@@ -1,0 +1,103 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.leftImgSection{
+    background: #F2F8FF;
+    height: 100%;
+    max-height: 100vh;
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.heading{
+    margin: 0px 50px;
+    color: #404040;
+}
+.leftImgSection .image{
+    margin: 0px 50px;
+}
+.heading h3{
+    font-weight: 600;
+}
+
+.rightFormSection{
+    height: 100%;
+    max-height: 100vh;
+    min-height: 100vh;
+    overflow-y: auto;
+}
+.rightFormSection::-webkit-scrollbar {
+  width: 0.5rem; /* Set the width of the scrollbar */
+}
+
+.rightFormSection::-webkit-scrollbar-thumb {
+  background-color: #888; /* Set the color of the scrollbar thumb */
+}
+
+.rightFormSection::-webkit-scrollbar-thumb:hover {
+  background-color: #555; /* Set the color of the scrollbar thumb on hover */
+}
+.contentForm{
+    width: 60%;
+}
+.google a{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.08);
+    border-radius: 10px;
+    width: 100%;
+}
+.borderDiv{
+    border-top: 1px solid #BDBDBD;
+    width: 30%;
+}
+.textDiv{
+    width: 40%;
+    font-size: 13px;
+    color: #BDBDBD;
+}
+.emailInput{
+    width: 100%;
+    border-radius: 10px;
+    border: 1px solid #DBDBDB;
+    background: #FEFDFD;
+    height: 50px;
+}
+.input-group{
+    height: 50px;
+}
+.input-group input{
+    border: 1px solid #DBDBDB;
+    border-radius: 10px;
+
+    height: 50px;
+}
+.input-group .input-group-append{
+    border-radius: 10px;
+    height: 50px;
+    cursor: pointer;
+}
+.forgotPassword{
+    color: #003F77;
+}
+.forgotPassword:hover{
+    color: #003F77;
+}
+.formSection button{
+    width: 100%;
+    background-color: #003F77;
+    color: white;
+    font-weight: 600;
+    font-size: 16px;
+    border-radius: 10px;
+    border: none;
+}
+.signUp a{
+    font-weight: 600;
+    color: #003F77;
+}
