@@ -16,3 +16,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/dashboard', function () {
     return view('pages.dashboard');
 });
+Route::get('/signup', function () {
+    return view('pages.auth.signup');
+});

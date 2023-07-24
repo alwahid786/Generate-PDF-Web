@@ -26,7 +26,7 @@
                             <a href="#">
                                 <img src="{{asset('public/assets/images/google-icon-logo.png')}}" />
                                 <h1>
-                                    Sign in with Google
+                                    Sign Up with Google
                                 </h1>
                             </a>
                         </div>
@@ -36,6 +36,9 @@
                     </div>
                     <div class="login-form">
                         <form>
+                            <div class="form-group login-email-field">
+                                <input type="text" name="name" class="form-control" id="loginemail" aria-describedby="emailHelp" placeholder="Name">
+                            </div>
                             <div class="form-group login-email-field">
                                 <input type="email" name="email" class="form-control" id="loginemail" aria-describedby="emailHelp" placeholder="Email">
                             </div>
@@ -55,15 +58,15 @@
 
                             <div class="d-flex justify-content-center login-button-outer">
                                 <a href="{{(url('dashboard'))}}" class="btn  login-btn">
-                                    Sign In
+                                    Sign Up
                                 </a>
                             </div>
 
                         </form>
                     </div>
                     <div class="sign-up-link pt-1">
-                        Don’t have an account yet?
-                        <a href="{{(url('signup'))}}">Sign up</a>
+                        Already have an account?
+                        <a href="{{(url('/'))}}">Sign In</a>
                     </div>
                 </div>
             </div>
