@@ -3,9 +3,9 @@
  <!-- icons cdn -->
  {{-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> --}}
  <!-- ============== Bootstrap Css Links =============== -->
- <link rel="stylesheet" href="{{asset('assets/css/bootstrap.css')}}">
- <link rel="stylesheet" href="{{asset('assets/css/bootstrap.min.css')}}">
+ <link rel="stylesheet" href="{{asset('public/assets/css/bootstrap.css')}}">
+ <link rel="stylesheet" href="{{asset('public/assets/css/bootstrap.min.css')}}">
 
- <link rel="stylesheet" href="{{asset('assets/css/font-awesome.min.css')}}">
+ <link rel="stylesheet" href="{{asset('public/assets/css/font-awesome.min.css')}}">
  <!-- ============== Custom Css Link ============== -->
- <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
+ <link rel="stylesheet" href="{{asset('public/assets/css/style.css')}}">
