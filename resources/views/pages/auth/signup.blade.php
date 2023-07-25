@@ -57,7 +57,7 @@
                             </div>
 
                             <div class="d-flex justify-content-center login-button-outer">
-                                <a href="{{(url('/'))}}" class="btn  login-btn">
+                                <a href="{{(url('/login'))}}" class="btn  login-btn">
                                     Sign Up
                                 </a>
                             </div>
