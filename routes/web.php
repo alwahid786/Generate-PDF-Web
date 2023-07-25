@@ -22,3 +22,12 @@ Route::get('/signup', function () {
 Route::get('/login', function () {
     return view('pages.auth.login');
 });
+Route::get('/reset-password', function () {
+    return view('pages.auth.reset-password');
+});
+Route::get('/verify-otp', function () {
+    return view('pages.auth.otp');
+});
+Route::get('/new-password', function () {
+    return view('pages.auth.new-password');
+});

@@ -1,4 +1,11 @@
 @extends('layouts.layout-default')
+<style>
+    .login-content {
+        justify-content: center !important;
+        row-gap: 4rem !important;
+    }
+</style>
+
 @section('content')
 <div class="container-fluid">
     <div class="row">
@@ -24,50 +31,33 @@
                     <div class="signin-options">
                         <div class="sign-in-google">
                             <a href="#">
-                                <img src="{{asset('public/assets/images/google-icon-logo.png')}}" />
                                 <h1>
-                                    Sign Up with Google
+                                    Reset Password
                                 </h1>
                             </a>
                         </div>
-                        <div class="email-login-option pt-4">
-                            <h1>OR LOGIN WITH EMAIL</h1>
-                        </div>
+
                     </div>
                     <div class="login-form">
                         <form>
-                            <div class="form-group login-email-field">
-                                <input type="text" name="name" class="form-control" id="loginemail" aria-describedby="emailHelp" placeholder="Name">
-                            </div>
-                            <div class="form-group login-email-field">
-                                <input type="email" name="email" class="form-control" id="loginemail" aria-describedby="emailHelp" placeholder="Email">
-                            </div>
                             <div class="form-group login-email-field">
                                 <i class="fa fa-eye-slash show-pass" aria-hidden="true"></i>
                                 <i class="fa fa-eye hide-pass" aria-hidden="true"></i>
                                 <input type="password" class="form-control" id="loginpassword" name="password" placeholder="Password">
                             </div>
-                            <div class="reset-password ">
-                                <div class="checkbox-input-wrapper">
-                                    <input type="checkbox" id="vehicle1" name="Keep-me-logged-in" value="Keep me logged in">
-                                    <h1>Keep me logged in</h1>
-                                </div>
-
-                                <a href="{{(url('reset-password'))}}">Forgot Password?</a>
+                            <div class="form-group login-email-field">
+                                <i class="fa fa-eye-slash show-pass" aria-hidden="true"></i>
+                                <i class="fa fa-eye hide-pass" aria-hidden="true"></i>
+                                <input type="password" class="form-control" id="loginpassword" name="password" placeholder="Confirm Password">
                             </div>
-
                             <div class="d-flex justify-content-center login-button-outer">
-                                <a href="{{(url('/login'))}}" class="btn  login-btn" data-toggle="modal" data-target="#exampleModal">
-                                    Sign Up
+                                <a href="{{(url('login'))}}" class="btn  login-btn" data-toggle="modal" data-target="#exampleModal">
+                                    Reset
                                 </a>
                             </div>
-
                         </form>
                     </div>
-                    <div class="sign-up-link pt-1">
-                        Already have an account?
-                        <a href="{{(url('/login'))}}">Sign In</a>
-                    </div>
+
                 </div>
             </div>
 
@@ -83,7 +73,7 @@
                 <img src="{{asset('public/assets/images/success-tick.png')}}" alt="image">
             </div>
             <div class="modal-body">
-                Sign Up Successfully
+                Password Reset Successfully
             </div>
         </div>
     </div>
@@ -91,20 +81,11 @@
 @endsection
 @section('insertjavascript')
 <script>
-    $(document).ready(function() {
-        $(".hide-pass").hide();
-        $(".show-pass").click(function() {
-            $(this).hide();
-            $(".hide-pass").show();
-            $("#loginpassword").attr("type", "text")
-        });
-        $(".hide-pass").click(function() {
-            $(this).hide();
-            $(".show-pass").show();
-            $("#loginpassword").attr("type", "password")
-        });
-        $("#loginemail").focus();
-    });
+    function moveToNext(currentInput, nextInputId) {
+        if (currentInput.value.length === currentInput.maxLength) {
+            document.getElementById(nextInputId).focus();
+        }
+    }
 </script>
 <script>
     $(document).ready(function() {
@@ -115,7 +96,30 @@
                     window.location.href = "{{(url('login'))}}";
                 },
                 1000);
+
         });
     })
 </script>
+<script>
+    $(document).ready(function() {
+
+        $('.show-pass, .hide-pass').on('click', function() {
+            var formGroup = $(this).closest('.form-group');
+            var passwordInput = formGroup.find('input');
+            if (passwordInput.attr('type') === 'password') {
+                passwordInput.attr('type', 'text');
+            } else {
+                passwordInput.attr('type', 'password');
+            }
+        });
+    });
+</script>
+In this code, when you click on the eye icon, it will toggle the visibility of the password in the corresponding input field (within the same form-group). The .closest() and .find() methods are used to navigate the DOM and select the relevant elements.
+
+
+
+
+
+
+
 @endsection

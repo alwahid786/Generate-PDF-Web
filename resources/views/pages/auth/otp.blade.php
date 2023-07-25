@@ -1,4 +1,11 @@
 @extends('layouts.layout-default')
+<style>
+    .login-content {
+        justify-content: center !important;
+        row-gap: 4rem !important;
+    }
+</style>
+
 @section('content')
 <div class="container-fluid">
     <div class="row">
@@ -24,49 +31,32 @@
                     <div class="signin-options">
                         <div class="sign-in-google">
                             <a href="#">
-                                <img src="{{asset('public/assets/images/google-icon-logo.png')}}" />
                                 <h1>
-                                    Sign Up with Google
+                                    Verify OTP
                                 </h1>
                             </a>
                         </div>
-                        <div class="email-login-option pt-4">
-                            <h1>OR LOGIN WITH EMAIL</h1>
-                        </div>
+
                     </div>
                     <div class="login-form">
                         <form>
                             <div class="form-group login-email-field">
-                                <input type="text" name="name" class="form-control" id="loginemail" aria-describedby="emailHelp" placeholder="Name">
-                            </div>
-                            <div class="form-group login-email-field">
-                                <input type="email" name="email" class="form-control" id="loginemail" aria-describedby="emailHelp" placeholder="Email">
-                            </div>
-                            <div class="form-group login-email-field">
-                                <i class="fa fa-eye-slash show-pass" aria-hidden="true"></i>
-                                <i class="fa fa-eye hide-pass" aria-hidden="true"></i>
-                                <input type="password" class="form-control" id="loginpassword" name="password" placeholder="Password">
-                            </div>
-                            <div class="reset-password ">
-                                <div class="checkbox-input-wrapper">
-                                    <input type="checkbox" id="vehicle1" name="Keep-me-logged-in" value="Keep me logged in">
-                                    <h1>Keep me logged in</h1>
+                                <div class="otp-inputs">
+                                    <input type="text" maxlength="1" name="otp" class="form-control" id="input1" onkeyup="moveToNext(this, 'input2')" aria-describedby="emailHelp">
+                                    -<input type="text" maxlength="1" name="otp" class="form-control" id="input2" onkeyup="moveToNext(this, 'input3')" aria-describedby="emailHelp">
+                                    -<input type="text" maxlength="1" name="otp" class="form-control" id="input3" onkeyup="moveToNext(this, 'input4')" aria-describedby="emailHelp">
+                                    -<input type="text" maxlength="1" name="otp" class="form-control" id="input4" aria-describedby="emailHelp">
                                 </div>
-
-                                <a href="{{(url('reset-password'))}}">Forgot Password?</a>
                             </div>
-
                             <div class="d-flex justify-content-center login-button-outer">
-                                <a href="{{(url('/login'))}}" class="btn  login-btn" data-toggle="modal" data-target="#exampleModal">
-                                    Sign Up
+                                <a href="{{(url('new-password'))}}" class="btn  login-btn" data-toggle="modal" data-target="#exampleModal">
+                                    Verify
                                 </a>
                             </div>
-
                         </form>
                     </div>
                     <div class="sign-up-link pt-1">
-                        Already have an account?
-                        <a href="{{(url('/login'))}}">Sign In</a>
+                        Didn't received OTP? <a href="{{(url('reset-password'))}}">Check your email</a>
                     </div>
                 </div>
             </div>
@@ -83,7 +73,7 @@
                 <img src="{{asset('public/assets/images/success-tick.png')}}" alt="image">
             </div>
             <div class="modal-body">
-                Sign Up Successfully
+                OTP Varified
             </div>
         </div>
     </div>
@@ -91,20 +81,11 @@
 @endsection
 @section('insertjavascript')
 <script>
-    $(document).ready(function() {
-        $(".hide-pass").hide();
-        $(".show-pass").click(function() {
-            $(this).hide();
-            $(".hide-pass").show();
-            $("#loginpassword").attr("type", "text")
-        });
-        $(".hide-pass").click(function() {
-            $(this).hide();
-            $(".show-pass").show();
-            $("#loginpassword").attr("type", "password")
-        });
-        $("#loginemail").focus();
-    });
+    function moveToNext(currentInput, nextInputId) {
+        if (currentInput.value.length === currentInput.maxLength) {
+            document.getElementById(nextInputId).focus();
+        }
+    }
 </script>
 <script>
     $(document).ready(function() {
@@ -112,9 +93,10 @@
         $('.login-btn').click(function() {
             setTimeout(function() {
                     $('#exampleModal').modal('hide');
-                    window.location.href = "{{(url('login'))}}";
+                    window.location.href = "{{(url('new-password'))}}";
                 },
                 1000);
+
         });
     })
 </script>
