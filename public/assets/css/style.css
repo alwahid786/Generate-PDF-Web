@@ -654,7 +654,7 @@
     }
 }
 
-@media screen and (max-width: 992px) {
+@media screen and (max-width: 991px) {
     .login-content-outer {
         background-image: url("../images/background.png");
         background-position: center;
