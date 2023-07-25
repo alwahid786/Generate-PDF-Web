@@ -19,3 +19,6 @@ Route::get('/dashboard', function () {
 Route::get('/signup', function () {
     return view('pages.auth.signup');
 });
+Route::get('/login', function () {
+    return view('pages.auth.login');
+});
