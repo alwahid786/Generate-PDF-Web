@@ -1,5 +1,6 @@
 @extends('layouts.layout-default')
 @section('content')
+
 <div class="container-fluid">
     <div class="row">
         <div class="col-sm-6 login-banner-left px-0">
@@ -35,7 +36,15 @@
                         </div>
                     </div>
                     <div class="login-form">
-                        <form>
+                        <form action="{{route('signupFunction')}}" method="POST" id="SignupForm_d">
+                            @csrf
+                            @if($errors->any())
+                            <div class="alert alert-danger">
+                                @foreach($errors->all() as $error)
+                                <p class="m-0">{{ $error }}</p>
+                                @endforeach
+                            </div>
+                            @endif
                             <div class="form-group login-email-field">
                                 <input type="text" name="name" class="form-control" id="loginemail" aria-describedby="emailHelp" placeholder="Name">
                             </div>
@@ -57,9 +66,10 @@
                             </div>
 
                             <div class="d-flex justify-content-center login-button-outer">
-                                <a href="{{(url('/login'))}}" class="btn  login-btn" data-toggle="modal" data-target="#exampleModal">
+                                <!-- <button type="submit" href="{{(url('/login'))}}" class="btn  login-btn" data-toggle="modal" data-target="#exampleModal"> -->
+                                <button type="submit" href="{{(url('/login'))}}" class="btn  login-btn">
                                     Sign Up
-                                </a>
+                                </button>
                             </div>
 
                         </form>

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,3 +35,8 @@ Route::get('/verify-otp', function () {
 Route::get('/new-password', function () {
     return view('pages.auth.new-password');
 });
+
+
+// API's Function and Routes
+Route::post('/register', [AuthController::class, 'signupFunction'])->name('signupFunction');
+
