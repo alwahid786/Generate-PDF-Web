@@ -403,6 +403,13 @@
 .logout-dropdown {
     left: -150px !important;
 }
+.logout-dropdown .dropdown-item:hover {
+    background-color: #003f77;
+    color: white;
+}
+.logout-dropdown .dropdown-item:hover .fa-sign-out {
+    color: white;
+}
 /* ------------------------------------------------Auth Pages--------------------------------------- */
 .login-banner-left {
     background-image: url("../images/background.png");
@@ -793,6 +800,7 @@
     font-size: 1.2rem;
     border-radius: 8px;
     padding: 8px 15px;
+    box-shadow: none !important;
 }
 
 .create-btn:hover {
@@ -1053,6 +1061,9 @@
     padding: 0.7rem;
     text-align: center;
 }
+.package-type:hover {
+    background-color: #004077de;
+}
 .package-type a {
     color: white;
     width: 100%;
@@ -1127,6 +1138,9 @@
     padding: 1rem;
     border-radius: 10px;
 }
+.add-button a:hover {
+    background-color: #34a853de !important;
+}
 .add-button a h1 {
     font-size: 1rem;
     margin: 0;
@@ -1184,8 +1198,6 @@
     text-align: center;
 }
 .pdf-detail-bar {
-    background-color: #f5f5f5;
-    border-radius: 10px;
     width: 100%;
 }
 .pdf-detail-bar ul {
@@ -1195,18 +1207,51 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    background-color: #f5f5f5;
+    border-radius: 10px;
+    width: 100%;
 }
 .summary-wrapper {
     display: flex;
     align-items: center;
     column-gap: 0.8rem;
     width: 100%;
+    position: relative;
+    padding-left: 30px; /* Adjust this value to change the checkbox size */
 }
 .summary-wrapper h1 {
     font-size: 1rem;
     margin: 0;
     font-weight: 600;
 }
+/* Hide the default checkbox appearance */
+input.rounded-checkbox {
+    display: none;
+}
+
+/* Create the rounded checkbox appearance */
+
+.summary-wrapper label:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 2px;
+    width: 20px; /* Adjust this value to change the checkbox size */
+    height: 20px; /* Adjust this value to change the checkbox size */
+    border: 2px solid #ccc; /* Border color for the checkbox */
+    border-radius: 50%; /* Make it a circle to create the rounded appearance */
+    background-color: transparent;
+}
+
+/* Style the checkbox when checked */
+.summary-wrapper input:checked + label:before {
+    background: url("../images/check.png");
+    background-position: center;
+    background-size: 10px;
+    background-repeat: no-repeat;
+    border-color: #003f77;
+}
+
 .pdf-action {
     display: flex;
     align-items: center;
@@ -1220,6 +1265,9 @@
 .action-type:nth-child(2) a {
     background-color: #34a853 !important;
 }
+.action-type:nth-child(2) a:hover {
+    background-color: #34a853de !important;
+}
 .action-type a {
     width: 100%;
     background-color: #003f77;
@@ -1229,6 +1277,9 @@
     color: white;
     display: block;
     text-decoration: none !important;
+}
+.action-type a:hover {
+    background-color: #004077de;
 }
 @media screen and (max-width: 767px) {
     .lower-body-input-wrapper {
@@ -1265,6 +1316,7 @@
     .type-menu select {
         width: 100%;
     }
+
     .drop-zone {
         max-width: 100%;
     }

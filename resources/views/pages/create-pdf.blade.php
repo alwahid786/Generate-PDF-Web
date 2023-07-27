@@ -99,7 +99,13 @@
                 </div>
             </div>
             <div class="pdf-detail-bar">
-                <ul>
+                <ul class="mt-4">
+                    <li>Reference #</li>
+                    <li>#0000000000</li>
+                    <li> <img src="{{asset('public/assets/images/pdf-icon.png')}}" alt="image"></li>
+                    <li> <img src="{{asset('public/assets/images/delete.png')}}" alt="image"></li>
+                </ul>
+                <ul class="mt-4">
                     <li>Reference #</li>
                     <li>#0000000000</li>
                     <li> <img src="{{asset('public/assets/images/pdf-icon.png')}}" alt="image"></li>
@@ -107,8 +113,8 @@
                 </ul>
             </div>
             <div class="summary-wrapper">
-                <img src="{{asset('public/assets/images/check-circle.png')}}" alt="image">
-                <h1>Summary</h1>
+                <input type="checkbox" id="checkbox1" class="rounded-checkbox">
+                <label for="checkbox1">Summary</label>
             </div>
             <div class="pdf-action">
                 <div class="action-type">
