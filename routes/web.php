@@ -19,6 +19,12 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return view('pages.dashboard');
 });
+Route::get('/pdf-cover', function () {
+    return view('pages.pdf-cover');
+});
+Route::get('/create-pdf', function () {
+    return view('pages.create-pdf');
+});
 Route::get('/signup', function () {
     return view('pages.auth.signup');
 });
