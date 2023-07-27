@@ -72,7 +72,7 @@
             </div>
             <div class="form-group has-search">
                 <div class="dropdown dropdown-logout">
-                    <img src="{{asset('public/assets/images/vector.png')}}" class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown">
+                    <img src="{{asset('public/assets/images/Vector.png')}}" class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown">
                     <div class="dropdown-menu text-center logout-dropdown" aria-labelledby="dropdownMenuButton">
                         <a class="dropdown-item logout" href="{{(url('login'))}}"><i class="fa fa-sign-out pr-2" aria-hidden="true"></i>Logout</a>
 
