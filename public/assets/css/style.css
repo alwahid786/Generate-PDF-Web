@@ -1055,6 +1055,8 @@
 }
 .package-type a {
     color: white;
+    width: 100%;
+    display: block;
     text-decoration: none !important;
 }
 .project-input-wrapper {
@@ -1214,16 +1216,18 @@
 }
 .action-type {
     width: 50%;
+}
+.action-type:nth-child(2) a {
+    background-color: #34a853 !important;
+}
+.action-type a {
+    width: 100%;
     background-color: #003f77;
     border-radius: 10px;
     padding: 0.7rem;
     text-align: center;
-}
-.action-type:nth-child(2) {
-    background-color: #34a853;
-}
-.action-type a {
     color: white;
+    display: block;
     text-decoration: none !important;
 }
 @media screen and (max-width: 767px) {

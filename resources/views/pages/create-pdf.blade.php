@@ -13,8 +13,6 @@
             <div class="heading-top">
                 <h1>PDF Package Creator <span>14 Jul 2023</span></h1>
             </div>
-
-
         </div>
 
         <div class="create-pdf-uper-body">
@@ -114,16 +112,13 @@
             </div>
             <div class="pdf-action">
                 <div class="action-type">
-                    <a href="#">Preview</a>
+                    <a href="{{(url('pdf-cover'))}}">Preview</a>
                 </div>
                 <div class="action-type">
                     <a href="#">Create & Save Package</a>
                 </div>
             </div>
-            <?php
-            $port = $_SERVER['SERVER_PORT'];
-            echo "The server is running on port: " . $port;
-            ?>
+
         </div>
 </main>
 @endsection
