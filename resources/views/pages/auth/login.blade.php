@@ -35,7 +35,25 @@
                         </div>
                     </div>
                     <div class="login-form">
-                        <form>
+                        <form action="{{route('loginFunction')}}" method="POST" id="loginForm_d">
+                            @csrf
+                            @if(session()->has('signupSuccess'))
+                            <div class="alert alert-success">
+                                {{ session('signupSuccess') }}
+                            </div>
+                            @endif
+                            @if(session()->has('passwordSuccess'))
+                            <div class="alert alert-success">
+                                {{ session('passwordSuccess') }}
+                            </div>
+                            @endif
+                            @if($errors->any())
+                            <div class="alert alert-danger">
+                                @foreach($errors->all() as $error)
+                                <p class="m-0">{{ $error }}</p>
+                                @endforeach
+                            </div>
+                            @endif
                             <div class="form-group login-email-field">
                                 <input type="email" name="email" class="form-control" id="loginemail" aria-describedby="emailHelp" placeholder="Email">
                             </div>
@@ -53,11 +71,10 @@
                                 <a href="{{(url('reset-password'))}}">Forgot Password?</a>
                             </div>
                             <div class="d-flex justify-content-center login-button-outer">
-                                <a href="{{(url('dashboard'))}}" class="btn  login-btn">
+                                <button type="submit" class="btn  login-btn">
                                     Sign In
-                                </a>
+                                </button>
                             </div>
-
                         </form>
                     </div>
                     <div class="sign-up-link pt-1">

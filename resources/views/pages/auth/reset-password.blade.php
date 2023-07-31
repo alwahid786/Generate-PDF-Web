@@ -39,14 +39,22 @@
 
                     </div>
                     <div class="login-form">
-                        <form>
+                        <form action="{{route('forgotPassword')}}" method="POST">
+                            @csrf
+                            @if($errors->any())
+                            <div class="alert alert-danger">
+                                @foreach($errors->all() as $error)
+                                <p class="m-0">{{ $error }}</p>
+                                @endforeach
+                            </div>
+                            @endif
                             <div class="form-group login-email-field">
                                 <input type="email" name="email" class="form-control" id="loginemail" aria-describedby="emailHelp" placeholder="Email">
                             </div>
                             <div class="d-flex justify-content-center login-button-outer">
-                                <a href="{{(url('verify-otp'))}}" class="btn  login-btn">
+                                <button type="submit" class="btn  login-btn">
                                     Send OTP
-                                </a>
+                                </button>
                             </div>
                         </form>
                     </div>

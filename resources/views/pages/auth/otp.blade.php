@@ -39,19 +39,28 @@
 
                     </div>
                     <div class="login-form">
-                        <form>
+                        <form action="{{route('verifyOtp')}}" method="POST">
+                            @csrf
+                            @if($errors->any())
+                            <div class="alert alert-danger">
+                                @foreach($errors->all() as $error)
+                                <p class="m-0">{{ $error }}</p>
+                                @endforeach
+                            </div>
+                            @endif
                             <div class="form-group login-email-field">
                                 <div class="otp-inputs">
-                                    <input type="text" maxlength="1" name="otp" class="form-control" id="input1" onkeyup="moveToNext(this, 'input2')" aria-describedby="emailHelp">
-                                    -<input type="text" maxlength="1" name="otp" class="form-control" id="input2" onkeyup="moveToNext(this, 'input3')" aria-describedby="emailHelp">
-                                    -<input type="text" maxlength="1" name="otp" class="form-control" id="input3" onkeyup="moveToNext(this, 'input4')" aria-describedby="emailHelp">
-                                    -<input type="text" maxlength="1" name="otp" class="form-control" id="input4" aria-describedby="emailHelp">
+                                    <input type="text" maxlength="1" name="otp[]" class="form-control" id="input1" onkeyup="moveToNext(this, 'input2')" aria-describedby="emailHelp">
+                                    -<input type="text" maxlength="1" name="otp[]" class="form-control" id="input2" onkeyup="moveToNext(this, 'input3')" aria-describedby="emailHelp">
+                                    -<input type="text" maxlength="1" name="otp[]" class="form-control" id="input3" onkeyup="moveToNext(this, 'input4')" aria-describedby="emailHelp">
+                                    -<input type="text" maxlength="1" name="otp[]" class="form-control" id="input4" aria-describedby="emailHelp">
                                 </div>
                             </div>
                             <div class="d-flex justify-content-center login-button-outer">
-                                <a href="{{(url('new-password'))}}" class="btn  login-btn" data-toggle="modal" data-target="#exampleModal">
+                                <input type="hidden" name="otp_code" id="otpCode_d">
+                                <button type="submit" class="btn  login-btn">
                                     Verify
-                                </a>
+                                </button>
                             </div>
                         </form>
                     </div>
@@ -90,14 +99,14 @@
 <script>
     $(document).ready(function() {
         $("#input1").focus();
-        $('.login-btn').click(function() {
-            setTimeout(function() {
-                    $('#exampleModal').modal('hide');
-                    window.location.href = "{{(url('new-password'))}}";
-                },
-                1000);
 
-        });
+        // Combine OTP CODE 
+        function combineOTP() {
+            const otpInputs = document.querySelectorAll('input[name="otp[]"]');
+            const otpValue = Array.from(otpInputs).map(input => input.value).join('');
+            document.getElementById('otpCode_d').value = otpValue;
+        }
+        document.querySelector('form').addEventListener('submit', combineOTP);
     })
 </script>
 @endsection

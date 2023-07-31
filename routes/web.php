@@ -17,9 +17,7 @@ use App\Http\Controllers\AuthController;
 Route::get('/', function () {
     return view('pages.auth.login');
 });
-Route::get('/dashboard', function () {
-    return view('pages.dashboard');
-});
+
 Route::get('/signup', function () {
     return view('pages.auth.signup');
 });
@@ -39,4 +37,14 @@ Route::get('/new-password', function () {
 
 // API's Function and Routes
 Route::post('/register', [AuthController::class, 'signupFunction'])->name('signupFunction');
+Route::post('/login', [AuthController::class, 'loginFunction'])->name('loginFunction');
+Route::post('/forgot-password', [AuthController::class, 'forgotPassword'])->name('forgotPassword');
+Route::post('/otp-verification', [AuthController::class, 'verifyOtp'])->name('verifyOtp');
+Route::post('/password-reset', [AuthController::class, 'resetPassword'])->name('resetPassword');
 
+// Auth Protected Routes 
+Route::middleware('auth')->group(function () {
+    Route::get('/dashboard', function () {
+        return view('pages.dashboard');
+    });
+});

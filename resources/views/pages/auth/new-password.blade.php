@@ -39,7 +39,15 @@
 
                     </div>
                     <div class="login-form">
-                        <form>
+                        <form action="{{route('resetPassword')}}" method="POST">
+                            @csrf
+                            @if($errors->any())
+                            <div class="alert alert-danger">
+                                @foreach($errors->all() as $error)
+                                <p class="m-0">{{ $error }}</p>
+                                @endforeach
+                            </div>
+                            @endif
                             <div class="form-group login-email-field">
                                 <i class="fa fa-eye-slash show-pass" aria-hidden="true"></i>
                                 <i class="fa fa-eye hide-pass" aria-hidden="true"></i>
@@ -48,12 +56,12 @@
                             <div class="form-group login-email-field">
                                 <i class="fa fa-eye-slash show-pass" aria-hidden="true"></i>
                                 <i class="fa fa-eye hide-pass" aria-hidden="true"></i>
-                                <input type="password" class="form-control" id="loginpassword" name="password" placeholder="Confirm Password">
+                                <input type="password" class="form-control" id="loginpassword" name="password_confirmation" placeholder="Confirm Password">
                             </div>
                             <div class="d-flex justify-content-center login-button-outer">
-                                <a href="{{(url('login'))}}" class="btn  login-btn" data-toggle="modal" data-target="#exampleModal">
+                                <button type="submit" class="btn  login-btn">
                                     Reset
-                                </a>
+                                </button>
                             </div>
                         </form>
                     </div>
@@ -90,14 +98,6 @@
 <script>
     $(document).ready(function() {
         $("#input1").focus();
-        $('.login-btn').click(function() {
-            setTimeout(function() {
-                    $('#exampleModal').modal('hide');
-                    window.location.href = "{{(url('login'))}}";
-                },
-                1000);
-
-        });
     })
 </script>
 <script>
