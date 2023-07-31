@@ -52,7 +52,7 @@
         <!-- -------------------Lower body------------------------ -->
         <div class="create-pdf-lower-body mt-5">
             <div class="lower-body-heading">
-                <h1>Type</h1>
+                <h1>Fixture</h1>
             </div>
             <div class="lower-body-input-wrapper">
                 <div class="lower-body-input">

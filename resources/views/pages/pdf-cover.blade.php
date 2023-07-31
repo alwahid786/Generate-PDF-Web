@@ -20,7 +20,6 @@
                 <h1>PDF Package Creator <span>14 Jul 2023</span></h1>
             </div>
         </div>
-        <!-- <iframe src="https://kodextech.com/Submittal_pkg.pdf"> -->
         <iframe src="https://docs.google.com/viewer?url=https://kodextech.com/Submittal_pkg.pdf&embedded=true">
         </iframe>
     </div>
