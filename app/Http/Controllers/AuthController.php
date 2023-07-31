@@ -9,6 +9,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\OtpMail;
+use Illuminate\Support\Facades\Session;
 
 class AuthController extends Controller
 {
@@ -120,5 +121,13 @@ class AuthController extends Controller
             return redirect()->back()->withErrors("Something went wrong! Please try again.");
         }
         return redirect('/')->with('passwordSuccess', 'Password reset successfully!');
+    }
+
+    // Logout FUnction 
+    public function logout(Request $request)
+    {
+        Session::flush();
+        Auth::logout();
+        return redirect('/');
     }
 }

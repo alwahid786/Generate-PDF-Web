@@ -49,6 +49,7 @@ Route::post('/login', [AuthController::class, 'loginFunction'])->name('loginFunc
 Route::post('/forgot-password', [AuthController::class, 'forgotPassword'])->name('forgotPassword');
 Route::post('/otp-verification', [AuthController::class, 'verifyOtp'])->name('verifyOtp');
 Route::post('/password-reset', [AuthController::class, 'resetPassword'])->name('resetPassword');
+Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
 // Auth Protected Routes 
 Route::middleware('auth')->group(function () {
