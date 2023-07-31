@@ -17,7 +17,15 @@ use App\Http\Controllers\AuthController;
 Route::get('/', function () {
     return view('pages.auth.login');
 });
-
+Route::get('/dashboard', function () {
+    return view('pages.dashboard');
+});
+Route::get('/pdf-cover', function () {
+    return view('pages.pdf-cover');
+});
+Route::get('/create-pdf', function () {
+    return view('pages.create-pdf');
+});
 Route::get('/signup', function () {
     return view('pages.auth.signup');
 });

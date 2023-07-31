@@ -13,7 +13,7 @@
             <div class="heading-top">
                 <h1>Dashboard <span>14 Jul 2023</span></h1>
             </div>
-            <a href="" class="btn create-btn"><img class="mr-2" src="{{asset('public/assets/images/plus.png')}}" alt="">Create New Package</a>
+            <a href="{{(url('create-pdf'))}}" class="btn create-btn"><img class="mr-2" src="{{asset('public/assets/images/plus.png')}}" alt="">Create New Package</a>
         </div>
 
         <div class="client-table ">
@@ -37,7 +37,7 @@
                         <td data-column="Date Created">17 Jul 2023</td>
                         <td data-column="Date Last Edit">17 Jul 2023</td>
                         <td class="action-btn" data-column="Actions">
-                            <a href="#"><img class="my-1" src="{{asset('public/assets/images/view.png')}}" alt=""></a>
+                            <a href="{{(url('pdf-cover'))}}"><img class="my-1" src="{{asset('public/assets/images/view.png')}}" alt=""></a>
                             <a href="#"><img class="my-1" src="{{asset('public/assets/images/edit.png')}}" alt=""></a>
                             <a href="#"><img class="my-1" src="{{asset('public/assets/images/delete.png')}}" alt=""></a>
                         </td>
@@ -51,7 +51,7 @@
                         <td data-column="Date Created">17 Jul 2023</td>
                         <td data-column="Date Last Edit">17 Jul 2023</td>
                         <td class="action-btn" data-column="Actions">
-                            <a href="#"><img class="my-1" src="{{asset('public/assets/images/view.png')}}" alt=""></a>
+                            <a href="{{(url('pdf-cover'))}}"><img class="my-1" src="{{asset('public/assets/images/view.png')}}" alt=""></a>
                             <a href="#"><img class="my-1" src="{{asset('public/assets/images/edit.png')}}" alt=""></a>
                             <a href="#"><img class="my-1" src="{{asset('public/assets/images/delete.png')}}" alt=""></a>
                         </td>
@@ -64,7 +64,7 @@
                         <td data-column="Date Created">17 Jul 2023</td>
                         <td data-column="Date Last Edit">17 Jul 2023</td>
                         <td class="action-btn" data-column="Actions">
-                            <a href="#"><img class="my-1" src="{{asset('public/assets/images/view.png')}}" alt=""></a>
+                            <a href="{{(url('pdf-cover'))}}"><img class="my-1" src="{{asset('public/assets/images/view.png')}}" alt=""></a>
                             <a href="#"><img class="my-1" src="{{asset('public/assets/images/edit.png')}}" alt=""></a>
                             <a href="#"><img class="my-1" src="{{asset('public/assets/images/delete.png')}}" alt=""></a>
                         </td>
@@ -77,7 +77,7 @@
                         <td data-column="Date Created">17 Jul 2023</td>
                         <td data-column="Date Last Edit">17 Jul 2023</td>
                         <td class="action-btn" data-column="Actions">
-                            <a href="#"><img class="my-1" src="{{asset('public/assets/images/view.png')}}" alt=""></a>
+                            <a href="{{(url('pdf-cover'))}}"><img class="my-1" src="{{asset('public/assets/images/view.png')}}" alt=""></a>
                             <a href="#"><img class="my-1" src="{{asset('public/assets/images/edit.png')}}" alt=""></a>
                             <a href="#"><img class="my-1" src="{{asset('public/assets/images/delete.png')}}" alt=""></a>
                         </td>
@@ -90,7 +90,7 @@
                         <td data-column="Date Created">17 Jul 2023</td>
                         <td data-column="Date Last Edit">17 Jul 2023</td>
                         <td class="action-btn" data-column="Actions">
-                            <a href="#"><img class="my-1" src="{{asset('public/assets/images/view.png')}}" alt=""></a>
+                            <a href="{{(url('pdf-cover'))}}"><img class="my-1" src="{{asset('public/assets/images/view.png')}}" alt=""></a>
                             <a href="#"><img class="my-1" src="{{asset('public/assets/images/edit.png')}}" alt=""></a>
                             <a href="#"><img class="my-1" src="{{asset('public/assets/images/delete.png')}}" alt=""></a>
                         </td>
@@ -103,7 +103,7 @@
                         <td data-column="Date Created">17 Jul 2023</td>
                         <td data-column="Date Last Edit">17 Jul 2023</td>
                         <td class="action-btn" data-column="Actions">
-                            <a href="#"><img class="my-1" src="{{asset('public/assets/images/view.png')}}" alt=""></a>
+                            <a href="{{(url('pdf-cover'))}}"><img class="my-1" src="{{asset('public/assets/images/view.png')}}" alt=""></a>
                             <a href="#"><img class="my-1" src="{{asset('public/assets/images/edit.png')}}" alt=""></a>
                             <a href="#"><img class="my-1" src="{{asset('public/assets/images/delete.png')}}" alt=""></a>
                         </td>
@@ -116,7 +116,7 @@
                         <td data-column="Date Created">17 Jul 2023</td>
                         <td data-column="Date Last Edit">17 Jul 2023</td>
                         <td class="action-btn" data-column="Actions">
-                            <a href="#"><img class="my-1" src="{{asset('public/assets/images/view.png')}}" alt=""></a>
+                            <a href="{{(url('pdf-cover'))}}"><img class="my-1" src="{{asset('public/assets/images/view.png')}}" alt=""></a>
                             <a href="#"><img class="my-1" src="{{asset('public/assets/images/edit.png')}}" alt=""></a>
                             <a href="#"><img class="my-1" src="{{asset('public/assets/images/delete.png')}}" alt=""></a>
                         </td>
@@ -129,7 +129,7 @@
                         <td data-column="Date Created">17 Jul 2023</td>
                         <td data-column="Date Last Edit">17 Jul 2023</td>
                         <td class="action-btn" data-column="Actions">
-                            <a href="#"><img class="my-1" src="{{asset('public/assets/images/view.png')}}" alt=""></a>
+                            <a href="{{(url('pdf-cover'))}}"><img class="my-1" src="{{asset('public/assets/images/view.png')}}" alt=""></a>
                             <a href="#"><img class="my-1" src="{{asset('public/assets/images/edit.png')}}" alt=""></a>
                             <a href="#"><img class="my-1" src="{{asset('public/assets/images/delete.png')}}" alt=""></a>
                         </td>
@@ -142,7 +142,7 @@
                         <td data-column="Date Created">17 Jul 2023</td>
                         <td data-column="Date Last Edit">17 Jul 2023</td>
                         <td class="action-btn" data-column="Actions">
-                            <a href="#"><img class="my-1" src="{{asset('public/assets/images/view.png')}}" alt=""></a>
+                            <a href="{{(url('pdf-cover'))}}"><img class="my-1" src="{{asset('public/assets/images/view.png')}}" alt=""></a>
                             <a href="#"><img class="my-1" src="{{asset('public/assets/images/edit.png')}}" alt=""></a>
                             <a href="#"><img class="my-1" src="{{asset('public/assets/images/delete.png')}}" alt=""></a>
                         </td>
@@ -155,7 +155,7 @@
                         <td data-column="Date Created">17 Jul 2023</td>
                         <td data-column="Date Last Edit">17 Jul 2023</td>
                         <td class="action-btn" data-column="Actions">
-                            <a href="#"><img class="my-1" src="{{asset('public/assets/images/view.png')}}" alt=""></a>
+                            <a href="{{(url('pdf-cover'))}}"><img class="my-1" src="{{asset('public/assets/images/view.png')}}" alt=""></a>
                             <a href="#"><img class="my-1" src="{{asset('public/assets/images/edit.png')}}" alt=""></a>
                             <a href="#"><img class="my-1" src="{{asset('public/assets/images/delete.png')}}" alt=""></a>
                         </td>
@@ -168,7 +168,7 @@
                         <td data-column="Date Created">17 Jul 2023</td>
                         <td data-column="Date Last Edit">17 Jul 2023</td>
                         <td class="action-btn" data-column="Actions">
-                            <a href="#"><img class="my-1" src="{{asset('public/assets/images/view.png')}}" alt=""></a>
+                            <a href="{{(url('pdf-cover'))}}"><img class="my-1" src="{{asset('public/assets/images/view.png')}}" alt=""></a>
                             <a href="#"><img class="my-1" src="{{asset('public/assets/images/edit.png')}}" alt=""></a>
                             <a href="#"><img class="my-1" src="{{asset('public/assets/images/delete.png')}}" alt=""></a>
                         </td>
@@ -181,7 +181,7 @@
                         <td data-column="Date Created">17 Jul 2023</td>
                         <td data-column="Date Last Edit">17 Jul 2023</td>
                         <td class="action-btn" data-column="Actions">
-                            <a href="#"><img class="my-1" src="{{asset('public/assets/images/view.png')}}" alt=""></a>
+                            <a href="{{(url('pdf-cover'))}}"><img class="my-1" src="{{asset('public/assets/images/view.png')}}" alt=""></a>
                             <a href="#"><img class="my-1" src="{{asset('public/assets/images/edit.png')}}" alt=""></a>
                             <a href="#"><img class="my-1" src="{{asset('public/assets/images/delete.png')}}" alt=""></a>
                         </td>
@@ -194,7 +194,7 @@
                         <td data-column="Date Created">17 Jul 2023</td>
                         <td data-column="Date Last Edit">17 Jul 2023</td>
                         <td class="action-btn" data-column="Actions">
-                            <a href="#"><img class="my-1" src="{{asset('public/assets/images/view.png')}}" alt=""></a>
+                            <a href="{{(url('pdf-cover'))}}"><img class="my-1" src="{{asset('public/assets/images/view.png')}}" alt=""></a>
                             <a href="#"><img class="my-1" src="{{asset('public/assets/images/edit.png')}}" alt=""></a>
                             <a href="#"><img class="my-1" src="{{asset('public/assets/images/delete.png')}}" alt=""></a>
                         </td>
