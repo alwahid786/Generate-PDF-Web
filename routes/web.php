@@ -25,9 +25,9 @@ Route::get('/pdf-cover', function () {
 Route::get('/create-pdf', function () {
     return view('pages.create-pdf');
 });
-Route::get('/lighting-legend', function () {
-    return view('pages.lighting-legend');
-});
+// Route::get('/lighting-legend', function () {
+//     return view('pages.lighting-legend');
+// });
 Route::get('/record-drawings', function () {
     return view('pages.record-drawings');
 });
@@ -36,6 +36,9 @@ Route::get('/spec-package', function () {
 });
 Route::get('/submittal-package', function () {
     return view('pages.submittal-package');
+});
+Route::get('/lighting-output', function () {
+    return view('pages.lighting-output');
 });
 Route::get('/signup', function () {
     return view('pages.auth.signup');

@@ -12,7 +12,7 @@
     }
 </style>
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top navbar-header">
-    <a class="navbar-brand logo-header" href="#">
+    <a class="navbar-brand logo-header" href="{{url('dashboard')}}">
         <img src="{{asset('public/assets/images/side-logo.png')}}" alt="Admin logo">
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
