@@ -52,7 +52,9 @@
     });
 </script>
 <script>
-    $('.sidenav  li:nth-of-type(1)').addClass('active');
+   for (let i = 1; i <= 8; i++) {
+  $(`.sidenav li:nth-of-type(${i})`).removeClass('active');
+}
 </script>
 
 

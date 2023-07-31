@@ -5,30 +5,49 @@
     body {
         background: #f6f6f6;
     }
+
+    .pdf-info-input-wrapper {
+        width: 100%;
+    }
+
+    .lower-body-input-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        row-gap: 1rem;
+        column-gap: 1rem;
+        width: 100%;
+    }
+
+    .lower-body-input-wrapper .row .type-menu select {
+        width: 100%;
+    }
+
+    .drop-zone-wrapper .drop-zone {
+        width: 100%;
+        max-width: 1414px;
+
+    }
+
+    .drop-zone-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        justify-content: center;
+        row-gap: 1rem;
+        width: 100%;
+    }
 </style>
 @include('includes.navbar')
 <main class="content-wrapper">
     <div class="container-fluid py-3">
-        <div class="header-wrapper">
+        <div class="header-wrapper pb-3">
             <div class="heading-top">
-                <h1>PDF Package Creator <span>14 Jul 2023</span></h1>
+                <h1>Lighting Legend <span>14 Jul 2023</span></h1>
             </div>
         </div>
 
         <div class="create-pdf-uper-body">
-            <div class="package-type-dropdown">
-                <div class="section-heading">
-                    <h1>Package Type:</h1>
-                </div>
-                <div class="type-menu">
-                    <select name="cars" id="cars">
-                        <option value="volvo">Volvo</option>
-                        <option value="saab">Saab</option>
-                        <option value="mercedes">Mercedes</option>
-                        <option value="audi">Audi</option>
-                    </select>
-                </div>
-            </div>
             <div class="project-input-wrapper">
                 <div class="pdf-info-input-wrapper">
                     <div class="section-heading">
@@ -46,6 +65,7 @@
                         <input type="text">
                     </div>
                 </div>
+
             </div>
 
         </div>
@@ -55,36 +75,108 @@
                 <h1>Fixture</h1>
             </div>
             <div class="lower-body-input-wrapper">
-                <div class="lower-body-input">
-                    <div class="pdf-info-input-wrapper">
-                        <div class="section-heading">
-                            <h1>Type</h1>
-                        </div>
-                        <div class="pdf-info-input">
-                            <input type="text">
-                        </div>
-                    </div>
-                    <div class="pdf-info-input-wrapper">
-                        <div class="section-heading">
-                            <h1>Part Number</h1>
-                        </div>
-                        <div class="pdf-info-input">
-                            <input type="text">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="pdf-info-input-wrapper">
+                            <div class="section-heading">
+                                <h1>Type</h1>
+                            </div>
+                            <div class="pdf-info-input">
+                                <input type="text">
+                            </div>
                         </div>
                     </div>
+                    <div class="col-md-6">
+
+                        <div class="pdf-info-input-wrapper">
+                            <div class="section-heading">
+                                <h1>Manufacturer</h1>
+                            </div>
+                            <div class="pdf-info-input">
+                                <input type="text">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="pdf-info-input-wrapper">
+                            <div class="section-heading">
+                                <h1>Description</h1>
+                            </div>
+                            <div class="pdf-info-input">
+                                <input type="text">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="pdf-info-input-wrapper">
+                            <div class="section-heading">
+                                <h1>Part Number</h1>
+                            </div>
+                            <div class="pdf-info-input">
+                                <input type="text">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="pdf-info-input-wrapper">
+                            <div class="section-heading">
+                                <h1>Lamping</h1>
+                            </div>
+                            <div class="pdf-info-input">
+                                <input type="text">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="package-type-dropdown">
+                            <div class="section-heading">
+                                <h1>Voltage</h1>
+                            </div>
+                            <div class="type-menu">
+                                <select name="cars" id="cars">
+                                    <option value="120V">120V</option>
+                                    <option value="347">347</option>
+                                    <option value="12V/120V Remote">12V/120V Remote</option>
+                                    <option value="24V/120V Remote">24V/120V Remote</option>
+                                    <option value="48V/120V Remote">48V/120V Remote</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="package-type-dropdown">
+                            <div class="section-heading">
+                                <h1>Dimming</h1>
+                            </div>
+                            <div class="type-menu">
+                                <select name="cars" id="cars">
+                                    <option value="No Dimming">No Dimming</option>
+                                    <option value="ELV">ELV</option>
+                                    <option value="0-10V">0-10V</option>
+                                    <option value="DALI">DALI</option>
+                                    <option value="DMX">DMX</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="drop-zone">
-                    <span class="drop-zone__prompt">Add PDF</span>
-                    <span>Spec Sheet</span>
-                    <span>Drag+Drop</span>
-                    <input type="file" name="myFile" class="drop-zone__input">
+                <div class="drop-zone-wrapper">
+                    <div class="drop-zone">
+                        <span class="drop-zone__prompt">Add JPEG</span>
+                        <span>Product Image</span>
+                        <span>Drag+Drop</span>
+                        <input type="file" name="myFile" class="drop-zone__input">
+                    </div>
+                    <div class="add-button">
+                        <a href="#">
+                            <img src="{{asset('public/assets/images/plus-circle.png')}}">
+                            <h1>Add Type</h1>
+                        </a>
+                    </div>
                 </div>
-                <div class="add-button">
-                    <a href="#">
-                        <img src="{{asset('public/assets/images/plus-circle.png')}}">
-                        <h1>Add Type</h1>
-                    </a>
-                </div>
+
             </div>
             <div class="pdf-detail-bar">
                 <ul class="mt-4">
@@ -145,7 +237,13 @@
     });
 </script>
 <script>
-    $('.sidenav  li:nth-of-type(1)').addClass('active');
+    $('.sidenav  li:nth-of-type(3)').addClass('active');
+    for (let i = 1; i <= 8; i++) {
+        if (i === 3) {
+            continue;
+        }
+        $(`.sidenav li:nth-of-type(${i})`).removeClass('active');
+    }
 </script>
 <script>
     document.querySelectorAll(".drop-zone__input").forEach((inputElement) => {
@@ -157,7 +255,7 @@
 
         inputElement.addEventListener("change", (e) => {
             if (inputElement.files.length) {
-                
+
                 updateThumbnail(dropZoneElement, inputElement.files[0]);
             }
         });
@@ -184,11 +282,13 @@
             dropZoneElement.classList.remove("drop-zone--over");
         });
     });
+
     function hideFirstAndThirdSpans(dropZoneElement) {
-      const spans = dropZoneElement.querySelectorAll("span");
-      spans[0].style.display = "none"; // Hide the first span
-      spans[2].style.display = "none"; // Hide the third span
+        const spans = dropZoneElement.querySelectorAll("span");
+        spans[0].style.display = "none"; // Hide the first span
+        spans[2].style.display = "none"; // Hide the third span
     }
+
     function updateThumbnail(dropZoneElement, file) {
         let thumbnailElement = dropZoneElement.querySelector(".drop-zone__thumb");
 

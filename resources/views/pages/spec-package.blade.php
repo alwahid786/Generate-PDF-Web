@@ -9,26 +9,13 @@
 @include('includes.navbar')
 <main class="content-wrapper">
     <div class="container-fluid py-3">
-        <div class="header-wrapper">
+        <div class="header-wrapper pb-3">
             <div class="heading-top">
-                <h1>PDF Package Creator <span>14 Jul 2023</span></h1>
+                <h1>Specifications Package <span>14 Jul 2023</span></h1>
             </div>
         </div>
 
         <div class="create-pdf-uper-body">
-            <div class="package-type-dropdown">
-                <div class="section-heading">
-                    <h1>Package Type:</h1>
-                </div>
-                <div class="type-menu">
-                    <select name="cars" id="cars">
-                        <option value="volvo">Volvo</option>
-                        <option value="saab">Saab</option>
-                        <option value="mercedes">Mercedes</option>
-                        <option value="audi">Audi</option>
-                    </select>
-                </div>
-            </div>
             <div class="project-input-wrapper">
                 <div class="pdf-info-input-wrapper">
                     <div class="section-heading">
@@ -145,7 +132,14 @@
     });
 </script>
 <script>
-    $('.sidenav  li:nth-of-type(1)').addClass('active');
+    $('.sidenav  li:nth-of-type(2)').addClass('active');
+    for (let i = 1; i <= 8; i++) {
+        if(i===2){
+            continue;
+        }
+  $(`.sidenav li:nth-of-type(${i})`).removeClass('active');
+}
+    
 </script>
 <script>
     document.querySelectorAll(".drop-zone__input").forEach((inputElement) => {

@@ -72,7 +72,7 @@
             </div>
             <div class="form-group has-search">
                 <div class="dropdown dropdown-logout">
-                    <img src="{{asset('public/assets/images/vector.png')}}" class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown">
+                    <img src="{{asset('public/assets/images/Vector.png')}}" class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown">
                     <div class="dropdown-menu text-center logout-dropdown" aria-labelledby="dropdownMenuButton">
                         <a class="dropdown-item logout" href="{{(url('login'))}}"><i class="fa fa-sign-out pr-2" aria-hidden="true"></i>Logout</a>
 
@@ -89,24 +89,24 @@
                 </a>
             </li>
             <li class="nav-item my-1 ">
-                <a class="nav-link sidenav-item" href="{{url('plot')}}">
+                <a class="nav-link sidenav-item" href="{{url('spec-package')}}">
                     <img src="{{asset('public/assets/images/spec-blue.png')}}" class="icon-blue pr-2">
                     <img src="{{asset('public/assets/images/spec-white.png')}}" class="icon-white pr-2">
                     Specification Package</a>
             </li>
 
             <li class="nav-item my-1 ">
-                <a class="nav-link sidenav-item" href="{{url('client')}}"><img src="{{asset('public/assets/images/light-white.png')}}" class="pr-2 icon-white">
+                <a class="nav-link sidenav-item" href="{{url('lighting-legend')}}"><img src="{{asset('public/assets/images/light-white.png')}}" class="pr-2 icon-white">
                     <img src="{{asset('public/assets/images/light-blue.png')}}" class="pr-2 icon-blue">
                     Lighting Legend</a>
             </li>
             <li class="nav-item my-1 ">
-                <a class="nav-link sidenav-item" href="{{url('manager')}}"><img src="{{asset('public/assets/images/sub-white.png')}}" class="pr-2 icon-white">
+                <a class="nav-link sidenav-item" href="{{url('submittal-package')}}"><img src="{{asset('public/assets/images/sub-white.png')}}" class="pr-2 icon-white">
                     <img src="{{asset('public/assets/images/sub-blue.png')}}" class="pr-2 icon-blue">
                     Submittal Package</a>
             </li>
             <li class="nav-item my-1 ">
-                <a class="nav-link sidenav-item" href="#"><img src="{{asset('public/assets/images/rec-white.png')}}" class="pr-2 icon-white">
+                <a class="nav-link sidenav-item" href="{{url('record-drawings')}}"><img src="{{asset('public/assets/images/rec-white.png')}}" class="pr-2 icon-white">
                     <img src="{{asset('public/assets/images/rec-blue.png')}}" class="pr-2 icon-blue">
                     Record Drawing</a>
             </li>
