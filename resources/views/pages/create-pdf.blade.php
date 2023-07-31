@@ -16,19 +16,6 @@
         </div>
 
         <div class="create-pdf-uper-body">
-            <div class="open-package-wrapper">
-                <div class="section-heading">
-                    <h1>Select:</h1>
-                </div>
-                <div class="open-package-type">
-                    <div class="package-type">
-                        <a href="#">New Package</a>
-                    </div>
-                    <div class="package-type">
-                        <a href="#">Open Existing Package</a>
-                    </div>
-                </div>
-            </div>
             <div class="package-type-dropdown">
                 <div class="section-heading">
                     <h1>Package Type:</h1>
@@ -88,6 +75,7 @@
                 </div>
                 <div class="drop-zone">
                     <span class="drop-zone__prompt">Add PDF</span>
+                    <span>Spec Sheet</span>
                     <span>Drag+Drop</span>
                     <input type="file" name="myFile" class="drop-zone__input">
                 </div>
@@ -159,7 +147,6 @@
 <script>
     $('.sidenav  li:nth-of-type(1)').addClass('active');
 </script>
-
 <script>
     document.querySelectorAll(".drop-zone__input").forEach((inputElement) => {
         const dropZoneElement = inputElement.closest(".drop-zone");
@@ -170,6 +157,7 @@
 
         inputElement.addEventListener("change", (e) => {
             if (inputElement.files.length) {
+                
                 updateThumbnail(dropZoneElement, inputElement.files[0]);
             }
         });
@@ -196,13 +184,11 @@
             dropZoneElement.classList.remove("drop-zone--over");
         });
     });
-
-    /**
-     * Updates the thumbnail on a drop zone element.
-     *
-     * @param {HTMLElement} dropZoneElement
-     * @param {File} file
-     */
+    function hideFirstAndThirdSpans(dropZoneElement) {
+      const spans = dropZoneElement.querySelectorAll("span");
+      spans[0].style.display = "none"; // Hide the first span
+      spans[2].style.display = "none"; // Hide the third span
+    }
     function updateThumbnail(dropZoneElement, file) {
         let thumbnailElement = dropZoneElement.querySelector(".drop-zone__thumb");
 
