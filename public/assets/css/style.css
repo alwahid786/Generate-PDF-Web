@@ -1455,3 +1455,123 @@ input.rounded-checkbox {
         row-gap: 1rem;
     }
 }
+
+/*-------------------------------------------- Profile blade ----------------------------------------*/
+.profile-body {
+    background-color: white;
+    border-radius: 10px;
+    padding: 2rem 1rem;
+}
+
+.profile-body-inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.profile-img-wrapper {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    row-gap: 1rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.profile-img-wrapper img {
+    width: 256px;
+    height: 256px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.profile-img-wrapper .upload-file label {
+    padding: 15px 40px;
+    border-radius: 10px;
+    background-color: #003f77;
+    color: #fff;
+    text-align: center;
+    cursor: pointer;
+}
+
+.profile-img-wrapper .upload-file label:hover {
+    background-color: #004077de;
+}
+
+.profile-img-wrapper .upload-file input[type="file"] {
+    display: none;
+}
+
+.profile-detail-wrapper {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.profile-detail-wrapper .pdf-info-input-wrapper {
+    width: 100%;
+}
+
+.profile-update-btn {
+    text-align: end;
+}
+
+.profile-update-btn button {
+    background-color: #003f77;
+    outline: none;
+    border: none;
+    padding: 0.8rem 2rem;
+    color: white;
+    border-radius: 10px;
+}
+
+.profile-update-btn button:hover {
+    background-color: #004077de;
+}
+
+.profile-detail-wrapper .password-field {
+    position: relative;
+}
+
+.profile-detail-wrapper .password-field .show-pass,
+.profile-detail-wrapper .password-field .hide-pass {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+@media screen and (max-width: 768px) {
+    .profile-img-wrapper img {
+        width: 200px;
+        height: 200px;
+    }
+
+    .profile-img-wrapper {
+        width: 40%;
+    }
+
+    .profile-detail-wrapper {
+        width: 60%;
+    }
+
+    .profile-update-btn {
+        padding: 1rem 0;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .profile-body-inner {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .profile-img-wrapper {
+        width: 100%;
+    }
+
+    .profile-detail-wrapper {
+        width: 100%;
+    }
+}

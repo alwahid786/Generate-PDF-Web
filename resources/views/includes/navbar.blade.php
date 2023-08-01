@@ -68,7 +68,7 @@
             <div class="form-group has-search profile mr-2">
 
                 <span class="mr-2">Name here</span>
-                <img src="{{asset('public/assets/images/profile.png')}}">
+                <img src="{{asset('public/assets/images/profile-icon.png')}}">
             </div>
             <div class="form-group has-search">
                 <div class="dropdown dropdown-logout">
@@ -116,7 +116,7 @@
                     Existing Record Search</a>
             </li>
             <li class="nav-item my-1 ">
-                <a class="nav-link sidenav-item" href="#"><img src="{{asset('public/assets/images/pro-white.png')}}" class="pr-2 icon-white">
+                <a class="nav-link sidenav-item" href="{{url('profile')}}"><img src="{{asset('public/assets/images/pro-white.png')}}" class="pr-2 icon-white">
                     <img src="{{asset('public/assets/images/pro-blue.png')}}" class="pr-2 icon-blue">
                     Profile</a>
             </li>
