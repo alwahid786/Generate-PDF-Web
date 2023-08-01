@@ -47,7 +47,7 @@
                             <h1>Email </h1>
                         </div>
                         <div class="pdf-info-input">
-                            <input type="text" disabled>
+                            <input type="text" disabled value="test@mail.com">
                         </div>
                     </div>
                     <div class="pdf-info-input-wrapper">
