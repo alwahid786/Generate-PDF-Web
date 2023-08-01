@@ -64,13 +64,24 @@
             </div>
 
             <div class="profile-update-btn">
-                <button>Update</button>
+                <button class="login-btn" data-toggle="modal" data-target="#exampleModal">Update</button>
             </div>
         </div>
 
     </div>
 </main>
-
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <img src="{{asset('public/assets/images/success-tick.png')}}" alt="image">
+            </div>
+            <div class="modal-body">
+                Updated Successfully
+            </div>
+        </div>
+    </div>
+</div>
 @endsection
 @section('insertjavascript')
 <script>
