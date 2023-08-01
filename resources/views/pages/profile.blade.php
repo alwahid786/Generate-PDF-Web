@@ -74,14 +74,7 @@
 @endsection
 @section('insertjavascript')
 <script>
-    $('body').addClass('bg-clr')
-</script>
-
-</script>
-<script>
-    for (let i = 1; i <= 8; i++) {
-        $(`.sidenav li:nth-of-type(${i})`).removeClass('active');
-    }
+    $('.sidenav  li:nth-of-type(7)').addClass('active');
 </script>
 <script>
     document.addEventListener("DOMContentLoaded", function() {

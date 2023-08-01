@@ -42,6 +42,7 @@ Route::get('/lighting-output', function () {
 });
 Route::get('/support', function () {
     return view('pages.support');
+});
 Route::get('/profile', function () {
     return view('pages.profile');
 });
