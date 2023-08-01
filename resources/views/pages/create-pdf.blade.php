@@ -1,6 +1,5 @@
 @extends('layouts.layout-default')
 @section('content')
-<link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap4.min.css">
 <style>
     body {
         background: #f6f6f6;
@@ -120,30 +119,7 @@
 <script>
     $('body').addClass('bg-clr')
 </script>
-<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap4.min.js"></script>
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 
-
-
-<script>
-    $(document).ready(function() {
-        $('#detail-table').DataTable({
-            "ordering": false,
-            "info": false,
-            "searching": false,
-            "lengthChange": false,
-            "pageLength": 12,
-            language: {
-                'paginate': {
-                    'previous': '<img class="my-1" src="{{asset("public/assets/images/rev.png")}}" alt="">',
-                    'next': '<img class="my-1" src="{{asset("public/assets/images/for.png")}}" alt="">'
-                }
-            }
-        });
-    });
-</script>
 <script>
     $('.sidenav  li:nth-of-type(1)').addClass('active');
 </script>
@@ -157,7 +133,7 @@
 
         inputElement.addEventListener("change", (e) => {
             if (inputElement.files.length) {
-                
+
                 updateThumbnail(dropZoneElement, inputElement.files[0]);
             }
         });
@@ -184,11 +160,13 @@
             dropZoneElement.classList.remove("drop-zone--over");
         });
     });
+
     function hideFirstAndThirdSpans(dropZoneElement) {
-      const spans = dropZoneElement.querySelectorAll("span");
-      spans[0].style.display = "none"; // Hide the first span
-      spans[2].style.display = "none"; // Hide the third span
+        const spans = dropZoneElement.querySelectorAll("span");
+        spans[0].style.display = "none"; // Hide the first span
+        spans[2].style.display = "none"; // Hide the third span
     }
+
     function updateThumbnail(dropZoneElement, file) {
         let thumbnailElement = dropZoneElement.querySelector(".drop-zone__thumb");
 

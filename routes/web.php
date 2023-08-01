@@ -40,6 +40,9 @@ Route::get('/submittal-package', function () {
 Route::get('/lighting-output', function () {
     return view('pages.lighting-output');
 });
+Route::get('/support', function () {
+    return view('pages.support');
+});
 Route::get('/signup', function () {
     return view('pages.auth.signup');
 });
