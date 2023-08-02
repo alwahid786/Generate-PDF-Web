@@ -46,6 +46,9 @@ Route::get('/support', function () {
 Route::get('/profile', function () {
     return view('pages.profile');
 });
+Route::get('/pdf-template', function () {
+    return view('pages.pdf-template');
+});
 Route::get('/signup', function () {
     return view('pages.auth.signup');
 });
