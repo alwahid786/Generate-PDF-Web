@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\PdfController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,9 +24,7 @@ Route::get('/dashboard', function () {
 Route::get('/pdf-cover', function () {
     return view('pages.pdf-cover');
 });
-Route::get('/create-pdf', function () {
-    return view('pages.create-pdf');
-});
+
 Route::get('/signup', function () {
     return view('pages.auth.signup');
 });
@@ -49,11 +48,13 @@ Route::post('/login', [AuthController::class, 'loginFunction'])->name('loginFunc
 Route::post('/forgot-password', [AuthController::class, 'forgotPassword'])->name('forgotPassword');
 Route::post('/otp-verification', [AuthController::class, 'verifyOtp'])->name('verifyOtp');
 Route::post('/password-reset', [AuthController::class, 'resetPassword'])->name('resetPassword');
-Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
 // Auth Protected Routes 
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', function () {
         return view('pages.dashboard');
     });
+    Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+    Route::get('/create-pdf', [PdfController::class, 'createPdfPage'])->name('createPdfPage');
+    Route::post('/preview-pdf', [PdfController::class, 'previewPdf'])->name('previewPdf');
 });
