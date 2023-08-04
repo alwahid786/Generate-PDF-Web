@@ -15,7 +15,8 @@
         "laravel/framework": "^8.12",
         "laravel/passport": "*",
         "laravel/tinker": "^2.5",
-        "spatie/pdf-to-image": "^1.2"
+        "spatie/pdf-to-image": "^1.2",
+        "symfony/process": "*"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
