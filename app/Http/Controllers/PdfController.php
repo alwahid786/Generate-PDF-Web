@@ -34,12 +34,15 @@ class PdfController extends Controller
                     if (!is_dir($path)) {
                         mkdir($path, 0777, true);
                     }
+                    $imagePath = public_path('/files/images');
+                    if (!is_dir($imagePath)) {
+                        mkdir($imagePath, 0777, true);
+                    }
                     $uploadedFile->move($path, $name);
                     $file = $path . '/' . $name;
 
                     // Generate the output image path and filename
-                    $outputImagePath = $path . '/' . pathinfo($name, PATHINFO_FILENAME);
-
+                    $outputImagePath = $imagePath . '/' . pathinfo($name, PATHINFO_FILENAME);
                     // Update the command to use pdftoppm
                     // $pageNumber = 1; // Replace with the desired page number to convert
                     // $command = "pdftoppm -singlefile -png -f $pageNumber -l $pageNumber \"$file\" \"$outputImagePath\"";
@@ -47,7 +50,7 @@ class PdfController extends Controller
                     // // Execute the shell command using shell_exec
                     // shell_exec($command);
                     // // The output image file will have .png extension, not .jpg
-                    $outputImageFile = $outputImagePath . '.png';
+                    $outputImageFile = $outputImagePath . 'image.jpg';
                     // dd($outputImageFile);
 
                     // // Check if the conversion was successful and the output image exists
@@ -63,7 +66,7 @@ class PdfController extends Controller
                     // dd($image->getNumberImages());
 
                     $pdf = new Pdf($file);
-                    $pdf->setPage(1); // Optional: Set image quality (100 is highest)
+                    $pdf->setPage(1);
                     $pdf->saveImage($outputImageFile);
                     dd('done');
                 } catch (FileNotFoundException $e) {
