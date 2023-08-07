@@ -21,9 +21,9 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return view('pages.dashboard');
 });
-Route::get('/pdf-cover', function () {
-    return view('pages.pdf-cover');
-});
+// Route::get('/pdf-cover', function () {
+//     return view('pages.pdf-cover');
+// })->name('coverPage');
 
 Route::get('/signup', function () {
     return view('pages.auth.signup');
@@ -57,4 +57,5 @@ Route::middleware('auth')->group(function () {
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::get('/create-pdf', [PdfController::class, 'createPdfPage'])->name('createPdfPage');
     Route::post('/preview-pdf', [PdfController::class, 'previewPdf'])->name('previewPdf');
+    Route::any('/pdf-cover', [PdfController::class, 'pdfCover'])->name('pdfCover');
 });

@@ -204,6 +204,14 @@
 
 <!-- Add Type Function  -->
 <script>
+    // $(document).ready(function() {
+    //     const data = {
+    //         packageTypeId: 'name'
+    //     };
+    //     const queryString = new URLSearchParams(data).toString();
+    //     const controllerURL = `{{url('/pdf-cover')}}` + '?' + queryString;
+    //     console.log(controllerURL);
+    // });
     var fixtures = [];
     $(document).on('click', '#addTypeBtn', function() {
         let error = 0;
@@ -239,11 +247,13 @@
         var pdfFile = selectedFiles[0];
         let ref = $("#referenceNo").val();
         let partNo = $("#partNo").val();
+        let fixtureType = $("#fixtureType").val();
         let id = Math.floor(Math.random() * 90000) + 10000;
         pdfObject = {
             "pdfFile": pdfFile,
             "reference_no": ref,
             "part_no": partNo,
+            "fixtureType": fixtureType,
             "id": id
         };
         fixtures.push(pdfObject);
@@ -273,7 +283,6 @@
         let pdfFile = $("#pdfFile").val('');
         let dropImage = $(".drop-zone__thumb").remove();
     }
-
     // Preview PDF Function 
     $("#previewPdf").click(function() {
         if (fixtures.length < 1) {
@@ -294,7 +303,7 @@
             referenceNo: referenceNo
         }
 
-        // AJAX REQUEST START 
+        // Fetch REQUEST START 
         var data = new FormData();
         console.log(fixtures)
         console.log(packageObject)
@@ -305,30 +314,12 @@
             data.append(`fixtures[${i}][reference_no]`, fixture.reference_no);
             data.append(`fixtures[${i}][part_no]`, fixture.part_no);
             data.append(`fixtures[${i}][id]`, fixture.id);
+            data.append(`fixtures[${i}][fixtureType]`, fixture.fixtureType);
         }
         data.append('package', JSON.stringify(packageObject));
         console.log(data);
         var csrfToken = $('meta[name="csrf-token"]').attr('content');
-        // $.ajax({
-        //     url: `{{url('/preview-pdf')}}`, // Replace this with the actual URL of your controller method
-        //     type: 'POST',
-        //     data: data,
-        //     cache: false,
-        //     processData: false,
-        //     contentType: false,
-        //     dataType: 'json',
-        //     headers: {
-        //         'X-CSRF-TOKEN': csrfToken
-        //     },
-        //     success: function(response) {
-        //         // Handle the success response from the controller
-        //         console.log('AJAX request successful:', response);
-        //     },
-        //     error: function(xhr, status, error) {
-        //         // Handle the error response, if any
-        //         console.error('AJAX request error:', error);
-        //     }
-        // });
+
         fetch(`{{url('/preview-pdf')}}`, {
                 method: 'POST',
                 body: data,
@@ -338,14 +329,28 @@
             })
             .then(response => response.json())
             .then(data => {
-                // Handle the server response if needed
                 console.log(data);
+                if (data.status == false) {
+                    Swal.fire({
+                        title: 'Error',
+                        text: data.message,
+                        icon: 'error',
+                        confirmButtonColor: "#1D3F77"
+                    })
+                    return;
+                }
+                const responseData = {
+                    packageTypeId: data.data
+                };
+                const queryString = new URLSearchParams(data).toString();
+                const controllerURL = `{{url('/pdf-cover')}}` + '?' + queryString;
+                window.location.href = controllerURL;
             })
             .catch(error => {
                 // Handle errors
                 console.error(error);
             });
-        // AJAX REQUEST END
+        // Fetch REQUEST END
 
     });
 </script>

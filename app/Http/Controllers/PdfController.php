@@ -5,12 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\PackageType;
 use App\Models\PackageInfo;
-use Spatie\PdfToImage\Pdf;
+use App\Models\Fixtures;
 use Spatie\PdfToImage\Exceptions\PdfDoesNotExist;
 use Exception;
 use Imagick;
 use Symfony\Component\Process\Process;
 use Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
+use Barryvdh\DomPDF\Facade\Pdf as PDF;
 
 class PdfController extends Controller
 {
@@ -24,59 +25,7 @@ class PdfController extends Controller
     // Preview PDF Function 
     public function previewPdf(Request $request)
     {
-        $fixtures = $request->fixtures;
-        foreach ($fixtures as $fixture) {
-            $uploadedFile = $fixture['pdfFile'];
-            if ($uploadedFile && $uploadedFile->isValid()) {
-                try {
-                    $name = time() . $uploadedFile->getClientOriginalName();
-                    $path = public_path('/files');
-                    if (!is_dir($path)) {
-                        mkdir($path, 0777, true);
-                    }
-                    $imagePath = public_path('/files/images');
-                    if (!is_dir($imagePath)) {
-                        mkdir($imagePath, 0777, true);
-                    }
-                    $uploadedFile->move($path, $name);
-                    $file = $path . '/' . $name;
-
-                    // Generate the output image path and filename
-                    $outputImagePath = $imagePath . '/' . pathinfo($name, PATHINFO_FILENAME);
-                    // Update the command to use pdftoppm
-                    // $pageNumber = 1; // Replace with the desired page number to convert
-                    // $command = "pdftoppm -singlefile -png -f $pageNumber -l $pageNumber \"$file\" \"$outputImagePath\"";
-
-                    // // Execute the shell command using shell_exec
-                    // shell_exec($command);
-                    // // The output image file will have .png extension, not .jpg
-                    $outputImageFile = $outputImagePath . 'image.jpg';
-                    // dd($outputImageFile);
-
-                    // // Check if the conversion was successful and the output image exists
-                    // if (file_exists($outputImageFile)) {
-                    //     // Do whatever you need to do with the converted image here
-                    //     // For example, you can save the path in the database or display it to the user.
-                    //     dd("PDF page $pageNumber converted to image: $outputImageFile");
-                    // } else {
-                    //     dump("Error: Image conversion failed.");
-                    // }
-                    // $image = new Imagick();
-                    // $image->pingImage($file);
-                    // dd($image->getNumberImages());
-
-                    $pdf = new Pdf($file);
-                    $pdf->setPage(1);
-                    $pdf->saveImage($outputImageFile);
-                    dd('done');
-                } catch (FileNotFoundException $e) {
-                    dump("Error: PDF does not exist or is not accessible.");
-                } catch (Exception $e) {
-                    dump("Error processing PDF: " . $e->getMessage());
-                }
-            }
-        }
-        dd($request->all());
+        // Save Package First 
         $package = json_decode($request->input('package'));
 
         // First Create Package Info 
@@ -86,12 +35,59 @@ class PdfController extends Controller
         $packageType->package_type_id = $package->packageType;
         $packageType->save();
 
-        // Get Fixtures 
+        // Then Loop Through Every Fixture to Save() 
+        $fixtures = $request->fixtures;
+        foreach ($fixtures as $fixture) {
+            $uploadedFile = $fixture['pdfFile'];
+            if ($uploadedFile && $uploadedFile->isValid()) {
+                $name = time() . $uploadedFile->getClientOriginalName();
+                $path = public_path('/files');
+                if (!is_dir($path)) {
+                    mkdir($path, 0777, true);
+                }
+                $uploadedFile->move($path, $name);
+                $filePath = $path . '/' . $name;
+            } else {
+                return response()->json(['status' => false, 'message' => 'Error: File is Invalid!']);
+            }
+            $fixtureData = new Fixtures();
+            $fixtureData->package_type_id = $packageType->id;
+            $fixtureData->pdf_path = $filePath;
+            $fixtureData->type = $fixture['fixtureType'];
+            $fixtureData->part_number = $fixture['part_no'];
+            $fixtureData->save();
+        }
+
+        // Prevent Data at last for response
+        return response()->json(['status' => true, 'message' => 'Success', 'data' => $packageType->id]);
     }
     private function countPages($path)
     {
         $pdftext = file_get_contents($path);
         $num = preg_match_all("/\/Page\W/", $pdftext, $dummy);
         return $num;
+    }
+
+    public function pdfCover(Request $request)
+    {
+        $typeId = $request->query('packageTypeId');
+        $package = PackageInfo::where('package_type_id', $typeId)->with('fixtures')->first();
+        if (empty($package)) {
+            return response()->json(['status' => false, 'message' => 'Error: Package Id is Invalid!']);
+        }
+        foreach ($package->fixtures as $fixture) {
+            $pdfPath = $fixture['pdf_path'];
+            $pagesCount = $this->countPages($pdfPath);
+            $pdf = PDF::loadFile($pdfPath);
+
+            for ($page = 1; $page <= $pagesCount; $page++) {
+                
+            }
+        }
+
+
+
+
+        return view('pages.pdf-cover', compact('file'));
     }
 }
