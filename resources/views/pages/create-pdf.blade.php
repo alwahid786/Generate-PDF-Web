@@ -241,7 +241,7 @@
             return;
         }
 
-        // Get PDF FIle 
+        // Get PDF FIle
         var pdfFileInput = document.getElementById('pdfFile');
         var selectedFiles = pdfFileInput.files;
         var pdfFile = selectedFiles[0];
@@ -266,7 +266,7 @@
         $(".pdf-detail-bar").append(pdfDiv);
         resetFixtures();
     });
-    // Remove PDF BTN Click function 
+    // Remove PDF BTN Click function
     $(document).on('click', '.removePdfBtn', function() {
         let pdfDiv = $(this).closest('ul');
         let id = pdfDiv.data('id');
@@ -276,14 +276,14 @@
         }
         pdfDiv.remove();
     });
-    // Reset Fields Function 
+    // Reset Fields Function
     function resetFixtures() {
         let part = $("#partNo").val('');
         let fixtureType = $("#fixtureType").val('');
         let pdfFile = $("#pdfFile").val('');
         let dropImage = $(".drop-zone__thumb").remove();
     }
-    // Preview PDF Function 
+    // Preview PDF Function
     $("#previewPdf").click(function() {
         if (fixtures.length < 1) {
             Swal.fire({
@@ -303,7 +303,7 @@
             referenceNo: referenceNo
         }
 
-        // Fetch REQUEST START 
+        // Fetch REQUEST START
         var data = new FormData();
         console.log(fixtures)
         console.log(packageObject)
@@ -317,7 +317,7 @@
             data.append(`fixtures[${i}][fixtureType]`, fixture.fixtureType);
         }
         data.append('package', JSON.stringify(packageObject));
-        console.log(data);
+        // console.log(data);
         var csrfToken = $('meta[name="csrf-token"]').attr('content');
 
         fetch(`{{url('/preview-pdf')}}`, {
@@ -329,7 +329,8 @@
             })
             .then(response => response.json())
             .then(data => {
-                console.log(data);
+                console.log("qwe*^2456754", data.data);
+                // return
                 if (data.status == false) {
                     Swal.fire({
                         title: 'Error',
@@ -342,7 +343,10 @@
                 const responseData = {
                     packageTypeId: data.data
                 };
-                const queryString = new URLSearchParams(data).toString();
+
+                const queryString = new URLSearchParams(responseData).toString(); // 22=
+                // console.log("a90su89as79b as 897a69as 8yasyh", queryString)
+                // return
                 const controllerURL = `{{url('/pdf-cover')}}` + '?' + queryString;
                 window.location.href = controllerURL;
             })

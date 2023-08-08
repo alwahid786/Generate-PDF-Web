@@ -15,27 +15,27 @@ use Barryvdh\DomPDF\Facade\Pdf as PDF;
 
 class PdfController extends Controller
 {
-    // Create PDF Page View 
+    // Create PDF Page View
     public function createPdfPage(Request $request)
     {
         $packageTypes = PackageType::get();
         return view('pages.create-pdf', compact('packageTypes'));
     }
 
-    // Preview PDF Function 
+    // Preview PDF Function
     public function previewPdf(Request $request)
     {
-        // Save Package First 
+        // Save Package First
         $package = json_decode($request->input('package'));
 
-        // First Create Package Info 
+        // First Create Package Info
         $packageType = new PackageInfo();
         $packageType->package_name = $package->projectName;
         $packageType->vision_reference = $package->referenceNo;
         $packageType->package_type_id = $package->packageType;
         $packageType->save();
 
-        // Then Loop Through Every Fixture to Save() 
+        // Then Loop Through Every Fixture to Save()
         $fixtures = $request->fixtures;
         foreach ($fixtures as $fixture) {
             $uploadedFile = $fixture['pdfFile'];
@@ -71,23 +71,25 @@ class PdfController extends Controller
     public function pdfCover(Request $request)
     {
         $typeId = $request->query('packageTypeId');
-        $package = PackageInfo::where('package_type_id', $typeId)->with('fixtures')->first();
+        $package = PackageInfo::where('id', $typeId)->with('fixtures')->first();
+
         if (empty($package)) {
             return response()->json(['status' => false, 'message' => 'Error: Package Id is Invalid!']);
         }
         foreach ($package->fixtures as $fixture) {
             $pdfPath = $fixture['pdf_path'];
             $pagesCount = $this->countPages($pdfPath);
+            dd($pagesCount);
             $pdf = PDF::loadFile($pdfPath);
 
             for ($page = 1; $page <= $pagesCount; $page++) {
-                
+
             }
         }
 
 
 
 
-        return view('pages.pdf-cover', compact('file'));
+        return view('pages.pdf-cover');
     }
 }
