@@ -87,16 +87,16 @@ class PdfController extends Controller
 
             $pdfPath = $fixture['pdf_path'];
 
-            $pagesCount = $this->countPages($pdfPath);
+            // $pagesCount = $this->countPages($pdfPath);
 
-            $pdf = PDF::loadFile($pdfPath);
+            // // $pdf = PDF::loadFile($pdfPath);
 
-            for ($page = 1; $page <= $pagesCount; $page++) {
+            // for ($page = 1; $page <= $pagesCount; $page++) {
 
-            }
+            // }
 
         }
 
-        return view('pages.pdf-cover');
+        return view('pages.pdf-cover', ['pdf_path' => $pdfPath]);
     }
 }
