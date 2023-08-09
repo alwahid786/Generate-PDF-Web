@@ -345,10 +345,12 @@
                 };
 
                 const queryString = new URLSearchParams(responseData).toString(); // 22=
-                // console.log("a90su89as79b as 897a69as 8yasyh", queryString)
-                // return
+
                 const controllerURL = `{{url('/pdf-cover')}}` + '?' + queryString;
+
                 window.location.href = controllerURL;
+
+
             })
             .catch(error => {
                 // Handle errors

@@ -11,6 +11,6 @@ class PackageInfo extends Model
 
     public function fixtures()
     {
-        return $this->hasMany(Fixtures::class, 'id', 'package_type_id');
+        return $this->hasMany(Fixtures::class, 'package_info_id');
     }
 }

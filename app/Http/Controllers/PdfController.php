@@ -41,18 +41,24 @@ class PdfController extends Controller
             $uploadedFile = $fixture['pdfFile'];
             if ($uploadedFile && $uploadedFile->isValid()) {
                 $name = time() . $uploadedFile->getClientOriginalName();
-                $path = public_path('/files');
-                if (!is_dir($path)) {
-                    mkdir($path, 0777, true);
-                }
-                $uploadedFile->move($path, $name);
-                $filePath = $path . '/' . $name;
+                // $path = public_path('/files');
+                // dd($path);
+                // if (!is_dir($path)) {
+                //     mkdir($path, 0777, true);
+                // }
+
+                $uploadedFile->move(public_path('/files'), $name);
+                $filePath = 'public/files/' . $name;
+                $fileUrl = asset($filePath);
+                // $uploadedFile->move($path, $name);
+                // $filePath = $path . '/' . $name;
+                // dd($fileUrl);
             } else {
                 return response()->json(['status' => false, 'message' => 'Error: File is Invalid!']);
             }
             $fixtureData = new Fixtures();
-            $fixtureData->package_type_id = $packageType->id;
-            $fixtureData->pdf_path = $filePath;
+            $fixtureData->package_info_id = $packageType->id;
+            $fixtureData->pdf_path = $fileUrl;
             $fixtureData->type = $fixture['fixtureType'];
             $fixtureData->part_number = $fixture['part_no'];
             $fixtureData->save();
@@ -76,19 +82,20 @@ class PdfController extends Controller
         if (empty($package)) {
             return response()->json(['status' => false, 'message' => 'Error: Package Id is Invalid!']);
         }
+
         foreach ($package->fixtures as $fixture) {
+
             $pdfPath = $fixture['pdf_path'];
+
             $pagesCount = $this->countPages($pdfPath);
-            dd($pagesCount);
+
             $pdf = PDF::loadFile($pdfPath);
 
             for ($page = 1; $page <= $pagesCount; $page++) {
 
             }
+
         }
-
-
-
 
         return view('pages.pdf-cover');
     }
