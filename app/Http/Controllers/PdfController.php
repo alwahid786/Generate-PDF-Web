@@ -12,7 +12,7 @@ use Imagick;
 use Symfony\Component\Process\Process;
 use Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
 use Barryvdh\DomPDF\Facade\Pdf as PDF;
-
+use Mpdf\Mpdf;
 class PdfController extends Controller
 {
     // Create PDF Page View
@@ -87,6 +87,23 @@ class PdfController extends Controller
 
             $pdfPath = $fixture['pdf_path'];
 
+            $pdfFilePath = $pdfPath;
+
+            // Create an mPDF instance
+            $mpdf = new Mpdf();
+
+            // Load the PDF file
+            $pageCount = $mpdf->SetSourceFile($pdfFilePath);
+            // Add the first page to the mPDF instance
+            $page = $mpdf->ImportPage(1);
+
+            // Add the imported page to the output PDF
+            $mpdf->AddPage();
+            $mpdf->UseTemplate($page);
+
+            // Output or save the modified PDF
+            $modifiedPdfFilePath = 'public/files/modified.pdf';
+            $mpdf->Output($modifiedPdfFilePath, 'F');
             // $pagesCount = $this->countPages($pdfPath);
 
             // // $pdf = PDF::loadFile($pdfPath);
