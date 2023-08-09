@@ -6,12 +6,13 @@ use Illuminate\Http\Request;
 use App\Models\PackageType;
 use App\Models\PackageInfo;
 use App\Models\Fixtures;
-use Spatie\PdfToImage\Exceptions\PdfDoesNotExist;
+// use Spatie\PdfToImage\Exceptions\PdfDoesNotExist;
+use Spatie\PdfToImage\Pdf;
 use Exception;
 use Imagick;
 use Symfony\Component\Process\Process;
 use Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
-use Barryvdh\DomPDF\Facade\Pdf as PDF;
+// use Barryvdh\DomPDF\Facade\Pdf as PDF;
 use Mpdf\Mpdf;
 class PdfController extends Controller
 {
@@ -87,32 +88,49 @@ class PdfController extends Controller
 
             $pdfPath = $fixture['pdf_path'];
 
-            $pdfFilePath = $pdfPath;
+            // $pdfPath = 'C:\xampp\htdocs\pdf-generator\public\files/1691575096test.pdf';
 
-            // Create an mPDF instance
-            $mpdf = new Mpdf();
+            // $outputPath = 'C:\xampp\htdocs\pdf-generator\public\files';
 
-            // Load the PDF file
-            $pageCount = $mpdf->SetSourceFile($pdfFilePath);
-            // Add the first page to the mPDF instance
-            $page = $mpdf->ImportPage(1);
+            // $pdfFilePath = $pdfPath;
 
-            // Add the imported page to the output PDF
-            $mpdf->AddPage();
-            $mpdf->UseTemplate($page);
+            // if (file_exists($pdfPath)) {
 
-            // Output or save the modified PDF
-            $modifiedPdfFilePath = 'public/files/modified.pdf';
-            $mpdf->Output($modifiedPdfFilePath, 'F');
-            // $pagesCount = $this->countPages($pdfPath);
+            //     try {
 
-            // // $pdf = PDF::loadFile($pdfPath);
+            //         $outputFilename = '\output_image.png';
+            //         $command = "gswin64c.exe -sDEVICE=pngalpha -o \"$outputPath$outputFilename\" \"$pdfPath\"";
 
-            // for ($page = 1; $page <= $pagesCount; $page++) {
+            //         exec($command, $output, $returnCode);
 
+            //         if ($returnCode === 0) {
+            //             echo "PDF converted to image successfully.";
+            //             die;
+            //         } else {
+            //             echo "Error converting PDF to image.";
+            //             print_r($output); // Print any error output
+            //             die;
+            //         }
+
+            //         // Backup Code
+
+            //         // $pdf = new Pdf($pdfPath);
+            //         // $pdf->saveImage($outputPath);
+
+            //     } catch (PdfDoesNotExist $exception) {
+            //         // Log the error or return an error response
+            //         dd($exception->getMessage());
+            //     }
+
+            // } else {
+            //     dd("PDF file does not exist at the specified path: $pdfPath");
             // }
 
+
+
         }
+
+        // $image = '';
 
         return view('pages.pdf-cover', ['pdf_path' => $pdfPath]);
     }
