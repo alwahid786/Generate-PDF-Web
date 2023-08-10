@@ -285,6 +285,7 @@
     }
     // Preview PDF Function
     $("#previewPdf").click(function() {
+
         if (fixtures.length < 1) {
             Swal.fire({
                 title: 'No Data!',
@@ -319,7 +320,8 @@
         data.append('package', JSON.stringify(packageObject));
         // console.log(data);
         var csrfToken = $('meta[name="csrf-token"]').attr('content');
-
+      showLoading();
+        // return false
         fetch(`{{url('/preview-pdf')}}`, {
                 method: 'POST',
                 body: data,
@@ -332,6 +334,7 @@
                 // console.log("qwe*^2456754", data.data);
                 // return
                 if (data.status == false) {
+                    hideLoading();
                     Swal.fire({
                         title: 'Error',
                         text: data.message,
@@ -359,6 +362,17 @@
         // Fetch REQUEST END
 
     });
+
+    function showLoading(){
+        $('body').css('opacity', 0.5);
+        $('button').prop('disabled', true);
+        $("#loader").removeClass('d-none');
+    }
+    function hideLoading(){
+        $('body').css('opacity', 1);
+        $('button').prop('disabled', false);
+        $("#loader").addClass('d-none');
+    }
 </script>
 
 @endsection

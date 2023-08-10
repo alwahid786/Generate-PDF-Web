@@ -7,7 +7,7 @@ use App\Models\PackageType;
 use App\Models\PackageInfo;
 use App\Models\Fixtures;
 // use Spatie\PdfToImage\Exceptions\PdfDoesNotExist;
-use Spatie\PdfToImage\Pdf;
+// use Spatie\PdfToImage\Pdf;
 use Exception;
 use Imagick;
 use Symfony\Component\Process\Process;
@@ -16,6 +16,7 @@ use Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
 use Mpdf\Mpdf;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Str;
+use PDF;
 
 class PdfController extends Controller
 {
@@ -87,6 +88,7 @@ class PdfController extends Controller
             return response()->json(['status' => false, 'message' => 'Error: Package Id is Invalid!']);
         }
 
+        $completePdfPath = [];
         foreach ($package->fixtures as $fixture) {
 
             $pdfPath = $fixture['pdf_path'];
@@ -99,11 +101,10 @@ class PdfController extends Controller
             ];
 
             // path for ubuntu
-            $outputPath = '/var/www/html/pdf-generator/public/files/';
+            // $outputPath = '/var/www/html/pdf-generator/public/files/';
 
             // path for window
-            // $outputPath = 'C:\xampp\htdocs\pdf-generator\public\files';
-            $completePdfPath = [];
+            $outputPath = 'C:\xampp\htdocs\pdf-generator\public\files';
 
 
             if (file_exists($pdfPath)) {
@@ -127,17 +128,16 @@ class PdfController extends Controller
                         $outputFilename = "/$randomString.$pageNumber.$randomNumber.png";
 
                         // command for window
-                        // $command = "gswin64c.exe -sDEVICE=pngalpha -r300 -o \"$outputPath$outputFilename\" -dFirstPage=$pageNumber -dLastPage=$pageNumber \"$pdfPath\"";
+                        $command = "gswin64c.exe -sDEVICE=pngalpha -r300 -o \"$outputPath$outputFilename\" -dFirstPage=$pageNumber -dLastPage=$pageNumber \"$pdfPath\"";
 
                         // command for ubuntu
-                        $command = "gs -sDEVICE=pngalpha -r300 -o \"$outputPath$outputFilename\" -dFirstPage=$pageNumber -dLastPage=$pageNumber \"$pdfPath\"";
+                        // $command = "gs -sDEVICE=pngalpha -r300 -o \"$outputPath$outputFilename\" -dFirstPage=$pageNumber -dLastPage=$pageNumber \"$pdfPath\"";
 
 
                         exec($command, $output, $returnCode);
 
                         if ($returnCode === 0) {
 
-                            // $completePdfPath[] = asset('public/files/'.$outputFilename);
                             $completePdfPath[] = asset('public/files/'.$outputFilename);
 
                         } else {
@@ -147,40 +147,7 @@ class PdfController extends Controller
                         }
                     }
 
-                    // echo $completePdfPath;
-
-
                     // For Multiple Pages --------------------------------------------------------End
-
-
-
-
-
-                    // for single Page ---------------------------------Start-------------------------
-
-                    // $outputFilename = '/output_image.png';
-
-                    // commad for window
-                    // $command = "gswin64c.exe -sDEVICE=pngalpha -r300 -o \"$outputPath$outputFilename\" \"$pdfPath\"";
-
-                    // command for ubuntu
-                    // $command = "gs -sDEVICE=pngalpha -o \"$outputPath$outputFilename\" \"$pdfPath\"";
-
-                    // exec($command, $output, $returnCode);
-
-                    // if ($returnCode === 0) {
-                    //     $fullPath = asset('public/files/'.$outputFilename);
-                    //     // dd($fullPath);
-                    // } else {
-                    //     echo "Error converting PDF to image.";
-                    //     print_r($output); // Print any error output
-                    //     die;
-                    // }
-
-                    // for single Page ---------------------------------End-------------------------
-
-
-
 
 
                 } catch (PdfDoesNotExist $exception) {
@@ -194,9 +161,6 @@ class PdfController extends Controller
                 dd("PDF file does not exist at the specified path: $pdfPath");
 
             }
-
-
-
         }
 
         $template =  view('pages.pdf-template', ['pdf_path' => $completePdfPath, 'object' => $obj])->render();
@@ -204,6 +168,33 @@ class PdfController extends Controller
         View::share('pdfTemplate', $template);
 
         return view('pages.pdf-cover')->with('pdfTemplate', $template);
+
+        // $pageWidthMm = 250;
+        // $pageHeightMm = 375.5;
+
+        // Convert millimeters to points (1 mm = 2.83465 points)
+        // $pageWidthPoints = $pageWidthMm * 2.83465;
+        // $pageHeightPoints = $pageHeightMm * 2.83465;
+
+
+        // $pdf = PDF::loadHtml($template)->setPaper([0,0,500,800], 'portrait');
+
+        // $pdf = PDF::loadHtml($template);
+
+        // $filename = Str::random(10) . '.pdf';
+
+         // Store the PDF in a designated folder within the storage directory
+        // $pdf->save('C:\xampp\htdocs\pdf-generator\public\pdf/'.$filename);
+
+        // return $template;
+
+        // $pdf = PDF::loadHtml($template);
+
+        // $pdf->setPaper('A4', 'portrait');
+
+        // return $pdf->download('your-pdf-filename.pdf');
+
+
 
     }
 }
