@@ -86,21 +86,25 @@ class PdfController extends Controller
 
         foreach ($package->fixtures as $fixture) {
 
-            // $pdfPath = $fixture['pdf_path'];
-
             $pdfPath = $fixture['pdf_path'];
 
-            $outputPath = '/var/www/html/pdf-generator/public/files/';
+            // path for ubuntu
+            // $outputPath = '/var/www/html/pdf-generator/public/files/';
 
-            $pdfFilePath = $pdfPath;
+            // path for window
+            $outputPath = 'C:\xampp\htdocs\pdf-generator\public\files';
 
             if (file_exists($pdfPath)) {
 
                 try {
 
                     $outputFilename = '/output_image.png';
-                    // $command = "gswin64c.exe -sDEVICE=pngalpha -o \"$outputPath$outputFilename\" \"$pdfPath\"";
-                    $command = "gs -sDEVICE=pngalpha -o \"$outputPath$outputFilename\" \"$pdfPath\"";
+
+                    // commad for window
+                    $command = "gswin64c.exe -sDEVICE=pngalpha -o \"$outputPath$outputFilename\" \"$pdfPath\"";
+
+                    // command for ubuntu
+                    // $command = "gs -sDEVICE=pngalpha -o \"$outputPath$outputFilename\" \"$pdfPath\"";
 
                     exec($command, $output, $returnCode);
 
@@ -114,12 +118,15 @@ class PdfController extends Controller
                     }
 
                 } catch (PdfDoesNotExist $exception) {
-                    // Log the error or return an error response
+
                     dd($exception->getMessage());
+
                 }
 
             } else {
+
                 dd("PDF file does not exist at the specified path: $pdfPath");
+
             }
 
 
