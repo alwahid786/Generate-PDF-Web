@@ -99,7 +99,8 @@ class PdfController extends Controller
                 try {
 
                     $outputFilename = '\output_image.png';
-                    $command = "gswin64c.exe -sDEVICE=pngalpha -o \"$outputPath$outputFilename\" \"$pdfPath\"";
+                    // $command = "gswin64c.exe -sDEVICE=pngalpha -o \"$outputPath$outputFilename\" \"$pdfPath\"";
+                    $command = "gs -sDEVICE=pngalpha -o \"$outputPath$outputFilename\" \"$pdfPath\"";
 
                     exec($command, $output, $returnCode);
 
@@ -111,11 +112,6 @@ class PdfController extends Controller
                         print_r($output); // Print any error output
                         die;
                     }
-
-                    // Backup Code
-
-                    // $pdf = new Pdf($pdfPath);
-                    // $pdf->saveImage($outputPath);
 
                 } catch (PdfDoesNotExist $exception) {
                     // Log the error or return an error response
