@@ -42,24 +42,24 @@ class PdfController extends Controller
             $uploadedFile = $fixture['pdfFile'];
             if ($uploadedFile && $uploadedFile->isValid()) {
                 $name = time() . $uploadedFile->getClientOriginalName();
-                // $path = public_path('/files');
+                $path = public_path('/files');
                 // dd($path);
                 // if (!is_dir($path)) {
                 //     mkdir($path, 0777, true);
                 // }
 
-                $uploadedFile->move(public_path('/files'), $name);
-                $filePath = 'public/files/' . $name;
-                $fileUrl = asset($filePath);
-                // $uploadedFile->move($path, $name);
-                // $filePath = $path . '/' . $name;
+                // $uploadedFile->move(public_path('/files'), $name);
+                // $filePath = 'public/files/' . $name;
+                // $fileUrl = asset($filePath);
+                $uploadedFile->move($path, $name);
+                $filePath = $path . '/' . $name;
                 // dd($fileUrl);
             } else {
                 return response()->json(['status' => false, 'message' => 'Error: File is Invalid!']);
             }
             $fixtureData = new Fixtures();
             $fixtureData->package_info_id = $packageType->id;
-            $fixtureData->pdf_path = $fileUrl;
+            $fixtureData->pdf_path = $filePath;
             $fixtureData->type = $fixture['fixtureType'];
             $fixtureData->part_number = $fixture['part_no'];
             $fixtureData->save();
@@ -86,45 +86,45 @@ class PdfController extends Controller
 
         foreach ($package->fixtures as $fixture) {
 
+            // $pdfPath = $fixture['pdf_path'];
+
             $pdfPath = $fixture['pdf_path'];
 
-            // $pdfPath = 'C:\xampp\htdocs\pdf-generator\public\files/1691575096test.pdf';
+            $outputPath = 'C:\xampp\htdocs\pdf-generator\public\files';
 
-            // $outputPath = 'C:\xampp\htdocs\pdf-generator\public\files';
+            $pdfFilePath = $pdfPath;
 
-            // $pdfFilePath = $pdfPath;
+            if (file_exists($pdfPath)) {
 
-            // if (file_exists($pdfPath)) {
+                try {
 
-            //     try {
+                    $outputFilename = '\output_image.png';
+                    $command = "gswin64c.exe -sDEVICE=pngalpha -o \"$outputPath$outputFilename\" \"$pdfPath\"";
 
-            //         $outputFilename = '\output_image.png';
-            //         $command = "gswin64c.exe -sDEVICE=pngalpha -o \"$outputPath$outputFilename\" \"$pdfPath\"";
+                    exec($command, $output, $returnCode);
 
-            //         exec($command, $output, $returnCode);
+                    if ($returnCode === 0) {
+                        echo "PDF converted to image successfully.";
+                        die;
+                    } else {
+                        echo "Error converting PDF to image.";
+                        print_r($output); // Print any error output
+                        die;
+                    }
 
-            //         if ($returnCode === 0) {
-            //             echo "PDF converted to image successfully.";
-            //             die;
-            //         } else {
-            //             echo "Error converting PDF to image.";
-            //             print_r($output); // Print any error output
-            //             die;
-            //         }
+                    // Backup Code
 
-            //         // Backup Code
+                    // $pdf = new Pdf($pdfPath);
+                    // $pdf->saveImage($outputPath);
 
-            //         // $pdf = new Pdf($pdfPath);
-            //         // $pdf->saveImage($outputPath);
+                } catch (PdfDoesNotExist $exception) {
+                    // Log the error or return an error response
+                    dd($exception->getMessage());
+                }
 
-            //     } catch (PdfDoesNotExist $exception) {
-            //         // Log the error or return an error response
-            //         dd($exception->getMessage());
-            //     }
-
-            // } else {
-            //     dd("PDF file does not exist at the specified path: $pdfPath");
-            // }
+            } else {
+                dd("PDF file does not exist at the specified path: $pdfPath");
+            }
 
 
 

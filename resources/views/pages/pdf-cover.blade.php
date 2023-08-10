@@ -20,8 +20,9 @@
                 <h1>PDF Package Creator <span>14 Jul 2023</span></h1>
             </div>
         </div>
-        <iframe src="{{ $pdf_path }}">
-        </iframe>
+        <img src="" alt="">
+        {{-- <iframe src="{{ $pdf_path }}">
+        </iframe> --}}
     </div>
 </main>
 
