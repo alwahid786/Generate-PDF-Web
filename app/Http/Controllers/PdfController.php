@@ -99,10 +99,10 @@ class PdfController extends Controller
             ];
 
             // path for ubuntu
-            // $outputPath = '/var/www/html/pdf-generator/public/files/';
+            $outputPath = '/var/www/html/pdf-generator/public/files/';
 
             // path for window
-            $outputPath = 'C:\xampp\htdocs\pdf-generator\public\files';
+            // $outputPath = 'C:\xampp\htdocs\pdf-generator\public\files';
             $completePdfPath = [];
 
 
