@@ -137,7 +137,8 @@ class PdfController extends Controller
 
                         if ($returnCode === 0) {
 
-                            $completePdfPath[] = asset('public/files/'.$outputFilename);
+                            // $completePdfPath[] = asset('public/files/'.$outputFilename);
+                            $completePdfPath[] = asset('public/files'.$outputFilename);
 
                         } else {
                             echo "Error converting page $pageNumber to image.<br>";
