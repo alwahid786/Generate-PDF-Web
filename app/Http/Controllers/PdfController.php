@@ -98,7 +98,7 @@ class PdfController extends Controller
 
                 try {
 
-                    $outputFilename = '\output_image.png';
+                    $outputFilename = '/output_image.png';
                     // $command = "gswin64c.exe -sDEVICE=pngalpha -o \"$outputPath$outputFilename\" \"$pdfPath\"";
                     $command = "gs -sDEVICE=pngalpha -o \"$outputPath$outputFilename\" \"$pdfPath\"";
 
