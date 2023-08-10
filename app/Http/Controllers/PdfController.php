@@ -124,7 +124,7 @@ class PdfController extends Controller
                         $randomString = Str::random(6);
                         $randomNumber = mt_rand(100000, 999999);
 
-                        $outputFilename = "\\$randomString.$pageNumber.$randomNumber.png";
+                        $outputFilename = "/$randomString.$pageNumber.$randomNumber.png";
 
                         // command for window
                         // $command = "gswin64c.exe -sDEVICE=pngalpha -r300 -o \"$outputPath$outputFilename\" -dFirstPage=$pageNumber -dLastPage=$pageNumber \"$pdfPath\"";
@@ -138,7 +138,7 @@ class PdfController extends Controller
                         if ($returnCode === 0) {
 
                             // $completePdfPath[] = asset('public/files/'.$outputFilename);
-                            $completePdfPath[] = asset('public/files'.$outputFilename);
+                            $completePdfPath[] = asset('public/files/'.$outputFilename);
 
                         } else {
                             echo "Error converting page $pageNumber to image.<br>";
