@@ -180,7 +180,7 @@ class PdfController extends Controller
 
         // $image = '';
 
-        return view('pages.pdf-cover', ['pdf_path' => $completePdfPath]);
+        return view('pages.pdf-template', ['pdf_path' => $completePdfPath]);
         // return view('pages.pdf-cover');
     }
 }

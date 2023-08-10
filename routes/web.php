@@ -41,6 +41,10 @@ Route::get('/new-password', function () {
     return view('pages.auth.new-password');
 });
 
+Route::get('/template', function () {
+    return view('pages.pdf-template');
+});
+
 
 // API's Function and Routes
 Route::post('/register', [AuthController::class, 'signupFunction'])->name('signupFunction');
@@ -49,7 +53,7 @@ Route::post('/forgot-password', [AuthController::class, 'forgotPassword'])->name
 Route::post('/otp-verification', [AuthController::class, 'verifyOtp'])->name('verifyOtp');
 Route::post('/password-reset', [AuthController::class, 'resetPassword'])->name('resetPassword');
 
-// Auth Protected Routes 
+// Auth Protected Routes
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', function () {
         return view('pages.dashboard');
