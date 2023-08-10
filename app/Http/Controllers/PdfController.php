@@ -101,10 +101,10 @@ class PdfController extends Controller
             ];
 
             // path for ubuntu
-            // $outputPath = '/var/www/html/pdf-generator/public/files/';
+            $outputPath = '/var/www/html/pdf-generator/public/files/';
 
             // path for window
-            $outputPath = 'C:\xampp\htdocs\pdf-generator\public\files';
+            // $outputPath = 'C:\xampp\htdocs\pdf-generator\public\files';
 
 
             if (file_exists($pdfPath)) {
@@ -128,10 +128,10 @@ class PdfController extends Controller
                         $outputFilename = "/$randomString.$pageNumber.$randomNumber.png";
 
                         // command for window
-                        $command = "gswin64c.exe -sDEVICE=pngalpha -r300 -o \"$outputPath$outputFilename\" -dFirstPage=$pageNumber -dLastPage=$pageNumber \"$pdfPath\"";
+                        // $command = "gswin64c.exe -sDEVICE=pngalpha -r300 -o \"$outputPath$outputFilename\" -dFirstPage=$pageNumber -dLastPage=$pageNumber \"$pdfPath\"";
 
                         // command for ubuntu
-                        // $command = "gs -sDEVICE=pngalpha -r300 -o \"$outputPath$outputFilename\" -dFirstPage=$pageNumber -dLastPage=$pageNumber \"$pdfPath\"";
+                        $command = "gs -sDEVICE=pngalpha -r300 -o \"$outputPath$outputFilename\" -dFirstPage=$pageNumber -dLastPage=$pageNumber \"$pdfPath\"";
 
 
                         exec($command, $output, $returnCode);
@@ -168,33 +168,6 @@ class PdfController extends Controller
         View::share('pdfTemplate', $template);
 
         return view('pages.pdf-cover')->with('pdfTemplate', $template);
-
-        // $pageWidthMm = 250;
-        // $pageHeightMm = 375.5;
-
-        // Convert millimeters to points (1 mm = 2.83465 points)
-        // $pageWidthPoints = $pageWidthMm * 2.83465;
-        // $pageHeightPoints = $pageHeightMm * 2.83465;
-
-
-        // $pdf = PDF::loadHtml($template)->setPaper([0,0,500,800], 'portrait');
-
-        // $pdf = PDF::loadHtml($template);
-
-        // $filename = Str::random(10) . '.pdf';
-
-         // Store the PDF in a designated folder within the storage directory
-        // $pdf->save('C:\xampp\htdocs\pdf-generator\public\pdf/'.$filename);
-
-        // return $template;
-
-        // $pdf = PDF::loadHtml($template);
-
-        // $pdf->setPaper('A4', 'portrait');
-
-        // return $pdf->download('your-pdf-filename.pdf');
-
-
 
     }
 }
