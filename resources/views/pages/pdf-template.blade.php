@@ -27,12 +27,12 @@
           ">
                 <div>
                     <h1 style="font-size: 2.8rem; margin: 0">
-                        1 City Centre Drive - Cafe
+                         {{ $object['project'] }}
                     </h1>
-                    <h3 style="font-size: 2.2rem; margin-top: 0; margin-bottom: 20px">
+                    {{-- <h3 style="font-size: 2.2rem; margin-top: 0; margin-bottom: 20px">
                         Submittal Package
                     </h3>
-                    <p style="font-size: 1.5rem; margin: 0">July 5, 2023</p>
+                    <p style="font-size: 1.5rem; margin: 0">July 5, 2023</p> --}}
                 </div>
                 <div style="
               display: flex;
@@ -69,7 +69,7 @@
                             Project
                         </h1>
                         <p style="margin: 0; text-align: center; font-size: 0.9rem">
-                            1 City Center Drive-Cafe
+                            {{ $object['project'] }}
                         </p>
                     </div>
                     <div style="width: 30%; border-right: 1px solid black; padding: 2px 0px">
@@ -77,10 +77,10 @@
                             Part Number
                         </h1>
                         <p style="margin: 0; text-align: center; font-size: 0.9rem">
-                            1200-PR-FL-NO-150"-30K-LP3-HW3-I-D
+                            {{ $object['part_number'] }}
                         </p>
                         <p style="margin: 0; text-align: center; font-size: 0.9rem">
-                            <strong>Visionz #</strong> 1981
+                            <strong>Visionz #</strong> {{ $object['vision_reference'] }}
                         </p>
                     </div>
                     <div style="width: 25%; padding: 2px 0px">
@@ -122,7 +122,7 @@
 </body>
 
 
-<button id="convertBtn">Convert to PDF</button>
+{{-- <button id="convertBtn">Convert to PDF</button> --}}
 <!-- Include the html2canvas library -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
 <script>

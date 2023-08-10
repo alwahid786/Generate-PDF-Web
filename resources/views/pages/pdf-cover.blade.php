@@ -20,15 +20,12 @@
                 <h1>PDF Package Creator <span>14 Jul 2023</span></h1>
             </div>
         </div>
-        @foreach ($pdf_path as $path)
 
-            <img style="width: 100%" src="{{ $path }}" alt="">
-            {{-- <iframe src="{{ $path }}">
+        {!! $pdfTemplate !!}
 
-            </iframe> --}}
+        {{-- <iframe src="">
 
-        @endforeach
-        {{-- <img style="width: 100%;" src="{{ $pdf_path }}" alt=""> --}}
+        </iframe> --}}
 
     </div>
 </main>

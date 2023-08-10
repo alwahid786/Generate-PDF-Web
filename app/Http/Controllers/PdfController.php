@@ -14,6 +14,9 @@ use Symfony\Component\Process\Process;
 use Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
 // use Barryvdh\DomPDF\Facade\Pdf as PDF;
 use Mpdf\Mpdf;
+use Illuminate\Support\Facades\View;
+use Illuminate\Support\Str;
+
 class PdfController extends Controller
 {
     // Create PDF Page View
@@ -88,6 +91,13 @@ class PdfController extends Controller
 
             $pdfPath = $fixture['pdf_path'];
 
+            $obj = [
+                'type'=> $fixture['type'],
+                'part_number'=> $fixture['part_number'],
+                'project' => $package['package_name'],
+                'vision_reference' => $package['vision_reference'],
+            ];
+
             // path for ubuntu
             // $outputPath = '/var/www/html/pdf-generator/public/files/';
 
@@ -110,8 +120,18 @@ class PdfController extends Controller
                     // die;
 
                     for ($pageNumber = 1; $pageNumber <= $totalPages; $pageNumber++) {
-                        $outputFilename = "\\output_image_$pageNumber.png";
-                        $command = "gswin64c.exe -sDEVICE=pngalpha -r300 -o \"$outputPath$outputFilename\" -dFirstPage=$pageNumber -dLastPage=$pageNumber \"$pdfPath\"";
+
+                        $randomString = Str::random(6);
+                        $randomNumber = mt_rand(100000, 999999);
+
+                        $outputFilename = "\\$randomString.$pageNumber.$randomNumber.png";
+
+                        // command for window
+                        // $command = "gswin64c.exe -sDEVICE=pngalpha -r300 -o \"$outputPath$outputFilename\" -dFirstPage=$pageNumber -dLastPage=$pageNumber \"$pdfPath\"";
+
+                        // command for ubuntu
+                        $command = "gs -sDEVICE=pngalpha -r300 -o \"$outputPath$outputFilename\" -dFirstPage=$pageNumber -dLastPage=$pageNumber \"$pdfPath\"";
+
 
                         exec($command, $output, $returnCode);
 
@@ -178,9 +198,11 @@ class PdfController extends Controller
 
         }
 
-        // $image = '';
+        $template =  view('pages.pdf-template', ['pdf_path' => $completePdfPath, 'object' => $obj])->render();
 
-        return view('pages.pdf-template', ['pdf_path' => $completePdfPath]);
-        // return view('pages.pdf-cover');
+        View::share('pdfTemplate', $template);
+
+        return view('pages.pdf-cover')->with('pdfTemplate', $template);
+
     }
 }
