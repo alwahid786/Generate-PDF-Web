@@ -90,7 +90,7 @@ class PdfController extends Controller
 
             $pdfPath = $fixture['pdf_path'];
 
-            $outputPath = 'C:\xampp\htdocs\pdf-generator\public\files';
+            $outputPath = '/var/www/html/pdf-generator/public/files';
 
             $pdfFilePath = $pdfPath;
 
