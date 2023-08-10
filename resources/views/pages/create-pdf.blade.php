@@ -329,7 +329,7 @@
             })
             .then(response => response.json())
             .then(data => {
-                console.log("qwe*^2456754", data.data);
+                // console.log("qwe*^2456754", data.data);
                 // return
                 if (data.status == false) {
                     Swal.fire({

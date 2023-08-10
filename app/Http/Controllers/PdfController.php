@@ -93,29 +93,74 @@ class PdfController extends Controller
 
             // path for window
             $outputPath = 'C:\xampp\htdocs\pdf-generator\public\files';
+            $completePdfPath = [];
+
 
             if (file_exists($pdfPath)) {
 
                 try {
 
-                    $outputFilename = '/output_image.png';
+
+                    // For Multiple Pages --------------------------------------------------------Start
+
+
+                    $totalPages = $this->countPages($pdfPath);
+
+                    // echo "Total Pages: $totoalPages<br>";
+                    // die;
+
+                    for ($pageNumber = 1; $pageNumber <= $totalPages; $pageNumber++) {
+                        $outputFilename = "\\output_image_$pageNumber.png";
+                        $command = "gswin64c.exe -sDEVICE=pngalpha -r300 -o \"$outputPath$outputFilename\" -dFirstPage=$pageNumber -dLastPage=$pageNumber \"$pdfPath\"";
+
+                        exec($command, $output, $returnCode);
+
+                        if ($returnCode === 0) {
+
+                            $completePdfPath[] = asset('public/files/'.$outputFilename);
+
+                        } else {
+                            echo "Error converting page $pageNumber to image.<br>";
+                            print_r($output); // Print any error output
+                            die;
+                        }
+                    }
+
+                    // echo $completePdfPath;
+
+
+                    // For Multiple Pages --------------------------------------------------------End
+
+
+
+
+
+                    // for single Page ---------------------------------Start-------------------------
+
+                    // $outputFilename = '/output_image.png';
 
                     // commad for window
-                    $command = "gswin64c.exe -sDEVICE=pngalpha -o \"$outputPath$outputFilename\" \"$pdfPath\"";
+                    // $command = "gswin64c.exe -sDEVICE=pngalpha -r300 -o \"$outputPath$outputFilename\" \"$pdfPath\"";
 
                     // command for ubuntu
                     // $command = "gs -sDEVICE=pngalpha -o \"$outputPath$outputFilename\" \"$pdfPath\"";
 
-                    exec($command, $output, $returnCode);
+                    // exec($command, $output, $returnCode);
 
-                    if ($returnCode === 0) {
-                        echo "PDF converted to image successfully.";
-                        die;
-                    } else {
-                        echo "Error converting PDF to image.";
-                        print_r($output); // Print any error output
-                        die;
-                    }
+                    // if ($returnCode === 0) {
+                    //     $fullPath = asset('public/files/'.$outputFilename);
+                    //     // dd($fullPath);
+                    // } else {
+                    //     echo "Error converting PDF to image.";
+                    //     print_r($output); // Print any error output
+                    //     die;
+                    // }
+
+                    // for single Page ---------------------------------End-------------------------
+
+
+
+
 
                 } catch (PdfDoesNotExist $exception) {
 
@@ -135,6 +180,7 @@ class PdfController extends Controller
 
         // $image = '';
 
-        return view('pages.pdf-cover', ['pdf_path' => $pdfPath]);
+        return view('pages.pdf-cover', ['pdf_path' => $completePdfPath]);
+        // return view('pages.pdf-cover');
     }
 }
