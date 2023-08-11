@@ -18,9 +18,10 @@ use App\Http\Controllers\PdfController;
 Route::get('/', function () {
     return view('pages.auth.login');
 });
-Route::get('/dashboard', function () {
-    return view('pages.dashboard');
-});
+// Route::get('/dashboard', function () {
+//     return view('pages.dashboard');
+// });
+
 // Route::get('/pdf-cover', function () {
 //     return view('pages.pdf-cover');
 // })->name('coverPage');
@@ -55,9 +56,7 @@ Route::post('/password-reset', [AuthController::class, 'resetPassword'])->name('
 
 // Auth Protected Routes
 Route::middleware('auth')->group(function () {
-    Route::get('/dashboard', function () {
-        return view('pages.dashboard');
-    });
+    Route::get('/dashboard', [PdfController::class, 'getpdfdetail']);
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::get('/create-pdf', [PdfController::class, 'createPdfPage'])->name('createPdfPage');
     Route::post('/preview-pdf', [PdfController::class, 'previewPdf'])->name('previewPdf');
