@@ -142,7 +142,7 @@ class PdfController extends Controller
 
                         } else {
                             echo "Error converting page $pageNumber to image.<br>";
-                            print_r($output); // Print any error output
+                            print_r($output);
                             die;
                         }
                     }

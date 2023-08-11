@@ -1,4 +1,4 @@
-<body style="background-color: wheat;">
+<body style="background-color: #f6f6f6;">
     <div id="content"
         style="
     margin: 0 auto;
@@ -59,10 +59,11 @@
                 </div>
             </div>
         </div>
+
         @foreach ($pdf_path as $path)
             <div style="height: 1355px; padding: 2rem; background-color: rgb(255, 255, 255);">
                 <div class="table-wrapper" style="border: 1px solid; ">
-                    <div class="table-header" style="display: flex; border-bottom: 1px solid black">
+                    <div class="table-header" style="height: 70px; display: flex; border-bottom: 1px solid black">
                         <div style="width: 20%;border-right: 1px solid black;text-align: center;padding: 10px 0px;">
                             <img style="width: 120px; margin: 0 auto"
                                 src="{{ asset('public/assets/images/side-logo.png') }}" alt="" />
@@ -94,12 +95,12 @@
                         </div>
                     </div>
 
-                    <div class="pdf-content" style="height: 1240px">
-                        <img style="width: 100%" src="{{ $path }}" alt="">
+                    <div class="pdf-content" style="height: 1183px">
+                        <img style="width: 100%; height: 100%" src="{{ $path }}" alt="">
                         {{-- <img src="{{asset('public/assets/images/Capture.png')}}" alt="" style="width: 100%" /> --}}
                     </div>
 
-                    <div class="table-footer" style="display: flex; border-top: 1px solid black; padding: 8px 0px">
+                    <div class="table-footer" style="height: 37px; display: flex; border-top: 1px solid black; padding: 8px 0px">
                         <div style="width: 25%; text-align: center">
                             <p style="margin: 0; font-size: 0.9rem">
                                 <strong>Date</strong> July 5, 2023
@@ -138,7 +139,7 @@
             scale: 1
         }, // Increase the scale for better image quality (adjust as needed)
         jsPDF: {
-            format: [250, 350]
+            format: [250, 358.5]
         },
     };
     convertBtn.addEventListener("click", () => {
