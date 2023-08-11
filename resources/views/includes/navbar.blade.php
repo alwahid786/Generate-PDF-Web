@@ -88,39 +88,39 @@
                 </a>
             </li>
             <li class="nav-item my-1 ">
-                <a class="nav-link sidenav-item" href="{{url('plot')}}">
+                <a class="nav-link sidenav-item" href="{{url('coming-soon')}}">
                     <img src="{{asset('public/assets/images/spec-blue.png')}}" class="icon-blue pr-2">
                     <img src="{{asset('public/assets/images/spec-white.png')}}" class="icon-white pr-2">
                     Specification Package</a>
             </li>
 
             <li class="nav-item my-1 ">
-                <a class="nav-link sidenav-item" href="{{url('client')}}"><img src="{{asset('public/assets/images/light-white.png')}}" class="pr-2 icon-white">
+                <a class="nav-link sidenav-item" href="{{url('coming-soon')}}"><img src="{{asset('public/assets/images/light-white.png')}}" class="pr-2 icon-white">
                     <img src="{{asset('public/assets/images/light-blue.png')}}" class="pr-2 icon-blue">
                     Lighting Legend</a>
             </li>
             <li class="nav-item my-1 ">
-                <a class="nav-link sidenav-item" href="{{url('manager')}}"><img src="{{asset('public/assets/images/sub-white.png')}}" class="pr-2 icon-white">
+                <a class="nav-link sidenav-item" href="{{url('coming-soon')}}"><img src="{{asset('public/assets/images/sub-white.png')}}" class="pr-2 icon-white">
                     <img src="{{asset('public/assets/images/sub-blue.png')}}" class="pr-2 icon-blue">
                     Submittal Package</a>
             </li>
             <li class="nav-item my-1 ">
-                <a class="nav-link sidenav-item" href="#"><img src="{{asset('public/assets/images/rec-white.png')}}" class="pr-2 icon-white">
+                <a class="nav-link sidenav-item" href="{{url('coming-soon')}}"><img src="{{asset('public/assets/images/rec-white.png')}}" class="pr-2 icon-white">
                     <img src="{{asset('public/assets/images/rec-blue.png')}}" class="pr-2 icon-blue">
                     Record Drawing</a>
             </li>
             <li class="nav-item my-1 ">
-                <a class="nav-link sidenav-item" href="#"><img src="{{asset('public/assets/images/exis-white.png')}}" class="pr-2 icon-white">
+                <a class="nav-link sidenav-item" href="{{url('coming-soon')}}"><img src="{{asset('public/assets/images/exis-white.png')}}" class="pr-2 icon-white">
                     <img src="{{asset('public/assets/images/exis-blue.png')}}" class="pr-2 icon-blue">
                     Existing Record Saerch</a>
             </li>
             <li class="nav-item my-1 ">
-                <a class="nav-link sidenav-item" href="#"><img src="{{asset('public/assets/images/pro-white.png')}}" class="pr-2 icon-white">
+                <a class="nav-link sidenav-item" href="{{url('coming-soon')}}"><img src="{{asset('public/assets/images/pro-white.png')}}" class="pr-2 icon-white">
                     <img src="{{asset('public/assets/images/pro-blue.png')}}" class="pr-2 icon-blue">
                     Profile</a>
             </li>
             <li class="nav-item my-1 ">
-                <a class="nav-link sidenav-item" href="#"><img src="{{asset('public/assets/images/sup-white.png')}}" class="pr-2 icon-white">
+                <a class="nav-link sidenav-item" href="{{url('coming-soon')}}"><img src="{{asset('public/assets/images/sup-white.png')}}" class="pr-2 icon-white">
                     <img src="{{asset('public/assets/images/sup-blue.png')}}" class="pr-2 icon-blue">
                     Support</a>
             </li>

@@ -44,6 +44,9 @@ Route::get('/new-password', function () {
 Route::get('/template', function () {
     return view('pages.pdf-template');
 });
+Route::get('/coming-soon', function () {
+    return view('pages.coming-soon');
+});
 
 
 // API's Function and Routes

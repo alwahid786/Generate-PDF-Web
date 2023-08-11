@@ -11,7 +11,7 @@
     <div class="container-fluid py-3">
         <div class="header-wrapper">
             <div class="heading-top">
-                <h1>Dashboard <span>14 Jul 2023</span></h1>
+                <h1>Dashboard <span>{{date('d M Y')}}</span></h1>
             </div>
             <a href="{{(url('create-pdf'))}}" class="btn create-btn"><img class="mr-2" src="{{asset('public/assets/images/plus.png')}}" alt="">Create New Package</a>
         </div>
