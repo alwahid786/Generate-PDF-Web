@@ -38,7 +38,7 @@
                         <td data-column="Date Created">{{date('M d, Y', strtotime($package['created_at']))}}</td>
                         <td data-column="Date Last Edit">{{date('M d, Y h:i:s', strtotime($package['updated_at']))}}</td>
                         <td class="action-btn" data-column="Actions">
-                            <a href="{{(url('pdf-cover?packageTypeId=1'))}}"><img class="my-1" src="{{asset('public/assets/images/view.png')}}" alt=""></a>
+                            <a href="{{(url('pdf-cover?packageTypeId=$package['id']'))}}"><img class="my-1" src="{{asset('public/assets/images/view.png')}}" alt=""></a>
                             <a href="#"><img class="my-1" src="{{asset('public/assets/images/edit.png')}}" alt=""></a>
                             <a href="#"><img class="my-1" src="{{asset('public/assets/images/delete.png')}}" alt=""></a>
                         </td>
