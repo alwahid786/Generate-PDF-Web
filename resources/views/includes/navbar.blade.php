@@ -115,12 +115,12 @@
                     Existing Record Saerch</a>
             </li>
             <li class="nav-item my-1 ">
-                <a class="nav-link sidenav-item" href="{{url('coming-soon')}}"><img src="{{asset('public/assets/images/pro-white.png')}}" class="pr-2 icon-white">
+                <a class="nav-link sidenav-item" href="{{url('profile')}}"><img src="{{asset('public/assets/images/pro-white.png')}}" class="pr-2 icon-white">
                     <img src="{{asset('public/assets/images/pro-blue.png')}}" class="pr-2 icon-blue">
                     Profile</a>
             </li>
             <li class="nav-item my-1 ">
-                <a class="nav-link sidenav-item" href="{{url('coming-soon')}}"><img src="{{asset('public/assets/images/sup-white.png')}}" class="pr-2 icon-white">
+                <a class="nav-link sidenav-item" href="{{url('support')}}"><img src="{{asset('public/assets/images/sup-white.png')}}" class="pr-2 icon-white">
                     <img src="{{asset('public/assets/images/sup-blue.png')}}" class="pr-2 icon-blue">
                     Support</a>
             </li>

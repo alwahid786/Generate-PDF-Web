@@ -63,7 +63,7 @@
     padding-left: 0;
 }
 
-.nav-item ul.nav-second-level > .nav-item {
+.nav-item ul.nav-second-level>.nav-item {
     padding-left: 20px;
 }
 
@@ -403,13 +403,16 @@
 .logout-dropdown {
     left: -150px !important;
 }
+
 .logout-dropdown .dropdown-item:hover {
     background-color: #003f77;
     color: white;
 }
+
 .logout-dropdown .dropdown-item:hover .fa-sign-out {
     color: white;
 }
+
 /* ------------------------------------------------Auth Pages--------------------------------------- */
 .login-banner-left {
     background-image: url("../images/background.png");
@@ -880,7 +883,7 @@
 }
 
 @media only screen and (max-width: 760px),
-    (min-device-width: 760px) and (max-device-width: 885px) {
+(min-device-width: 760px) and (max-device-width: 885px) {
     .client-table table {
         width: 100%;
     }
@@ -982,10 +985,12 @@
     flex-direction: column;
     justify-content: space-between;
 }
+
 .cover-body-logo {
     height: 60%;
     position: relative;
 }
+
 .cover-body-logo img {
     height: 25%;
     position: absolute;
@@ -993,39 +998,47 @@
     top: 35%;
     transform: rotate(-90deg) translateY(-50%);
 }
+
 .pdf-cover-bottom-body {
     height: 40%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
+
 .pdf-cover-heading h1 {
     margin: 0;
     font-weight: 700;
     font-size: 2.3rem;
 }
+
 .pdf-cover-heading h3 {
     margin: 0;
     font-size: 1.5rem;
     font-weight: 700;
 }
+
 .pdf-cover-heading p {
     margin: 0;
     font-weight: 600;
     padding: 0.7rem 0;
 }
+
 .pdf-cover-footer {
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
+
 .pdf-cover-footer p {
     margin: 0;
     font-size: 1.1rem;
 }
+
 .pdf-cover-footer img {
     width: 150px;
 }
+
 @media screen and (min-height: 767px) {
     .cover-body-logo img {
         height: 25%;
@@ -1035,6 +1048,7 @@
         transform: rotate(-90deg) translateY(-50%);
     }
 }
+
 /* -------------------------------------------create-pdf------------------------------------------ */
 .create-pdf-uper-body,
 .create-pdf-lower-body {
@@ -1042,18 +1056,21 @@
     padding: 1.5rem 3rem;
     border-radius: 10px;
 }
+
 .section-heading h1 {
     font-size: 1rem;
     margin: 0;
     font-weight: 600;
     padding: 0.8rem 0;
 }
+
 .open-package-type {
     display: flex;
     align-items: center;
     justify-content: center;
     column-gap: 1rem;
 }
+
 .package-type {
     width: 50%;
     background-color: #003f77;
@@ -1061,32 +1078,99 @@
     padding: 0.7rem;
     text-align: center;
 }
+
 .package-type:hover {
     background-color: #004077de;
 }
+
 .package-type a {
     color: white;
     width: 100%;
     display: block;
     text-decoration: none !important;
 }
+
 .project-input-wrapper {
     display: flex;
     align-items: center;
     justify-content: center;
     column-gap: 1rem;
 }
+
 .pdf-info-input-wrapper {
     width: 50%;
 }
+
+.pdf-info-input textarea {
+    resize: none;
+    border-radius: 10px;
+    background-color: #fdfcfc;
+    border: 1px solid #e2e2e2;
+    width: 100%;
+    padding: 0.7rem 0.5rem;
+    outline: none !important;
+    height: 200px;
+}
+
+.contact-form {
+    background-color: white;
+    border-radius: 10px;
+    padding: 1.5rem 3rem;
+
+}
+
+.contact-form form {
+    width: 50%;
+    margin: 0 auto;
+}
+
+@media screen and (max-width:576px) {
+    .contact-form form {
+        width: 100%;
+        margin: 0 auto;
+    }
+
+    .contact-form {
+        background-color: white;
+        border-radius: 10px;
+        padding: 1.5rem;
+
+    }
+
+    .pdf-info-input textarea {
+        height: 150px;
+    }
+}
+
+.contact-form form .pdf-info-input-wrapper {
+    width: 100%;
+}
+
+.contact-form button {
+    background-color: #003f77;
+    color: white;
+    border: none !important;
+    box-shadow: none !important;
+    max-width: 200px;
+    width: 100%;
+    padding: 0.7rem;
+    margin: 0 auto;
+    border-radius: 10px;
+}
+
+.contact-form button:hover {
+    background-color: #004077de;
+}
+
 .pdf-info-input input {
     border-radius: 10px;
     background-color: #fdfcfc;
     border: 1px solid #e2e2e2;
     width: 100%;
-    padding: 0.7rem 0.3rem;
+    padding: 0.7rem 0.5rem;
     outline: none !important;
 }
+
 .type-menu select {
     width: 60%;
     border-radius: 10px;
@@ -1103,29 +1187,36 @@
     align-items: center;
     row-gap: 2rem;
 }
+
 .lower-body-heading {
     width: 100%;
 }
+
 .lower-body-heading h1 {
     font-size: 1.2rem;
     margin: 0;
     font-weight: 700;
 }
+
 .lower-body-input-wrapper {
     display: flex;
     justify-content: space-between;
     column-gap: 1rem;
     width: 100%;
 }
+
 .lower-body-input {
     width: 60%;
 }
+
 .lower-body-input .pdf-info-input-wrapper {
     width: 100%;
 }
+
 .add-button {
     min-width: 150px;
 }
+
 .add-button a {
     display: flex;
     align-items: center;
@@ -1138,13 +1229,16 @@
     padding: 1rem;
     border-radius: 10px;
 }
+
 .add-button a:hover {
     background-color: #34a853de !important;
 }
+
 .add-button a h1 {
     font-size: 1rem;
     margin: 0;
 }
+
 .drop-zone {
     width: 25%;
     max-width: 200px;
@@ -1164,6 +1258,7 @@
     border-radius: 10px;
     background-color: #fdfcfc;
 }
+
 .drop-zone span:nth-child(3) {
     font-size: 15px;
     padding: 0.5rem 0;
@@ -1199,9 +1294,11 @@
     font-size: 14px;
     text-align: center;
 }
+
 .pdf-detail-bar {
     width: 100%;
 }
+
 .pdf-detail-bar ul {
     list-style: none;
     padding: 1rem;
@@ -1213,19 +1310,23 @@
     border-radius: 10px;
     width: 100%;
 }
+
 .summary-wrapper {
     display: flex;
     align-items: center;
     column-gap: 0.8rem;
     width: 100%;
     position: relative;
-    padding-left: 30px; /* Adjust this value to change the checkbox size */
+    padding-left: 30px;
+    /* Adjust this value to change the checkbox size */
 }
+
 .summary-wrapper h1 {
     font-size: 1rem;
     margin: 0;
     font-weight: 600;
 }
+
 /* Hide the default checkbox appearance */
 input.rounded-checkbox {
     display: none;
@@ -1238,15 +1339,19 @@ input.rounded-checkbox {
     position: absolute;
     left: 0;
     top: 2px;
-    width: 20px; /* Adjust this value to change the checkbox size */
-    height: 20px; /* Adjust this value to change the checkbox size */
-    border: 2px solid #ccc; /* Border color for the checkbox */
-    border-radius: 50%; /* Make it a circle to create the rounded appearance */
+    width: 20px;
+    /* Adjust this value to change the checkbox size */
+    height: 20px;
+    /* Adjust this value to change the checkbox size */
+    border: 2px solid #ccc;
+    /* Border color for the checkbox */
+    border-radius: 50%;
+    /* Make it a circle to create the rounded appearance */
     background-color: transparent;
 }
 
 /* Style the checkbox when checked */
-.summary-wrapper input:checked + label:before {
+.summary-wrapper input:checked+label:before {
     background: url("../images/check.png");
     background-position: center;
     background-size: 10px;
@@ -1261,15 +1366,19 @@ input.rounded-checkbox {
     column-gap: 1rem;
     width: 100%;
 }
+
 .action-type {
     width: 50%;
 }
+
 .action-type:nth-child(2) a {
     background-color: #34a853 !important;
 }
+
 .action-type:nth-child(2) a:hover {
     background-color: #34a853de !important;
 }
+
 .action-type a {
     width: 100%;
     background-color: #003f77;
@@ -1280,9 +1389,11 @@ input.rounded-checkbox {
     display: block;
     text-decoration: none !important;
 }
+
 .action-type a:hover {
     background-color: #004077de;
 }
+
 @media screen and (max-width: 767px) {
     .lower-body-input-wrapper {
         flex-direction: column;
@@ -1290,31 +1401,39 @@ input.rounded-checkbox {
         align-items: center;
         row-gap: 1rem;
     }
+
     .lower-body-input {
         width: 100%;
     }
+
     .drop-zone {
         width: 100%;
     }
 }
+
 @media screen and (max-width: 576px) {
     .open-package-type {
         flex-direction: column;
         row-gap: 1rem;
     }
+
     .project-input-wrapper {
         flex-direction: column;
     }
+
     .package-type {
         width: 100%;
     }
+
     .pdf-info-input-wrapper {
         width: 100%;
     }
+
     .create-pdf-uper-body,
     .create-pdf-lower-body {
         padding: 1.5rem;
     }
+
     .type-menu select {
         width: 100%;
     }
@@ -1322,15 +1441,138 @@ input.rounded-checkbox {
     .drop-zone {
         max-width: 100%;
     }
+
     .pdf-action {
         flex-direction: column;
         row-gap: 1rem;
     }
+
     .action-type {
         width: 100%;
     }
+
     .pdf-detail-bar ul {
         flex-direction: column;
         row-gap: 1rem;
+    }
+}
+
+/*-------------------------------------------- Profile blade ----------------------------------------*/
+.profile-body {
+    background-color: white;
+    border-radius: 10px;
+    padding: 2rem 1rem;
+}
+
+.profile-body-inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.profile-img-wrapper {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    row-gap: 1rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.profile-img-wrapper img {
+    width: 256px;
+    height: 256px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.profile-img-wrapper .upload-file label {
+    padding: 15px 40px;
+    border-radius: 10px;
+    background-color: #003f77;
+    color: #fff;
+    text-align: center;
+    cursor: pointer;
+}
+
+.profile-img-wrapper .upload-file label:hover {
+    background-color: #004077de;
+}
+
+.profile-img-wrapper .upload-file input[type="file"] {
+    display: none;
+}
+
+.profile-detail-wrapper {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.profile-detail-wrapper .pdf-info-input-wrapper {
+    width: 100%;
+}
+
+.profile-update-btn {
+    text-align: end;
+}
+
+.profile-update-btn button {
+    background-color: #003f77;
+    outline: none;
+    border: none;
+    padding: 0.8rem 2rem;
+    color: white;
+    border-radius: 10px;
+}
+
+.profile-update-btn button:hover {
+    background-color: #004077de;
+}
+
+.profile-detail-wrapper .password-field {
+    position: relative;
+}
+
+.profile-detail-wrapper .password-field .show-pass,
+.profile-detail-wrapper .password-field .hide-pass {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+@media screen and (max-width: 768px) {
+    .profile-img-wrapper img {
+        width: 200px;
+        height: 200px;
+    }
+
+    .profile-img-wrapper {
+        width: 40%;
+    }
+
+    .profile-detail-wrapper {
+        width: 60%;
+    }
+
+    .profile-update-btn {
+        padding: 1rem 0;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .profile-body-inner {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .profile-img-wrapper {
+        width: 100%;
+    }
+
+    .profile-detail-wrapper {
+        width: 100%;
     }
 }
