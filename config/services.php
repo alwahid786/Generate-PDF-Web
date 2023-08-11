@@ -32,7 +32,7 @@ return [
     'google' => [
         'client_id' => env('GOOGLE_CLIENT_ID'),
         'client_secret' => env('GOOGLE_CLIENT_SECRET'),
-        'redirect' => 'http://localhost/pdf-generator/google/callback',
+        'redirect' => 'http://kodextech.net/pdf-generator/google/callback',
     ],
 
 ];
