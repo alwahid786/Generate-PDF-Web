@@ -23,7 +23,7 @@
                     </div>
                     <div class="signin-options">
                         <div class="sign-in-google">
-                            <a href="#">
+                            <a href="{{url('/google')}}">
                                 <img src="{{asset('public/assets/images/google-icon-logo.png')}}" />
                                 <h1>
                                     Sign in with Google

@@ -67,7 +67,7 @@
             </div> -->
             <div class="form-group has-search profile mr-2">
 
-                <span class="mr-2">Name here</span>
+                <span class="mr-2">{{auth()->user()->name}}</span>
                 <img src="{{asset('public/assets/images/profile.png')}}">
             </div>
             <div class="form-group has-search">
@@ -75,7 +75,6 @@
                     <img src="{{asset('public/assets/images/Vector.png')}}" class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown">
                     <div class="dropdown-menu text-center logout-dropdown" aria-labelledby="dropdownMenuButton">
                         <a class="dropdown-item logout" href="{{(url('logout'))}}"><i class="fa fa-sign-out pr-2" aria-hidden="true"></i>Logout</a>
-
                     </div>
                 </div>
             </div>

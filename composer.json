@@ -15,6 +15,7 @@
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.12",
         "laravel/passport": "*",
+        "laravel/socialite": "^5.8",
         "laravel/tinker": "^2.5",
         "mpdf/mpdf": "^8.1",
         "spatie/pdf-to-image": "^1.2",

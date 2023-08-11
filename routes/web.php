@@ -53,6 +53,10 @@ Route::post('/forgot-password', [AuthController::class, 'forgotPassword'])->name
 Route::post('/otp-verification', [AuthController::class, 'verifyOtp'])->name('verifyOtp');
 Route::post('/password-reset', [AuthController::class, 'resetPassword'])->name('resetPassword');
 
+// Social login 
+Route::get('google', [AuthController::class, 'redirectToGoogle']);
+Route::get('google/callback', [AuthController::class, 'handleGoogleCallback']);
+
 // Auth Protected Routes
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', function () {
