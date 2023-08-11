@@ -38,6 +38,7 @@ class PdfController extends Controller
         $packageType->package_name = $package->projectName;
         $packageType->vision_reference = $package->referenceNo;
         $packageType->package_type_id = $package->packageType;
+        $packageType->user_id = auth()->user()->id;
         $packageType->save();
 
         // Then Loop Through Every Fixture to Save()
@@ -94,8 +95,8 @@ class PdfController extends Controller
             $pdfPath = $fixture['pdf_path'];
 
             $obj = [
-                'type'=> $fixture['type'],
-                'part_number'=> $fixture['part_number'],
+                'type' => $fixture['type'],
+                'part_number' => $fixture['part_number'],
                 'project' => $package['package_name'],
                 'vision_reference' => $package['vision_reference'],
             ];
@@ -138,8 +139,7 @@ class PdfController extends Controller
 
                         if ($returnCode === 0) {
 
-                            $completePdfPath[] = asset('public/files/'.$outputFilename);
-
+                            $completePdfPath[] = asset('public/files/' . $outputFilename);
                         } else {
                             echo "Error converting page $pageNumber to image.<br>";
                             print_r($output);
@@ -153,13 +153,10 @@ class PdfController extends Controller
                 } catch (PdfDoesNotExist $exception) {
 
                     dd($exception->getMessage());
-
                 }
-
             } else {
 
                 dd("PDF file does not exist at the specified path: $pdfPath");
-
             }
         }
 
@@ -168,6 +165,5 @@ class PdfController extends Controller
         View::share('pdfTemplate', $template);
 
         return view('pages.pdf-cover')->with('pdfTemplate', $template);
-
     }
 }

@@ -21,7 +21,7 @@
                 <thead>
                     <tr>
                         <th>Reference#</th>
-                        <th>User</th>
+                        <!-- <th>User</th> -->
                         <th>Project</th>
                         <th>Date Created </th>
                         <th>Date Last Edit</th>
@@ -29,176 +29,22 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @if(count($packageInfo) > 0)
+                    @foreach($packageInfo as $package)
                     <tr>
-                        <td data-column="Reference#">01</td>
-                        <td data-column="User">John Smith</td>
-                        <td data-column="Project">Lorem Ipsum is simply
-                            the printing and... </td>
-                        <td data-column="Date Created">17 Jul 2023</td>
-                        <td data-column="Date Last Edit">17 Jul 2023</td>
+                        <td data-column="Reference#">{{$package['vision_reference'] ?? 'N/A'}}</td>
+                        <!-- <td data-column="User">John Smith</td> -->
+                        <td data-column="Project">{{$package['package_name'] ?? 'N/A'}}</td>
+                        <td data-column="Date Created">{{date('M d, Y', strtotime($package['created_at']))}}</td>
+                        <td data-column="Date Last Edit">{{date('M d, Y h:i:s', strtotime($package['updated_at']))}}</td>
                         <td class="action-btn" data-column="Actions">
-                            <a href="{{(url('pdf-cover'))}}"><img class="my-1" src="{{asset('public/assets/images/view.png')}}" alt=""></a>
+                            <a href="{{(url('pdf-cover?packageTypeId=1'))}}"><img class="my-1" src="{{asset('public/assets/images/view.png')}}" alt=""></a>
                             <a href="#"><img class="my-1" src="{{asset('public/assets/images/edit.png')}}" alt=""></a>
                             <a href="#"><img class="my-1" src="{{asset('public/assets/images/delete.png')}}" alt=""></a>
                         </td>
                     </tr>
-
-                    <tr>
-                        <td data-column="Reference#">01</td>
-                        <td data-column="User">John Smith</td>
-                        <td data-column="Project">Lorem Ipsum is simply
-                            the printing and... </td>
-                        <td data-column="Date Created">17 Jul 2023</td>
-                        <td data-column="Date Last Edit">17 Jul 2023</td>
-                        <td class="action-btn" data-column="Actions">
-                            <a href="{{(url('pdf-cover'))}}"><img class="my-1" src="{{asset('public/assets/images/view.png')}}" alt=""></a>
-                            <a href="#"><img class="my-1" src="{{asset('public/assets/images/edit.png')}}" alt=""></a>
-                            <a href="#"><img class="my-1" src="{{asset('public/assets/images/delete.png')}}" alt=""></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td data-column="Reference#">01</td>
-                        <td data-column="User">John Smith</td>
-                        <td data-column="Project">Lorem Ipsum is simply
-                            the printing and... </td>
-                        <td data-column="Date Created">17 Jul 2023</td>
-                        <td data-column="Date Last Edit">17 Jul 2023</td>
-                        <td class="action-btn" data-column="Actions">
-                            <a href="{{(url('pdf-cover'))}}"><img class="my-1" src="{{asset('public/assets/images/view.png')}}" alt=""></a>
-                            <a href="#"><img class="my-1" src="{{asset('public/assets/images/edit.png')}}" alt=""></a>
-                            <a href="#"><img class="my-1" src="{{asset('public/assets/images/delete.png')}}" alt=""></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td data-column="Reference#">01</td>
-                        <td data-column="User">John Smith</td>
-                        <td data-column="Project">Lorem Ipsum is simply
-                            the printing and... </td>
-                        <td data-column="Date Created">17 Jul 2023</td>
-                        <td data-column="Date Last Edit">17 Jul 2023</td>
-                        <td class="action-btn" data-column="Actions">
-                            <a href="{{(url('pdf-cover'))}}"><img class="my-1" src="{{asset('public/assets/images/view.png')}}" alt=""></a>
-                            <a href="#"><img class="my-1" src="{{asset('public/assets/images/edit.png')}}" alt=""></a>
-                            <a href="#"><img class="my-1" src="{{asset('public/assets/images/delete.png')}}" alt=""></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td data-column="Reference#">01</td>
-                        <td data-column="User">John Smith</td>
-                        <td data-column="Project">Lorem Ipsum is simply
-                            the printing and... </td>
-                        <td data-column="Date Created">17 Jul 2023</td>
-                        <td data-column="Date Last Edit">17 Jul 2023</td>
-                        <td class="action-btn" data-column="Actions">
-                            <a href="{{(url('pdf-cover'))}}"><img class="my-1" src="{{asset('public/assets/images/view.png')}}" alt=""></a>
-                            <a href="#"><img class="my-1" src="{{asset('public/assets/images/edit.png')}}" alt=""></a>
-                            <a href="#"><img class="my-1" src="{{asset('public/assets/images/delete.png')}}" alt=""></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td data-column="Reference#">01</td>
-                        <td data-column="User">John Smith</td>
-                        <td data-column="Project">Lorem Ipsum is simply
-                            the printing and... </td>
-                        <td data-column="Date Created">17 Jul 2023</td>
-                        <td data-column="Date Last Edit">17 Jul 2023</td>
-                        <td class="action-btn" data-column="Actions">
-                            <a href="{{(url('pdf-cover'))}}"><img class="my-1" src="{{asset('public/assets/images/view.png')}}" alt=""></a>
-                            <a href="#"><img class="my-1" src="{{asset('public/assets/images/edit.png')}}" alt=""></a>
-                            <a href="#"><img class="my-1" src="{{asset('public/assets/images/delete.png')}}" alt=""></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td data-column="Reference#">01</td>
-                        <td data-column="User">John Smith</td>
-                        <td data-column="Project">Lorem Ipsum is simply
-                            the printing and... </td>
-                        <td data-column="Date Created">17 Jul 2023</td>
-                        <td data-column="Date Last Edit">17 Jul 2023</td>
-                        <td class="action-btn" data-column="Actions">
-                            <a href="{{(url('pdf-cover'))}}"><img class="my-1" src="{{asset('public/assets/images/view.png')}}" alt=""></a>
-                            <a href="#"><img class="my-1" src="{{asset('public/assets/images/edit.png')}}" alt=""></a>
-                            <a href="#"><img class="my-1" src="{{asset('public/assets/images/delete.png')}}" alt=""></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td data-column="Reference#">01</td>
-                        <td data-column="User">John Smith</td>
-                        <td data-column="Project">Lorem Ipsum is simply
-                            the printing and... </td>
-                        <td data-column="Date Created">17 Jul 2023</td>
-                        <td data-column="Date Last Edit">17 Jul 2023</td>
-                        <td class="action-btn" data-column="Actions">
-                            <a href="{{(url('pdf-cover'))}}"><img class="my-1" src="{{asset('public/assets/images/view.png')}}" alt=""></a>
-                            <a href="#"><img class="my-1" src="{{asset('public/assets/images/edit.png')}}" alt=""></a>
-                            <a href="#"><img class="my-1" src="{{asset('public/assets/images/delete.png')}}" alt=""></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td data-column="Reference#">01</td>
-                        <td data-column="User">John Smith</td>
-                        <td data-column="Project">Lorem Ipsum is simply
-                            the printing and... </td>
-                        <td data-column="Date Created">17 Jul 2023</td>
-                        <td data-column="Date Last Edit">17 Jul 2023</td>
-                        <td class="action-btn" data-column="Actions">
-                            <a href="{{(url('pdf-cover'))}}"><img class="my-1" src="{{asset('public/assets/images/view.png')}}" alt=""></a>
-                            <a href="#"><img class="my-1" src="{{asset('public/assets/images/edit.png')}}" alt=""></a>
-                            <a href="#"><img class="my-1" src="{{asset('public/assets/images/delete.png')}}" alt=""></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td data-column="Reference#">01</td>
-                        <td data-column="User">John Smith</td>
-                        <td data-column="Project">Lorem Ipsum is simply
-                            the printing and... </td>
-                        <td data-column="Date Created">17 Jul 2023</td>
-                        <td data-column="Date Last Edit">17 Jul 2023</td>
-                        <td class="action-btn" data-column="Actions">
-                            <a href="{{(url('pdf-cover'))}}"><img class="my-1" src="{{asset('public/assets/images/view.png')}}" alt=""></a>
-                            <a href="#"><img class="my-1" src="{{asset('public/assets/images/edit.png')}}" alt=""></a>
-                            <a href="#"><img class="my-1" src="{{asset('public/assets/images/delete.png')}}" alt=""></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td data-column="Reference#">01</td>
-                        <td data-column="User">John Smith</td>
-                        <td data-column="Project">Lorem Ipsum is simply
-                            the printing and... </td>
-                        <td data-column="Date Created">17 Jul 2023</td>
-                        <td data-column="Date Last Edit">17 Jul 2023</td>
-                        <td class="action-btn" data-column="Actions">
-                            <a href="{{(url('pdf-cover'))}}"><img class="my-1" src="{{asset('public/assets/images/view.png')}}" alt=""></a>
-                            <a href="#"><img class="my-1" src="{{asset('public/assets/images/edit.png')}}" alt=""></a>
-                            <a href="#"><img class="my-1" src="{{asset('public/assets/images/delete.png')}}" alt=""></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td data-column="Reference#">01</td>
-                        <td data-column="User">John Smith</td>
-                        <td data-column="Project">Lorem Ipsum is simply
-                            the printing and... </td>
-                        <td data-column="Date Created">17 Jul 2023</td>
-                        <td data-column="Date Last Edit">17 Jul 2023</td>
-                        <td class="action-btn" data-column="Actions">
-                            <a href="{{(url('pdf-cover'))}}"><img class="my-1" src="{{asset('public/assets/images/view.png')}}" alt=""></a>
-                            <a href="#"><img class="my-1" src="{{asset('public/assets/images/edit.png')}}" alt=""></a>
-                            <a href="#"><img class="my-1" src="{{asset('public/assets/images/delete.png')}}" alt=""></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td data-column="Reference#">01</td>
-                        <td data-column="User">John Smith</td>
-                        <td data-column="Project">Lorem Ipsum is simply
-                            the printing and... </td>
-                        <td data-column="Date Created">17 Jul 2023</td>
-                        <td data-column="Date Last Edit">17 Jul 2023</td>
-                        <td class="action-btn" data-column="Actions">
-                            <a href="{{(url('pdf-cover'))}}"><img class="my-1" src="{{asset('public/assets/images/view.png')}}" alt=""></a>
-                            <a href="#"><img class="my-1" src="{{asset('public/assets/images/edit.png')}}" alt=""></a>
-                            <a href="#"><img class="my-1" src="{{asset('public/assets/images/delete.png')}}" alt=""></a>
-                        </td>
-                    </tr>
+                    @endforeach
+                    @endif
                 </tbody>
             </table>
         </div>

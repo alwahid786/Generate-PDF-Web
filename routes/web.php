@@ -19,9 +19,9 @@ use App\Http\Controllers\UserController;
 Route::get('/', function () {
     return view('pages.auth.login');
 });
-Route::get('/dashboard', function () {
-    return view('pages.dashboard');
-});
+// Route::get('/dashboard', function () {
+//     return view('pages.dashboard');
+// });
 // Route::get('/pdf-cover', function () {
 //     return view('pages.pdf-cover');
 // })->name('coverPage');
@@ -69,9 +69,8 @@ Route::get('google/callback', [AuthController::class, 'handleGoogleCallback']);
 
 // Auth Protected Routes
 Route::middleware('auth')->group(function () {
-    Route::get('/dashboard', function () {
-        return view('pages.dashboard');
-    });
+
+    Route::get('/dashboard', [UserController::class, 'dashboard'])->name('dashboard');
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::get('/create-pdf', [PdfController::class, 'createPdfPage'])->name('createPdfPage');
     Route::post('/preview-pdf', [PdfController::class, 'previewPdf'])->name('previewPdf');
