@@ -59,10 +59,6 @@
     </div>
 </main>
 
-
-@endsection
-
-
 {{-- delete modal --}}
 
 <div class="modal" id="deleteModal" tabindex="-1" role="dialog">
@@ -89,6 +85,12 @@
       </div>
     </div>
 </div>
+
+
+@endsection
+
+
+
 
 {{-- edit package --}}
 
