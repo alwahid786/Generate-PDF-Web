@@ -218,14 +218,9 @@
 
 <!-- Add Type Function  -->
 <script>
-    // $(document).ready(function() {
-    //     const data = {
-    //         packageTypeId: 'name'
-    //     };
-    //     const queryString = new URLSearchParams(data).toString();
-    //     const controllerURL = `{{url('/pdf-cover')}}` + '?' + queryString;
-    //     console.log(controllerURL);
-    // });
+    $(document).ready(function() {
+
+    });
     var fixtures = [];
     $(document).on('click', '#addTypeBtn', function() {
         let error = 0;

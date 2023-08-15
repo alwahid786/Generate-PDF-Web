@@ -34,9 +34,7 @@
                     $formattedDate = $date->format('d F Y');
                 ?>
                 <div>
-                    <h1 style="font-size: 2.8rem; margin: 0">
-                        {{ $object['project'] }}
-                    </h1>
+                    <h1 style="font-size: 2.8rem; margin: 0" class="projectTitle">{{ $object['project'] }}</h1>
                     {{-- <h3 style="font-size: 2.2rem; margin-top: 0; margin-bottom: 20px">
                         Submittal Package
                     </h3> --}}
@@ -137,12 +135,17 @@
     const convertBtn = document.getElementById("convertBtn");
     const contentDiv = document.getElementById("content");
 
+    var projectTitles  = document.getElementsByClassName("projectTitle");
+    if (projectTitles.length > 0) {
+        var fileName = projectTitles[0].innerHTML;
+    }
+
     const pdfOptions = {
         image: {
             type: "png",
             quality: 1.0
         }, // Use PNG and set maximum quality
-        filename: "converted.pdf", // The default filename for the downloaded PDF
+        filename: `${fileName}.pdf`, // The default filename for the downloaded PDF
         html2canvas: {
             scale: 1
         }, // Increase the scale for better image quality (adjust as needed)
@@ -151,7 +154,6 @@
         },
     };
     convertBtn.addEventListener("click", () => {
-        // Use html2pdf.js library to convert the contentDiv to PDF
         html2pdf().set(pdfOptions).from(contentDiv).save();
     });
 
