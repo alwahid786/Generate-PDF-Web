@@ -40,7 +40,7 @@
                         <td class="action-btn" data-column="Actions">
                             <a href="{{(url('pdf-cover'))}}?packageTypeId=<?= $package['id']; ?>"><img class="my-1" src="{{asset('public/assets/images/view.png')}}" alt=""></a>
                             <a href="#"><img class="my-1" src="{{asset('public/assets/images/edit.png')}}" alt=""></a>
-                            <a href="#"><img class="my-1" src="{{asset('public/assets/images/delete.png')}}" alt=""></a>
+                            <a href="#" onclick="deleteFunction($package['id'])"><img class="my-1" src="{{asset('public/assets/images/delete.png')}}" alt=""></a>
                         </td>
                     </tr>
                     @endforeach
@@ -50,14 +50,52 @@
         </div>
     </div>
 </main>
+
+
 @endsection
+
+
+{{-- delete modal --}}
+
+<div class="modal" id="deleteModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          {{-- <h5 class="modal-title">Modal title</h5> --}}
+          {{-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span> --}}
+          {{-- </button> --}}
+        </div>
+        <div class="modal-body">
+          <p style="font-size: 18px;">Are you sure you want to delete this data.</p>
+        </div>
+        <div class="modal-footer">
+            <form action="">
+                <input type="hidden" id="">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-danger">Delete</button>
+            </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
 @section('insertjavascript')
 <script>
     $('body').addClass('bg-clr')
 </script>
-<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+{{-- <script src="https://code.jquery.com/jquery-3.5.1.js"></script> --}}
 <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap4.min.js"></script>
+<script>
+    function deleteFunction(id)
+    {
+
+        $("#deleteModal").modal('show');
+    }
+</script>
 <script>
     $(document).ready(function() {
         $('#detail-table').DataTable({

@@ -104,7 +104,7 @@
                         <li style="font-weight: bold;">Part Number</li>
                         <li style="font-weight: bold;">Image</li>
                         <li style="font-weight: bold;">Spec Sheet</li>
-                        <li style="font-weight: bold;">Edit</li>
+                        {{-- <li style="font-weight: bold;">Edit</li> --}}
                         <li style="font-weight: bold;">Delete</li>
                     </ul>
                     <!-- Append PDF Row Here -->
@@ -294,7 +294,6 @@
                         <li>#${partNo}</li>
                         <li> <img style="width: 36px;" src="{{asset('public/assets/images/png_icon.png')}}" alt="image"></li>
                         <li> <img src="{{asset('public/assets/images/pdf-icon.png')}}" alt="image"></li>
-                        <li> <img style="cursor:pointer;" class="removePdfBtn" src="{{asset('public/assets/images/edit.png')}}" alt="image"></li>
                         <li> <img style="cursor:pointer;" class="removePdfBtn" src="{{asset('public/assets/images/delete.png')}}" alt="image"></li>
                     </ul>`;
         $(".pdf-detail-bar").append(pdfDiv);
