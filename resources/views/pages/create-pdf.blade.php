@@ -79,6 +79,12 @@
                         </div>
                     </div>
                     <div class="drop-zone">
+                        <span class="drop-zone__prompt">Add Image</span>
+                        {{-- <span>Spec Sheet</span> --}}
+                        <span>Drag+Drop</span>
+                        <input type="file" name="image-file" id="pdfImage" class="drop-zone__input typeValidation" accept="image/jpeg, image/png, image/gif">
+                    </div>
+                    <div class="drop-zone">
                         <span class="drop-zone__prompt">Add PDF</span>
                         <span>Spec Sheet</span>
                         <span>Drag+Drop</span>
@@ -92,6 +98,14 @@
                     </div>
                 </div>
                 <div class="pdf-detail-bar">
+                    <ul class="mt-4" data-id="${id}">
+                        <li style="font-weight: bold;">Fixture Type</li>
+                        <li style="font-weight: bold;">Part Number</li>
+                        <li style="font-weight: bold;">Image</li>
+                        <li style="font-weight: bold;">Spec Sheet</li>
+                        <li style="font-weight: bold;">Edit</li>
+                        <li style="font-weight: bold;">Delete</li>
+                    </ul>
                     <!-- Append PDF Row Here -->
                 </div>
                 <div class="summary-wrapper">
@@ -245,12 +259,17 @@
         var pdfFileInput = document.getElementById('pdfFile');
         var selectedFiles = pdfFileInput.files;
         var pdfFile = selectedFiles[0];
+        // Get Image File
+        var ImageFileInput = document.getElementById('pdfImage');
+        var selectedImageFiles = ImageFileInput.files;
+        var ImageFile = selectedImageFiles[0];
         let ref = $("#referenceNo").val();
         let partNo = $("#partNo").val();
         let fixtureType = $("#fixtureType").val();
         let id = Math.floor(Math.random() * 90000) + 10000;
         pdfObject = {
             "pdfFile": pdfFile,
+            'imageFile': ImageFile,
             "reference_no": ref,
             "part_no": partNo,
             "fixtureType": fixtureType,
@@ -258,9 +277,11 @@
         };
         fixtures.push(pdfObject);
         let pdfDiv = `<ul class="mt-4" data-id="${id}">
-                        <li>Reference #${ref}</li>
+                        <li>${fixtureType}</li>
                         <li>#${partNo}</li>
+                        <li> <img style="width: 36px;" src="{{asset('public/assets/images/png_icon.png')}}" alt="image"></li>
                         <li> <img src="{{asset('public/assets/images/pdf-icon.png')}}" alt="image"></li>
+                        <li> <img style="cursor:pointer;" class="removePdfBtn" src="{{asset('public/assets/images/edit.png')}}" alt="image"></li>
                         <li> <img style="cursor:pointer;" class="removePdfBtn" src="{{asset('public/assets/images/delete.png')}}" alt="image"></li>
                     </ul>`;
         $(".pdf-detail-bar").append(pdfDiv);
@@ -306,21 +327,19 @@
 
         // Fetch REQUEST START
         var data = new FormData();
-        console.log(fixtures)
-        console.log(packageObject)
-        // data.append('fixtures', fixtures);
+
         for (let i = 0; i < fixtures.length; i++) {
             const fixture = fixtures[i];
             data.append(`fixtures[${i}][pdfFile]`, fixture.pdfFile);
+            data.append(`fixtures[${i}][imageFile]`, fixture.imageFile);
             data.append(`fixtures[${i}][reference_no]`, fixture.reference_no);
             data.append(`fixtures[${i}][part_no]`, fixture.part_no);
             data.append(`fixtures[${i}][id]`, fixture.id);
             data.append(`fixtures[${i}][fixtureType]`, fixture.fixtureType);
         }
         data.append('package', JSON.stringify(packageObject));
-        // console.log(data);
         var csrfToken = $('meta[name="csrf-token"]').attr('content');
-      showLoading();
+        showLoading();
         // return false
         fetch(`{{url('/preview-pdf')}}`, {
                 method: 'POST',

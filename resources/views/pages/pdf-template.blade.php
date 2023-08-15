@@ -29,14 +29,18 @@
             justify-content: space-between;
             padding: 0 2rem;
           ">
+                <?php
+                    $date = new DateTime($object['created_at']);
+                    $formattedDate = $date->format('d F Y');
+                ?>
                 <div>
                     <h1 style="font-size: 2.8rem; margin: 0">
                         {{ $object['project'] }}
                     </h1>
                     {{-- <h3 style="font-size: 2.2rem; margin-top: 0; margin-bottom: 20px">
                         Submittal Package
-                    </h3>
-                    <p style="font-size: 1.5rem; margin: 0">July 5, 2023</p> --}}
+                    </h3> --}}
+                    <p style="font-size: 1.5rem; margin: 0">{{ $formattedDate }}</p>
                 </div>
                 <div
                     style="
@@ -47,20 +51,24 @@
                     <div><img src="{{ asset('public/assets/images/logo-icon.png') }}" style="width: 170px" /></div>
                     <div>
                         <a href="https://visionz.ca/"
-                            style="text-decoration: none; color: black; font-size: 1.5rem">visionz.ca</a>
+                            style="text-decoration: none; color: black; font-size: 17px">visionz.ca</a>
                     </div>
                     <div>
-                        <p style="font-size: 1.5rem; margin: 0">437-886-9837</p>
+                        <p style="font-size: 17px; margin: 0">437-886-9837</p>
                     </div>
                     <div>
                         <a href="mailto:projects@visionz.ca"
-                            style="text-decoration: none; color: black; font-size: 1.5rem">projects@visionz.ca</a>
+                            style="text-decoration: none; color: black; font-size: 17px">projects@visionz.ca</a>
                     </div>
                 </div>
             </div>
         </div>
 
-        @foreach ($pdf_path as $path)
+        @foreach ($pdf_path as $index => $path)
+
+            @php
+                $currentPage = $index + 1;
+            @endphp
             <div style="height: 1355px; padding: 2rem; background-color: rgb(255, 255, 255);">
                 <div class="table-wrapper" style="border: 1px solid; ">
                     <div class="table-header" style="height: 70px; display: flex; border-bottom: 1px solid black">
@@ -103,7 +111,7 @@
                     <div class="table-footer" style="height: 37px; display: flex; border-top: 1px solid black; padding: 8px 0px">
                         <div style="width: 25%; text-align: center">
                             <p style="margin: 0; font-size: 0.9rem">
-                                <strong>Date</strong> July 5, 2023
+                                <strong>Date</strong> {{ $formattedDate }}
                             </p>
                         </div>
                         <div style="width: 50%;display: flex;column-gap: 1.5rem;justify-content: center;">
@@ -111,7 +119,7 @@
                             <p style="margin: 0; font-size: 0.9rem">437-886-9837</p>
                         </div>
                         <div style="width: 25%; text-align: center">
-                            <p style="margin: 0; font-size: 0.9rem">Page 1 of 1</p>
+                            <p style="margin: 0; font-size: 0.9rem">Page {{ $currentPage }} </p>
                         </div>
                     </div>
                 </div>

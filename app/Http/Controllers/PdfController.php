@@ -45,28 +45,40 @@ class PdfController extends Controller
         $fixtures = $request->fixtures;
         foreach ($fixtures as $fixture) {
             $uploadedFile = $fixture['pdfFile'];
+            $uploadedImageFile = $fixture['imageFile'];
+
             if ($uploadedFile && $uploadedFile->isValid()) {
+
                 $name = time() . $uploadedFile->getClientOriginalName();
                 $path = public_path('/files');
-                // dd($path);
-                // if (!is_dir($path)) {
-                //     mkdir($path, 0777, true);
-                // }
 
-                // $uploadedFile->move(public_path('/files'), $name);
-                // $filePath = 'public/files/' . $name;
-                // $fileUrl = asset($filePath);
                 $uploadedFile->move($path, $name);
                 $filePath = $path . '/' . $name;
-                // dd($fileUrl);
+
             } else {
                 return response()->json(['status' => false, 'message' => 'Error: File is Invalid!']);
             }
+
+            // image upload
+            if ($uploadedImageFile && $uploadedImageFile->isValid()) {
+
+                $imageName = time() . $uploadedImageFile->getClientOriginalName();
+                $imagePath = public_path('/files');
+
+                $uploadedImageFile->move($imagePath, $imageName);
+                $imageFilePath = $imagePath . '/' . $imageName;
+
+            } else {
+                return response()->json(['status' => false, 'message' => 'Error: File is Invalid!']);
+            }
+
+
             $fixtureData = new Fixtures();
             $fixtureData->package_info_id = $packageType->id;
             $fixtureData->pdf_path = $filePath;
             $fixtureData->type = $fixture['fixtureType'];
             $fixtureData->part_number = $fixture['part_no'];
+            $fixtureData->image_path = $imageFilePath;
             $fixtureData->save();
         }
 
@@ -90,6 +102,7 @@ class PdfController extends Controller
         }
 
         $completePdfPath = [];
+        $currentPage = [];
         foreach ($package->fixtures as $fixture) {
 
             $pdfPath = $fixture['pdf_path'];
@@ -99,13 +112,14 @@ class PdfController extends Controller
                 'part_number' => $fixture['part_number'],
                 'project' => $package['package_name'],
                 'vision_reference' => $package['vision_reference'],
+                'created_at' => $package['created_at'],
             ];
 
             // path for ubuntu
-            $outputPath = '/var/www/html/pdf-generator/public/files/';
+            // $outputPath = '/var/www/html/pdf-generator/public/files/';
 
             // path for window
-            // $outputPath = 'C:\xampp\htdocs\pdf-generator\public\files';
+            $outputPath = 'C:\xampp\htdocs\pdf-generator\public\files';
 
 
             if (file_exists($pdfPath)) {
@@ -129,10 +143,10 @@ class PdfController extends Controller
                         $outputFilename = "/$randomString.$pageNumber.$randomNumber.png";
 
                         // command for window
-                        // $command = "gswin64c.exe -sDEVICE=pngalpha -r300 -o \"$outputPath$outputFilename\" -dFirstPage=$pageNumber -dLastPage=$pageNumber \"$pdfPath\"";
+                        $command = "gswin64c.exe -sDEVICE=pngalpha -r300 -o \"$outputPath$outputFilename\" -dFirstPage=$pageNumber -dLastPage=$pageNumber \"$pdfPath\"";
 
                         // command for ubuntu
-                        $command = "gs -sDEVICE=pngalpha -r300 -o \"$outputPath$outputFilename\" -dFirstPage=$pageNumber -dLastPage=$pageNumber \"$pdfPath\"";
+                        // $command = "gs -sDEVICE=pngalpha -r300 -o \"$outputPath$outputFilename\" -dFirstPage=$pageNumber -dLastPage=$pageNumber \"$pdfPath\"";
 
 
                         exec($command, $output, $returnCode);
@@ -140,6 +154,7 @@ class PdfController extends Controller
                         if ($returnCode === 0) {
 
                             $completePdfPath[] = asset('public/files/' . $outputFilename);
+
                         } else {
                             echo "Error converting page $pageNumber to image.<br>";
                             print_r($output);
@@ -160,7 +175,7 @@ class PdfController extends Controller
             }
         }
 
-        $template =  view('pages.pdf-template', ['pdf_path' => $completePdfPath, 'object' => $obj])->render();
+        $template =  view('pages.pdf-template', ['pdf_path' => $completePdfPath, 'object' => $obj, 'pageNumber' => $pageNumber,])->render();
 
         View::share('pdfTemplate', $template);
 

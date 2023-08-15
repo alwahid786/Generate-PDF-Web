@@ -15,11 +15,10 @@ class PackageTypes extends Seeder
     public function run()
     {
         $data = [
-            ['title' => "Type 1"],
-            ['title' => "Type 2"],
-            ['title' => "Type 3"],
-            ['title' => "Type 4"],
-            ['title' => "Type 5"],
+            ['title' => "Specification Package"],
+            ['title' => "Lighting Legend"],
+            ['title' => "Submittal Package"],
+            ['title' => "Record Drawings"],
         ];
         PackageType::insert($data);
     }
