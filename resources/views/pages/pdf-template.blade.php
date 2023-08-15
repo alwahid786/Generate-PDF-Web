@@ -147,12 +147,12 @@
         }, // Use PNG and set maximum quality
         filename: `${fileName}.pdf`, // The default filename for the downloaded PDF
         html2canvas: {
-            scale: 1
+            scale: 4
         }, // Increase the scale for better image quality (adjust as needed)
         jsPDF: {
             format: [250, 358.5]
         },
-        scale: 4
+        // scale: 4,
     };
     convertBtn.addEventListener("click", () => {
         html2pdf().set(pdfOptions).from(contentDiv).save();
