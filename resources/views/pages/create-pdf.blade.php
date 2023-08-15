@@ -41,6 +41,7 @@
                         </div>
                         <div class="pdf-info-input">
                             <input type="text" name="project" id="projectName" class="typeValidation">
+                            <p style="color: red" id="warning-message"></p>
                         </div>
                     </div>
                     <div class="pdf-info-input-wrapper">
@@ -219,6 +220,25 @@
 <!-- Add Type Function  -->
 <script>
     $(document).ready(function() {
+
+        // $('#projectName').on('change', function() {
+        //     alert( this.value );
+        // });
+
+        var maxLength = 20
+
+        $('#projectName').on('keydown keyup change', function(){
+            var char = $(this).val();
+            var charLength = $(this).val().length;
+            if(charLength > maxLength){
+                console.log('aksjas')
+                $('#warning-message').text('Length is not valid, maximum '+maxLength+' allowed.');
+                // $(this).val(char.substring(0, maxLength));
+            }else{
+                console.log('')
+                $('#warning-message').text('');
+            }
+        });
 
     });
     var fixtures = [];
