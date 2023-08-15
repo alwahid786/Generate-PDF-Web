@@ -63,7 +63,7 @@ Route::post('/forgot-password', [AuthController::class, 'forgotPassword'])->name
 Route::post('/otp-verification', [AuthController::class, 'verifyOtp'])->name('verifyOtp');
 Route::post('/password-reset', [AuthController::class, 'resetPassword'])->name('resetPassword');
 
-// Social login 
+// Social login
 Route::get('google', [AuthController::class, 'redirectToGoogle']);
 Route::get('google/callback', [AuthController::class, 'handleGoogleCallback']);
 
@@ -76,4 +76,5 @@ Route::middleware('auth')->group(function () {
     Route::post('/preview-pdf', [PdfController::class, 'previewPdf'])->name('previewPdf');
     Route::any('/pdf-cover', [PdfController::class, 'pdfCover'])->name('pdfCover');
     Route::any('/update-profile', [UserController::class, 'updateProfile'])->name('updateProfile');
+    Route::any('/delete-package', [UserController::class, 'deletePackage'])->name('deletePackage');
 });

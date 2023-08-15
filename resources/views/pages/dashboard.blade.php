@@ -16,6 +16,14 @@
             <a href="{{(url('create-pdf'))}}" class="btn create-btn"><img class="mr-2" src="{{asset('public/assets/images/plus.png')}}" alt="">Create New Package</a>
         </div>
 
+        @if (\Session::has('error'))
+            <div class="alert alert-danger">
+                <ul>
+                    <li>{{ \Session::get('error') }}</li>
+                </ul>
+            </div>
+        @endif
+
         <div class="client-table ">
             <table id="detail-table" style="width:100%">
                 <thead>
@@ -40,7 +48,7 @@
                         <td class="action-btn" data-column="Actions">
                             <a href="{{(url('pdf-cover'))}}?packageTypeId=<?= $package['id']; ?>"><img class="my-1" src="{{asset('public/assets/images/view.png')}}" alt=""></a>
                             <a href="#"><img class="my-1" src="{{asset('public/assets/images/edit.png')}}" alt=""></a>
-                            <a href="#" onclick="deleteFunction($package['id'])"><img class="my-1" src="{{asset('public/assets/images/delete.png')}}" alt=""></a>
+                            <a href="#" onclick="deleteFunction({{$package['id']}})"><img class="my-1" src="{{asset('public/assets/images/delete.png')}}" alt=""></a>
                         </td>
                     </tr>
                     @endforeach
@@ -70,10 +78,11 @@
           <p style="font-size: 18px;">Are you sure you want to delete this data.</p>
         </div>
         <div class="modal-footer">
-            <form action="">
-                <input type="hidden" id="">
+            <form action="{{ route('deletePackage') }}" method="post">
+                @csrf
+                <input type="hidden" name="id" id="packageId">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-danger">Delete</button>
+                <button type="submit" class="btn btn-danger">Delete</button>
             </form>
 
         </div>
@@ -92,7 +101,7 @@
 <script>
     function deleteFunction(id)
     {
-
+        $("#packageId").val(id);
         $("#deleteModal").modal('show');
     }
 </script>

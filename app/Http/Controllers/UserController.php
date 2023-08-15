@@ -16,4 +16,18 @@ class UserController extends Controller
         $packageInfo = PackageInfo::where('user_id', auth()->user()->id)->with('fixtures')->get();
         return view('pages.dashboard', compact('packageInfo'));
     }
+
+    public function deletePackage(Request $request)
+    {
+        $package = PackageInfo::findOrFail($request->id);
+
+        $package->fixtures()->delete();
+
+        $package->delete();
+
+        if($package)
+        {
+            return redirect()->back()->with('error', 'Delete Package Successfully.');
+        }
+    }
 }
