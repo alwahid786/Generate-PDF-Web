@@ -30,4 +30,15 @@ class UserController extends Controller
             return redirect()->back()->with('error', 'Delete Package Successfully.');
         }
     }
+
+    public function getPackageData(Request $request)
+    {
+        $packageData = PackageInfo::where('id', $request->id)->with('fixtures')->get();
+
+        return response()->json([
+            'status' => 'success',
+            'data' => $packageData,
+            'message' => 'category data!'
+        ], 200);
+    }
 }

@@ -88,7 +88,33 @@
         </div>
       </div>
     </div>
-  </div>
+</div>
+
+{{-- edit package --}}
+
+<div class="modal" id="editModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          {{-- <h5 class="modal-title">Modal title</h5> --}}
+          {{-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span> --}}
+          {{-- </button> --}}
+        </div>
+        <div class="modal-body">
+          <p style="font-size: 18px;">Are you sure you want to delete this data.</p>
+        </div>
+        <div class="modal-footer">
+            <form action="{{ route('deletePackage') }}" method="post">
+                @csrf
+
+            </form>
+
+        </div>
+      </div>
+    </div>
+</div>
+
 
 
 @section('insertjavascript')
@@ -103,6 +129,36 @@
     {
         $("#packageId").val(id);
         $("#deleteModal").modal('show');
+    }
+
+    function editFunction(id)
+    {
+
+        $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+        });
+
+        $.ajax({
+
+            url: '{{ route("getPackageData") }}',
+            type: "POST",
+            data: {id : id},
+            dataType: 'json',
+
+            success: function(data) {
+
+                $('#')
+
+            },
+
+            error: function(data) {
+
+            }
+
+        });
+        // $("#editModal").modal('show');
     }
 </script>
 <script>

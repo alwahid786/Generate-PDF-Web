@@ -77,4 +77,5 @@ Route::middleware('auth')->group(function () {
     Route::any('/pdf-cover', [PdfController::class, 'pdfCover'])->name('pdfCover');
     Route::any('/update-profile', [UserController::class, 'updateProfile'])->name('updateProfile');
     Route::any('/delete-package', [UserController::class, 'deletePackage'])->name('deletePackage');
+    Route::any('/get-package-data', [UserController::class, 'getPackageData'])->name('getPackageData');
 });
