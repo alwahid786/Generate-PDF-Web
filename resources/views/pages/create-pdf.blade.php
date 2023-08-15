@@ -80,8 +80,8 @@
                         </div>
                     </div>
                     <div class="drop-zone">
-                        <span class="drop-zone__prompt">Add Image</span>
-                        {{-- <span>Spec Sheet</span> --}}
+                        <span class="drop-zone__prompt"></span>
+                        <span>Add Image</span>
                         <span>Drag+Drop</span>
                         <input type="file" name="image-file" id="pdfImage" class="drop-zone__input typeValidation" accept="image/jpeg, image/png, image/gif">
                     </div>
