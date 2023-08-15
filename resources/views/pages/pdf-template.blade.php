@@ -152,6 +152,7 @@
         jsPDF: {
             format: [250, 358.5]
         },
+        scale: 4
     };
     convertBtn.addEventListener("click", () => {
         html2pdf().set(pdfOptions).from(contentDiv).save();
