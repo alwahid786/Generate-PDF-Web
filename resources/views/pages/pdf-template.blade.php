@@ -143,16 +143,15 @@
     const pdfOptions = {
         image: {
             type: "png",
-            quality: 1.0
+            quality: 2.0
         }, // Use PNG and set maximum quality
         filename: `${fileName}.pdf`, // The default filename for the downloaded PDF
         html2canvas: {
-            scale: 3
+            scale: 2
         }, // Increase the scale for better image quality (adjust as needed)
         jsPDF: {
             format: [250, 358.5]
         },
-        // scale: 4,
     };
     convertBtn.addEventListener("click", () => {
         html2pdf().set(pdfOptions).from(contentDiv).save();
