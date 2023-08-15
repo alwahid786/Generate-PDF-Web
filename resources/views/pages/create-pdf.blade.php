@@ -231,9 +231,7 @@
             var char = $(this).val();
             var charLength = $(this).val().length;
             if(charLength > maxLength){
-                console.log('aksjas')
                 $('#warning-message').text('Length is not valid, maximum '+maxLength+' allowed.');
-                // $(this).val(char.substring(0, maxLength));
             }else{
                 console.log('')
                 $('#warning-message').text('');
