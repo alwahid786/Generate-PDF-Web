@@ -147,7 +147,7 @@
         }, // Use PNG and set maximum quality
         filename: `${fileName}.pdf`, // The default filename for the downloaded PDF
         html2canvas: {
-            scale: 2
+            scale: 1
         }, // Increase the scale for better image quality (adjust as needed)
         jsPDF: {
             format: [250, 358.5]
