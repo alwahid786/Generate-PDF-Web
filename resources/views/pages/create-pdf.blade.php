@@ -255,7 +255,9 @@
     });
     var fixtures = [];
     <?php 
-        if()
+        if(isset($packageInfo)){
+            
+        }
     ?>
     $(document).on('click', '#addTypeBtn', function() {
         let error = 0;
