@@ -26,7 +26,9 @@
                         <select name="package_type" id="packageType" class="typeValidation">
                             @if(isset($packageTypes) && !empty($packageTypes))
                             @foreach($packageTypes as $type)
-                            <option value="{{$type['id']}}">{{$type['title']}}</option>
+                            <option <?php if (isset($packageInfo) && $packageInfo->package_type_id == $type['id']) {
+                                        echo "selected";
+                                    } ?> value="{{$type['id']}}">{{$type['title']}}</option>
                             @endforeach
                             @else
                             <option selected="selected" disabled="disabled">--Select</option>
@@ -40,7 +42,7 @@
                             <h1>Project: * </h1>
                         </div>
                         <div class="pdf-info-input">
-                            <input type="text" name="project" id="projectName" class="typeValidation">
+                            <input type="text" name="project" value="{{$packageInfo->package_name ?? ''}}" id="projectName" class="typeValidation">
                             <p style="color: red" id="warning-message"></p>
                         </div>
                     </div>
@@ -49,7 +51,7 @@
                             <h1>Visionz Reference: *</h1>
                         </div>
                         <div class="pdf-info-input">
-                            <input type="text" name="reference" id="referenceNo" class="typeValidation">
+                            <input type="text" name="reference" value="{{$packageInfo->vision_reference ?? ''}}" id="referenceNo" class="typeValidation">
                         </div>
                     </div>
                 </div>
@@ -79,22 +81,23 @@
                             </div>
                         </div>
                     </div>
-                    <div class="drop-zone">
+                    <!-- <div class="drop-zone">
                         <span class="drop-zone__prompt"></span>
                         <span>Add Image</span>
                         <span>Drag+Drop</span>
                         <input type="file" name="image-file" id="pdfImage" class="drop-zone__input typeValidation" accept="image/jpeg, image/png, image/gif">
-                    </div>
+                    </div> -->
                     <div class="drop-zone">
-                        <span class="drop-zone__prompt">Add PDF</span>
+                        <span class="drop-zone__prompt">Add File</span>
                         <span>Spec Sheet</span>
-                        <span>Drag+Drop</span>
+                        <span>Drag + Drop</span>
                         <input type="file" name="pdf-file" id="pdfFile" class="drop-zone__input typeValidation" accept="application/pdf">
                     </div>
+                    <input type="hidden" id="editId">
                     <div class="add-button">
                         <a href="javascript:void(0)" id="addTypeBtn">
                             <img src="{{asset('public/assets/images/plus-circle.png')}}">
-                            <h1>Add Type</h1>
+                            <h1>Save</h1>
                         </a>
                     </div>
                 </div>
@@ -102,24 +105,36 @@
                     <ul class="mt-4" data-id="${id}">
                         <li style="font-weight: bold;">Fixture Type</li>
                         <li style="font-weight: bold;">Part Number</li>
-                        <li style="font-weight: bold;">Image</li>
                         <li style="font-weight: bold;">Spec Sheet</li>
                         {{-- <li style="font-weight: bold;">Edit</li> --}}
-                        <li style="font-weight: bold;">Delete</li>
+                        <li style="font-weight: bold;">Action</li>
                     </ul>
+                    @if(isset($packageInfo))
+                    @foreach($packageInfo->fixtures as $fixture)
+                    <ul class="mt-4 row.{{$fixture['id']}}" data-id="{{$fixture['id']}}">
+                        <li class="fixType_append">${fixtureType}</li>
+                        <li class="fixPartNo_append">${partNo}</li>
+                        <li> <img src="{{asset('public/assets/images/pdf-icon.png')}}" alt="image"></li>
+                        <li class="d-flex align-items-center justify-content-end">
+                            <img style="cursor:pointer; width:28px;height:28px;" class="editPdfBtn" src="{{asset('public/assets/images/edit-icon.svg')}}" alt="image">
+                            <img style="cursor:pointer;" class="removePdfBtn ml-2" src="{{asset('public/assets/images/delete.png')}}" alt="image">
+                        </li>
+                    </ul>
+                    @endforeach
+                    @endif
                     <!-- Append PDF Row Here -->
                 </div>
-                <div class="summary-wrapper">
+                <!-- <div class="summary-wrapper">
                     <input type="checkbox" id="checkbox1" class="rounded-checkbox">
                     <label for="checkbox1">Summary</label>
-                </div>
+                </div> -->
                 <div class="pdf-action">
                     <div class="action-type">
-                        <a id="previewPdf" href="javascript:void(0)">Preview</a>
+                        <a id="previewPdf" href="javascript:void(0)">Preview & Save</a>
                     </div>
-                    <div class="action-type">
+                    <!-- <div class="action-type">
                         <a id="createPdf" href="javascript:void(0)">Create & Save Package</a>
-                    </div>
+                    </div> -->
                 </div>
 
             </div>
@@ -227,13 +242,12 @@
 
         var maxLength = 20
 
-        $('#projectName').on('keydown keyup change', function(){
+        $('#projectName').on('keydown keyup change', function() {
             var char = $(this).val();
             var charLength = $(this).val().length;
-            if(charLength > maxLength){
-                $('#warning-message').text('Length is not valid, maximum '+maxLength+' allowed.');
-            }else{
-                console.log('')
+            if (charLength > maxLength) {
+                $('#warning-message').text('Length is not valid, maximum ' + maxLength + ' allowed.');
+            } else {
                 $('#warning-message').text('');
             }
         });
@@ -273,31 +287,72 @@
         var selectedFiles = pdfFileInput.files;
         var pdfFile = selectedFiles[0];
         // Get Image File
-        var ImageFileInput = document.getElementById('pdfImage');
-        var selectedImageFiles = ImageFileInput.files;
-        var ImageFile = selectedImageFiles[0];
+        // var ImageFileInput = document.getElementById('pdfImage');
+        // var selectedImageFiles = ImageFileInput.files;
+        // var ImageFile = selectedImageFiles[0];
+        // Get Image Preview Div 
+        // var imagePreview = $(".drop-zone__thumb:first").prop('outerHTML');
+        // var pdfPreview = $(".drop-zone__thumb:eq(1)").prop('outerHTML');
+
         let ref = $("#referenceNo").val();
         let partNo = $("#partNo").val();
         let fixtureType = $("#fixtureType").val();
         let id = Math.floor(Math.random() * 90000) + 10000;
+
+        // Check if it is edit case 
+        let editedId = $("#editId").val();
+        if (editedId != '') {
+            // Update Array 
+            fixtures = fixtures.map(obj => {
+                if (obj.id === parseInt(editedId)) {
+                    console.log('coming')
+                    // Create a new object with the updated age
+                    return {
+                        ...obj,
+                        pdfFile: pdfFile,
+                        reference_no: ref,
+                        part_no: partNo,
+                        fixtureType: fixtureType,
+                    };
+                }
+                return obj; // Return unchanged object
+            });
+            // Update Content Row which was appended 
+            $(".row" + editedId).find('.fixType_append').text(fixtureType);
+            $(".row" + editedId).find('.fixPartNo_append').text(partNo);
+            resetFixtures();
+            console.log('edited')
+            console.log(fixtures)
+            console.log('edited')
+            return;
+        }
+
         pdfObject = {
             "pdfFile": pdfFile,
-            'imageFile': ImageFile,
+            // 'imageFile': ImageFile,
             "reference_no": ref,
             "part_no": partNo,
             "fixtureType": fixtureType,
-            "id": id
+            "id": id,
+            // "imagePreview": imagePreview,
+            // "pdfPreview": pdfPreview
         };
         fixtures.push(pdfObject);
-        let pdfDiv = `<ul class="mt-4" data-id="${id}">
-                        <li>${fixtureType}</li>
-                        <li>#${partNo}</li>
-                        <li> <img style="width: 36px;" src="{{asset('public/assets/images/png_icon.png')}}" alt="image"></li>
+        let pdfDiv = `<ul class="mt-4 row${id}" data-id="${id}">
+                        <li class="fixType_append">${fixtureType}</li>
+                        <li class="fixPartNo_append">${partNo}</li>
                         <li> <img src="{{asset('public/assets/images/pdf-icon.png')}}" alt="image"></li>
-                        <li> <img style="cursor:pointer;" class="removePdfBtn" src="{{asset('public/assets/images/delete.png')}}" alt="image"></li>
+                        <li class="d-flex align-items-center justify-content-end">
+                            <img style="cursor:pointer; width:28px;height:28px;" class="editPdfBtn" src="{{asset('public/assets/images/edit-icon.svg')}}" alt="image">
+                            <img style="cursor:pointer;" class="removePdfBtn ml-2" src="{{asset('public/assets/images/delete.png')}}" alt="image">
+                        </li>
                     </ul>`;
         $(".pdf-detail-bar").append(pdfDiv);
         resetFixtures();
+        console.log('old')
+        console.log(fixtures)
+        console.log('old')
+
     });
     // Remove PDF BTN Click function
     $(document).on('click', '.removePdfBtn', function() {
@@ -308,6 +363,27 @@
             fixtures.splice(indexToRemove, 1);
         }
         pdfDiv.remove();
+    });
+    // EDIT PDF BTN Click function
+    $(document).on('click', '.editPdfBtn', function() {
+        console.log(fixtures)
+        let pdfDiv = $(this).closest('ul');
+        let id = pdfDiv.data('id');
+        let type = pdfDiv.find('.fixType_append').text();
+        let part = pdfDiv.find('.fixPartNo_append').text();
+        // let imagePre = pdfDiv.find('.imgPreview_append').html();
+        // let pdfPre = pdfDiv.find('.pdfPreview_append').html();
+        // console.log(imagePre);
+        $("#fixtureType").val(type);
+        $("#partNo").val(part);
+        $("#editId").val(id);
+        // $("#pdfImage").after(imagePre);
+        // $("#pdfFile").after(pdfPre);
+        // let indexToRemove = fixtures.findIndex(entry => entry.id === id);
+        // if (indexToRemove !== -1) {
+        //     fixtures.splice(indexToRemove, 1);
+        // }
+        // pdfDiv.remove();
     });
     // Reset Fields Function
     function resetFixtures() {
@@ -394,12 +470,13 @@
 
     });
 
-    function showLoading(){
+    function showLoading() {
         $('body').css('opacity', 0.5);
         $('button').prop('disabled', true);
         $("#loader").removeClass('d-none');
     }
-    function hideLoading(){
+
+    function hideLoading() {
         $('body').css('opacity', 1);
         $('button').prop('disabled', false);
         $("#loader").addClass('d-none');

@@ -24,6 +24,11 @@ class PdfController extends Controller
     public function createPdfPage(Request $request)
     {
         $packageTypes = PackageType::get();
+        $packageInfoId = $request->query('packageInfoId');
+        if($packageInfoId){
+            $packageInfo = PackageInfo::where('id', $packageInfoId)->with('fixtures')->first();
+            return view('pages.create-pdf', compact('packageTypes', 'packageInfo'));
+        }
         return view('pages.create-pdf', compact('packageTypes'));
     }
 
@@ -54,7 +59,6 @@ class PdfController extends Controller
 
                 $uploadedFile->move($path, $name);
                 $filePath = $path . '/' . $name;
-
             } else {
                 return response()->json(['status' => false, 'message' => 'Error: File is Invalid!']);
             }
@@ -67,7 +71,6 @@ class PdfController extends Controller
 
                 $uploadedImageFile->move($imagePath, $imageName);
                 $imageFilePath = $imagePath . '/' . $imageName;
-
             } else {
                 return response()->json(['status' => false, 'message' => 'Error: File is Invalid!']);
             }
@@ -116,10 +119,10 @@ class PdfController extends Controller
             ];
 
             // path for ubuntu
-            $outputPath = '/var/www/html/pdf-generator/public/files/';
+            // $outputPath = '/var/www/html/pdf-generator/public/files/';
 
             // path for window
-            // $outputPath = 'C:\xampp\htdocs\pdf-generator\public\files';
+            $outputPath = 'C:\xampp\htdocs\pdf-generator\public\files';
 
 
             if (file_exists($pdfPath)) {
@@ -143,10 +146,10 @@ class PdfController extends Controller
                         $outputFilename = "/$randomString.$pageNumber.$randomNumber.png";
 
                         // command for window
-                        // $command = "gswin64c.exe -sDEVICE=pngalpha -r300 -o \"$outputPath$outputFilename\" -dFirstPage=$pageNumber -dLastPage=$pageNumber \"$pdfPath\"";
+                        $command = "gswin64c.exe -sDEVICE=pngalpha -r300 -o \"$outputPath$outputFilename\" -dFirstPage=$pageNumber -dLastPage=$pageNumber \"$pdfPath\"";
 
                         // command for ubuntu
-                        $command = "gs -sDEVICE=pngalpha -r600 -o \"$outputPath$outputFilename\" -dFirstPage=$pageNumber -dLastPage=$pageNumber \"$pdfPath\"";
+                        // $command = "gs -sDEVICE=pngalpha -r600 -o \"$outputPath$outputFilename\" -dFirstPage=$pageNumber -dLastPage=$pageNumber \"$pdfPath\"";
 
 
                         exec($command, $output, $returnCode);
@@ -154,7 +157,6 @@ class PdfController extends Controller
                         if ($returnCode === 0) {
 
                             $completePdfPath[] = asset('public/files/' . $outputFilename);
-
                         } else {
                             echo "Error converting page $pageNumber to image.<br>";
                             print_r($output);

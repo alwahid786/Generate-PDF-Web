@@ -17,11 +17,11 @@
         </div>
 
         @if (\Session::has('error'))
-            <div class="alert alert-danger">
-                <ul>
-                    <li>{{ \Session::get('error') }}</li>
-                </ul>
-            </div>
+        <div class="alert alert-danger">
+            <ul>
+                <li>{{ \Session::get('error') }}</li>
+            </ul>
+        </div>
         @endif
 
         <div class="client-table ">
@@ -47,7 +47,7 @@
                         <td data-column="Date Last Edit">{{date('M d, Y h:i:s', strtotime($package['updated_at']))}}</td>
                         <td class="action-btn" data-column="Actions">
                             <a href="{{(url('pdf-cover'))}}?packageTypeId=<?= $package['id']; ?>"><img class="my-1" src="{{asset('public/assets/images/view.png')}}" alt=""></a>
-                            <a href="#"><img class="my-1" src="{{asset('public/assets/images/edit.png')}}" alt=""></a>
+                            <a href="{{(url('create-pdf'))}}?packageInfoId=<?= $package['id']; ?>"><img class="my-1" src="{{asset('public/assets/images/edit.png')}}" alt=""></a>
                             <a href="#" onclick="deleteFunction({{$package['id']}})"><img class="my-1" src="{{asset('public/assets/images/delete.png')}}" alt=""></a>
                         </td>
                     </tr>
@@ -63,26 +63,26 @@
 
 <div class="modal" id="deleteModal" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          {{-- <h5 class="modal-title">Modal title</h5> --}}
-          {{-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <div class="modal-content">
+            <div class="modal-header">
+                {{-- <h5 class="modal-title">Modal title</h5> --}}
+                {{-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span> --}}
-          {{-- </button> --}}
-        </div>
-        <div class="modal-body">
-          <p style="font-size: 18px;">Are you sure you want to delete this data.</p>
-        </div>
-        <div class="modal-footer">
-            <form action="{{ route('deletePackage') }}" method="post">
-                @csrf
-                <input type="hidden" name="id" id="packageId">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-danger">Delete</button>
-            </form>
+                {{-- </button> --}}
+            </div>
+            <div class="modal-body">
+                <p style="font-size: 18px;">Are you sure you want to delete this data.</p>
+            </div>
+            <div class="modal-footer">
+                <form action="{{ route('deletePackage') }}" method="post">
+                    @csrf
+                    <input type="hidden" name="id" id="packageId">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
 
+            </div>
         </div>
-      </div>
     </div>
 </div>
 
@@ -104,13 +104,13 @@
         </div>
         <div class="modal-footer">
             <form action="{{ route('deletePackage') }}" method="post">
-                @csrf
+@csrf
 
-            </form>
+</form>
 
-        </div>
-      </div>
-    </div>
+</div>
+</div>
+</div>
 </div> --}}
 
 
@@ -123,8 +123,7 @@
 <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap4.min.js"></script>
 <script>
-    function deleteFunction(id)
-    {
+    function deleteFunction(id) {
         $("#packageId").val(id);
         $("#deleteModal").modal('show');
     }
