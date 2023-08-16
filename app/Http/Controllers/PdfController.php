@@ -38,17 +38,16 @@ class PdfController extends Controller
         // Save Package First
         $package = json_decode($request->input('package'));
 
-
         $existingPackageType = PackageInfo::where('vision_reference', $package->referenceNo)->first();
 
         if ($existingPackageType) {
-            // Update existing package info if found
+
             $existingPackageType->package_name = $package->projectName;
             $existingPackageType->package_type_id = $package->packageType;
             $existingPackageType->save();
             $packageType = $existingPackageType;
         } else {
-            // Create a new package info if not found
+
             $packageType = new PackageInfo();
             $packageType->package_name = $package->projectName;
             $packageType->vision_reference = $package->referenceNo;
@@ -57,38 +56,42 @@ class PdfController extends Controller
             $packageType->save();
         }
 
-        // First Create Package Info
-        // $packageType = new PackageInfo();
-        // $packageType->package_name = $package->projectName;
-        // $packageType->vision_reference = $package->referenceNo;
-        // $packageType->package_type_id = $package->packageType;
-        // $packageType->user_id = auth()->user()->id;
-        // $packageType->save();
-
         // Then Loop Through Every Fixture to Save()
         $fixtures = $request->fixtures;
+
         foreach ($fixtures as $fixture) {
-            $uploadedFile = $fixture['pdfFile'];
 
-            $name = time() . $uploadedFile->getClientOriginalName();
-            $path = public_path('/files');
+            if($existingPackageType)
+            {
+                if ($fixture['fixtureType'] != null && $fixture['fixtureType'] != 'undefined') {
 
-            $uploadedFile->move($path, $name);
-            $filePath = $path . '/' . $name;
+                    $existingFixture = Fixtures::where('id', $fixture['id'])->first();
+
+                    $uploadedFile = $fixture['pdfFile'];
+
+                    $name = time() . $uploadedFile->getClientOriginalName();
+                    $path = public_path('/files');
+
+                    $uploadedFile->move($path, $name);
+                    $filePath = $path . '/' . $name;
 
 
-            $existingFixture = Fixtures::where('package_info_id', $packageType->id)->first();
+                    $existingFixture->pdf_path = $filePath;
+                    $existingFixture->type = $fixture['fixtureType'];
+                    $existingFixture->part_number = $fixture['part_no'];
+                    $existingFixture->save();
 
-            if ($existingFixture) {
-                // Update existing fixture data if found
-                $existingFixture->pdf_path = $filePath;
-                $existingFixture->type = $fixture['fixtureType'];
-                $existingFixture->part_number = $fixture['part_no'];
-                // $existingFixture->package_info_id = $fixture['part_no'];
-                $existingFixture->save();
-                $fixtureData = $existingFixture;
+                }
+
             } else {
-                // Create a new fixture data if not found
+                $uploadedFile = $fixture['pdfFile'];
+
+                $name = time() . $uploadedFile->getClientOriginalName();
+                $path = public_path('/files');
+
+                $uploadedFile->move($path, $name);
+                $filePath = $path . '/' . $name;
+
                 $fixtureData = new Fixtures();
                 $fixtureData->package_info_id = $packageType->id;
                 $fixtureData->pdf_path = $filePath;
@@ -98,13 +101,6 @@ class PdfController extends Controller
                 $fixtureData->save();
             }
 
-            // $fixtureData = new Fixtures();
-            // $fixtureData->package_info_id = $packageType->id;
-            // $fixtureData->pdf_path = $filePath;
-            // $fixtureData->type = $fixture['fixtureType'];
-            // $fixtureData->part_number = $fixture['part_no'];
-            // $fixtureData->image_path = null;
-            // $fixtureData->save();
         }
 
         // Prevent Data at last for response
