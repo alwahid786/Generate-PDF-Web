@@ -253,11 +253,11 @@
         });
 
     });
-    // var fixtures = [];
+    var fixtures = [];
     <?php
     if (isset($packageInfo)) {
     ?>
-        var fixtures = <?= $packageInfo->fixtures; ?>;
+    fixtures = <?= $packageInfo->fixtures; ?>;
     <?php
     }
     ?>
