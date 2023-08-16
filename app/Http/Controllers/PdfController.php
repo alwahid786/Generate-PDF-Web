@@ -52,16 +52,16 @@ class PdfController extends Controller
             $uploadedFile = $fixture['pdfFile'];
             // $uploadedImageFile = $fixture['imageFile'];
 
-            if ($uploadedFile && $uploadedFile->isValid()) {
+            // if ($uploadedFile && $uploadedFile->isValid()) {
 
-                $name = time() . $uploadedFile->getClientOriginalName();
-                $path = public_path('/files');
+            $name = time() . $uploadedFile->getClientOriginalName();
+            $path = public_path('/files');
 
-                $uploadedFile->move($path, $name);
-                $filePath = $path . '/' . $name;
-            } else {
-                return response()->json(['status' => false, 'message' => 'Error: File is Invalid!']);
-            }
+            $uploadedFile->move($path, $name);
+            $filePath = $path . '/' . $name;
+            // } else {
+            //     return response()->json(['status' => false, 'message' => 'Error: File is Invalid!']);
+            // }
 
             // image upload
             // if ($uploadedImageFile && $uploadedImageFile->isValid()) {
