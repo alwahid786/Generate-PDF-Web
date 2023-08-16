@@ -117,9 +117,9 @@
                     <div class="action-type">
                         <a id="previewPdf" href="javascript:void(0)">Preview</a>
                     </div>
-                    <div class="action-type">
+                    {{-- <div class="action-type">
                         <a id="createPdf" href="javascript:void(0)">Create & Save Package</a>
-                    </div>
+                    </div> --}}
                 </div>
 
             </div>
