@@ -17,10 +17,18 @@
     <div class="container-fluid py-3">
         <div class="header-wrapper">
             <div class="heading-top">
-                <h1>Profile <span>14 Jul 2023</span></h1>
+                <h1>Profile <span>{{ date("F j, Y") }}</span></h1>
             </div>
         </div>
-        <form action="">
+        @if (\Session::has('success'))
+            <div class="alert alert-success">
+                <ul>
+                    <li>{{ \Session::get('success') }}</li>
+                </ul>
+            </div>
+        @endif
+        <form action="{{ route('updateProfile') }}" method="post" enctype="multipart/form-data">
+            @csrf
             <div class="profile-body">
                 <div class="profile-body-inner">
                     <div class="profile-img-wrapper">
@@ -29,7 +37,7 @@
 
                         <div class="upload-file">
                             <label class="mb-0">
-                                Upload
+                                Upload Profile Pic
                                 <input type="file" id="image-input" name="profile_img" class="validate" />
                             </label>
                         </div>
@@ -65,7 +73,7 @@
                 </div>
 
                 <div class="profile-update-btn">
-                    <button class="login-btn">Update</button>
+                    <button type="submit" class="login-btn">Update</button>
                     <!-- <button class="login-btn" data-toggle="modal" data-target="#exampleModal">Update</button> -->
                 </div>
             </div>

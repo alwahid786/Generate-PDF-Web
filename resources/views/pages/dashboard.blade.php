@@ -22,6 +22,12 @@
                 <li>{{ \Session::get('error') }}</li>
             </ul>
         </div>
+        @if (\Session::has('success'))
+            <div class="alert alert-success">
+                <ul>
+                    <li>{{ \Session::get('success') }}</li>
+                </ul>
+            </div>
         @endif
 
         <div class="client-table ">

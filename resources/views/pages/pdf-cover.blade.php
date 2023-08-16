@@ -17,7 +17,7 @@
     <div class="container-fluid py-3">
         <div class="header-wrapper">
             <div class="heading-top">
-                <h1>PDF Package Creator <span>14 Jul 2023</span></h1>
+                <h1>PDF Package Creator <span>{{ date("F j, Y") }}</span></h1>
             </div>
         </div>
 

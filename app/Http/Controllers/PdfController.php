@@ -100,6 +100,8 @@ class PdfController extends Controller
         $typeId = $request->query('packageTypeId');
         $package = PackageInfo::where('id', $typeId)->with('fixtures')->first();
 
+        $packageTypeName = PackageType::where('id', $package->package_type_id)->pluck('title');
+
         if (empty($package)) {
             return response()->json(['status' => false, 'message' => 'Error: Package Id is Invalid!']);
         }
@@ -177,7 +179,7 @@ class PdfController extends Controller
             }
         }
 
-        $template =  view('pages.pdf-template', ['pdf_path' => $completePdfPath, 'object' => $obj, 'pageNumber' => $pageNumber,])->render();
+        $template =  view('pages.pdf-template', ['pdf_path' => $completePdfPath, 'object' => $obj, 'pageNumber' => $pageNumber, 'packageTypeName' => $packageTypeName])->render();
 
         View::share('pdfTemplate', $template);
 

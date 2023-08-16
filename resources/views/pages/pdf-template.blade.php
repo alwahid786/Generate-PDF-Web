@@ -35,10 +35,8 @@
                 ?>
                 <div>
                     <h1 style="font-size: 2.8rem; margin: 0" class="projectTitle">{{ $object['project'] }}</h1>
-                    {{-- <h3 style="font-size: 2.2rem; margin-top: 0; margin-bottom: 20px">
-                        Submittal Package
-                    </h3> --}}
-                    <p style="font-size: 1.5rem; margin: 0">{{ $formattedDate }}</p>
+                    <h3 style="font-size: 17px;margin-top: 6px;margin-bottom: 4px;font-weight: bold;" class="projectTypeName">{{ $packageTypeName[0] }}</h3>
+                    <p style="font-size: 14px;padding-top: 12px;">{{ $formattedDate }}</p>
                 </div>
                 <div
                     style="
@@ -136,16 +134,21 @@
     const contentDiv = document.getElementById("content");
 
     var projectTitles  = document.getElementsByClassName("projectTitle");
+    var projectName  = document.getElementsByClassName("projectTypeName");
     if (projectTitles.length > 0) {
         var fileName = projectTitles[0].innerHTML;
     }
 
+    if (projectName.length > 0) {
+        var fileTypeName = projectName[0].innerHTML;
+    }
+
     const pdfOptions = {
         image: {
-            type: "png",
-            quality: 1.0
+            type: "jpeg",
+            quality: 1,
         }, // Use PNG and set maximum quality
-        filename: `${fileName}.pdf`, // The default filename for the downloaded PDF
+        filename: `${fileName} - ${fileTypeName}.pdf`, // The default filename for the downloaded PDF
         html2canvas: {
             scale: 2
         }, // Increase the scale for better image quality (adjust as needed)
@@ -154,7 +157,13 @@
         },
     };
     convertBtn.addEventListener("click", () => {
+        // $("#loader").removeClass('d-none');
         html2pdf().set(pdfOptions).from(contentDiv).save();
+        // $("#loader").addClass('d-none');
+        // html2pdf().set(pdfOptions).from(contentDiv).outputPdf().then(pdf => {
+        //     $("#loader").removeClass('d-none');
+        //     saveAs(pdf, `${fileName}.pdf`); // Save the PDF
+        // });
     });
 
     // function convertToPDF() {
