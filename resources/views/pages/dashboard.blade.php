@@ -16,10 +16,10 @@
             <a href="{{(url('create-pdf'))}}" class="btn create-btn"><img class="mr-2" src="{{asset('public/assets/images/plus.png')}}" alt="">Create New Package</a>
         </div>
 
-        @if (\Session::has('error'))
-            <div class="alert alert-danger">
+        @if (\Session::has('success'))
+            <div class="alert alert-success">
                 <ul>
-                    <li>{{ \Session::get('error') }}</li>
+                    <li>{{ \Session::get('success') }}</li>
                 </ul>
             </div>
         @endif
