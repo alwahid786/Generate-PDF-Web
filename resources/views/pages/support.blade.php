@@ -13,15 +13,25 @@
                 <h1>Contact Us</h1>
             </div>
         </div>
+
+        @if (\Session::has('success'))
+            <div class="alert alert-success">
+                <ul>
+                    <li>{{ \Session::get('success') }}</li>
+                </ul>
+            </div>
+        @endif
+
         <div class="contact-form">
-            <form>
+            <form method="post" action="{{ route('contactUs') }}">
+                @csrf
                 <div class="form-group">
                     <div class="pdf-info-input-wrapper">
                         <div class="section-heading">
                             <h1>Name:</h1>
                         </div>
                         <div class="pdf-info-input">
-                            <input type="text">
+                            <input type="text" name="name">
                         </div>
                     </div>
                 </div>
@@ -31,7 +41,7 @@
                             <h1>Email:</h1>
                         </div>
                         <div class="pdf-info-input">
-                            <input type="email">
+                            <input type="email" name="email">
                         </div>
                     </div>
                 </div>
@@ -41,7 +51,7 @@
                             <h1>Phone No:</h1>
                         </div>
                         <div class="pdf-info-input">
-                            <input type="text">
+                            <input type="text" name="phone_number">
                         </div>
                     </div>
                 </div>
@@ -51,7 +61,7 @@
                             <h1>Message:</h1>
                         </div>
                         <div class="pdf-info-input">
-                            <textarea name="" id=""></textarea>
+                            <textarea name="description" id=""></textarea>
                         </div>
                     </div>
                 </div>

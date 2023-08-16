@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\PackageInfo;
 use App\Models\User;
+use App\Models\ContactUs;
 use Str;
 
 class UserController extends Controller
@@ -78,5 +79,35 @@ class UserController extends Controller
         }
 
         return view('pages.profile');
+    }
+
+    public function contactUs(Request $request)
+    {
+
+        if($request->isMethod('post'))
+        {
+            // return view('emails.contact_us', ['contactUsData' => $request->all()]);
+            // $this->sendEmailTemplateFun('test@test.com', 'Contact Form', 'emails.contact_us', ['contactUsData' => $request->all()]);
+
+            $query = ContactUs::create($request->all());
+            if($query)
+            {
+                return redirect()->back()->with('success', 'Sent message successfully.');
+            }
+        }
+
+        return view('pages.support');
+    }
+
+    public function sendEmailTemplateFun($targetEmail, $subject, $template, $templateParams)
+    {
+        try {
+            $sendMail = Mail::send($template, $templateParams, function ($m) use ($targetEmail, $subject) {
+                $m->from('test@test.com', config('Pdf-generator'));
+                $m->to($targetEmail)->subject($subject);
+            });
+        } catch (\Exception $ex) {
+            dd($ex);
+        }
     }
 }

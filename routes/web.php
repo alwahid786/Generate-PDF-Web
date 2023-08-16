@@ -48,12 +48,9 @@ Route::get('/template', function () {
 Route::get('/coming-soon', function () {
     return view('pages.coming-soon');
 });
-Route::get('/support', function () {
-    return view('pages.support');
+Route::get('/test', function () {
+    return view('emails.contact_us');
 });
-// Route::get('/profile', function () {
-//     return view('pages.profile');
-// });
 
 
 // API's Function and Routes
@@ -79,4 +76,5 @@ Route::middleware('auth')->group(function () {
     Route::any('/delete-package', [UserController::class, 'deletePackage'])->name('deletePackage');
     Route::any('/get-package-data', [UserController::class, 'getPackageData'])->name('getPackageData');
     Route::any('/profile', [UserController::class, 'updateProfile'])->name('updateProfile');
+    Route::any('/support', [UserController::class, 'contactUs'])->name('contactUs');
 });
