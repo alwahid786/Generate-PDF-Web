@@ -50,30 +50,30 @@ class PdfController extends Controller
         $fixtures = $request->fixtures;
         foreach ($fixtures as $fixture) {
             $uploadedFile = $fixture['pdfFile'];
-            $uploadedImageFile = $fixture['imageFile'];
+            // $uploadedImageFile = $fixture['imageFile'];
 
-            if ($uploadedFile && $uploadedFile->isValid()) {
+            // if ($uploadedFile && $uploadedFile->isValid()) {
 
                 $name = time() . $uploadedFile->getClientOriginalName();
                 $path = public_path('/files');
 
                 $uploadedFile->move($path, $name);
                 $filePath = $path . '/' . $name;
-            } else {
-                return response()->json(['status' => false, 'message' => 'Error: File is Invalid!']);
-            }
+            // } else {
+                // return response()->json(['status' => false, 'message' => 'Error: File is Invalid!']);
+            // }
 
             // image upload
-            if ($uploadedImageFile && $uploadedImageFile->isValid()) {
+            // if ($uploadedImageFile && $uploadedImageFile->isValid()) {
 
-                $imageName = time() . $uploadedImageFile->getClientOriginalName();
-                $imagePath = public_path('/files');
+            //     $imageName = time() . $uploadedImageFile->getClientOriginalName();
+            //     $imagePath = public_path('/files');
 
-                $uploadedImageFile->move($imagePath, $imageName);
-                $imageFilePath = $imagePath . '/' . $imageName;
-            } else {
-                return response()->json(['status' => false, 'message' => 'Error: File is Invalid!']);
-            }
+            //     $uploadedImageFile->move($imagePath, $imageName);
+            //     $imageFilePath = $imagePath . '/' . $imageName;
+            // } else {
+            // }
+            // return response()->json(['status' => false, 'message' => 'Error: File is Invalid!']);
 
 
             $fixtureData = new Fixtures();
@@ -81,7 +81,7 @@ class PdfController extends Controller
             $fixtureData->pdf_path = $filePath;
             $fixtureData->type = $fixture['fixtureType'];
             $fixtureData->part_number = $fixture['part_no'];
-            $fixtureData->image_path = $imageFilePath;
+            $fixtureData->image_path = null;
             $fixtureData->save();
         }
 
