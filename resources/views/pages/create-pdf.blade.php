@@ -111,7 +111,7 @@
                     </ul>
                     @if(isset($packageInfo))
                     @foreach($packageInfo->fixtures as $fixture)
-                    <ul class="mt-4 row.{{$fixture['id']}}" data-id="{{$fixture['id']}}">
+                    <ul class="mt-4 row{{$fixture['id']}}" data-id="{{$fixture['id']}}">
                         <li class="fixType_append">{{$fixture['type']}}</li>
                         <li class="fixPartNo_append">{{$fixture['part_number']}}</li>
                         <li> <img src="{{asset('public/assets/images/pdf-icon.png')}}" alt="image"></li>
@@ -253,12 +253,15 @@
         });
 
     });
-    var fixtures = [];
-    <?php 
-        if(isset($packageInfo)){
-            
-        }
+    // var fixtures = [];
+    <?php
+    if (isset($packageInfo)) {
     ?>
+        var fixtures = <?= $packageInfo->fixtures; ?>;
+    <?php
+    }
+    ?>
+    console.log(fixtures)
     $(document).on('click', '#addTypeBtn', function() {
         let error = 0;
         let validate = $(".typeValidation").each(function() {
