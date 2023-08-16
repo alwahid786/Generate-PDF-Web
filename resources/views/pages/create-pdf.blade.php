@@ -298,7 +298,7 @@
         // var ImageFileInput = document.getElementById('pdfImage');
         // var selectedImageFiles = ImageFileInput.files;
         // var ImageFile = selectedImageFiles[0];
-        // Get Image Preview Div 
+        // Get Image Preview Div
         // var imagePreview = $(".drop-zone__thumb:first").prop('outerHTML');
         // var pdfPreview = $(".drop-zone__thumb:eq(1)").prop('outerHTML');
 
@@ -307,10 +307,10 @@
         let fixtureType = $("#fixtureType").val();
         let id = Math.floor(Math.random() * 90000) + 10000;
 
-        // Check if it is edit case 
+        // Check if it is edit case
         let editedId = $("#editId").val();
         if (editedId != '') {
-            // Update Array 
+            // Update Array
             fixtures = fixtures.map(obj => {
                 if (obj.id === parseInt(editedId)) {
                     console.log('coming')
@@ -325,7 +325,7 @@
                 }
                 return obj; // Return unchanged object
             });
-            // Update Content Row which was appended 
+            // Update Content Row which was appended
             $(".row" + editedId).find('.fixType_append').text(fixtureType);
             $(".row" + editedId).find('.fixPartNo_append').text(partNo);
             resetFixtures();
@@ -341,7 +341,8 @@
             "reference_no": ref,
             "part_no": partNo,
             "fixtureType": fixtureType,
-            "id": id,
+            // "id": id,
+            // "new_edit": true
             // "imagePreview": imagePreview,
             // "pdfPreview": pdfPreview
         };
@@ -357,9 +358,9 @@
                     </ul>`;
         $(".pdf-detail-bar").append(pdfDiv);
         resetFixtures();
-        console.log('old')
+        // console.log('old')
         console.log(fixtures)
-        console.log('old')
+        // console.log('old')
 
     });
     // Remove PDF BTN Click function

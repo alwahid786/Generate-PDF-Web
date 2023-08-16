@@ -63,9 +63,18 @@ class PdfController extends Controller
 
             if($existingPackageType)
             {
-                if ($fixture['fixtureType'] != null && $fixture['fixtureType'] != 'undefined') {
+                if ($fixture['fixtureType'] != null && $fixture['fixtureType'] != 'undefined')
+                {
 
-                    $existingFixture = Fixtures::where('id', $fixture['id'])->first();
+                    if($fixture['id'] != null && $fixture['id'] != 'undefined' ){
+
+                        $existingFixture = Fixtures::where('id', $fixture['id'])->first();
+                    }else{
+                        $existingFixture = new Fixtures();
+                        $existingFixture->package_info_id = $packageType->id;
+                        $existingFixture->image_path = null;
+                    }
+
 
                     $uploadedFile = $fixture['pdfFile'];
 
