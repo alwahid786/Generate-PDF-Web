@@ -35,10 +35,10 @@
                 ?>
                 <div>
                     <h1 style="font-size: 2.8rem; margin: 0" class="projectTitle">{{ $object['project'] }}</h1>
-                    {{-- <h3 style="font-size: 2.2rem; margin-top: 0; margin-bottom: 20px">
-                        Submittal Package
-                    </h3> --}}
-                    <p style="font-size: 1.5rem; margin: 0">{{ $formattedDate }}</p>
+                    <h3 style="font-size: 17px;margin-top: 6px;margin-bottom: 4px;font-weight: bold;">
+                        {{ $packageTypeName[0] }}
+                    </h3>
+                    <p style="font-size: 14px;padding-top: 12px;">{{ $formattedDate }}</p>
                 </div>
                 <div
                     style="
