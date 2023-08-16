@@ -142,8 +142,8 @@
 
     const pdfOptions = {
         image: {
-            type: "png",
-            quality: 1.0
+            type: "jpeg",
+            quality: 1,
         }, // Use PNG and set maximum quality
         filename: `${fileName}.pdf`, // The default filename for the downloaded PDF
         html2canvas: {
@@ -154,7 +154,13 @@
         },
     };
     convertBtn.addEventListener("click", () => {
+        // $("#loader").removeClass('d-none');
         html2pdf().set(pdfOptions).from(contentDiv).save();
+        // $("#loader").addClass('d-none');
+        // html2pdf().set(pdfOptions).from(contentDiv).outputPdf().then(pdf => {
+        //     $("#loader").removeClass('d-none');
+        //     saveAs(pdf, `${fileName}.pdf`); // Save the PDF
+        // });
     });
 
     // function convertToPDF() {
