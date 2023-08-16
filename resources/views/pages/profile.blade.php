@@ -17,7 +17,7 @@
     <div class="container-fluid py-3">
         <div class="header-wrapper">
             <div class="heading-top">
-                <h1>Profile <span>14 Jul 2023</span></h1>
+                <h1>Profile <span>{{ date("F j, Y") }}</span></h1>
             </div>
         </div>
         @if (\Session::has('success'))
@@ -37,7 +37,7 @@
 
                         <div class="upload-file">
                             <label class="mb-0">
-                                Upload
+                                Upload Profile Pic
                                 <input type="file" id="image-input" name="profile_img" class="validate" />
                             </label>
                         </div>
