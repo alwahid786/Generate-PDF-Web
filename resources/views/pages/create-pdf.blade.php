@@ -307,6 +307,7 @@
                 })
                 return;
             }
+            $("#pdfFile").addClass('typeValidation');
 
             // Get PDF FIle
             var pdfFileInput = document.getElementById('pdfFile');
@@ -388,7 +389,6 @@
             // console.log('old')
             // console.log('old')
 
-            $("#pdfFile").addClass('typeValidation');
         });
         // Remove PDF BTN Click function
         $(document).on('click', '.removePdfBtn', function() {
