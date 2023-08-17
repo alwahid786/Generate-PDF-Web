@@ -35,7 +35,7 @@ class PdfController extends Controller
     // Preview PDF Function
     public function previewPdf(Request $request)
     {
-        // Save Package First
+
         $package = json_decode($request->input('package'));
 
         $existingPackageType = PackageInfo::where('vision_reference', $package->referenceNo)->first();
@@ -46,6 +46,7 @@ class PdfController extends Controller
             $existingPackageType->package_type_id = $package->packageType;
             $existingPackageType->save();
             $packageType = $existingPackageType;
+
         } else {
 
             $packageType = new PackageInfo();
@@ -56,7 +57,7 @@ class PdfController extends Controller
             $packageType->save();
         }
 
-        // Then Loop Through Every Fixture to Save()
+
         $fixtures = $request->fixtures;
 
         foreach ($fixtures as $fixture) {
@@ -69,10 +70,13 @@ class PdfController extends Controller
                     if($fixture['id'] != null && $fixture['id'] != 'undefined' ){
 
                         $existingFixture = Fixtures::where('id', $fixture['id'])->first();
-                    }else{
+
+                    } else {
+
                         $existingFixture = new Fixtures();
                         $existingFixture->package_info_id = $packageType->id;
                         $existingFixture->image_path = null;
+
                     }
 
 
@@ -93,6 +97,7 @@ class PdfController extends Controller
                 }
 
             } else {
+
                 $uploadedFile = $fixture['pdfFile'];
 
                 $name = time() . $uploadedFile->getClientOriginalName();
@@ -108,11 +113,11 @@ class PdfController extends Controller
                 $fixtureData->part_number = $fixture['part_no'];
                 $fixtureData->image_path = null;
                 $fixtureData->save();
+
             }
 
         }
 
-        // Prevent Data at last for response
         return response()->json(['status' => true, 'message' => 'Success', 'data' => $packageType->id]);
     }
     private function countPages($path)
@@ -148,58 +153,67 @@ class PdfController extends Controller
             ];
 
             // path for ubuntu
-            $outputPath = '/var/www/html/pdf-generator/public/files/';
+            // $outputPath = '/var/www/html/pdf-generator/public/files/';
 
             // path for window
-            // $outputPath = 'C:\xampp\htdocs\pdf-generator\public\files';
+            $outputPath = 'C:\xampp\htdocs\pdf-generator\public\files';
 
 
-            if (file_exists($pdfPath)) {
+            if (file_exists($pdfPath) ) {
 
-                try {
+                // $extension = pathinfo($pdfPath, PATHINFO_EXTENSION);
 
-
-                    // For Multiple Pages --------------------------------------------------------Start
-
-
-                    $totalPages = $this->countPages($pdfPath);
-
-                    // echo "Total Pages: $totoalPages<br>";
-                    // die;
-
-                    for ($pageNumber = 1; $pageNumber <= $totalPages; $pageNumber++) {
-
-                        $randomString = Str::random(6);
-                        $randomNumber = mt_rand(100000, 999999);
-
-                        $outputFilename = "/$randomString.$pageNumber.$randomNumber.png";
-
-                        // command for window
-                        // $command = "gswin64c.exe -sDEVICE=pngalpha -r300 -o \"$outputPath$outputFilename\" -dFirstPage=$pageNumber -dLastPage=$pageNumber \"$pdfPath\"";
-
-                        // command for ubuntu
-                        $command = "gs -sDEVICE=pngalpha -r600 -o \"$outputPath$outputFilename\" -dFirstPage=$pageNumber -dLastPage=$pageNumber \"$pdfPath\"";
+                // if ($extension === 'pdf') {
+                    try {
 
 
-                        exec($command, $output, $returnCode);
+                        // For Multiple Pages --------------------------------------------------------Start
 
-                        if ($returnCode === 0) {
 
-                            $completePdfPath[] = asset('public/files/' . $outputFilename);
-                        } else {
-                            echo "Error converting page $pageNumber to image.<br>";
-                            print_r($output);
-                            die;
+                        $totalPages = $this->countPages($pdfPath);
+
+                        // echo "Total Pages: $totoalPages<br>";
+                        // die;
+
+                        for ($pageNumber = 1; $pageNumber <= $totalPages; $pageNumber++) {
+
+                            $randomString = Str::random(6);
+                            $randomNumber = mt_rand(100000, 999999);
+
+                            $outputFilename = "/$randomString.$pageNumber.$randomNumber.png";
+
+                            // command for window
+                            $command = "gswin64c.exe -sDEVICE=pngalpha -r300 -o \"$outputPath$outputFilename\" -dFirstPage=$pageNumber -dLastPage=$pageNumber \"$pdfPath\"";
+
+                            // command for ubuntu
+                            // $command = "gs -sDEVICE=pngalpha -r600 -o \"$outputPath$outputFilename\" -dFirstPage=$pageNumber -dLastPage=$pageNumber \"$pdfPath\"";
+
+
+                            exec($command, $output, $returnCode);
+
+                            if ($returnCode === 0) {
+
+                                $completePdfPath[] = asset('public/files/' . $outputFilename);
+                            } else {
+                                echo "Error converting page $pageNumber to image.<br>";
+                                print_r($output);
+                                die;
+                            }
                         }
+
+                        // For Multiple Pages --------------------------------------------------------End
+
+
+                    } catch (PdfDoesNotExist $exception) {
+
+                        dd($exception->getMessage());
                     }
+                // } else {
+                //     $completePdfPath[] = $pdfPath;
+                //     $pageNumber = 1;
+                // }
 
-                    // For Multiple Pages --------------------------------------------------------End
 
-
-                } catch (PdfDoesNotExist $exception) {
-
-                    dd($exception->getMessage());
-                }
             } else {
 
                 dd("PDF file does not exist at the specified path: $pdfPath");

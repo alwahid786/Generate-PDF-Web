@@ -68,7 +68,7 @@
             <div class="form-group has-search profile mr-2">
 
                 <span class="mr-2">{{auth()->user()->name}}</span>
-                <img src="{{asset('public/assets/images/profile.png')}}">
+                <a href=""></a><img src="{{ auth()->user()->profile_img ?? asset('public/assets/images/profile.png') }}"></a>
             </div>
             <div class="form-group has-search">
                 <div class="dropdown dropdown-logout">

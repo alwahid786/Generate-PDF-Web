@@ -91,7 +91,7 @@
                         <span class="drop-zone__prompt">Add File</span>
                         <span>Spec Sheet</span>
                         <span>Drag + Drop</span>
-                        <input type="file" name="pdf-file" id="pdfFile" class="drop-zone__input typeValidation" accept="application/pdf">
+                        <input type="file" name="pdf-file" id="pdfFile" class="drop-zone__input typeValidation" accept="*">
                     </div>
                     <input type="hidden" id="editId">
                     <div class="add-button">
