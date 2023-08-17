@@ -280,6 +280,7 @@
     ?>
         console.log(fixtures)
         $(document).on('click', '#addTypeBtn', function() {
+
             let error = 0;
             let validate = $(".typeValidation").each(function() {
                 if ($(this).val() == '') {
@@ -330,15 +331,22 @@
                 // Update Array
                 fixtures = fixtures.map(obj => {
                     if (obj.id === parseInt(editedId)) {
-                        console.log('coming')
-                        // Create a new object with the updated age
-                        return {
+                        // console.log(obj.pdfFile);
+                        oldfile = obj.pdfFile;
+                        editObj = {
                             ...obj,
-                            pdfFile: pdfFile,
                             reference_no: ref,
                             part_no: partNo,
                             fixtureType: fixtureType,
                         };
+                        if($("#pdfFile").val()!=''){
+                            editObj['pdfFile'] = pdfFile
+                        }else{
+                            editObj['pdfFile'] = oldfile
+                        }
+                        console.log('coming')
+                        // Create a new object with the updated age
+                        return editObj;
                     }
                     return obj; // Return unchanged object
                 });
@@ -349,6 +357,7 @@
 
                 console.log("Test Foeikjsd", fixtures)
 
+                $("#editId").val('');
                 return;
             }
 
@@ -379,6 +388,7 @@
             // console.log('old')
             // console.log('old')
 
+            $("#pdfFile").addClass('typeValidation');
         });
         // Remove PDF BTN Click function
         $(document).on('click', '.removePdfBtn', function() {
@@ -392,6 +402,9 @@
         });
         // EDIT PDF BTN Click function
         $(document).on('click', '.editPdfBtn', function() {
+            $(".drop-zone").append(`<div class="drop-zone__thumb" data-label="Previous File"></div>`);
+            $(".drop-zone__prompt").remove();
+            $("#pdfFile").removeClass('typeValidation');
             console.log(fixtures)
             let pdfDiv = $(this).closest('ul');
             let id = pdfDiv.data('id');
