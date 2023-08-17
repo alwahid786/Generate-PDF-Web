@@ -126,6 +126,10 @@
 
 <div class="d-flex justify-content-center align-items-center mt-5">
     <button style="background: #5757c8;color: white;width: 250px;height: 60px;border-style: none;border-radius: 5px;" id="convertBtn">Download to PDF</button>
+   @if (!$is_view)
+    <a href="{{(url('create-pdf'))}}?packageInfoId=<?= $typeId; ?>"><button style="background: black;color: white;width: 250px;height: 60px;border-style: none;border-radius: 5px;margin-left: 5px" >Go back to Edit</button></a>
+
+   @endif
 <div>
 <!-- Include the html2canvas library -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
