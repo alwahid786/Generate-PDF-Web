@@ -108,7 +108,7 @@ class PdfController extends Controller
                 $filePath = $fixture['pdfFile'];
                 if(gettype($filePath) != 'string'){
                 $uploadedFile = $fixture['pdfFile'];
-                $name = time() . $uploadedFile->getClientOriginalName();
+                $name = time() .'_'. $uploadedFile->getClientOriginalName();
                 $path = public_path('/files');
 
                 $uploadedFile->move($path, $name);
@@ -150,6 +150,7 @@ class PdfController extends Controller
 
         $completePdfPath = [];
         $currentPage = [];
+        // $obj = [];
         foreach ($package->fixtures as $fixture) {
 
             $pdfPath = $fixture['pdf_path'];
@@ -189,8 +190,9 @@ class PdfController extends Controller
 
                             $randomString = Str::random(6);
                             $randomNumber = mt_rand(100000, 999999);
+                            $time = time();
 
-                            $outputFilename = "/$randomString.$pageNumber.$randomNumber.png";
+                            $outputFilename = "/$time.$randomString.$randomNumber.png";
 
                             // command for window
                             // $command = "gswin64c.exe -sDEVICE=pngalpha -r300 -o \"$outputPath$outputFilename\" -dFirstPage=$pageNumber -dLastPage=$pageNumber \"$pdfPath\"";
@@ -203,7 +205,10 @@ class PdfController extends Controller
 
                             if ($returnCode === 0) {
 
-                                $completePdfPath[] = asset('public/files/' . $outputFilename);
+                                $completePdfPath[] = [
+                                    'path' => asset('public/files/' . $outputFilename),
+                                    'fixture' => $obj
+                                ];
                             } else {
                                 echo "Error converting page $pageNumber to image.<br>";
                                 print_r($output);
@@ -230,7 +235,7 @@ class PdfController extends Controller
             }
         }
 
-        $template =  view('pages.pdf-template', ['pdf_path' => $completePdfPath, 'object' => $obj, 'pageNumber' => $pageNumber, 'packageTypeName' => $packageTypeName, 'typeId' => $typeId, 'is_view' => $is_view])->render();
+        $template =  view('pages.pdf-template', ['pdf_path' => $completePdfPath, 'pageNumber' => $pageNumber, 'packageTypeName' => $packageTypeName, 'typeId' => $typeId, 'is_view' => $is_view])->render();
 
         View::share('pdfTemplate', $template);
 
