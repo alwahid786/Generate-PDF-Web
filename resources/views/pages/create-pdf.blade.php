@@ -88,11 +88,11 @@
                             </div>
                         </div>
                         <!-- <div class="drop-zone">
-                            <span class="drop-zone__prompt"></span>
-                            <span>Add Image</span>
-                            <span>Drag+Drop</span>
-                            <input type="file" name="image-file" id="pdfImage" class="drop-zone__input typeValidation" accept="image/jpeg, image/png, image/gif">
-                        </div> -->
+                                    <span class="drop-zone__prompt"></span>
+                                    <span>Add Image</span>
+                                    <span>Drag+Drop</span>
+                                    <input type="file" name="image-file" id="pdfImage" class="drop-zone__input typeValidation" accept="image/jpeg, image/png, image/gif">
+                                </div> -->
                         <div class="drop-zone">
                             <span class="drop-zone__prompt">Add File</span>
                             <span>Spec Sheet</span>
@@ -134,16 +134,16 @@
                         <!-- Append PDF Row Here -->
                     </div>
                     <!-- <div class="summary-wrapper">
-                        <input type="checkbox" id="checkbox1" class="rounded-checkbox">
-                        <label for="checkbox1">Summary</label>
-                    </div> -->
+                                <input type="checkbox" id="checkbox1" class="rounded-checkbox">
+                                <label for="checkbox1">Summary</label>
+                            </div> -->
                     <div class="pdf-action">
                         <div class="action-type">
                             <a id="previewPdf" href="javascript:void(0)">Preview & Save</a>
                         </div>
                         <!-- <div class="action-type">
-                            <a id="createPdf" href="javascript:void(0)">Create & Save Package</a>
-                        </div> -->
+                                    <a id="createPdf" href="javascript:void(0)">Create & Save Package</a>
+                                </div> -->
                     </div>
 
                 </div>
@@ -243,8 +243,6 @@
 
     <!-- Add Type Function  -->
     <script>
-
-
         $(document).ready(function() {
 
             $('#projectName').on('keydown keyup change', function() {
@@ -375,9 +373,9 @@
                             part_no: partNo,
                             fixtureType: fixtureType,
                         };
-                        if($("#pdfFile").val()!=''){
+                        if ($("#pdfFile").val() != '') {
                             editObj['pdfFile'] = pdfFile
-                        }else{
+                        } else {
                             editObj['pdfFile'] = oldfile
                         }
                         console.log('coming')
@@ -440,15 +438,30 @@
             console.log('EditFixtures', fixtures)
 
             // console.log('EditFixtures', fixtures[0].pdfFile)
-            // var filePath = fixtures[0].pdfFile;
-            // var filename = filePath.split('/').pop().split('\\').pop();
-            // var exactName = filename.split('_').slice(1).join('_');
 
-            $(".drop-zone").append(`<div class="drop-zone__thumb" data-label="Previous File"></div>`);
+
             $(".drop-zone__prompt").remove();
             $("#pdfFile").removeClass('typeValidation');
             let pdfDiv = $(this).closest('ul');
             let id = pdfDiv.data('id');
+
+
+            fixtures.map(obj => {
+                if (obj.id === parseInt(id)) {
+                    oldfile = obj.pdfFile;
+                    if (typeof oldfile === 'string') {
+                        var filename = oldfile.split('/').pop().split('\\').pop();
+                        var exactName = filename.split('_').slice(1).join('_');
+                    }else{
+                        exactName = oldfile.name;
+                    }
+                    $(".drop-zone__thumb").remove();
+                    $(".drop-zone").append(
+                    `<div class="drop-zone__thumb" data-label="${exactName}"></div>`);
+                }
+            });
+
+
             let type = pdfDiv.find('.fixType_append').text();
             let part = pdfDiv.find('.fixPartNo_append').text();
             // let imagePre = pdfDiv.find('.imgPreview_append').html();
