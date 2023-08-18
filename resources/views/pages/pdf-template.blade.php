@@ -77,7 +77,7 @@
                                 Project
                             </h1>
                             <p style="margin: 0; text-align: center; font-size: 0.9rem">
-                                {{ $object['project'] }}
+                                {{ $path['fixture']['project'] }}
                             </p>
                         </div>
                         <div style="width: 30%; border-right: 1px solid black; padding: 2px 0px">
@@ -85,22 +85,22 @@
                                 Part Number
                             </h1>
                             <p style="margin: 0; text-align: center; font-size: 0.9rem">
-                                {{ $object['part_number'] }}
+                                {{ $path['fixture']['part_number'] }}
                             </p>
                             <p style="margin: 0; text-align: center; font-size: 0.9rem">
-                                <strong>Visionz #</strong> {{ $object['vision_reference'] }}
+                                <strong>Visionz #</strong> {{ $path['fixture']['vision_reference'] }}
                             </p>
                         </div>
                         <div style="width: 25%; padding: 2px 0px">
                             <h1 style="margin: 0; text-align: center; font-size: 1.2rem">
                                 Type
                             </h1>
-                            <h1 style="margin: 0; text-align: center; font-size: 1.8rem">L1</h1>
+                            <h1 style="margin: 0; text-align: center; font-size: 1.8rem">{{ $path['fixture']['type'] }}</h1>
                         </div>
                     </div>
 
                     <div class="pdf-content" style="height: 1183px">
-                        <img style="width: 100%; height: 100%" src="{{ $path }}" alt="">
+                        <img style="width: 100%; height: 100%" src="{{ $path['path'] }}" alt="">
                         {{-- <img src="{{asset('public/assets/images/Capture.png')}}" alt="" style="width: 100%" /> --}}
                     </div>
 
