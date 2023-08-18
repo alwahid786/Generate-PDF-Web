@@ -55,6 +55,7 @@
                             <div class="pdf-info-input">
                                 <input type="text" name="reference" value="{{ $packageInfo->vision_reference ?? '' }}"
                                     id="referenceNo" class="typeValidation">
+                                <p style="color: red" id="warning-message-ref"></p>
                             </div>
                         </div>
                     </div>
@@ -73,6 +74,7 @@
                                 </div>
                                 <div class="pdf-info-input">
                                     <input type="text" name="fixture-type" id="fixtureType" class="typeValidation">
+                                    <p style="color: red" id="warning-message-type"></p>
                                 </div>
                             </div>
                             <div class="pdf-info-input-wrapper">
@@ -81,6 +83,7 @@
                                 </div>
                                 <div class="pdf-info-input">
                                     <input type="text" name="part-number" id="partNo" class="typeValidation">
+                                    <p style="color: red" id="warning-message-partno"></p>
                                 </div>
                             </div>
                         </div>
@@ -240,25 +243,57 @@
 
     <!-- Add Type Function  -->
     <script>
+
+
         $(document).ready(function() {
-
-            // $('#projectName').on('change', function() {
-            //     alert( this.value );
-            // });
-
-            var maxLength = 20
 
             $('#projectName').on('keydown keyup change', function() {
                 var char = $(this).val();
                 var charLength = $(this).val().length;
-                if (charLength > maxLength) {
-                    $('#warning-message').text('Length is not valid, maximum ' + maxLength + ' allowed.');
+                if (charLength > 20) {
+                    $(this).val($(this).val().substring(0, 20));
+                    $('#warning-message').text('Length is not valid, maximum ' + 20 + ' allowed.');
                 } else {
                     $('#warning-message').text('');
                 }
             });
 
+            $('#referenceNo').on('keydown keyup change', function() {
+                var char = $(this).val();
+                var charLength = $(this).val().length;
+                if (charLength > 15) {
+                    $(this).val($(this).val().substring(0, 15));
+                    $('#warning-message-ref').text('Length is not valid, maximum ' + 15 + ' allowed.');
+                } else {
+                    $('#warning-message-ref').text('');
+                }
+            });
+
+            $('#fixtureType').on('keydown keyup change', function() {
+                var char = $(this).val();
+                var charLength = $(this).val().length;
+                if (charLength > 20) {
+                    $(this).val($(this).val().substring(0, 20));
+                    $('#warning-message-type').text('Length is not valid, maximum ' + 20 + ' allowed.');
+                } else {
+                    $('#warning-message-type').text('');
+                }
+            });
+
+            $('#partNo').on('keydown keyup change', function() {
+                var char = $(this).val();
+                var charLength = $(this).val().length;
+                if (charLength > 20) {
+                    $(this).val($(this).val().substring(0, 20));
+                    $('#warning-message-partno').text('Length is not valid, maximum ' + 20 + ' allowed.');
+                } else {
+                    $('#warning-message-partno').text('');
+                }
+            });
+
         });
+
+
         var fixtures = [];
         <?php
     if (isset($packageInfo)) {
@@ -402,10 +437,16 @@
         });
         // EDIT PDF BTN Click function
         $(document).on('click', '.editPdfBtn', function() {
+            console.log('EditFixtures', fixtures)
+
+            // console.log('EditFixtures', fixtures[0].pdfFile)
+            // var filePath = fixtures[0].pdfFile;
+            // var filename = filePath.split('/').pop().split('\\').pop();
+            // var exactName = filename.split('_').slice(1).join('_');
+
             $(".drop-zone").append(`<div class="drop-zone__thumb" data-label="Previous File"></div>`);
             $(".drop-zone__prompt").remove();
             $("#pdfFile").removeClass('typeValidation');
-            console.log(fixtures)
             let pdfDiv = $(this).closest('ul');
             let id = pdfDiv.data('id');
             let type = pdfDiv.find('.fixType_append').text();
