@@ -79,6 +79,7 @@ Route::middleware('auth')->group(function () {
     Route::group(['middleware' => ['admin'], 'prefix' => 'admin/'], function () {
         Route::get('dashboard', [AdminController::class, 'adminDashboard']);
         Route::get('user_request', [AdminController::class, 'userRequest']);
+        Route::post('update_status', [AdminController::class, 'updateStatus'])->name('update.status');
     });
 
 });

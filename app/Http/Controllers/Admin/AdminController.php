@@ -21,14 +21,27 @@ class AdminController extends Controller
 
     public function adminDashboard(Request $request)
     {
-        
+
         $packageInfo = PackageInfo::with('fixtures')->with('user')->get();
         return view('pages.admin.dashboard', compact('packageInfo'));
     }
 
     public function userRequest(Request $request)
     {
+
         $users = $this->adminRepository->getUser();
+
         return view('pages.admin.user_request', ['users' => $users]);
+
+    }
+
+    public function updateStatus(Request $request)
+    {
+
+        $updateStatus = $this->adminRepository->updateStatus($request->id);
+
+        // if($updateStatus) {
+
+        // }
     }
 }
