@@ -45,6 +45,14 @@
                 </a>
             </li>
 
+            <li class="nav-item my-1 active">
+                <a class="nav-link sidenav-item dasboard-link" href="{{url('admin/user_request')}}">
+                    <img src="{{asset('public/assets/images/d-white.png')}}" class="icon-white pr-2">
+                    <img src="{{asset('public/assets/images/d-blue.png')}}" class="icon-blue pr-2">
+                    Users Request
+                </a>
+            </li>
+
             <li class="nav-item my-1 ">
                 <a class="nav-link sidenav-item" href="{{url('profile')}}"><img src="{{asset('public/assets/images/pro-white.png')}}" class="pr-2 icon-white">
                     <img src="{{asset('public/assets/images/pro-blue.png')}}" class="pr-2 icon-blue">

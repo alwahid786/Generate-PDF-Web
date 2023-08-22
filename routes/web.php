@@ -78,6 +78,7 @@ Route::middleware('auth')->group(function () {
 
     Route::group(['middleware' => ['admin'], 'prefix' => 'admin/'], function () {
         Route::get('dashboard', [AdminController::class, 'adminDashboard']);
+        Route::get('user_request', [AdminController::class, 'userRequest']);
     });
 
 });

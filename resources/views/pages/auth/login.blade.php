@@ -54,6 +54,10 @@
                                 @endforeach
                             </div>
                             @endif
+                            @if (session('error'))
+                                <div class="alert alert-danger">{{ session('error') }}</div>
+                            @endif
+
                             <div class="form-group login-email-field">
                                 <input type="email" name="email" class="form-control" id="loginemail" aria-describedby="emailHelp" placeholder="Email">
                             </div>

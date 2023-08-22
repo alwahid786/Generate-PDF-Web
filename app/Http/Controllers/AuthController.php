@@ -63,8 +63,11 @@ class AuthController extends Controller
         ];
         if (!auth()->attempt($loginData)) {
             return redirect()->back()->withErrors("Wrong credentials! Password does not match.");
+        } elseif(auth()->user()->user_status == 'pending')
+        {
+            return redirect()->back()->with('error', 'Your account status is pending');
         }
-        if(auth()->user()->is_admin ===1)
+        if(auth()->user()->is_admin === 1)
         {
             return redirect()->to('admin/dashboard');
         }
