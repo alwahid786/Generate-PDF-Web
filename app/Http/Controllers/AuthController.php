@@ -22,7 +22,7 @@ class AuthController extends Controller
         return implode("\n", $messages->all());
     }
 
-    // Signup Function 
+    // Signup Function
     public function signupFunction(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -46,7 +46,7 @@ class AuthController extends Controller
         }
     }
 
-    // Login Function 
+    // Login Function
     public function loginFunction(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -64,10 +64,14 @@ class AuthController extends Controller
         if (!auth()->attempt($loginData)) {
             return redirect()->back()->withErrors("Wrong credentials! Password does not match.");
         }
+        if(auth()->user()->is_admin ===1)
+        {
+            return redirect()->to('admin/dashboard');
+        }
         return redirect('/dashboard');
     }
 
-    // Forgot Password Function 
+    // Forgot Password Function
     public function forgotPassword(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -87,7 +91,7 @@ class AuthController extends Controller
         return redirect('/verify-otp');
     }
 
-    // Verify OTP CODE FUNCTION 
+    // Verify OTP CODE FUNCTION
     public function verifyOtp(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -105,7 +109,7 @@ class AuthController extends Controller
         return redirect()->back()->withErrors('Invalid OTP Code!');
     }
 
-    // Password Reset Function 
+    // Password Reset Function
     public function resetPassword(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -125,7 +129,7 @@ class AuthController extends Controller
         return redirect('/')->with('passwordSuccess', 'Password reset successfully!');
     }
 
-    // Logout FUnction 
+    // Logout FUnction
     public function logout(Request $request)
     {
         Session::flush();
@@ -133,14 +137,14 @@ class AuthController extends Controller
         return redirect('/');
     }
 
-    // Social Login Google Redirect 
+    // Social Login Google Redirect
     public function redirectToGoogle()
     {
         return Socialite::driver('google')->redirect();
     }
 
 
-    // Social login Callback 
+    // Social login Callback
     public function handleGoogleCallback()
     {
         try {

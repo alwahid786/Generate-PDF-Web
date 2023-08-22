@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PdfController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\Admin\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,19 +20,13 @@ use App\Http\Controllers\UserController;
 Route::get('/', function () {
     return view('pages.auth.login');
 });
-// Route::get('/dashboard', function () {
-//     return view('pages.dashboard');
-// });
-// Route::get('/pdf-cover', function () {
-//     return view('pages.pdf-cover');
-// })->name('coverPage');
 
 Route::get('/signup', function () {
     return view('pages.auth.signup');
 });
 Route::get('/login', function () {
     return view('pages.auth.login');
-});
+})->name('login');
 Route::get('/reset-password', function () {
     return view('pages.auth.reset-password');
 });
@@ -72,9 +67,17 @@ Route::middleware('auth')->group(function () {
     Route::get('/create-pdf', [PdfController::class, 'createPdfPage'])->name('createPdfPage');
     Route::post('/preview-pdf', [PdfController::class, 'previewPdf'])->name('previewPdf');
     Route::any('/pdf-cover', [PdfController::class, 'pdfCover'])->name('pdfCover');
-    Route::any('/update-profile', [UserController::class, 'updateProfile'])->name('updateProfile');
+    // Route::any('/update-profile', [UserController::class, 'updateProfile'])->name('updateProfile');
     Route::any('/delete-package', [UserController::class, 'deletePackage'])->name('deletePackage');
     Route::any('/get-package-data', [UserController::class, 'getPackageData'])->name('getPackageData');
     Route::any('/profile', [UserController::class, 'updateProfile'])->name('updateProfile');
     Route::any('/support', [UserController::class, 'contactUs'])->name('contactUs');
+
+
+    // admin route
+
+    Route::group(['middleware' => ['admin'], 'prefix' => 'admin/'], function () {
+        Route::get('dashboard', [AdminController::class, 'adminDashboard']);
+    });
+
 });
