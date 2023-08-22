@@ -37,7 +37,7 @@
             </div>
         </form>
         <ul class="navbar-nav mr-auto sidenav" id="navAccordion">
-            <li class="nav-item my-1 active">
+            <li class="nav-item my-1">
                 <a class="nav-link sidenav-item dasboard-link" href="{{url('admin/dashboard')}}">
                     <img src="{{asset('public/assets/images/d-white.png')}}" class="icon-white pr-2">
                     <img src="{{asset('public/assets/images/d-blue.png')}}" class="icon-blue pr-2">
@@ -45,23 +45,12 @@
                 </a>
             </li>
 
-            <li class="nav-item my-1 active">
+            <li class="nav-item my-1">
                 <a class="nav-link sidenav-item dasboard-link" href="{{url('admin/user_request')}}">
                     <img src="{{asset('public/assets/images/d-white.png')}}" class="icon-white pr-2">
                     <img src="{{asset('public/assets/images/d-blue.png')}}" class="icon-blue pr-2">
-                    Users Request
+                    Users
                 </a>
-            </li>
-
-            <li class="nav-item my-1 ">
-                <a class="nav-link sidenav-item" href="{{url('profile')}}"><img src="{{asset('public/assets/images/pro-white.png')}}" class="pr-2 icon-white">
-                    <img src="{{asset('public/assets/images/pro-blue.png')}}" class="pr-2 icon-blue">
-                    Profile</a>
-            </li>
-            <li class="nav-item my-1 ">
-                <a class="nav-link sidenav-item" href="{{url('support')}}"><img src="{{asset('public/assets/images/sup-white.png')}}" class="pr-2 icon-white">
-                    <img src="{{asset('public/assets/images/sup-blue.png')}}" class="pr-2 icon-blue">
-                    Support</a>
             </li>
         </ul>
 

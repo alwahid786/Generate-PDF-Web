@@ -13,4 +13,9 @@ class PackageInfo extends Model
     {
         return $this->hasMany(Fixtures::class, 'package_info_id');
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }

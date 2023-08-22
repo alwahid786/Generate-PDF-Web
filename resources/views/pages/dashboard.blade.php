@@ -55,7 +55,7 @@
                         <td class="action-btn" data-column="Actions">
                             <a href="{{(url('pdf-cover'))}}?packageTypeId=<?= $package['id']; ?>&is_view=true"><img class="my-1" src="{{asset('public/assets/images/view.png')}}" alt=""></a>
                             <a href="{{(url('create-pdf'))}}?packageInfoId=<?= $package['id']; ?>"><img class="my-1" src="{{asset('public/assets/images/edit.png')}}" alt=""></a>
-                            <a href="#" onclick="deleteFunction({{$package['id']}})"><img class="my-1" src="{{asset('public/assets/images/delete.png')}}" alt=""></a>
+                            
                         </td>
                     </tr>
                     @endforeach

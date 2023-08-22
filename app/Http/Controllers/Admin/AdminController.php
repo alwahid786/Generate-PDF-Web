@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\PackageInfo;
 use Illuminate\Http\Request;
 use App\Repositories\Interfaces\AdminRepositoryInterface;
 
@@ -20,7 +21,9 @@ class AdminController extends Controller
 
     public function adminDashboard(Request $request)
     {
-        return view('pages.admin.dashboard');
+        
+        $packageInfo = PackageInfo::with('fixtures')->with('user')->get();
+        return view('pages.admin.dashboard', compact('packageInfo'));
     }
 
     public function userRequest(Request $request)
