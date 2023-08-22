@@ -9,7 +9,7 @@ class AdminRepository implements AdminRepositoryInterface
     public function getUser()
     {
 
-        $query = User::where('user_status', 'pending')->get();
+        $query = User::where('is_admin', NULL)->get();
 
         return $query;
 

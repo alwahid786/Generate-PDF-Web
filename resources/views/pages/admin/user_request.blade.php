@@ -1,7 +1,9 @@
 @extends('layouts.layout-default')
 @section('content')
-<link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap4.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
+
 
     @include('includes.admin.navbar')
     <main class="content-wrapper">
@@ -46,9 +48,10 @@
                                 <td>{{ $user->name }}</td>
                                 <td>{{ $user->email }}</td>
                                 <td>
-                                    <div class="form-check form-switch">
-                                        <input class="form-check-input" onclick="changeUserStatus({{ $user->id }})"
-                                            type="checkbox" role="switch" id="userStatus">
+
+                                    <div class="custom-control custom-switch">
+                                        <input type="checkbox" onchange="changeUserStatus({{ $user->id }})" @if ($user->user_status=='approved' ) checked @endif  data-id="{{ $user->id }}" class="custom-control-input user-status" id="customSwitch{{ $user->id }}">
+                                        <label class="custom-control-label" for="customSwitch{{ $user->id }}"></label>
                                     </div>
                                 </td>
                             </tr>
@@ -59,55 +62,72 @@
             </div>
         </div>
 
-    </div>
-</main>
+        </div>
+    </main>
 @endsection
 @section('insertjavascript')
-<script>
-    $('body').addClass('bg-clr')
-</script>
-<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap4.min.js"></script>
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script>
+        $('body').addClass('bg-clr')
+    </script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
 
     <script>
-
         function changeUserStatus(id) {
             // var checked = $('#userStatus').is(':checked');
 
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You want to update user status",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, update it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        }
+                    });
+
+                    $.ajax({
+
+                        url: '{{ route('update.status') }}',
+                        type: "POST",
+                        data: {
+                            id: id
+                        },
+                        dataType: 'json',
+
+                        success: function(data) {
+                            if (data.status === true) {
+                                Swal.fire(
+                                    'Updated!',
+                                    'User status updated successfully',
+                                    'success'
+                                )
+                            }
+                        },
+                        error: function(data) {
+
+                        }
+
+                    });
                 }
-            });
+            })
 
-            $.ajax({
 
-                url: '{{ route('update.status') }}',
-                type: "POST",
-                data: {
-                    id: id
-                },
-                dataType: 'json',
-
-                success: function(data) {
-
-                },
-                error: function(data) {
-
-                }
-
-            });
         }
-
     </script>
 
 
 
-<script>
-    $('.sidenav  li:nth-of-type(2)').addClass('active');
-</script>
-
-
+    <script>
+        $('.sidenav  li:nth-of-type(2)').addClass('active');
+    </script>
 @endsection

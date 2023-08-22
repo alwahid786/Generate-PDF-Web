@@ -40,8 +40,10 @@ class AdminController extends Controller
 
         $updateStatus = $this->adminRepository->updateStatus($request->id);
 
-        // if($updateStatus) {
-
-        // }
+        if($updateStatus) {
+            return response()->json([
+                'status' => true,
+            ]);
+        }
     }
 }
