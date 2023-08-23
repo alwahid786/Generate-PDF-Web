@@ -38,7 +38,7 @@ class AdminController extends Controller
     public function updateStatus(Request $request)
     {
 
-        $updateStatus = $this->adminRepository->updateStatus($request->id);
+        $updateStatus = $this->adminRepository->updateStatus($request->id, $request->status);
 
         if($updateStatus) {
             return response()->json([

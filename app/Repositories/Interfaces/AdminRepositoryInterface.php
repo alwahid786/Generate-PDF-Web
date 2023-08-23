@@ -9,6 +9,6 @@ interface AdminRepositoryInterface
     public function getUser();
 
     // update status
-    public function updateStatus($id);
+    public function updateStatus($id, $status);
 
 }

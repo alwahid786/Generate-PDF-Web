@@ -16,11 +16,11 @@ class AdminRepository implements AdminRepositoryInterface
     }
 
     // update user status
-    public function updateStatus($id)
+    public function updateStatus($id, $status)
     {
 
         $query = User::where('id', $id)->update([
-            "user_status" => 'approved',
+            "user_status" => $status,
         ]);
 
         return $query;

@@ -37,7 +37,7 @@
                             <th>#</th>
                             <th>Name</th>
                             <th>Email</th>
-                            <th>Status</th>
+                            <th>Aproval Status</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -79,6 +79,16 @@
         function changeUserStatus(id) {
             // var checked = $('#userStatus').is(':checked');
 
+            var isChecked = $("#customSwitch"+id).prop('checked');
+        if (isChecked == true) {
+            var reverse = false;
+            var title = 'Active';
+            status = 'approved';
+        } else {
+            var reverse = true;
+            var title = 'In Active';
+            status = 'pending';
+        }
             Swal.fire({
                 title: 'Are you sure?',
                 text: "You want to update user status",
@@ -97,10 +107,11 @@
 
                     $.ajax({
 
-                        url: '{{ route('update.status') }}',
+                        url: '{{ route("update.status") }}',
                         type: "POST",
                         data: {
-                            id: id
+                            id: id,
+                            status: status
                         },
                         dataType: 'json',
 
@@ -108,7 +119,7 @@
                             if (data.status === true) {
                                 Swal.fire(
                                     'Updated!',
-                                    'User status updated successfully',
+                                    'User status '+title+' successfully',
                                     'success'
                                 )
                             }
@@ -118,6 +129,8 @@
                         }
 
                     });
+                }else{
+                    $("#customSwitch"+id).prop('checked', reverse);
                 }
             })
 
