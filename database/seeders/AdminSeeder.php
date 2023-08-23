@@ -14,12 +14,15 @@ class AdminSeeder extends Seeder
      */
     public function run()
     {
-        User::create([
+        User::updateOrCreate([
+            'email' => 'admin@admin.com'
+        ],[
             'name' => 'admin',
             'email' => 'admin@admin.com',
             'password' => bcrypt('admin@123'),
             'profile_img' => 'http://localhost/pdf-generator/public/assets/images/side-logo.png',
-            'is_admin' => 1
+            'is_admin' => 1,
+            "user_status" => 'approved'
         ]);
     }
 }
