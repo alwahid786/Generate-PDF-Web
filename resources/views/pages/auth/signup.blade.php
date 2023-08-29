@@ -62,7 +62,7 @@
                                     <h1>Keep me logged in</h1>
                                 </div>
 
-                                <a href="{{(url('reset-password'))}}">Forgot Password?</a>
+                                <!-- <a href="{{(url('reset-password'))}}">Forgot Password?</a> -->
                             </div>
 
                             <div class="d-flex justify-content-center login-button-outer">
