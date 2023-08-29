@@ -38,75 +38,31 @@ class PdfController extends Controller
 
         $package = json_decode($request->input('package'));
 
-        // dd($_GET['packageInfoId'])
 
-        // $existingPackageType = PackageInfo::where('id', $package->referenceNo)->first();
-
-        // if ($existingPackageType) {
-
-        //     $existingPackageType->package_name = $package->projectName;
-        //     $existingPackageType->package_type_id = $package->packageType;
-        //     $existingPackageType->save();
-        //     $packageType = $existingPackageType;
-
-        // } else {
-            if(!empty($package->pdfId)){
-               $packageType = PackageInfo::find($package->pdfId);
-            }else{
+        if(!empty($package->pdfId)){
+            $packageType = PackageInfo::find($package->pdfId);
+        }else{
             $packageType = new PackageInfo();
-            }
-            $packageType->package_name = $package->projectName;
-            $packageType->vision_reference = $package->referenceNo;
-            $packageType->package_type_id = $package->packageType;
-            $packageType->user_id = auth()->user()->id;
-            $packageType->save();
-        // }
+        }
+
+        $packageType->package_name = $package->projectName;
+        $packageType->vision_reference = $package->referenceNo;
+        $packageType->package_type_id = $package->packageType;
+        $packageType->user_id = auth()->user()->id;
+        $packageType->save();
 
 
         $fixtures = $request->fixtures;
 
         Fixtures::where('package_info_id', $packageType->id)->delete();
 
-        // dd($fixtures);
         foreach ($fixtures as $fixture) {
 
-            // if($existingPackageType)
-            // {
-            //     if ($fixture['fixtureType'] != null && $fixture['fixtureType'] != 'undefined')
-            //     {
 
-            //         if($fixture['id'] != null && $fixture['id'] != 'undefined' ){
+            $filePath = $fixture['pdfFile'];
+            if(gettype($filePath) != 'string')
+            {
 
-            //             $existingFixture = Fixtures::where('id', $fixture['id'])->first();
-
-            //         } else {
-
-            //             $existingFixture = new Fixtures();
-            //             $existingFixture->package_info_id = $packageType->id;
-            //             $existingFixture->image_path = null;
-
-            //         }
-
-
-            //         $uploadedFile = $fixture['pdfFile'];
-
-            //         $name = time() . $uploadedFile->getClientOriginalName();
-            //         $path = public_path('/files');
-
-            //         $uploadedFile->move($path, $name);
-            //         $filePath = $path . '/' . $name;
-
-
-            //         $existingFixture->pdf_path = $filePath;
-            //         $existingFixture->type = $fixture['fixtureType'];
-            //         $existingFixture->part_number = $fixture['part_no'];
-            //         $existingFixture->save();
-
-            //     }
-
-            // } else {
-                $filePath = $fixture['pdfFile'];
-                if(gettype($filePath) != 'string'){
                 $uploadedFile = $fixture['pdfFile'];
                 $name = time() .'_'. $uploadedFile->getClientOriginalName();
                 $path = public_path('/files');
@@ -115,15 +71,13 @@ class PdfController extends Controller
                 $filePath = $path . '/' . $name;
 
             }
-                $fixtureData = new Fixtures();
-                $fixtureData->package_info_id = $packageType->id;
-                $fixtureData->pdf_path = $filePath;
-                $fixtureData->type = $fixture['fixtureType'];
-                $fixtureData->part_number = $fixture['part_no'];
-                $fixtureData->image_path = null;
-                $fixtureData->save();
-
-            // }
+            $fixtureData = new Fixtures();
+            $fixtureData->package_info_id = $packageType->id;
+            $fixtureData->pdf_path = $filePath;
+            $fixtureData->type = $fixture['fixtureType'];
+            $fixtureData->part_number = $fixture['part_no'];
+            $fixtureData->image_path = null;
+            $fixtureData->save();
 
         }
 
@@ -150,8 +104,10 @@ class PdfController extends Controller
 
         $completePdfPath = [];
         $currentPage = [];
-        // $obj = [];
+
         foreach ($package->fixtures as $fixture) {
+
+            $pdfImages = [];
 
             $pdfPath = $fixture['pdf_path'];
 
@@ -186,34 +142,61 @@ class PdfController extends Controller
                         // echo "Total Pages: $totoalPages<br>";
                         // die;
 
-                        for ($pageNumber = 1; $pageNumber <= $totalPages; $pageNumber++) {
+                        if($is_view == false)
+                        {
+                            for ($pageNumber = 1; $pageNumber <= $totalPages; $pageNumber++) {
 
-                            $randomString = Str::random(6);
-                            $randomNumber = mt_rand(100000, 999999);
-                            $time = time();
+                                $randomString = Str::random(6);
+                                $randomNumber = mt_rand(100000, 999999);
+                                $time = time();
 
-                            $outputFilename = "/$time.$randomString.$randomNumber.png";
+                                $outputFilename = "/$time.$randomString.$randomNumber.png";
 
-                            // command for window
-                            // $command = "gswin64c.exe -sDEVICE=pngalpha -r300 -o \"$outputPath$outputFilename\" -dFirstPage=$pageNumber -dLastPage=$pageNumber \"$pdfPath\"";
+                                // command for window
+                                // $command = "gswin64c.exe -sDEVICE=pngalpha -r300 -o \"$outputPath$outputFilename\" -dFirstPage=$pageNumber -dLastPage=$pageNumber \"$pdfPath\"";
 
-                            // command for ubuntu
-                            $command = "gs -sDEVICE=pngalpha -r600 -o \"$outputPath$outputFilename\" -dFirstPage=$pageNumber -dLastPage=$pageNumber \"$pdfPath\"";
+                                // command for ubuntu
+                                $command = "gs -sDEVICE=pngalpha -r600 -o \"$outputPath$outputFilename\" -dFirstPage=$pageNumber -dLastPage=$pageNumber \"$pdfPath\"";
 
 
-                            exec($command, $output, $returnCode);
+                                exec($command, $output, $returnCode);
 
-                            if ($returnCode === 0) {
+                                if ($returnCode === 0) {
 
-                                $completePdfPath[] = [
-                                    'path' => asset('public/files/' . $outputFilename),
-                                    'fixture' => $obj
-                                ];
-                            } else {
-                                echo "Error converting page $pageNumber to image.<br>";
-                                print_r($output);
-                                die;
+                                    $completePdfPath[] = [
+                                        'path' => asset('public/files/' . $outputFilename),
+                                        'fixture' => $obj
+                                    ];
+
+                                    $pdfImages[]= [
+                                        'path' => asset('public/files/' . $outputFilename)
+                                    ];
+                                } else {
+                                    echo "Error converting page $pageNumber to image.<br>";
+                                    print_r($output);
+                                    die;
+                                }
                             }
+
+                            Fixtures::where('id', $fixture['id'])->update([
+                                'pdf_images' => $pdfImages
+                            ]);
+                        } else {
+
+                            $jsonData = $fixture['pdf_images'];
+
+                            $data = json_decode($jsonData, true);
+                            // dd($data);
+
+                                foreach ($data as $item) {
+                                    if (isset($item['path'])) {
+
+                                        $completePdfPath[] = [
+                                            'path' => $item['path'],
+                                            'fixture' => $obj
+                                        ];
+                                    }
+                                }
                         }
 
                         // For Multiple Pages --------------------------------------------------------End
@@ -235,7 +218,9 @@ class PdfController extends Controller
             }
         }
 
-        $template =  view('pages.pdf-template', ['pdf_path' => $completePdfPath, 'pageNumber' => $pageNumber, 'packageTypeName' => $packageTypeName, 'typeId' => $typeId, 'is_view' => $is_view])->render();
+
+
+        $template =  view('pages.pdf-template', ['pdf_path' => $completePdfPath, 'packageTypeName' => $packageTypeName, 'typeId' => $typeId, 'is_view' => $is_view])->render();
 
         View::share('pdfTemplate', $template);
 
