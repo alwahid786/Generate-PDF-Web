@@ -80,6 +80,8 @@ Route::middleware('auth')->group(function () {
         Route::get('dashboard', [AdminController::class, 'adminDashboard']);
         Route::get('user_request', [AdminController::class, 'userRequest']);
         Route::post('update_status', [AdminController::class, 'updateStatus'])->name('update.status');
+        Route::any('/delete-user', [AdminController::class, 'deleteUser'])->name('deleteUser');
+        Route::post('/update-password', [AdminController::class, 'updatePassword'])->name('updatePassword');
     });
 
 });

@@ -171,7 +171,7 @@
             "info": false,
             "searching": false,
             "lengthChange": false,
-            "pageLength": 12,
+            "pageLength": 10,
             language: {
                 'paginate': {
                     'previous': '<img class="my-1" src="{{asset("public/assets/images/rev.png")}}" alt="">',
