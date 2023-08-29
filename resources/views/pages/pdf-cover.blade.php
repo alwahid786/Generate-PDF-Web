@@ -12,7 +12,11 @@
 
     }
 </style>
+@if(auth()->user()->is_admin==1)
+@include('includes.admin.navbar')
+@else
 @include('includes.navbar')
+@endif
 <main class="content-wrapper">
     <div class="container-fluid py-3">
         <div class="header-wrapper">
