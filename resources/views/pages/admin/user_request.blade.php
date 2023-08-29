@@ -144,6 +144,22 @@
 
 
         }
+        
+    $(document).ready(function() {
+        $('#detail-table').DataTable({
+            "ordering": false,
+            "info": false,
+            "searching": false,
+            "lengthChange": false,
+            "pageLength": 12,
+            language: {
+                'paginate': {
+                    'previous': '<img class="my-1" src="{{asset("public/assets/images/rev.png")}}" alt="">',
+                    'next': '<img class="my-1" src="{{asset("public/assets/images/for.png")}}" alt="">'
+                }
+            }
+        });
+    });
     </script>
 
 
