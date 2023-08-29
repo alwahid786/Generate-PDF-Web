@@ -65,7 +65,7 @@ class AuthController extends Controller
             return redirect()->back()->withErrors("Wrong credentials! Password does not match.");
         } elseif(auth()->user()->user_status == 'pending')
         {
-            return redirect()->back()->with('error', 'Your account status is pending');
+            return redirect()->back()->with('error', 'Your account is awaiting approval from the administrator. Kindly reach out to the admin for further assistance.');
         }
         if(auth()->user()->is_admin === 1)
         {
