@@ -42,6 +42,7 @@
                     </thead>
                     <tbody>
 
+                    @if(sizeof($users) >0)
                         @foreach ($users as $user)
                             <tr>
                                 <td>{{ $user->id }}</td>
@@ -56,6 +57,13 @@
                                 </td>
                             </tr>
                         @endforeach
+                        @else
+                        <tr>
+                            <td colspan="4">
+                                No Data Found!
+                            </td>
+                        </tr>
+                        @elseif
 
                     </tbody>
                 </table>
