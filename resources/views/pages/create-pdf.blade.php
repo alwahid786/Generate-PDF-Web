@@ -526,7 +526,7 @@
     }
     // Preview PDF Function
     $("#previewPdf").click(function() {
-
+alert('hi');
         if (fixtures.length < 1) {
             Swal.fire({
                 title: 'No Data!',
@@ -543,8 +543,7 @@
             packageType: packageType,
             projectName: projectName,
             referenceNo: referenceNo,
-            pdfId: '{{ $packageInfo->id ?? '
-            ' }}'
+            pdfId: '{{ $packageInfo->id ?? '' }}'
         }
 
         // Fetch REQUEST START
