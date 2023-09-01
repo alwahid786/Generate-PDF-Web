@@ -160,9 +160,9 @@
     $('#projectName').on('keydown keyup change', function() {
         var char = $(this).val();
         var charLength = $(this).val().length;
-        if (charLength > 40) {
+        if (charLength > 35) {
             // $(this).val($(this).val().substring(0, 40));
-            $('#warning-message').text('Length is not valid, maximum ' + 40 + ' allowed.');
+            $('#warning-message').text('Length is not valid, maximum ' + 35 + ' allowed.');
         } else {
             $('#warning-message').text('');
         }
@@ -182,9 +182,9 @@
     $('#fixtureType').on('keydown keyup change', function() {
         var char = $(this).val();
         var charLength = $(this).val().length;
-        if (charLength > 14) {
+        if (charLength > 10) {
             // $(this).val($(this).val().substring(0, 14));
-            $('#warning-message-type').text('Length is not valid, maximum ' + 14 + ' allowed.');
+            $('#warning-message-type').text('Length is not valid, maximum ' + 10 + ' allowed.');
         } else {
             $('#warning-message-type').text('');
         }
@@ -447,7 +447,7 @@
         fixtures.push(pdfObject);
         let pdfDiv = `<ul class="mt-4 row${id}" data-id="${id}">
                         <li class="fixType_append">${fixtureType}</li>
-                        <li class="fixPartNo_append" style="max-width:200px;">${partNo}</li>
+                        <li class="fixPartNo_append" style="max-width:200px; word-break: break-all">${partNo}</li>
                         <li> <img src="{{ asset('public/assets/images/pdf-icon.png') }}" alt="image"></li>
                         <li class="d-flex align-items-center justify-content-end">
                             <img style="cursor:pointer; width:28px;height:28px;" class="editPdfBtn" src="{{ asset('public/assets/images/edit-icon.svg') }}" alt="image">

@@ -69,7 +69,7 @@
                         <h1 style="margin: 0; font-size: 1.2rem; text-align: center">
                             Project
                         </h1>
-                        <p style="margin: 0; text-align: center; font-size: 0.9rem">
+                        <p style="margin: 0; text-align: center; font-size: 0.9rem; word-break:break-all; padding:0 0.5rem">
                             {{ $path['fixture']['project'] }}
                         </p>
                     </div>
@@ -77,7 +77,7 @@
                         <h1 style="margin: 0; font-size: 1.2rem; text-align: center;">
                             Part Number
                         </h1>
-                        <p style="margin: 0; text-align: center; font-size: 0.9rem">
+                        <p style="margin: 0; text-align: center; font-size: 0.9rem; word-break:break-all; padding:0 0.5rem">
                             {{ $path['fixture']['part_number'] }}
                         </p>
                         {{--<p style="margin: 0; text-align: center; font-size: 0.9rem">
@@ -88,7 +88,7 @@
                         <h1 style="margin: 0; text-align: center; font-size: 1.2rem">
                             Type
                         </h1>
-                        <h1 style="margin: 0; text-align: center; font-size: 1.8rem">{{ $path['fixture']['type'] }}</h1>
+                        <h1 style="margin: 0; text-align: center; font-size: 1.8rem; word-break:break-all">{{ $path['fixture']['type'] }}</h1>
                     </div>
                 </div>
 
