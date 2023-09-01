@@ -317,7 +317,7 @@
         });
 
         $('#partNo').on('keydown keyup change', function() {
-            alert('coming');
+            // alert('coming');
             var char = $(this).val();
             var charLength = $(this).val().length;
             if (charLength > 60) {
@@ -417,7 +417,6 @@
                     } else {
                         editObj['pdfFile'] = oldfile
                     }
-                    console.log('coming')
                     // Create a new object with the updated age
                     return editObj;
                 }
