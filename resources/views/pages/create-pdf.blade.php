@@ -157,49 +157,49 @@
 
 
 <script>
-    $('#projectName').on('keydown keyup change', function() {
-        var char = $(this).val();
-        var charLength = $(this).val().length;
-        if (charLength > 35) {
-            // $(this).val($(this).val().substring(0, 40));
-            $('#warning-message').text('Length is not valid, maximum ' + 35 + ' allowed.');
-        } else {
-            $('#warning-message').text('');
-        }
-    });
+    // $('#projectName').on('keydown keyup change', function() {
+    //     var char = $(this).val();
+    //     var charLength = $(this).val().length;
+    //     if (charLength > 35) {
+    //         // $(this).val($(this).val().substring(0, 40));
+    //         $('#warning-message').text('Lengthsssss is not valid, maximum ' + 35 + ' allowed.');
+    //     } else {
+    //         $('#warning-message').text('');
+    //     }
+    // });
 
-    $('#referenceNo').on('keydown keyup change', function() {
-        var char = $(this).val();
-        var charLength = $(this).val().length;
-        if (charLength > 15) {
-            // $(this).val($(this).val().substring(0, 15));
-            $('#warning-message-ref').text('Length is not valid, maximum ' + 15 + ' allowed.');
-        } else {
-            $('#warning-message-ref').text('');
-        }
-    });
+    // $('#referenceNo').on('keydown keyup change', function() {
+    //     var char = $(this).val();
+    //     var charLength = $(this).val().length;
+    //     if (charLength > 15) {
+    //         // $(this).val($(this).val().substring(0, 15));
+    //         $('#warning-message-ref').text('Length is not valid, maximum ' + 15 + ' allowed.');
+    //     } else {
+    //         $('#warning-message-ref').text('');
+    //     }
+    // });
 
-    $('#fixtureType').on('keydown keyup change', function() {
-        var char = $(this).val();
-        var charLength = $(this).val().length;
-        if (charLength > 10) {
-            // $(this).val($(this).val().substring(0, 14));
-            $('#warning-message-type').text('Length is not valid, maximum ' + 10 + ' allowed.');
-        } else {
-            $('#warning-message-type').text('');
-        }
-    });
+    // $('#fixtureType').on('keydown keyup change', function() {
+    //     var char = $(this).val();
+    //     var charLength = $(this).val().length;
+    //     if (charLength > 10) {
+    //         // $(this).val($(this).val().substring(0, 14));
+    //         $('#warning-message-type').text('Length is not valid, maximum ' + 10 + ' allowed.');
+    //     } else {
+    //         $('#warning-message-type').text('');
+    //     }
+    // });
 
-    $('#partNo').on('keydown keyup change', function() {
-        var char = $(this).val();
-        var charLength = $(this).val().length;
-        if (charLength > 60) {
-            // $(this).val($(this).val().substring(0, 60));
-            $('#warning-message-partno').text('Length is not valid, maximum ' + 60 + ' allowed.');
-        } else {
-            $('#warning-message-partno').text('');
-        }
-    });
+    // $('#partNo').on('keydown keyup change', function() {
+    //     var char = $(this).val();
+    //     var charLength = $(this).val().length;
+    //     if (charLength > 60) {
+    //         // $(this).val($(this).val().substring(0, 60));
+    //         $('#warning-message-partno').text('Length is not valid, maximum ' + 60 + ' allowed.');
+    //     } else {
+    //         $('#warning-message-partno').text('');
+    //     }
+    // });
     $('.sidenav  li:nth-of-type(1)').addClass('active');
 </script>
 <!-- DropZone Scripts -- START -- -->
@@ -286,9 +286,9 @@
         $('#projectName').on('keydown keyup change', function() {
             var char = $(this).val();
             var charLength = $(this).val().length;
-            if (charLength > 40) {
-                $(this).val($(this).val().substring(0, 40));
-                $('#warning-message').text('Length is not valid, maximum ' + 40 + ' allowed.');
+            if (charLength > 35) {
+                $(this).val($(this).val().substring(0, 35));
+                $('#warning-message').text('Length is not valid, maximum ' + 35 + ' allowed.');
             } else {
                 $('#warning-message').text('');
             }
@@ -308,9 +308,9 @@
         $('#fixtureType').on('keydown keyup change', function() {
             var char = $(this).val();
             var charLength = $(this).val().length;
-            if (charLength > 14) {
-                $(this).val($(this).val().substring(0, 14));
-                $('#warning-message-type').text('Length is not valid, maximum ' + 14 + ' allowed.');
+            if (charLength > 10) {
+                $(this).val($(this).val().substring(0, 10));
+                $('#warning-message-type').text('Length is not valid, maximum ' + 10 + ' allowed.');
             } else {
                 $('#warning-message-type').text('');
             }
