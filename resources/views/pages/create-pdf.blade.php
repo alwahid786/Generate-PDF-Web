@@ -149,10 +149,10 @@
 <script>
     $('body').addClass('bg-clr')
 </script>
-<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+{{-- <script src="https://code.jquery.com/jquery-3.5.1.js"></script> --}}
 <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap4.min.js"></script>
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+{{-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script> --}}
 
 
 
@@ -161,7 +161,7 @@
         var char = $(this).val();
         var charLength = $(this).val().length;
         if (charLength > 40) {
-            $(this).val($(this).val().substring(0, 40));
+            // $(this).val($(this).val().substring(0, 40));
             $('#warning-message').text('Length is not valid, maximum ' + 40 + ' allowed.');
         } else {
             $('#warning-message').text('');
@@ -172,7 +172,7 @@
         var char = $(this).val();
         var charLength = $(this).val().length;
         if (charLength > 15) {
-            $(this).val($(this).val().substring(0, 15));
+            // $(this).val($(this).val().substring(0, 15));
             $('#warning-message-ref').text('Length is not valid, maximum ' + 15 + ' allowed.');
         } else {
             $('#warning-message-ref').text('');
@@ -183,7 +183,7 @@
         var char = $(this).val();
         var charLength = $(this).val().length;
         if (charLength > 14) {
-            $(this).val($(this).val().substring(0, 14));
+            // $(this).val($(this).val().substring(0, 14));
             $('#warning-message-type').text('Length is not valid, maximum ' + 14 + ' allowed.');
         } else {
             $('#warning-message-type').text('');
@@ -194,7 +194,7 @@
         var char = $(this).val();
         var charLength = $(this).val().length;
         if (charLength > 60) {
-            $(this).val($(this).val().substring(0, 60));
+            // $(this).val($(this).val().substring(0, 60));
             $('#warning-message-partno').text('Length is not valid, maximum ' + 60 + ' allowed.');
         } else {
             $('#warning-message-partno').text('');
@@ -525,7 +525,6 @@
     }
     // Preview PDF Function
     $("#previewPdf").click(function() {
-alert('hi');
         if (fixtures.length < 1) {
             Swal.fire({
                 title: 'No Data!',
