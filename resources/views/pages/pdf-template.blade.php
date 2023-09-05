@@ -7,16 +7,16 @@
           sans-serif;
       ">
         <div style="
-          height: 1355px;
+          height: 1056px;
           background-color: rgb(255, 255, 255);
           padding: 2rem;">
             <div style="height: 50%; position: relative">
                 <img src="{{ asset('public/assets/images/logo-icon.png') }}" style="
               position: absolute;
-              right: -200px;
+              right: -150px;
               top: 50%;
               transform: translateY(-50%) rotate(-90deg);
-              width: 600px;
+              width: 500px;
             " />
             </div>
             <div style="
@@ -59,7 +59,7 @@
         @php
         $currentPage = $index + 1;
         @endphp
-        <div style="height: 1355px; padding: 2rem; background-color: rgb(255, 255, 255);">
+        <div style="height: 1056px; padding: 2rem; background-color: rgb(255, 255, 255);">
             <div class="table-wrapper" style="border: 1px solid; ">
                 <div class="table-header" style="height: 70px; display: flex; border-bottom: 1px solid black">
                     <div style="width: 20%;border-right: 1px solid black;text-align: center;padding: 10px 0px;">
@@ -92,8 +92,8 @@
                     </div>
                 </div>
 
-                <div class="pdf-content" style="height: 1183px">
-                    <img style="width: 100%; height: 100%" src="{{ $path['path'] }}" alt="">
+                <div class="pdf-content" style="height: 890px; width:100%; display:flex; justify-content:center; align-items:center">
+                    <img style="max-height: 100%; max-width:100%"  src="{{ $path['path'] }}" alt="">
                     {{-- <img src="{{asset('public/assets/images/Capture.png')}}" alt="" style="width: 100%" /> --}}
                 </div>
 
@@ -147,11 +147,9 @@
                 }, // Use PNG and set maximum quality
                 filename: `${fileName} - ${fileTypeName}.pdf`, // The default filename for the downloaded PDF
                 html2canvas: {
-                    scale: 2
+                    scale: 1
                 }, // Increase the scale for better image quality (adjust as needed)
-                jsPDF: {
-                    format: [250, 358.5]
-                },
+                jsPDF: { unit: "mm", format: "letter", orientation: "portrait" },
             };
             convertBtn.addEventListener("click", () => {
                 // $("#loader").removeClass('d-none');
