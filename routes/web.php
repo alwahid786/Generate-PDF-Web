@@ -62,7 +62,7 @@ Route::get('google/callback', [AuthController::class, 'handleGoogleCallback']);
 // Auth Protected Routes
 Route::middleware('auth')->group(function () {
 
-    Route::group(['middleware' => ['user']], function () {
+    // Route::group(['middleware' => ['user']], function () {
         Route::get('/dashboard', [UserController::class, 'dashboard'])->name('dashboard');
         Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
         Route::get('/create-pdf', [PdfController::class, 'createPdfPage'])->name('createPdfPage');
@@ -73,7 +73,7 @@ Route::middleware('auth')->group(function () {
         Route::any('/get-package-data', [UserController::class, 'getPackageData'])->name('getPackageData');
         Route::any('/profile', [UserController::class, 'updateProfile'])->name('updateProfile');
         Route::any('/support', [UserController::class, 'contactUs'])->name('contactUs');
-    });
+    // });
 
     // admin route
 
