@@ -38,6 +38,7 @@ class AuthController extends Controller
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
+        $user->is_admin = 0;
         $status = $user->save();
         if ($status) {
             return redirect('/')->with('signupSuccess', 'Signup was successful!');
