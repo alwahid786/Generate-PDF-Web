@@ -9,7 +9,7 @@ class AdminRepository implements AdminRepositoryInterface
     public function getUser()
     {
 
-        $query = User::where('is_admin', NULL)->get();
+        $query = User::where('is_admin', 0)->get();
 
         return $query;
 
