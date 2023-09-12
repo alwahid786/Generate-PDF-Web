@@ -108,7 +108,7 @@ width:816px;
 
                     <div class="pdf-content"
                         style="height: 890px; width:100%; display:flex; justify-content:center; align-items:center">
-                        <img class="body-images" style="max-width:100%" src="{{ $path['path'] }}" alt="">
+                        <img class="body-images" style="width:100%; height:100%" src="{{ $path['path'] }}" alt="">
                         {{-- <img src="{{asset('public/assets/images/Capture.png')}}" alt="" style="width: 100%" /> --}}
                     </div>
 
