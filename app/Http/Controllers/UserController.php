@@ -12,7 +12,7 @@ class UserController extends Controller
 {
     public function dashboard(Request $request)
     {
-        $packageInfo = PackageInfo::where('user_id', auth()->user()->id)->with('fixtures')->get();
+        $packageInfo = PackageInfo::with('fixtures')->latest()->get();
         return view('pages.dashboard', compact('packageInfo'));
     }
 
