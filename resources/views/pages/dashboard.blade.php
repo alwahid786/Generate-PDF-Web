@@ -13,7 +13,7 @@
             <div class="heading-top">
                 <h1>Dashboard <span>{{date('d M Y')}}</span></h1>
             </div>
-            <a href="{{(url('create-pdf'))}}" class="btn create-btn"><img class="mr-2" src="{{asset('public/assets/images/plus.png')}}" alt="">Create New Package</a>
+            <!-- <a href="{{(url('create-pdf'))}}" class="btn create-btn"><img class="mr-2" src="{{asset('public/assets/images/plus.png')}}" alt="">Create New Package</a> -->
         </div>
 
         @if (\Session::has('error'))
@@ -24,11 +24,11 @@
         </div>
         @endif
         @if (\Session::has('success'))
-            <div class="alert alert-success">
-                <div>
-                    <div>{{ \Session::get('success') }}</div>
-                </div>
+        <div class="alert alert-success">
+            <div>
+                <div>{{ \Session::get('success') }}</div>
             </div>
+        </div>
         @endif
 
         <div class="client-table ">
@@ -55,7 +55,7 @@
                         <td class="action-btn" data-column="Actions">
                             <a href="{{(url('pdf-cover'))}}?packageTypeId=<?= $package['id']; ?>&is_view=true"><img class="my-1" src="{{asset('public/assets/images/view.png')}}" alt=""></a>
                             <a href="{{(url('create-pdf'))}}?packageInfoId=<?= $package['id']; ?>"><img class="my-1" src="{{asset('public/assets/images/edit.png')}}" alt=""></a>
-                            
+
                         </td>
                     </tr>
                     @endforeach

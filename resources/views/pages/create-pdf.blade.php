@@ -24,15 +24,12 @@
                     </div>
                     <div class="type-menu">
                         <select name="package_type" id="packageType" class="typeValidation">
-                            @if (isset($packageTypes) && !empty($packageTypes))
-                            @foreach ($packageTypes as $type)
-                            <option <?php if (isset($packageInfo) && $packageInfo->package_type_id == $type['id']) {
-                                        echo 'selected';
-                                    } ?> value="{{ $type['id'] }}">{{ $type['title'] }}
-                            </option>
-                            @endforeach
-                            @else
-                            <option selected="selected" disabled="disabled">--Select</option>
+                            @if($packageName == "specification-package")
+                            <option value="Specification Package">Specification Package</option>
+                            @elseif($packageName == "submittal-package")
+                            <option value="Submittal Package">Submittal Package</option>
+                            @elseif($packageName == "record-drawing")
+                            <option value="Record Drawings">Record Drawings</option>
                             @endif
                         </select>
                     </div>
@@ -541,7 +538,7 @@
             packageType: packageType,
             projectName: projectName,
             referenceNo: referenceNo,
-            pdfId: '{{ $packageInfo->id ?? '' }}'
+            pdfId: '{{ $packageInfo->id ?? "" }}'
         }
 
         // Fetch REQUEST START

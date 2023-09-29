@@ -25,11 +25,16 @@ class PdfController extends Controller
     {
         $packageTypes = PackageType::get();
         $packageInfoId = $request->query('packageInfoId');
-        if($packageInfoId){
+
+        $packageName = $request->segment(count($request->segments()));
+
+        // dd($lastSegment);
+
+        if ($packageInfoId) {
             $packageInfo = PackageInfo::where('id', $packageInfoId)->with('fixtures')->first();
             return view('pages.create-pdf', compact('packageTypes', 'packageInfo'));
         }
-        return view('pages.create-pdf', compact('packageTypes'));
+        return view('pages.create-pdf', compact('packageTypes', 'packageName'));
     }
 
     // Preview PDF Function
@@ -39,9 +44,9 @@ class PdfController extends Controller
         $package = json_decode($request->input('package'));
 
 
-        if(!empty($package->pdfId)){
+        if (!empty($package->pdfId)) {
             $packageType = PackageInfo::find($package->pdfId);
-        }else{
+        } else {
             $packageType = new PackageInfo();
         }
 
@@ -60,16 +65,14 @@ class PdfController extends Controller
 
 
             $filePath = $fixture['pdfFile'];
-            if(gettype($filePath) != 'string')
-            {
+            if (gettype($filePath) != 'string') {
 
                 $uploadedFile = $fixture['pdfFile'];
-                $name = time() .'_'. $uploadedFile->getClientOriginalName();
+                $name = time() . '_' . $uploadedFile->getClientOriginalName();
                 $path = public_path('/files');
 
                 $uploadedFile->move($path, $name);
                 $filePath = $path . '/' . $name;
-
             }
             $fixtureData = new Fixtures();
             $fixtureData->package_info_id = $packageType->id;
@@ -78,7 +81,6 @@ class PdfController extends Controller
             $fixtureData->part_number = $fixture['part_no'];
             $fixtureData->image_path = null;
             $fixtureData->save();
-
         }
 
         return response()->json(['status' => true, 'message' => 'Success', 'data' => $packageType->id]);
@@ -126,86 +128,85 @@ class PdfController extends Controller
             // $outputPath = 'C:\xampp\htdocs\pdf-generator\public\files';
 
 
-            if (file_exists($pdfPath) ) {
+            if (file_exists($pdfPath)) {
 
                 // $extension = pathinfo($pdfPath, PATHINFO_EXTENSION);
 
                 // if ($extension === 'pdf') {
-                    try {
+                try {
 
 
-                        // For Multiple Pages --------------------------------------------------------Start
+                    // For Multiple Pages --------------------------------------------------------Start
 
 
-                        $totalPages = $this->countPages($pdfPath);
+                    $totalPages = $this->countPages($pdfPath);
 
-                        // echo "Total Pages: $totoalPages<br>";
-                        // die;
+                    // echo "Total Pages: $totoalPages<br>";
+                    // die;
 
-                        if($is_view == false)
-                        {
-                            for ($pageNumber = 1; $pageNumber <= $totalPages; $pageNumber++) {
+                    if ($is_view == false) {
+                        for ($pageNumber = 1; $pageNumber <= $totalPages; $pageNumber++) {
 
-                                $randomString = Str::random(6);
-                                $randomNumber = mt_rand(100000, 999999);
-                                $time = time();
+                            $randomString = Str::random(6);
+                            $randomNumber = mt_rand(100000, 999999);
+                            $time = time();
 
-                                $outputFilename = "/$time.$randomString.$randomNumber.png";
+                            $outputFilename = "/$time.$randomString.$randomNumber.png";
 
-                                // command for window
-                                // $command = "gswin64c.exe -sDEVICE=pngalpha -r300 -o \"$outputPath$outputFilename\" -dFirstPage=$pageNumber -dLastPage=$pageNumber \"$pdfPath\"";
+                            // command for window
+                            // $command = "gswin64c.exe -sDEVICE=pngalpha -r300 -o \"$outputPath$outputFilename\" -dFirstPage=$pageNumber -dLastPage=$pageNumber \"$pdfPath\"";
 
-                                // command for ubuntu
-                                $command = "gs -sDEVICE=pngalpha -r600 -o \"$outputPath$outputFilename\" -dFirstPage=$pageNumber -dLastPage=$pageNumber \"$pdfPath\"";
+                            // command for ubuntu
+                            $command = "gs -sDEVICE=pngalpha -r600 -o \"$outputPath$outputFilename\" -dFirstPage=$pageNumber -dLastPage=$pageNumber \"$pdfPath\"";
 
 
-                                exec($command, $output, $returnCode);
+                            exec($command, $output, $returnCode);
 
-                                if ($returnCode === 0) {
+                            if ($returnCode === 0) {
 
-                                    $completePdfPath[] = [
-                                        'path' => asset('public/files/' . $outputFilename),
-                                        'fixture' => $obj
-                                    ];
+                                $completePdfPath[] = [
+                                    'path' => asset('public/files/' . $outputFilename),
+                                    'fixture' => $obj
+                                ];
 
-                                    $pdfImages[]= [
-                                        'path' => asset('public/files/' . $outputFilename)
-                                    ];
-                                } else {
-                                    echo "Error converting page $pageNumber to image.<br>";
-                                    print_r($output);
-                                    die;
-                                }
+                                $pdfImages[] = [
+                                    'path' => asset('public/files/' . $outputFilename)
+                                ];
+                            } else {
+                                echo "Error converting page $pageNumber to image.<br>";
+                                print_r($output);
+                                die;
                             }
-
-                            Fixtures::where('id', $fixture['id'])->update([
-                                'pdf_images' => $pdfImages
-                            ]);
-                        } else {
-
-                            $jsonData = $fixture['pdf_images'];
-
-                            $data = json_decode($jsonData, true);
-                            // dd($data);
-
-                                foreach ($data as $item) {
-                                    if (isset($item['path'])) {
-
-                                        $completePdfPath[] = [
-                                            'path' => $item['path'],
-                                            'fixture' => $obj
-                                        ];
-                                    }
-                                }
                         }
 
-                        // For Multiple Pages --------------------------------------------------------End
+                        Fixtures::where('id', $fixture['id'])->update([
+                            'pdf_images' => $pdfImages
+                        ]);
+                    } else {
 
+                        $jsonData = $fixture['pdf_images'];
 
-                    } catch (PdfDoesNotExist $exception) {
+                        $data = json_decode($jsonData, true);
+                        // dd($data);
 
-                        dd($exception->getMessage());
+                        foreach ($data as $item) {
+                            if (isset($item['path'])) {
+
+                                $completePdfPath[] = [
+                                    'path' => $item['path'],
+                                    'fixture' => $obj
+                                ];
+                            }
+                        }
                     }
+
+                    // For Multiple Pages --------------------------------------------------------End
+
+
+                } catch (PdfDoesNotExist $exception) {
+
+                    dd($exception->getMessage());
+                }
                 // } else {
                 //     $completePdfPath[] = $pdfPath;
                 //     $pageNumber = 1;

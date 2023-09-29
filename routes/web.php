@@ -63,16 +63,19 @@ Route::get('google/callback', [AuthController::class, 'handleGoogleCallback']);
 Route::middleware('auth')->group(function () {
 
     // Route::group(['middleware' => ['user']], function () {
-        Route::get('/dashboard', [UserController::class, 'dashboard'])->name('dashboard');
-        Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
-        Route::get('/create-pdf', [PdfController::class, 'createPdfPage'])->name('createPdfPage');
-        Route::post('/preview-pdf', [PdfController::class, 'previewPdf'])->name('previewPdf');
-        Route::any('/pdf-cover', [PdfController::class, 'pdfCover'])->name('pdfCover');
-        // Route::any('/update-profile', [UserController::class, 'updateProfile'])->name('updateProfile');
-        Route::any('/delete-package', [UserController::class, 'deletePackage'])->name('deletePackage');
-        Route::any('/get-package-data', [UserController::class, 'getPackageData'])->name('getPackageData');
-        Route::any('/profile', [UserController::class, 'updateProfile'])->name('updateProfile');
-        Route::any('/support', [UserController::class, 'contactUs'])->name('contactUs');
+    Route::get('/dashboard', [UserController::class, 'dashboard'])->name('dashboard');
+    Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+    Route::get('/create-pdf', [PdfController::class, 'createPdfPage'])->name('createPdfPage');
+    Route::post('/preview-pdf', [PdfController::class, 'previewPdf'])->name('previewPdf');
+    Route::any('/pdf-cover', [PdfController::class, 'pdfCover'])->name('pdfCover');
+    // Route::any('/update-profile', [UserController::class, 'updateProfile'])->name('updateProfile');
+    Route::any('/delete-package', [UserController::class, 'deletePackage'])->name('deletePackage');
+    Route::any('/get-package-data', [UserController::class, 'getPackageData'])->name('getPackageData');
+    Route::any('/profile', [UserController::class, 'updateProfile'])->name('updateProfile');
+    Route::any('/support', [UserController::class, 'contactUs'])->name('contactUs');
+    Route::any('/specification-package', [PdfController::class, 'createPdfPage'])->name('createPdfPage');
+    Route::any('/submittal-package', [PdfController::class, 'createPdfPage'])->name('createPdfPage');
+    Route::any('/record-drawing', [PdfController::class, 'createPdfPage'])->name('createPdfPage');
     // });
 
     // admin route
@@ -84,5 +87,4 @@ Route::middleware('auth')->group(function () {
         Route::any('/delete-user', [AdminController::class, 'deleteUser'])->name('deleteUser');
         Route::post('/update-password', [AdminController::class, 'updatePassword'])->name('updatePassword');
     });
-
 });
