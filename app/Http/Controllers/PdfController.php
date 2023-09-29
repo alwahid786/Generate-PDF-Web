@@ -26,15 +26,23 @@ class PdfController extends Controller
         $packageTypes = PackageType::get();
         $packageInfoId = $request->query('packageInfoId');
 
-        $packageName = $request->segment(count($request->segments()));
+        $urlParam = $request->segment(count($request->segments()));
 
-        // dd($lastSegment);
+        if ($urlParam == 'specification-package') {
+            $packageName = 'Specification Package';
+        } elseif ($urlParam == 'submittal-package') {
+            $packageName = 'Submittal Package';
+        } elseif ($urlParam == 'record-drawing') {
+            $packageName = 'Record Drawings';
+        }
+
+        $packagetypeId = PackageType::where('title', $packageName)->pluck('id');
 
         if ($packageInfoId) {
             $packageInfo = PackageInfo::where('id', $packageInfoId)->with('fixtures')->first();
             return view('pages.create-pdf', compact('packageTypes', 'packageInfo'));
         }
-        return view('pages.create-pdf', compact('packageTypes', 'packageName'));
+        return view('pages.create-pdf', compact('packageTypes', 'packageName', 'packagetypeId'));
     }
 
     // Preview PDF Function
@@ -122,10 +130,10 @@ class PdfController extends Controller
             ];
 
             // path for ubuntu
-            $outputPath = '/var/www/html/pdf-generator/public/files/';
+            // $outputPath = '/var/www/html/pdf-generator/public/files/';
 
             // path for window
-            // $outputPath = 'C:\xampp\htdocs\pdf-generator\public\files';
+            $outputPath = 'C:\xampp\htdocs\pdf-generator\public\files';
 
 
             if (file_exists($pdfPath)) {
@@ -154,10 +162,10 @@ class PdfController extends Controller
                             $outputFilename = "/$time.$randomString.$randomNumber.png";
 
                             // command for window
-                            // $command = "gswin64c.exe -sDEVICE=pngalpha -r300 -o \"$outputPath$outputFilename\" -dFirstPage=$pageNumber -dLastPage=$pageNumber \"$pdfPath\"";
+                            $command = "gswin64c.exe -sDEVICE=pngalpha -r300 -o \"$outputPath$outputFilename\" -dFirstPage=$pageNumber -dLastPage=$pageNumber \"$pdfPath\"";
 
                             // command for ubuntu
-                            $command = "gs -sDEVICE=pngalpha -r600 -o \"$outputPath$outputFilename\" -dFirstPage=$pageNumber -dLastPage=$pageNumber \"$pdfPath\"";
+                            // $command = "gs -sDEVICE=pngalpha -r600 -o \"$outputPath$outputFilename\" -dFirstPage=$pageNumber -dLastPage=$pageNumber \"$pdfPath\"";
 
 
                             exec($command, $output, $returnCode);

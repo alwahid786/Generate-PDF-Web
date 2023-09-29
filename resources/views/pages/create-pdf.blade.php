@@ -24,13 +24,16 @@
                     </div>
                     <div class="type-menu">
                         <select name="package_type" id="packageType" class="typeValidation">
-                            @if($packageName == "specification-package")
-                            <option value="Specification Package">Specification Package</option>
-                            @elseif($packageName == "submittal-package")
-                            <option value="Submittal Package">Submittal Package</option>
-                            @elseif($packageName == "record-drawing")
-                            <option value="Record Drawings">Record Drawings</option>
+
+                            @if (isset($packageTypes) && !empty($packageTypes))
+                            <option <?php if (isset($packageInfo) && $packageInfo->package_type_id == $packagetypeId[0]) {
+                                        echo 'selected';
+                                    } ?> value="{{ $packagetypeId[0] }}">{{ $packageName }}
+                            </option>
+                            @else
+                            <option selected="selected" disabled="disabled">--Select</option>
                             @endif
+
                         </select>
                     </div>
                 </div>
