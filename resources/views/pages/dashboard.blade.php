@@ -13,7 +13,7 @@
             <div class="heading-top">
                 <h1>Dashboard <span>{{date('d M Y')}}</span></h1>
             </div>
-            <!-- <a href="{{(url('create-pdf'))}}" class="btn create-btn"><img class="mr-2" src="{{asset('public/assets/images/plus.png')}}" alt="">Create New Package</a> -->
+            <a href="{{(url('create-pdf'))}}" class="btn create-btn"><img class="mr-2" src="{{asset('public/assets/images/plus.png')}}" alt="">Create New Package</a>
         </div>
 
         @if (\Session::has('error'))

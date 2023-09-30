@@ -34,6 +34,8 @@ class PdfController extends Controller
             $packageName = 'Submittal Package';
         } elseif ($urlParam == 'record-drawing') {
             $packageName = 'Record Drawings';
+        } else {
+            $packageName = 'all';
         }
 
         $packagetypeId = PackageType::where('title', $packageName)->pluck('id');

@@ -26,10 +26,20 @@
                         <select name="package_type" id="packageType" class="typeValidation">
 
                             @if (isset($packageTypes) && !empty($packageTypes))
+                            @if($packageName != 'all')
                             <option <?php if (isset($packageInfo) && $packageInfo->package_type_id == $packagetypeId[0]) {
                                         echo 'selected';
                                     } ?> value="{{ $packagetypeId[0] }}">{{ $packageName }}
                             </option>
+                            @else
+                            @foreach ($packageTypes as $type)
+                            <option <?php if (isset($packageInfo) && $packageInfo->package_type_id == $type['id']) {
+                                        echo 'selected';
+                                    } ?> value="{{ $type['id'] }}">{{ $type['title'] }}
+                            </option>
+                            @endforeach
+                            @endif
+
                             @else
                             <option selected="selected" disabled="disabled">--Select</option>
                             @endif
