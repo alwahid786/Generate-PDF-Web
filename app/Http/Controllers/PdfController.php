@@ -50,7 +50,6 @@ class PdfController extends Controller
     // Preview PDF Function
     public function previewPdf(Request $request)
     {
-
         $package = json_decode($request->input('package'));
 
 
@@ -73,10 +72,8 @@ class PdfController extends Controller
 
         foreach ($fixtures as $fixture) {
 
-
             $filePath = $fixture['pdfFile'];
             if (gettype($filePath) != 'string') {
-
                 $uploadedFile = $fixture['pdfFile'];
                 $name = time() . '_' . $uploadedFile->getClientOriginalName();
                 $path = public_path('/files');
@@ -84,12 +81,24 @@ class PdfController extends Controller
                 $uploadedFile->move($path, $name);
                 $filePath = $path . '/' . $name;
             }
+
+            if ($fixture['imageFile'] != 'undefined') {
+                $image = $fixture['imageFile'];
+
+                $imageName = time() . '.' . $image->getClientOriginalExtension();
+
+                $imagePath = public_path('/files');
+                $image->move($imagePath, $imageName);
+                $imagefilePath = $imagePath . '/' . $imageName;
+            }
+
+
             $fixtureData = new Fixtures();
             $fixtureData->package_info_id = $packageType->id;
             $fixtureData->pdf_path = $filePath;
             $fixtureData->type = $fixture['fixtureType'];
             $fixtureData->part_number = $fixture['part_no'];
-            $fixtureData->image_path = null;
+            $fixtureData->image_path = $imagefilePath ?? null;
             $fixtureData->save();
         }
 
@@ -107,6 +116,7 @@ class PdfController extends Controller
         $typeId = $request->query('packageTypeId');
         $is_view = $request->is_view ?? false;
         $package = PackageInfo::where('id', $typeId)->with('fixtures')->first();
+
 
         $packageTypeName = PackageType::where('id', $package->package_type_id)->pluck('title');
 

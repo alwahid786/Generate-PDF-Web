@@ -95,12 +95,12 @@
                             </div>
                         </div>
                     </div>
-                    <!-- <div class="drop-zone">
-                                    <span class="drop-zone__prompt"></span>
-                                    <span>Add Image</span>
-                                    <span>Drag+Drop</span>
-                                    <input type="file" name="image-file" id="pdfImage" class="drop-zone__input typeValidation" accept="image/jpeg, image/png, image/gif">
-                                </div> -->
+                    <div class="drop-zone">
+                        <span class="drop-zone__prompt"></span>
+                        <span>Add Image</span>
+                        <span>Drag+Drop</span>
+                        <input type="file" name="image_path" id="pdfImage" class="drop-zone__input" accept="image/jpeg, image/png, image/gif">
+                    </div>
                     <div class="drop-zone">
                         <span class="drop-zone__prompt">Add File</span>
                         <span>Spec Sheet</span>
@@ -138,10 +138,10 @@
                     @endif
                     <!-- Append PDF Row Here -->
                 </div>
-                <!-- <div class="summary-wrapper">
-                                <input type="checkbox" id="checkbox1" class="rounded-checkbox">
-                                <label for="checkbox1">Summary</label>
-                            </div> -->
+                <div class="summary-wrapper">
+                    <input type="checkbox" id="checkbox1" class="rounded-checkbox">
+                    <label for="checkbox1">Summary</label>
+                </div>
                 <div class="pdf-action">
                     <div class="action-type">
                         <a id="previewPdf" href="javascript:void(0)">Preview & Save</a>
@@ -396,9 +396,9 @@
         var selectedFiles = pdfFileInput.files;
         var pdfFile = selectedFiles[0];
         // Get Image File
-        // var ImageFileInput = document.getElementById('pdfImage');
-        // var selectedImageFiles = ImageFileInput.files;
-        // var ImageFile = selectedImageFiles[0];
+        var ImageFileInput = document.getElementById('pdfImage');
+        var selectedImageFiles = ImageFileInput.files;
+        var ImageFile = selectedImageFiles[0];
         // Get Image Preview Div
         // var imagePreview = $(".drop-zone__thumb:first").prop('outerHTML');
         // var pdfPreview = $(".drop-zone__thumb:eq(1)").prop('outerHTML');
@@ -445,7 +445,7 @@
 
         pdfObject = {
             "pdfFile": pdfFile,
-            // 'imageFile': ImageFile,
+            'imageFile': ImageFile,
             "reference_no": ref,
             "part_no": partNo,
             "fixtureType": fixtureType,
