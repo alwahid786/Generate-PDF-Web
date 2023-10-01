@@ -27,7 +27,7 @@ class PdfController extends Controller
         $packageInfoId = $request->query('packageInfoId');
 
         $urlParam = $request->segment(count($request->segments()));
-
+        $packageName = '';
         if ($urlParam == 'specification-package') {
             $packageName = 'Specification Package';
         } elseif ($urlParam == 'submittal-package') {
@@ -42,7 +42,7 @@ class PdfController extends Controller
 
         if ($packageInfoId) {
             $packageInfo = PackageInfo::where('id', $packageInfoId)->with('fixtures')->first();
-            return view('pages.create-pdf', compact('packageTypes', 'packageInfo'));
+            return view('pages.create-pdf', compact('packageTypes', 'packageInfo', 'packageName'));
         }
         return view('pages.create-pdf', compact('packageTypes', 'packageName', 'packagetypeId'));
     }
