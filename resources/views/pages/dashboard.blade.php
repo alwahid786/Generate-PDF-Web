@@ -5,6 +5,11 @@
     body {
         background: #f6f6f6;
     }
+
+    .form-control-sm {
+        width: 300px !important;
+        margin: 6px !important;
+    }
 </style>
 @include('includes.navbar')
 <main class="content-wrapper">
@@ -170,7 +175,7 @@
         $('#detail-table').DataTable({
             "ordering": false,
             "info": false,
-            "searching": false,
+            "searching": true,
             "lengthChange": false,
             "pageLength": 12,
             language: {

@@ -109,11 +109,11 @@
                     <img src="{{asset('public/assets/images/rec-blue.png')}}" class="pr-2 icon-blue">
                     Record Drawing</a>
             </li>
-            <li class="nav-item my-1 ">
+            <!-- <li class="nav-item my-1 ">
                 <a class="nav-link sidenav-item" href="{{url('coming-soon')}}"><img src="{{asset('public/assets/images/exis-white.png')}}" class="pr-2 icon-white">
                     <img src="{{asset('public/assets/images/exis-blue.png')}}" class="pr-2 icon-blue">
                     Existing Record Search</a>
-            </li>
+            </li> -->
             <li class="nav-item my-1 ">
                 <a class="nav-link sidenav-item" href="{{url('profile')}}"><img src="{{asset('public/assets/images/pro-white.png')}}" class="pr-2 icon-white">
                     <img src="{{asset('public/assets/images/pro-blue.png')}}" class="pr-2 icon-blue">
