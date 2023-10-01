@@ -80,14 +80,14 @@
             </div>
         </form>
         <ul class="navbar-nav mr-auto sidenav" id="navAccordion">
-            <li class="nav-item my-1 active">
+            <li class="nav-item my-1 {{ request()->is('dashboard') ? 'active' : '' }}">
                 <a class="nav-link sidenav-item dasboard-link" href="{{url('dashboard')}}">
                     <img src="{{asset('public/assets/images/d-white.png')}}" class="icon-white pr-2">
                     <img src="{{asset('public/assets/images/d-blue.png')}}" class="icon-blue pr-2">
                     Dashboard
                 </a>
             </li>
-            <li class="nav-item my-1 ">
+            <li class="nav-item my-1 {{ request()->is('specification-package') ? 'active' : '' }}">
                 <a class="nav-link sidenav-item" href="{{url('/specification-package')}}">
                     <img src="{{asset('public/assets/images/spec-blue.png')}}" class="icon-blue pr-2">
                     <img src="{{asset('public/assets/images/spec-white.png')}}" class="icon-white pr-2">
@@ -99,12 +99,12 @@
                     <img src="{{asset('public/assets/images/light-blue.png')}}" class="pr-2 icon-blue">
                     Lighting Legend</a>
             </li> -->
-            <li class="nav-item my-1 ">
+            <li class="nav-item my-1 {{ request()->is('submittal-package') ? 'active' : '' }}">
                 <a class="nav-link sidenav-item" href="{{url('/submittal-package')}}"><img src="{{asset('public/assets/images/sub-white.png')}}" class="pr-2 icon-white">
                     <img src="{{asset('public/assets/images/sub-blue.png')}}" class="pr-2 icon-blue">
                     Submittal Package</a>
             </li>
-            <li class="nav-item my-1 ">
+            <li class="nav-item my-1 {{ request()->is('record-drawing') ? 'active' : '' }}">
                 <a class="nav-link sidenav-item" href="{{url('/record-drawing')}}"><img src="{{asset('public/assets/images/rec-white.png')}}" class="pr-2 icon-white">
                     <img src="{{asset('public/assets/images/rec-blue.png')}}" class="pr-2 icon-blue">
                     Record Drawing</a>

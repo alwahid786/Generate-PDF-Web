@@ -210,7 +210,7 @@
     //         $('#warning-message-partno').text('');
     //     }
     // });
-    $('.sidenav  li:nth-of-type(1)').addClass('active');
+    // $('.sidenav  li:nth-of-type(1)').addClass('active');
 </script>
 <!-- DropZone Scripts -- START -- -->
 <script>
