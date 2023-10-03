@@ -441,7 +441,6 @@
             $(".row" + editedId).find('.fixPartNo_append').text(partNo);
             resetFixtures();
 
-            console.log("Test Foeikjsd", fixtures)
 
             $("#editId").val('');
             return;
