@@ -163,6 +163,8 @@
 <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap4.min.js"></script>
 {{-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script> --}}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 
 
@@ -293,6 +295,8 @@
 <script>
     $(document).ready(function() {
 
+        $(".pdf-detail-bar").sortable();
+
         $('#projectName').on('keydown keyup change', function() {
             var char = $(this).val();
             var charLength = $(this).val().length;
@@ -360,7 +364,7 @@
     <?php
     }
     ?>
-    console.log(fixtures)
+    // console.log(fixtures)
     $(document).on('click', '#addTypeBtn', function() {
 
         let error = 0;
@@ -465,8 +469,14 @@
                         </li>
                     </ul>`;
         $(".pdf-detail-bar").append(pdfDiv);
+        // $(".sortable").draggable({
+        //     revert: true, // Automatically return to the original position when released
+        // });
+        // $(".sortable").draggable();
+        $(".pdf-detail-bar").sortable();
+        // $(".sortable").disableSelection();
         resetFixtures();
-        console.log(fixtures);
+        // console.log(fixtures);
         // console.log('old')
         // console.log('old')
 
