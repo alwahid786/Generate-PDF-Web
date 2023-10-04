@@ -446,6 +446,12 @@
             return;
         }
 
+        $(".pdf-detail-bar").sortable({
+            update: function() {
+                updateFixturesArray();
+            }
+        });
+
         pdfObject = {
             "pdfFile": pdfFile,
             'imageFile': ImageFile,
@@ -542,6 +548,22 @@
         let pdfFile = $("#pdfFile").val('');
         let dropImage = $(".drop-zone__thumb").remove();
     }
+
+    function updateFixturesArray() {
+        const sortedIds = $(".pdf-detail-bar ul").map(function() {
+            return $(this).data("id");
+        }).get();
+
+        const newFixtures = [];
+        for (const id of sortedIds) {
+            const fixture = fixtures.find(f => f.id === id);
+            if (fixture) {
+                newFixtures.push(fixture);
+            }
+        }
+
+        fixtures = newFixtures;
+    }
     // Preview PDF Function
     $("#previewPdf").click(function() {
         if (fixtures.length < 1) {
@@ -562,6 +584,8 @@
             referenceNo: referenceNo,
             pdfId: '{{ $packageInfo->id ?? "" }}'
         }
+
+        updateFixturesArray();
 
         // Fetch REQUEST START
         var data = new FormData();
