@@ -50,6 +50,7 @@ class PdfController extends Controller
     // Preview PDF Function
     public function previewPdf(Request $request)
     {
+
         $package = json_decode($request->input('package'));
 
 
@@ -62,6 +63,7 @@ class PdfController extends Controller
         $packageType->package_name = $package->projectName;
         $packageType->vision_reference = $package->referenceNo;
         $packageType->package_type_id = $package->packageType;
+        $packageType->summary = $package->summary;
         $packageType->user_id = auth()->user()->id;
         $packageType->save();
 
@@ -119,6 +121,7 @@ class PdfController extends Controller
 
 
         $packageTypeName = PackageType::where('id', $package->package_type_id)->pluck('title');
+        $getFixture = Fixtures::where('package_info_id', $package->package_type_id)->get();
 
         if (empty($package)) {
             return response()->json(['status' => false, 'message' => 'Error: Package Id is Invalid!']);
@@ -136,7 +139,9 @@ class PdfController extends Controller
             $obj = [
                 'type' => $fixture['type'],
                 'part_number' => $fixture['part_number'],
+                'image_path' => $fixture['image_path'],
                 'project' => $package['package_name'],
+                'summary' => $package['summary'],
                 'vision_reference' => $package['vision_reference'],
                 'created_at' => $package['created_at'],
             ];
@@ -240,8 +245,8 @@ class PdfController extends Controller
         }
 
 
-
-        $template =  view('pages.pdf-template', ['pdf_path' => $completePdfPath, 'packageTypeName' => $packageTypeName, 'typeId' => $typeId, 'is_view' => $is_view])->render();
+        // dd($getFixture);
+        $template =  view('pages.pdf-template', ['pdf_path' => $completePdfPath, 'getFixture' => $getFixture, 'packageTypeName' => $packageTypeName, 'typeId' => $typeId, 'is_view' => $is_view])->render();
 
         View::share('pdfTemplate', $template);
 

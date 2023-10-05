@@ -93,12 +93,12 @@
                                 <th>Image</th>
                                 <th>Part Number</th>
                             </tr>
-                            @foreach ($pdf_path as $path)
+                            @foreach ($getFixture as $data)
 
                             <tr>
-                                <td>{{ $path['fixture']['type'] }}</td>
-                                <td><img src="{{ $path['fixture']['image_path'] ?? '' }}" alt=""></td>
-                                <td>{{ $path['fixture']['part_number'] }}</td>
+                                <td>{{ $data['type'] }}</td>
+                                <td><img src="{{ $data['image_path'] ?? '' }}" alt=""></td>
+                                <td>{{ $data['part_number'] }}</td>
                             </tr>
                             @endforeach
                         </table>
