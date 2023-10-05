@@ -139,7 +139,7 @@
                     <!-- Append PDF Row Here -->
                 </div>
                 <div class="summary-wrapper">
-                    <input type="checkbox" id="checkbox1" class="rounded-checkbox">
+                    <input type="checkbox" name="summary" id="checkbox1" class="rounded-checkbox">
                     <label for="checkbox1">Summary</label>
                 </div>
                 <div class="pdf-action">
@@ -578,10 +578,18 @@
         let packageType = $("#packageType").val();
         let projectName = $("#projectName").val();
         let referenceNo = $("#referenceNo").val();
+        let summaryCheckbox = document.getElementById("checkbox1");
+        if (summaryCheckbox.checked) {
+            summary = 1;
+        } else {
+            summary = 0;
+        }
+        // alert(summary)
         var packageObject = {
             packageType: packageType,
             projectName: projectName,
             referenceNo: referenceNo,
+            summary: summary,
             pdfId: '{{ $packageInfo->id ?? "" }}'
         }
 
