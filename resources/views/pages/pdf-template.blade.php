@@ -1,5 +1,6 @@
 <body style="background-color: #f6f6f6;">
-    <div id="content" style="
+    <div id="content"
+        style="
         display:flex;
         flex-direction:column;
         align-items:center;
@@ -8,43 +9,125 @@
           Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue',
           sans-serif;
       ">
-        <div class="controls" style="position: fixed; left: 268px; top: 171px;">
-            <h3>Select</h3>
-            <div class="lightBorder">
-                <p>
-                    <input type="radio" name="shape" value="line" />
-                    Line Highlight
-                </p>
-                <p><input type="radio" name="shape" value="rect" /> Area Highlight</p>
-                <p><input type="radio" name="shape" value="arrow" /> Arrow</p>
-                <p>
-                    <input type="radio" name="shape" value="comm" id="comment-option" />
-                    Add Comment
-                </p>
+
+        <div class="controls" id="control-wrapper"
+            style="display:block;
+        position: fixed;
+        right:0;top: 52%;
+    transform: translateY(-50%);">
+            <div class="edit-options-wrapper"
+                style="
+                background-color: rgb(255, 255, 255);
+                box-shadow: rgba(17, 17, 26, 0.05) 0px 1px 0px,
+                  rgba(17, 17, 26, 0.1) 0px 0px 8px;
+                border-radius: 10px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                position: relative;
+                width: 80px;
+              ">
+
+                <label class="edit-option"
+                    style="
+                  display: flex;
+                  flex-direction: column;
+                  justify-content: center;
+                  align-items: center;
+                  row-gap: 0.5rem;
+                  cursor: pointer;
+                  width: 100%;
+                  border-bottom:1px solid #00000014;
+                  margin:0px;
+                  padding-top:1.5rem;
+                  border-top-left-radius:10px;
+                  border-top-right-radius:10px;
+                ">
+                    <input type="radio" name="shape" value="line" style="display: none" />
+                    <img style="width: 35px" src="{{ asset('public/assets/images/marker.png') }}" />
+                    <p style="margin: 0">Highlight</p>
+                </label>
+                <label class="edit-option"
+                    style="
+                 display: flex;
+                  flex-direction: column;
+                  justify-content: center;
+                  align-items: center;
+                  row-gap: 0.5rem;
+                  padding-top:1.5rem;
+                  cursor: pointer;
+                  width: 100%;
+                  border-bottom:1px solid #00000014;
+                  margin:0px;
+                ">
+                    <input type="radio" name="shape" value="comm" id="comment-option" style="display: none" />
+                    <img style="width: 35px" src="{{ asset('public/assets/images/add-text.png') }}" />
+                    <p style="margin: 0">Add Test</p>
+                </label>
+                <label class="edit-option"
+                    style="
+                    display: flex;
+                  flex-direction: column;
+                  justify-content: center;
+                  align-items: center;
+                  row-gap: 0.5rem;
+                  padding-top:1.5rem;
+                  cursor: pointer;
+                  width: 100%;
+                  border-bottom:1px solid #00000014;
+                  margin:0px;
+                ">
+                    <input type="radio" name="shape" value="rect" style="display: none" />
+                    <img style="width: 35px" src="{{ asset('public/assets/images/rectangle.png') }}" />
+                    <p style="margin: 0">Add Box</p>
+                </label>
+                <label class="edit-option"
+                    style="
+                    display: flex;
+                  flex-direction: column;
+                  justify-content: center;
+                  align-items: center;
+                  row-gap: 0.5rem;
+                  padding-top:1.5rem;
+                  cursor: pointer;
+                  width: 100%;
+                  border-bottom:1px solid #00000014;
+                  margin:0px;
+                ">
+                    <input type="radio" name="shape" value="arrow" style="display: none" />
+                    <img style="width: 35px" src="{{ asset('public/assets/images/right-arrow.png') }}" />
+                    <p style="margin: 0">Arrow</p>
+                </label>
+                <div id="clearCanvas" class="edit-option"
+                    style="
+                    display: flex;
+                  flex-direction: column;
+                  justify-content: center;
+                  align-items: center;
+                  row-gap: 0.5rem;
+                  cursor: pointer;
+                  width: 100%;
+                  padding-top:1.5rem;
+                  padding-bottom:0.5rem
+                  border-bottom-left-radius:10px;
+                  border-bottom-right-radius:10px;
+
+                ">
+                    <img style="width: 35px" src="{{ asset('public/assets/images/eraser.png') }}" />
+                    <p style="margin: 0">Clear All</p>
+                </div>
             </div>
-
-            <button type="button" class="button-error pure-button" style="
-                background: #5757c8;
-    color: white;
-    border-style: none;
-    border-radius: 5px;
-    width: 115px;
-    height: 40px;" id="clearCanvas" name="button">
-                Clear All
-            </button>
         </div>
-
-
-        <!-- start summary page -->
-        @if($pdf_path[0]['fixture']['summary'] == 1)
-
         <div id="inner-content" style="position: relative; width: 816px">
             <canvas id="canvas" style="position: absolute; top: 0; left: 0; z-index: 1"></canvas>
             <div class="text-modal" id="comment-modal" style="display: none">
                 <div>
-                    <img src="{{ asset('public/assets/images/delete-button.png') }}" style="width: 15px; cursor: pointer" id="comment-modal-close" />
+                    <img src="{{ asset('public/assets/images/delete-button.png') }}"
+                        style="width: 15px; cursor: pointer" id="comment-modal-close" />
                 </div>
-                <textarea placeholder="Enter comment" id="comment-content" type="text" rows="3" style="
+                <textarea placeholder="Enter comment" id="comment-content" type="text" rows="3"
+                    style="
                   border-radius: 10px;
                   border: 1px solid #dbdbdb;
                   padding: 0.375rem 0.75rem;
@@ -52,7 +135,8 @@
                   resize: none;
                   width: 100%;
                 "></textarea>
-                <button id="comment-btn" style="
+                <button id="comment-btn"
+                    style="
                   background-color: #003f77;
                   color: white;
                   border-radius: 10px;
@@ -64,161 +148,144 @@
                     Add
                 </button>
             </div>
-            <div style="
-          height: 1056px;
-        width:816px;
-          background-color: rgb(255, 255, 255);
-          padding: 2rem;" class="main-page-wrapper">
+  <!-- start summary page -->
+  @if ($pdf_path[0]['fixture']['summary'] == 1)
+  <div style="height: 1056px;width:816px;background-color: rgb(255, 255, 255);padding: 2rem;"class="main-page-wrapper">
+      <div style="display:flex; justify-content:space-between; align-items:center">
+          <img style="width:140px; height:100%" src="{{ asset('public/assets/images/logo-icon.png') }}"
+          <h1 style="font-size:1.2rem;margin:0px">Project</h1>
+          <h1 style="font-size:1.2rem ;margin:0px"> Visionz #</h1>
+          <h1 style="font-size:1.5rem ;margin:0px">Package</br> Summary</h1>
+      </div>
+          <div style="height: 890px; padding-top: 15px">
+              <table style="width: 100%">
+                  <tr>
+                    <th style="padding: 0.8rem 0; width: 15%; text-align:center">Type</th>
+                    <th style="padding: 0.8rem 0; width: 30%;text-align:center">Image</th>
+                    <th style="padding: 0.8rem 0; width: 40%;text-align:center">Part Number</th>
+                  </tr>
+                  @foreach ($getFixture as $data)
+                  <tr>
+                    <td
+                      style="
+                        border-bottom: 1px solid rgb(226, 226, 226);
+                        border-collapse: collapse;
+                        text-align: center;
+                      "
+                    >
+                    {{ $data['type'] }}
+                    </td>
+
+                    <td
+                      style="
+                        border-bottom: 1px solid rgb(226, 226, 226);
+                        border-collapse: collapse;
+                        text-align: center;
+                      "
+                    >
+
+                    <img  style="height: 90px" src="{{asset('public/files/'.$data['image_path'])}}" alt="">
+
+                    </td>
+                    <td
+                      style="
+                        border-bottom: 1px solid rgb(226, 226, 226);
+                        border-collapse: collapse;
+                        text-align: center;
+                      "
+                        >
+                    {{ $data['part_number'] }}
+                    </td>
+                  </tr>
+                  @endforeach
+                </table>
+          </div>
+          <div
+              style="display: flex;align-items: center;justify-content: space-between;">
+              <div><img src="{{ asset('public/assets/images/logo-icon.png') }}" style="width: 170px" />
+              </div>
+              <div>
+                  <a href="https://visionz.ca/"
+                      style="text-decoration: none; color: black; font-size: 17px">visionz.ca</a>
+              </div>
+              <div>
+                  <p style="font-size: 17px; margin: 0">437-886-9837</p>
+              </div>
+              <div>
+                  <a href="mailto:projects@visionz.ca"
+                      style="text-decoration: none; color: black; font-size: 17px">projects@visionz.ca</a>
+              </div>
+          </div>
+  </div>
+@endif
+
+<!-- end summary page -->
+            <div style="height: 1056px;width:816px;background-color: rgb(255, 255, 255);padding: 2rem;"
+                class="main-page-wrapper">
                 <div style="height: 50%; position: relative">
-                    <img src="{{ asset('public/assets/images/logo-icon.png') }}" style="
+                    <img src="{{ asset('public/assets/images/logo-icon.png') }}"
+                        style="
               position: absolute;
               right: -150px;
               top: 50%;
               transform: translateY(-50%) rotate(-90deg);
-              width: 500px;
-            " />
+              width: 500px;" />
                 </div>
-                <div style="
-            height: 50%;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            padding: 0 2rem;
-          ">
-
+                <div
+                    style="height: 50%;display: flex;flex-direction: column;justify-content: space-between;padding: 0 2rem;">
+                    <?php
+                    $date = new DateTime($pdf_path[0]['fixture']['created_at']);
+                    $formattedDate = $date->format('d F Y');
+                    ?>
                     <div>
-                        <table style="width:100%">
-                            <tr>
-                                <th>Type</th>
-                                <th>Image</th>
-                                <th>Part Number</th>
-                            </tr>
-                            @foreach ($getFixture as $data)
-
-                            <tr>
-                                <td>{{ $data['type'] }}</td>
-                                <td><img src="{{ $data['image_path'] ?? '' }}" alt=""></td>
-                                <td>{{ $data['part_number'] }}</td>
-                            </tr>
-                            @endforeach
-                        </table>
+                        <h1 style="font-size: 2.8rem; margin: 0" class="projectTitle">
+                            {{ $pdf_path[0]['fixture']['project'] }}
+                        </h1>
+                        <h3 style="font-size: 17px;margin-top: 6px;margin-bottom: 4px;font-weight: bold;"
+                            class="projectTypeName">{{ $packageTypeName[0] }}</h3>
+                        <p style="font-size: 14px;padding-top: 12px;">{{ $formattedDate }}</p>
                     </div>
-                    <div style="
+                    <div
+                        style="
               display: flex;
               align-items: center;
-              justify-content: space-between;
-            ">
-                        <div><img src="{{ asset('public/assets/images/logo-icon.png') }}" style="width: 170px" /></div>
+              justify-content: space-between;">
+                        <div><img src="{{ asset('public/assets/images/logo-icon.png') }}" style="width: 170px" />
+                        </div>
                         <div>
-                            <a href="https://visionz.ca/" style="text-decoration: none; color: black; font-size: 17px">visionz.ca</a>
+                            <a href="https://visionz.ca/"
+                                style="text-decoration: none; color: black; font-size: 17px">visionz.ca</a>
                         </div>
                         <div>
                             <p style="font-size: 17px; margin: 0">437-886-9837</p>
                         </div>
                         <div>
-                            <a href="mailto:projects@visionz.ca" style="text-decoration: none; color: black; font-size: 17px">projects@visionz.ca</a>
+                            <a href="mailto:projects@visionz.ca"
+                                style="text-decoration: none; color: black; font-size: 17px">projects@visionz.ca</a>
                         </div>
                     </div>
                 </div>
             </div>
 
-            @endif
-
-            <!-- end summary page -->
-
-
-            <div id="inner-content" style="position: relative; width: 816px">
-                <canvas id="canvas" style="position: absolute; top: 0; left: 0; z-index: 1"></canvas>
-                <div class="text-modal" id="comment-modal" style="display: none">
-                    <div>
-                        <img src="{{ asset('public/assets/images/delete-button.png') }}" style="width: 15px; cursor: pointer" id="comment-modal-close" />
-                    </div>
-                    <textarea placeholder="Enter comment" id="comment-content" type="text" rows="3" style="
-                  border-radius: 10px;
-                  border: 1px solid #dbdbdb;
-                  padding: 0.375rem 0.75rem;
-                  outline: none;
-                  resize: none;
-                  width: 100%;
-                "></textarea>
-                    <button id="comment-btn" style="
-                  background-color: #003f77;
-                  color: white;
-                  border-radius: 10px;
-                  border: none;
-                  height: 30px;
-                  width: 50px;
-                  cursor: pointer;
-                ">
-                        Add
-                    </button>
-                </div>
-                <div style="
-          height: 1056px;
-        width:816px;
-          background-color: rgb(255, 255, 255);
-          padding: 2rem;" class="main-page-wrapper">
-                    <div style="height: 50%; position: relative">
-                        <img src="{{ asset('public/assets/images/logo-icon.png') }}" style="
-              position: absolute;
-              right: -150px;
-              top: 50%;
-              transform: translateY(-50%) rotate(-90deg);
-              width: 500px;
-            " />
-                    </div>
-                    <div style="
-            height: 50%;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            padding: 0 2rem;
-          ">
-                        <?php
-                        $date = new DateTime($pdf_path[0]['fixture']['created_at']);
-                        $formattedDate = $date->format('d F Y');
-                        ?>
-                        <div>
-                            <h1 style="font-size: 2.8rem; margin: 0" class="projectTitle">
-                                {{ $pdf_path[0]['fixture']['project'] }}
-                            </h1>
-                            <h3 style="font-size: 17px;margin-top: 6px;margin-bottom: 4px;font-weight: bold;" class="projectTypeName">{{ $packageTypeName[0] }}</h3>
-                            <p style="font-size: 14px;padding-top: 12px;">{{ $formattedDate }}</p>
-                        </div>
-                        <div style="
-              display: flex;
-              align-items: center;
-              justify-content: space-between;
-            ">
-                            <div><img src="{{ asset('public/assets/images/logo-icon.png') }}" style="width: 170px" /></div>
-                            <div>
-                                <a href="https://visionz.ca/" style="text-decoration: none; color: black; font-size: 17px">visionz.ca</a>
-                            </div>
-                            <div>
-                                <p style="font-size: 17px; margin: 0">437-886-9837</p>
-                            </div>
-                            <div>
-                                <a href="mailto:projects@visionz.ca" style="text-decoration: none; color: black; font-size: 17px">projects@visionz.ca</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                @foreach ($pdf_path as $index => $path)
+            @foreach ($pdf_path as $index => $path)
                 @php
-                $currentPage = $index + 1;
+                    $currentPage = $index + 1;
                 @endphp
-                <div style="height: 1056px; width:816px; padding: 2rem; background-color: rgb(255, 255, 255);" class="body-page-wrapper">
+                <div style="height: 1056px; width:816px; padding: 2rem; background-color: rgb(255, 255, 255);"
+                    class="body-page-wrapper">
                     <div class="table-wrapper" style="border: 1px solid; ">
                         <div class="table-header" style="height: 70px; display: flex; border-bottom: 1px solid black">
-                            <div style="width: 20%;border-right: 1px solid black;text-align: center;padding: 10px 0px;">
-                                <img style="width: 120px; margin: 0 auto" src="{{ asset('public/assets/images/side-logo.png') }}" alt="" />
+                            <div
+                                style="width: 20%;border-right: 1px solid black;text-align: center;padding: 10px 0px;">
+                                <img style="width: 120px; margin: 0 auto"
+                                    src="{{ asset('public/assets/images/side-logo.png') }}" alt="" />
                             </div>
                             <div style="width: 25%; border-right: 1px solid black; padding: 2px 0px">
                                 <h1 style="margin: 0; font-size: 1.2rem; text-align: center">
                                     Project
                                 </h1>
-                                <p style="margin: 0; text-align: center; font-size: 0.9rem; word-break:break-all; padding:0 0.5rem">
+                                <p
+                                    style="margin: 0; text-align: center; font-size: 0.9rem; word-break:break-all; padding:0 0.5rem">
                                     {{ $path['fixture']['project'] }}
                                 </p>
                             </div>
@@ -226,7 +293,8 @@
                                 <h1 style="margin: 0; font-size: 1.2rem; text-align: center;">
                                     Part Number
                                 </h1>
-                                <p style="margin: 0; text-align: center; font-size: 0.9rem; word-break:break-all; padding:0 0.5rem">
+                                <p
+                                    style="margin: 0; text-align: center; font-size: 0.9rem; word-break:break-all; padding:0 0.5rem">
                                     {{ $path['fixture']['part_number'] }}
                                 </p>
                                 {{-- <p style="margin: 0; text-align: center; font-size: 0.9rem">
@@ -243,12 +311,15 @@
                             </div>
                         </div>
 
-                        <div class="pdf-content" style="height: 890px; width:100%; display:flex; justify-content:center; align-items:center">
-                            <img class="body-images" style="width:100%; height:100%" src="{{ $path['path'] }}" alt="">
+                        <div class="pdf-content"
+                            style="height: 890px; width:100%; display:flex; justify-content:center; align-items:center">
+                            <img class="body-images" style="width:100%; height:100%" src="{{ $path['path'] }}"
+                                alt="">
                             {{-- <img src="{{asset('public/assets/images/Capture.png')}}" alt="" style="width: 100%" /> --}}
                         </div>
 
-                        <div class="table-footer" style="height: 37px; display: flex; border-top: 1px solid black; padding: 8px 0px">
+                        <div class="table-footer"
+                            style="height: 37px; display: flex; border-top: 1px solid black; padding: 8px 0px">
                             <div style="width: 25%; text-align: center">
                                 <p style="margin: 0; font-size: 0.9rem">
                                     <strong>Date</strong> {{ $formattedDate }}
@@ -264,16 +335,19 @@
                         </div>
                     </div>
                 </div>
-                @endforeach
-            </div>
+            @endforeach
         </div>
+    </div>
+
 </body>
 
-<div class="d-flex justify-content-center align-items-center mt-5">
-    <button style="background: #5757c8;color: white;width: 250px;height: 60px;border-style: none;border-radius: 5px;" id="convertBtn">Download to PDF</button>
+<div class="d-flex flex-column justify-content-center align-items-center " style="position:fixed; bottom:10px; right:5px">
+    <button style="background: #5757c8;color: white;width: 180px;height: 60px;border-style: none;border-radius: 5px; margin-bottom:5px"
+        id="convertBtn">Download to PDF</button>
     @if (!$is_view)
-    <a href="{{ url('create-pdf') }}?packageInfoId=<?= $typeId ?>"><button style="background: black;color: white;width: 250px;height: 60px;border-style: none;border-radius: 5px;margin-left: 5px">Go
-            back to Edit</button></a>
+        <a href="{{ url('create-pdf') }}?packageInfoId=<?= $typeId ?>"><button
+                style="background: black;color: white;width: 180px;height: 60px;border-style: none;border-radius: 5px;">Go
+                back to Edit</button></a>
     @endif
 </div>
 <!-- Include the html2canvas library -->
@@ -343,6 +417,21 @@
         dragging = false,
         dragStartLocation,
         snapshot;
+
+    const contentWrapper = document.getElementById("content");
+    const innerContent = document.getElementById("inner-content");
+    const commentModal = document.getElementById("comment-modal");
+    const addComment = document.getElementById("comment-btn");
+    const commentContent = document.getElementById("comment-content");
+    const commentModalClose = document.getElementById("comment-modal-close");
+    const commentOption = document.getElementById("comment-option");
+    const controlWrapper = document.getElementById("control-wrapper");
+    const editOption = document.getElementById("edit-option");
+
+    $(".edit-option").click(function() {
+        $(".edit-option").css("background-color", "transparent");
+        $(this).css("background-color", "#dce8f3");
+    });
 
     function getCanvasCoordinates(event) {
         var x = event.clientX - canvas.getBoundingClientRect().left;
@@ -510,13 +599,6 @@
     // Call the function to set canvas dimensions initially and when the window is resized
     window.addEventListener("load", setCanvasDimensions);
     window.addEventListener("resize", setCanvasDimensions);
-    const contentWrapper = document.getElementById("content");
-    const innerContent = document.getElementById("inner-content");
-    const commentModal = document.getElementById("comment-modal");
-    const addComment = document.getElementById("comment-btn");
-    const commentContent = document.getElementById("comment-content");
-    const commentModalClose = document.getElementById("comment-modal-close");
-    const commentOption = document.getElementById("comment-option");
 
     var x1, y1;
 

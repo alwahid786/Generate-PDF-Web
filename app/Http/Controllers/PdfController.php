@@ -84,6 +84,8 @@ class PdfController extends Controller
                 $filePath = $path . '/' . $name;
             }
 
+            $imagefilePath = [];
+
             if ($fixture['imageFile'] != 'undefined') {
                 $image = $fixture['imageFile'];
 
@@ -91,7 +93,8 @@ class PdfController extends Controller
 
                 $imagePath = public_path('/files');
                 $image->move($imagePath, $imageName);
-                $imagefilePath = $imagePath . '/' . $imageName;
+                // $imagefilePath = $imagePath . '/' . $imageName;
+                $imagefilePath = $imageName;
             }
 
 
@@ -119,9 +122,8 @@ class PdfController extends Controller
         $is_view = $request->is_view ?? false;
         $package = PackageInfo::where('id', $typeId)->with('fixtures')->first();
 
-
         $packageTypeName = PackageType::where('id', $package->package_type_id)->pluck('title');
-        $getFixture = Fixtures::where('package_info_id', $package->package_type_id)->get();
+        $getFixture = Fixtures::where('package_info_id', $package->id)->get();
 
         if (empty($package)) {
             return response()->json(['status' => false, 'message' => 'Error: Package Id is Invalid!']);
@@ -245,7 +247,6 @@ class PdfController extends Controller
         }
 
 
-        // dd($getFixture);
         $template =  view('pages.pdf-template', ['pdf_path' => $completePdfPath, 'getFixture' => $getFixture, 'packageTypeName' => $packageTypeName, 'typeId' => $typeId, 'is_view' => $is_view])->render();
 
         View::share('pdfTemplate', $template);
