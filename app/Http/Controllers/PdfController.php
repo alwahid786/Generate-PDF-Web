@@ -84,7 +84,7 @@ class PdfController extends Controller
                 $filePath = $path . '/' . $name;
             }
 
-            $imagefilePath = [];
+            $imageFilePath = null;
 
             if ($fixture['imageFile'] != 'undefined') {
                 $image = $fixture['imageFile'];
@@ -103,7 +103,7 @@ class PdfController extends Controller
             $fixtureData->pdf_path = $filePath;
             $fixtureData->type = $fixture['fixtureType'];
             $fixtureData->part_number = $fixture['part_no'];
-            $fixtureData->image_path = $imagefilePath ?? null;
+            $fixtureData->image_path = $imagefilePath;
             $fixtureData->save();
         }
 
