@@ -149,13 +149,13 @@
                 </div>
                 <div style="height: 50%;display: flex;flex-direction: column;justify-content: space-between;padding: 0 2rem;">
                     <?php
-                    // $date = new DateTime($pdf_path[0]['fixture']['created_at']);
-                    // $formattedDate = $date->format('d F Y');
+                    $date = new DateTime($pdf_path[0]['fixture']['created_at']);
+                    $formattedDate = $date->format('d F Y');
                     ?>
                     <div>
                         <h1 style="font-size: 2.8rem; margin: 0" class="projectTitle">{{ $pdf_path[0]['fixture']['project'] }}</h1>
                         <h3 style="font-size: 17px;margin-top: 6px;margin-bottom: 4px;font-weight: bold;" class="projectTypeName">{{ $packageTypeName[0] }}</h3>
-                        <p style="font-size: 14px;padding-top: 12px;">Test</p>
+                        <p style="font-size: 14px;padding-top: 12px;">{{ $formattedDate }}</p>
                     </div>
                     <div style="
               display: flex;
@@ -285,7 +285,7 @@
                     <div class="table-footer" style="height: 37px; display: flex; border-top: 1px solid black; padding: 8px 0px">
                         <div style="width: 25%; text-align: center">
                             <p style="margin: 0; font-size: 0.9rem">
-                                <strong>Date</strong> Test
+                                <strong>Date</strong> {{ $formattedDate }}
                             </p>
                         </div>
                         <div style="width: 50%;display: flex;column-gap: 1.5rem;justify-content: center;">
