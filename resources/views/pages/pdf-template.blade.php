@@ -155,7 +155,7 @@
                     <div>
                         <h1 style="font-size: 2.8rem; margin: 0" class="projectTitle">{{ $pdf_path[0]['fixture']['project'] }}</h1>
                         <h3 style="font-size: 17px;margin-top: 6px;margin-bottom: 4px;font-weight: bold;" class="projectTypeName">{{ $packageTypeName[0] }}</h3>
-                        <p style="font-size: 14px;padding-top: 12px;">{{ $formattedDate }}</p>
+                        <p style="font-size: 14px;padding-top: 12px;">Test</p>
                     </div>
                     <div style="
               display: flex;
