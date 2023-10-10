@@ -72,6 +72,8 @@ class PdfController extends Controller
 
         Fixtures::where('package_info_id', $packageType->id)->delete();
 
+        $counts = 0;
+
         foreach ($fixtures as $fixture) {
 
             $filePath = $fixture['pdfFile'];
@@ -89,7 +91,7 @@ class PdfController extends Controller
             if ($fixture['imageFile'] != 'undefined') {
                 $image = $fixture['imageFile'];
 
-                $imageName = time() . '.' . $image->getClientOriginalExtension();
+                $imageName = $counts++ . time() . '.' . $image->getClientOriginalExtension();
 
                 $imagePath = public_path('/files');
                 $image->move($imagePath, $imageName);
@@ -103,7 +105,7 @@ class PdfController extends Controller
             $fixtureData->pdf_path = $filePath;
             $fixtureData->type = $fixture['fixtureType'];
             $fixtureData->part_number = $fixture['part_no'];
-            $fixtureData->image_path = $imagefilePath;
+            $fixtureData->image_path = $imagefilePath ?? null;
             $fixtureData->save();
         }
 
@@ -252,5 +254,10 @@ class PdfController extends Controller
         View::share('pdfTemplate', $template);
 
         return view('pages.pdf-cover')->with('pdfTemplate', $template);
+    }
+
+    public function createlighteningLegends(Request $request)
+    {
+        return view('pages.create-legends');
     }
 }
