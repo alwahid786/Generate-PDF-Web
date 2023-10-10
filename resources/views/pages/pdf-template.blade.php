@@ -149,8 +149,8 @@
                 </div>
                 <div style="height: 50%;display: flex;flex-direction: column;justify-content: space-between;padding: 0 2rem;">
                     <?php
-                    $date = new DateTime($pdf_path[0]['fixture']['created_at']);
-                    $formattedDate = $date->format('d F Y');
+                    // $date = new DateTime($pdf_path[0]['fixture']['created_at']);
+                    // $formattedDate = $date->format('d F Y');
                     ?>
                     <div>
                         <h1 style="font-size: 2.8rem; margin: 0" class="projectTitle">{{ $pdf_path[0]['fixture']['project'] }}</h1>
@@ -285,7 +285,7 @@
                     <div class="table-footer" style="height: 37px; display: flex; border-top: 1px solid black; padding: 8px 0px">
                         <div style="width: 25%; text-align: center">
                             <p style="margin: 0; font-size: 0.9rem">
-                                <strong>Date</strong> {{ $formattedDate }}
+                                <strong>Date</strong> Test
                             </p>
                         </div>
                         <div style="width: 50%;display: flex;column-gap: 1.5rem;justify-content: center;">
