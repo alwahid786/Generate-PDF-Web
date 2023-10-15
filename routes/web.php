@@ -76,6 +76,8 @@ Route::middleware('auth')->group(function () {
     Route::any('/specification-package', [PdfController::class, 'createPdfPage'])->name('createPdfPage');
     Route::any('/submittal-package', [PdfController::class, 'createPdfPage'])->name('createPdfPage');
     Route::any('/record-drawing', [PdfController::class, 'createPdfPage'])->name('createPdfPage');
+    Route::any('/ligtening-legend', [PdfController::class, 'lighteningLegend']);
+    Route::post('/ligtening-legend-post', [PdfController::class, 'lighteningLegendPost'])->name('legends.post');
     // });
 
     // admin route

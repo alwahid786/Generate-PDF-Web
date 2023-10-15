@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\PackageType;
 use App\Models\PackageInfo;
 use App\Models\Fixtures;
+use App\Models\LighteningLegend;
+use App\Models\LighteningLegendInfo;
 // use Spatie\PdfToImage\Exceptions\PdfDoesNotExist;
 // use Spatie\PdfToImage\Pdf;
 use Exception;
@@ -259,5 +261,68 @@ class PdfController extends Controller
     public function createlighteningLegends(Request $request)
     {
         return view('pages.create-legends');
+    }
+
+    public function lighteningLegend(Request $request)
+    {
+        $packageInfoId = $request->query('packageInfoId');
+        // $fixture = Fixtures::where('package_info_id', $packageInfoId)->get();
+        // $legends  = LighteningLegendInfo::where('package_info_id', $packageInfoId)->get();
+
+        $fixtureTypes = Fixtures::with('legends')->where('package_info_id', $packageInfoId)->get();;
+        // dd($fixtureTypes);
+
+        // // dd($legends);
+
+        return view('pages.lightening-legend', ['fixtureTypes' => $fixtureTypes]);
+    }
+
+    public function lighteningLegendPost(Request $request)
+    {
+
+        // $fixtureIds = [];
+
+        // foreach ($request->fixture_id as $key => $fixtureId) {
+
+        //     $fixtureIds = LighteningLegend::insertGetId([
+        //         'fixture_id' => $fixtureId
+        //     ]);
+
+        //     LighteningLegendInfo::create([
+        //         'legend_id' => $fixtureIds,
+        //         'manufacturer' => $request->manufacturer[$key],
+        //         'description' => $request->description[$key],
+        //         'part_number' => $request->part_number[$key],
+        //         'lamp' => $request->lamp[$key],
+        //         'voltage' => $request->voltage[$key],
+        //         'dimming' => $request->dimming[$key]
+        //     ]);
+        // }
+        $fixtureIds = [];
+
+        foreach ($request->fixture_id as $key => $fixtureId) {
+            $fixtureIdData = [
+                'fixture_id' => $fixtureId,
+            ];
+
+            $lighteningLegend = LighteningLegend::updateOrCreate($fixtureIdData, $fixtureIdData);
+
+            $lighteningLegendInfoData = [
+                'legend_id' => $lighteningLegend->id,
+                'manufacturer' => $request->manufacturer[$key],
+                'description' => $request->description[$key],
+                'part_number' => $request->part_number[$key],
+                'lamp' => $request->lamp[$key],
+                'voltage' => $request->voltage[$key],
+                'dimming' => $request->dimming[$key],
+            ];
+
+            LighteningLegendInfo::updateOrCreate(['legend_id' => $lighteningLegend->id], $lighteningLegendInfoData);
+        }
+
+
+
+
+        return redirect()->back();
     }
 }
