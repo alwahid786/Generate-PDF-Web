@@ -265,14 +265,11 @@ class PdfController extends Controller
 
     public function lighteningLegend(Request $request)
     {
+
         $packageInfoId = $request->query('packageInfoId');
-        // $fixture = Fixtures::where('package_info_id', $packageInfoId)->get();
-        // $legends  = LighteningLegendInfo::where('package_info_id', $packageInfoId)->get();
 
-        $fixtureTypes = Fixtures::with('legends')->where('package_info_id', $packageInfoId)->get();;
+        $fixtureTypes = Fixtures::where('package_info_id', $packageInfoId)->get();
         // dd($fixtureTypes);
-
-        // // dd($legends);
 
         return view('pages.lightening-legend', ['fixtureTypes' => $fixtureTypes]);
     }
@@ -280,41 +277,27 @@ class PdfController extends Controller
     public function lighteningLegendPost(Request $request)
     {
 
-        // $fixtureIds = [];
 
-        // foreach ($request->fixture_id as $key => $fixtureId) {
 
-        //     $fixtureIds = LighteningLegend::insertGetId([
-        //         'fixture_id' => $fixtureId
-        //     ]);
+        foreach ($request->manufacturer as $key => $manufacturer) {
 
-        //     LighteningLegendInfo::create([
-        //         'legend_id' => $fixtureIds,
-        //         'manufacturer' => $request->manufacturer[$key],
-        //         'description' => $request->description[$key],
-        //         'part_number' => $request->part_number[$key],
-        //         'lamp' => $request->lamp[$key],
-        //         'voltage' => $request->voltage[$key],
-        //         'dimming' => $request->dimming[$key]
-        //     ]);
-        // }
-        $fixtureIds = [];
+            $packageInfoId = $request->package_id;
 
-        foreach ($request->fixture_id as $key => $fixtureId) {
             $fixtureIdData = [
-                'fixture_id' => $fixtureId,
+                'package_info_id' => 1,
             ];
 
             $lighteningLegend = LighteningLegend::updateOrCreate($fixtureIdData, $fixtureIdData);
 
             $lighteningLegendInfoData = [
                 'legend_id' => $lighteningLegend->id,
-                'manufacturer' => $request->manufacturer[$key],
+                'manufacturer' => $manufacturer,
                 'description' => $request->description[$key],
                 'part_number' => $request->part_number[$key],
                 'lamp' => $request->lamp[$key],
                 'voltage' => $request->voltage[$key],
                 'dimming' => $request->dimming[$key],
+                'fixture_id' => $request->fixture_id[$key]
             ];
 
             LighteningLegendInfo::updateOrCreate(['legend_id' => $lighteningLegend->id], $lighteningLegendInfoData);

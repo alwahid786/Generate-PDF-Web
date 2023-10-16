@@ -10,6 +10,6 @@ class LighteningLegend extends Model
     use HasFactory;
 
     protected $fillable = [
-        'fixture_id'
+        'package_info_id'
     ];
 }

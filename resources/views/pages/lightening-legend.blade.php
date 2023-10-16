@@ -22,7 +22,6 @@
 
 
                 @foreach($fixtureTypes as $key => $type)
-                <!-- <h2>{{ $type->type }}</h2> -->
 
                 <div class="project-input-wrapper">
                     <div class="pdf-info-input-wrapper">
@@ -31,13 +30,14 @@
                         </div>
 
                         <div class="pdf-info-input">
-                            <input type="text" name="fixture_type[{{ $key }}]" value="{{ $type->type }}" id="projectName" class="typeValidation" disabled>
+                            <input type="text" name="fixture_type[{{ $key }}]" value="{{ $type->type }}" id="projectName" class="typeValidation">
+                            <input type="hidden" name="package_id" value="{{ $type->package_info_id }}" id="" class="typeValidation">
                             <input type="hidden" name="fixture_id[{{ $key }}]" value="{{ $type->id }}" id="" class="typeValidation">
                             <p style="color: red" id="warning-message"></p>
                         </div>
 
                     </div>
-                    @foreach($type->legends as $legend)
+
                     <div class="pdf-info-input-wrapper">
                         <div class="section-heading">
                             <h1>Manufacturer: *</h1>
@@ -92,7 +92,7 @@
                             <p style="color: red" id="warning-message-ref"></p>
                         </div>
                     </div>
-                    @endforeach
+
                 </div>
 
 
@@ -101,77 +101,7 @@
                 <button class="btn btn-primary">Save or Update</button>
                 <button class="btn btn-primary">Create Pdf</button>
 
-                <!-- <div class="project-input-wrapper">
-                    <div class="pdf-info-input-wrapper">
-                        <div class="section-heading">
-                            <h1>Type: * </h1>
-                        </div>
-
-                        <div class="pdf-info-input">
-                            <input type="text" name="project" value="" id="projectName" class="typeValidation">
-                            <p style="color: red" id="warning-message"></p>
-                        </div>
-
-                    </div>
-                    <div class="pdf-info-input-wrapper">
-                        <div class="section-heading">
-                            <h1>Manufacturer: *</h1>
-                        </div>
-                        <div class="pdf-info-input">
-                            <input type="text" name="reference" value="" id="referenceNo" class="typeValidation">
-                            <p style="color: red" id="warning-message-ref"></p>
-                        </div>
-                    </div>
-                    <div class="pdf-info-input-wrapper">
-                        <div class="section-heading">
-                            <h1>Description: *</h1>
-                        </div>
-                        <div class="pdf-info-input">
-                            <input type="text" name="reference" value="" id="referenceNo" class="typeValidation">
-                            <p style="color: red" id="warning-message-ref"></p>
-                        </div>
-                    </div>
-                    <div class="pdf-info-input-wrapper">
-                        <div class="section-heading">
-                            <h1>Part Number: *</h1>
-                        </div>
-                        <div class="pdf-info-input">
-                            <input type="text" name="reference" value="" id="referenceNo" class="typeValidation">
-                            <p style="color: red" id="warning-message-ref"></p>
-                        </div>
-                    </div>
-                    <div class="pdf-info-input-wrapper">
-                        <div class="section-heading">
-                            <h1>Lamp: *</h1>
-                        </div>
-                        <div class="pdf-info-input">
-                            <input type="text" name="reference" value="" id="referenceNo" class="typeValidation">
-                            <p style="color: red" id="warning-message-ref"></p>
-                        </div>
-                    </div>
-                    <div class="pdf-info-input-wrapper">
-                        <div class="section-heading">
-                            <h1>Voltage: *</h1>
-                        </div>
-                        <div class="pdf-info-input">
-                            <input type="text" name="reference" value="" id="referenceNo" class="typeValidation">
-                            <p style="color: red" id="warning-message-ref"></p>
-                        </div>
-                    </div>
-                    <div class="pdf-info-input-wrapper">
-                        <div class="section-heading">
-                            <h1>Dimming: *</h1>
-                        </div>
-                        <div class="pdf-info-input">
-                            <input type="text" name="reference" value="" id="referenceNo" class="typeValidation">
-                            <p style="color: red" id="warning-message-ref"></p>
-                        </div>
-                    </div>
-                </div> -->
-
             </div>
-
-
 
         </form>
 </main>
