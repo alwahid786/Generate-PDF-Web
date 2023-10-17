@@ -21,14 +21,14 @@
             <div class="create-pdf-uper-body">
 
 
-                {{-- @foreach($fixtureTypes as $key => $type) --}}
+                @foreach($fixtureTypes as $key => $type)
                 {{-- <!-- <h2>{{ $type->type }}</h2> --> --}}
 
                 <div class="project-input-wrapper">
                     <div class="pdf-info-input-wrapper">
-                        <div class="section-heading">
+                        {{-- <div class="section-heading">
                             <h1>Type: * </h1>
-                        </div>
+                        </div> --}}
 
                         <div class="pdf-info-input">
                             <input type="text" name="fixture_type[{{ $key }}]" value="{{ $type->type }}" id="projectName" class="typeValidation">
@@ -40,54 +40,54 @@
                     </div>
 
                     <div class="pdf-info-input-wrapper">
-                        <div class="section-heading">
+                        {{-- <div class="section-heading">
                             <h1>Manufacturer: *</h1>
-                        </div>
+                        </div> --}}
                         <div class="pdf-info-input">
                             <input type="text" name="manufacturer[{{ $key }}]" value="" id="referenceNo" class="typeValidation">
                             <p style="color: red" id="warning-message-ref"></p>
                         </div>
                     </div>
                     <div class="pdf-info-input-wrapper">
-                        <div class="section-heading">
+                        {{-- <div class="section-heading">
                             <h1>Description: *</h1>
-                        </div>
+                        </div> --}}
                         <div class="pdf-info-input">
                             <input type="text" name="description[{{ $key }}]" value="" id="referenceNo" class="typeValidation">
                             <p style="color: red" id="warning-message-ref"></p>
                         </div>
                     </div>
                     <div class="pdf-info-input-wrapper">
-                        <div class="section-heading">
+                        {{-- <div class="section-heading">
                             <h1>Part Number: *</h1>
-                        </div>
+                        </div> --}}
                         <div class="pdf-info-input">
                             <input type="text" name="part_number[{{ $key }}]" value="" id="referenceNo" class="typeValidation">
                             <p style="color: red" id="warning-message-ref"></p>
                         </div>
                     </div>
                     <div class="pdf-info-input-wrapper">
-                        <div class="section-heading">
+                        {{-- <div class="section-heading">
                             <h1>Lamp: *</h1>
-                        </div>
+                        </div> --}}
                         <div class="pdf-info-input">
                             <input type="text" name="lamp[{{ $key }}]" value="" id="referenceNo" class="typeValidation">
                             <p style="color: red" id="warning-message-ref"></p>
                         </div>
                     </div>
                     <div class="pdf-info-input-wrapper">
-                        <div class="section-heading">
+                        {{-- <div class="section-heading">
                             <h1>Voltage: *</h1>
-                        </div>
+                        </div> --}}
                         <div class="pdf-info-input">
                             <input type="text" name="voltage[{{ $key }}]" value="" id="referenceNo" class="typeValidation">
                             <p style="color: red" id="warning-message-ref"></p>
                         </div>
                     </div>
                     <div class="pdf-info-input-wrapper">
-                        <div class="section-heading">
+                        {{-- <div class="section-heading">
                             <h1>Dimming: *</h1>
-                        </div>
+                        </div> --}}
                         <div class="pdf-info-input">
                             <input type="text" name="dimming[{{ $key }}]" value="" id="referenceNo" class="typeValidation">
                             <p style="color: red" id="warning-message-ref"></p>
@@ -97,7 +97,7 @@
                 </div>
 
 
-                {{-- @endforeach --}}
+                @endforeach
 
                 <button class="btn btn-primary">Save or Update</button>
                 <button class="btn btn-primary">Create Pdf</button>

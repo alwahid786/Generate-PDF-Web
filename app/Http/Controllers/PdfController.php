@@ -269,7 +269,6 @@ class PdfController extends Controller
         $packageInfoId = $request->query('packageInfoId');
 
         $fixtureTypes = Fixtures::where('package_info_id', $packageInfoId)->get();
-        // dd($fixtureTypes);
 
         return view('pages.lightening-legend', ['fixtureTypes' => $fixtureTypes]);
     }
