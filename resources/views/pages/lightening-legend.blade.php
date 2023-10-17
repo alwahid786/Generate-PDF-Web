@@ -21,7 +21,8 @@
             <div class="create-pdf-uper-body">
 
 
-                @foreach($fixtureTypes as $key => $type)
+                {{-- @foreach($fixtureTypes as $key => $type) --}}
+                {{-- <!-- <h2>{{ $type->type }}</h2> --> --}}
 
                 <div class="project-input-wrapper">
                     <div class="pdf-info-input-wrapper">
@@ -43,7 +44,7 @@
                             <h1>Manufacturer: *</h1>
                         </div>
                         <div class="pdf-info-input">
-                            <input type="text" name="manufacturer[{{ $key }}]" value="{{ $legend->manufacturer ?? '' }}" id="referenceNo" class="typeValidation">
+                            <input type="text" name="manufacturer[{{ $key }}]" value="" id="referenceNo" class="typeValidation">
                             <p style="color: red" id="warning-message-ref"></p>
                         </div>
                     </div>
@@ -52,7 +53,7 @@
                             <h1>Description: *</h1>
                         </div>
                         <div class="pdf-info-input">
-                            <input type="text" name="description[{{ $key }}]" value="{{ $legend->description ?? '' }}" id="referenceNo" class="typeValidation">
+                            <input type="text" name="description[{{ $key }}]" value="" id="referenceNo" class="typeValidation">
                             <p style="color: red" id="warning-message-ref"></p>
                         </div>
                     </div>
@@ -61,7 +62,7 @@
                             <h1>Part Number: *</h1>
                         </div>
                         <div class="pdf-info-input">
-                            <input type="text" name="part_number[{{ $key }}]" value="{{ $legend->part_number ?? '' }}" id="referenceNo" class="typeValidation">
+                            <input type="text" name="part_number[{{ $key }}]" value="" id="referenceNo" class="typeValidation">
                             <p style="color: red" id="warning-message-ref"></p>
                         </div>
                     </div>
@@ -70,7 +71,7 @@
                             <h1>Lamp: *</h1>
                         </div>
                         <div class="pdf-info-input">
-                            <input type="text" name="lamp[{{ $key }}]" value="{{ $legend->lamp ?? '' }}" id="referenceNo" class="typeValidation">
+                            <input type="text" name="lamp[{{ $key }}]" value="" id="referenceNo" class="typeValidation">
                             <p style="color: red" id="warning-message-ref"></p>
                         </div>
                     </div>
@@ -79,7 +80,7 @@
                             <h1>Voltage: *</h1>
                         </div>
                         <div class="pdf-info-input">
-                            <input type="text" name="voltage[{{ $key }}]" value="{{ $legend->voltage ?? '' }}" id="referenceNo" class="typeValidation">
+                            <input type="text" name="voltage[{{ $key }}]" value="" id="referenceNo" class="typeValidation">
                             <p style="color: red" id="warning-message-ref"></p>
                         </div>
                     </div>
@@ -88,7 +89,7 @@
                             <h1>Dimming: *</h1>
                         </div>
                         <div class="pdf-info-input">
-                            <input type="text" name="dimming[{{ $key }}]" value="{{ $legend->dimming ?? '' }}" id="referenceNo" class="typeValidation">
+                            <input type="text" name="dimming[{{ $key }}]" value="" id="referenceNo" class="typeValidation">
                             <p style="color: red" id="warning-message-ref"></p>
                         </div>
                     </div>
@@ -96,7 +97,7 @@
                 </div>
 
 
-                @endforeach
+                {{-- @endforeach --}}
 
                 <button class="btn btn-primary">Save or Update</button>
                 <button class="btn btn-primary">Create Pdf</button>
@@ -120,3 +121,4 @@
 
 
 @endsection
+
