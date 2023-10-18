@@ -21,7 +21,7 @@
     }
 
     .table-inner-wrapper {
-        height: 950px;
+        height: 890px;
     }
 
     table {
@@ -203,7 +203,7 @@
             Go back to Edit
         </button></a>
 </div>
-<!-- Include the html2canvas library -->
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
 <script>
