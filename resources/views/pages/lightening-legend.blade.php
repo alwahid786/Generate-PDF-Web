@@ -15,95 +15,88 @@
             </div>
         </div>
         <form action="{{ route('legends.post') }}" method="POST" enctype="multipart/form-data">
-            @csrf
-            <!-- -------------------Upper body------------------------ -->
-
-            <div class="create-pdf-uper-body">
-
-
-                @foreach($fixtureTypes as $key => $type)
-                {{-- <!-- <h2>{{ $type->type }}</h2> --> --}}
-
-                <div class="project-input-wrapper">
-                    <div class="pdf-info-input-wrapper">
-                        {{-- <div class="section-heading">
-                            <h1>Type: * </h1>
-                        </div> --}}
-
-                        <div class="pdf-info-input">
-                            <input type="text" name="fixture_type[{{ $key }}]" value="{{ $type->type }}" id="projectName" class="typeValidation">
-                            <input type="hidden" name="package_id" value="{{ $type->package_info_id }}" id="" class="typeValidation">
-                            <input type="hidden" name="fixture_id[{{ $key }}]" value="{{ $type->id }}" id="" class="typeValidation">
-                            <p style="color: red" id="warning-message"></p>
+            <div class="lightining-input-wrapper">
+                <div class="lighting-legend-create my-3">
+                    <div class="input-field-wrapper">
+                        <div class="lightining-input">
+                            <label for="">Type*</label>
+                            <input type="text" />
                         </div>
-
-                    </div>
-
-                    <div class="pdf-info-input-wrapper">
-                        {{-- <div class="section-heading">
-                            <h1>Manufacturer: *</h1>
-                        </div> --}}
-                        <div class="pdf-info-input">
-                            <input type="text" name="manufacturer[{{ $key }}]" value="" id="referenceNo" class="typeValidation">
-                            <p style="color: red" id="warning-message-ref"></p>
+                        <div class="lightining-input">
+                            <label for=""> Manufacturer*</label>
+                            <input type="text" />
                         </div>
-                    </div>
-                    <div class="pdf-info-input-wrapper">
-                        {{-- <div class="section-heading">
-                            <h1>Description: *</h1>
-                        </div> --}}
-                        <div class="pdf-info-input">
-                            <input type="text" name="description[{{ $key }}]" value="" id="referenceNo" class="typeValidation">
-                            <p style="color: red" id="warning-message-ref"></p>
+                        <div class="lightining-input">
+                            <label for=""> Description*</label>
+                            <input type="text" />
+                        </div>
+                        <div class="lightining-input">
+                            <label for=""> Part Number*</label>
+                            <input type="text" />
+                        </div>
+                        <div class="lightining-input">
+                            <label for=""> Lamp*</label>
+                            <input type="text" />
+                        </div>
+                        <div class="lightining-input">
+                            <label for=""> Voltage*</label>
+                            <input type="text" />
+                        </div>
+                        <div class="lightining-input">
+                            <label for=""> Dimming*</label>
+                            <input type="text" />
                         </div>
                     </div>
-                    <div class="pdf-info-input-wrapper">
-                        {{-- <div class="section-heading">
-                            <h1>Part Number: *</h1>
-                        </div> --}}
-                        <div class="pdf-info-input">
-                            <input type="text" name="part_number[{{ $key }}]" value="" id="referenceNo" class="typeValidation">
-                            <p style="color: red" id="warning-message-ref"></p>
-                        </div>
+                    <div class="lighting-img-wrapper">
+                        <h1 class="">Image*</h1>
+                        <img src="./dummy.jpg" alt="image" />
                     </div>
-                    <div class="pdf-info-input-wrapper">
-                        {{-- <div class="section-heading">
-                            <h1>Lamp: *</h1>
-                        </div> --}}
-                        <div class="pdf-info-input">
-                            <input type="text" name="lamp[{{ $key }}]" value="" id="referenceNo" class="typeValidation">
-                            <p style="color: red" id="warning-message-ref"></p>
-                        </div>
-                    </div>
-                    <div class="pdf-info-input-wrapper">
-                        {{-- <div class="section-heading">
-                            <h1>Voltage: *</h1>
-                        </div> --}}
-                        <div class="pdf-info-input">
-                            <input type="text" name="voltage[{{ $key }}]" value="" id="referenceNo" class="typeValidation">
-                            <p style="color: red" id="warning-message-ref"></p>
-                        </div>
-                    </div>
-                    <div class="pdf-info-input-wrapper">
-                        {{-- <div class="section-heading">
-                            <h1>Dimming: *</h1>
-                        </div> --}}
-                        <div class="pdf-info-input">
-                            <input type="text" name="dimming[{{ $key }}]" value="" id="referenceNo" class="typeValidation">
-                            <p style="color: red" id="warning-message-ref"></p>
-                        </div>
-                    </div>
-
                 </div>
-
-
-                @endforeach
-
-                <button class="btn btn-primary">Save or Update</button>
-                <button class="btn btn-primary">Create Pdf</button>
-
+                <div class="lighting-legend-create my-3">
+                    <div class="input-field-wrapper">
+                        <div class="lightining-input">
+                            <label for="">Type*</label>
+                            <input type="text" />
+                        </div>
+                        <div class="lightining-input">
+                            <label for=""> Manufacturer*</label>
+                            <input type="text" />
+                        </div>
+                        <div class="lightining-input">
+                            <label for=""> Description*</label>
+                            <input type="text" />
+                        </div>
+                        <div class="lightining-input">
+                            <label for=""> Part Number*</label>
+                            <input type="text" />
+                        </div>
+                        <div class="lightining-input">
+                            <label for=""> Lamp*</label>
+                            <input type="text" />
+                        </div>
+                        <div class="lightining-input">
+                            <label for=""> Voltage*</label>
+                            <input type="text" />
+                        </div>
+                        <div class="lightining-input">
+                            <label for=""> Dimming*</label>
+                            <input type="text" />
+                        </div>
+                    </div>
+                    <div class="lighting-img-wrapper">
+                        <h1 class="">Image*</h1>
+                        <img src="./dummy.jpg" alt="image" />
+                    </div>
+                </div>
+                <div class="legend-creator-btns">
+                    <div class="legend-create-pdf">
+                        <a href="#">Save or Update</a>
+                    </div>
+                    <div class="lightining-input-btn">
+                        <a href="{{url('/lightining-cover')}}"> Create PDF</a>
+                    </div>
+                </div>
             </div>
-
         </form>
 </main>
 @endsection
@@ -121,4 +114,3 @@
 
 
 @endsection
-

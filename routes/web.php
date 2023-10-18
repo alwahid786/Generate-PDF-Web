@@ -47,6 +47,10 @@ Route::get('/test', function () {
     return view('emails.contact_us');
 });
 
+Route::get('/lightining-cover', function () {
+    return view('pages.legend-cover');
+});
+
 
 // API's Function and Routes
 Route::post('/register', [AuthController::class, 'signupFunction'])->name('signupFunction');

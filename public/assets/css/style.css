@@ -63,7 +63,7 @@
     padding-left: 0;
 }
 
-.nav-item ul.nav-second-level>.nav-item {
+.nav-item ul.nav-second-level > .nav-item {
     padding-left: 20px;
 }
 
@@ -883,7 +883,7 @@
 }
 
 @media only screen and (max-width: 760px),
-(min-device-width: 760px) and (max-device-width: 885px) {
+    (min-device-width: 760px) and (max-device-width: 885px) {
     .client-table table {
         width: 100%;
     }
@@ -1116,7 +1116,6 @@
     background-color: white;
     border-radius: 10px;
     padding: 1.5rem 3rem;
-
 }
 
 .contact-form form {
@@ -1124,7 +1123,7 @@
     margin: 0 auto;
 }
 
-@media screen and (max-width:576px) {
+@media screen and (max-width: 576px) {
     .contact-form form {
         width: 100%;
         margin: 0 auto;
@@ -1134,7 +1133,6 @@
         background-color: white;
         border-radius: 10px;
         padding: 1.5rem;
-
     }
 
     .pdf-info-input textarea {
@@ -1351,7 +1349,7 @@ input.rounded-checkbox {
 }
 
 /* Style the checkbox when checked */
-.summary-wrapper input:checked+label:before {
+.summary-wrapper input:checked + label:before {
     background: url("../images/check.png");
     background-position: center;
     background-size: 10px;
@@ -1575,4 +1573,98 @@ input.rounded-checkbox {
     .profile-detail-wrapper {
         width: 100%;
     }
+}
+
+/* legend-creator */
+
+.lighting-legend-create {
+    display: flex;
+    padding: 1rem;
+    padding-top: 0.5rem;
+    background-color: white;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    border-radius: 10px;
+}
+.input-field-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 1rem;
+    width: 85%;
+}
+.lighting-img-wrapper {
+    width: 10%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+.lighting-img-wrapper h1 {
+    font-size: 1rem;
+    margin: 0;
+    font-weight: 600;
+    padding: 0.5rem 0;
+}
+
+.lighting-img-wrapper img {
+    width: 100%;
+    max-height: 139px;
+    max-width: 139px;
+}
+.lightining-input {
+    width: 23%;
+    display: flex;
+    flex-direction: column;
+}
+.lightining-input label {
+    font-size: 1rem;
+    margin: 0;
+    font-weight: 600;
+    padding: 0.5rem 0;
+}
+.lightining-input input {
+    border-radius: 10px;
+    background-color: #fdfcfc;
+    border: 1px solid #e2e2e2;
+    width: 100%;
+    padding: 0.5rem;
+    outline: none !important;
+}
+.legend-creator-btns {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    column-gap: 1rem;
+}
+
+.lightining-input-btn a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    column-gap: 0.5rem;
+    background-color: #34a853;
+    text-decoration: none;
+    color: white;
+    width: 150px;
+    padding: 0.75rem;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+}
+.lightining-input-btn a:hover {
+    background-color: rgba(73, 165, 97, 0.753);
+}
+
+.legend-create-pdf a {
+    background-color: #003f77;
+    border-radius: 10px;
+    padding: 0.7rem;
+    text-align: center;
+    color: white !important;
+    display: block;
+    text-decoration: none !important;
+    margin: 0 auto;
+    width: 150px;
+    cursor: pointer;
+}
+.legend-create-pdf a:hover {
+    background-color: #004077b0;
 }
