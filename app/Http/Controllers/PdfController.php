@@ -299,4 +299,15 @@ class PdfController extends Controller
         return redirect()->back();
 
     }
+
+    public function generateLighteningPdf(Request $request)
+    {
+        $packageInfoId = $request->query('packageInfoId');
+
+        $fixtureTypes = Fixtures::where('package_info_id', $packageInfoId)->with('legends')->get();
+
+        // dd($fixtureTypes);
+
+        return view('pages.legend-cover', ['fixtureTypes' => $fixtureTypes, 'packageInfoId' => $packageInfoId]);
+    }
 }
