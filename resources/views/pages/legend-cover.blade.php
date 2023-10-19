@@ -136,7 +136,7 @@
         " class="body-page-wrapper">
                     <div class="table-wrapper" style="height: 100%; width: 100%">
                         <div class="table-header">
-                            <h1>Project: <span>Lorem, ipsum.</span></h1>
+                            {{-- <h1>Project: <span>Lorem, ipsum.</span></h1> --}}
                             <h1>Lightining Legend</h1>
                         </div>
                         <div class="table-inner-wrapper">
@@ -176,7 +176,7 @@
 
                         <div class="table-footer">
                             <div class="page-number">
-                                <h1>Page 2 of 10:</h1>
+                                {{-- <h1>Page 2 of 10:</h1> --}}
                                 <h1>Date : 10/18/2023</h1>
                             </div>
                             <a href="mailto:project@visionz.ca">project@visionz.ca</a>
