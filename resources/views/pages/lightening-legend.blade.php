@@ -22,7 +22,7 @@
 
                 @foreach ($fixtureTypes as $data)
 
-                @foreach ($data->legends as $legendsData)
+                {{-- @foreach ($data->legends as $legendsData) --}}
 
 
                 <div class="lighting-legend-create my-3">
@@ -35,27 +35,27 @@
                         </div>
                         <div class="lightining-input">
                             <label for=""> Manufacturer*</label>
-                            <input type="text" name="manufacturer[]" value="{{ $legendsData->manufacturer ?? '' }}"/>
+                            <input type="text" name="manufacturer[]" value="{{ $data->legends->manufacturer ?? '' }}"/>
                         </div>
                         <div class="lightining-input">
                             <label for=""> Description*</label>
-                            <input type="text" name="description[]" value="{{ $legendsData->description ?? '' }}"/>
+                            <input type="text" name="description[]" value="{{ $data->legends->description ?? '' }}"/>
                         </div>
                         <div class="lightining-input">
                             <label for=""> Part Number*</label>
-                            <input type="text" name="part_number[]" value="{{ $legendsData->part_number ?? '' }}"/>
+                            <input type="text" name="part_number[]" value="{{ $data->legends->part_number ?? '' }}"/>
                         </div>
                         <div class="lightining-input">
                             <label for=""> Lamp*</label>
-                            <input type="text" name="lamp[]" value="{{ $legendsData->lamp ?? '' }}"/>
+                            <input type="text" name="lamp[]" value="{{ $data->legends->lamp ?? '' }}"/>
                         </div>
                         <div class="lightining-input">
                             <label for=""> Voltage*</label>
-                            <input type="text" name="voltage[]" value="{{ $legendsData->voltage ?? '' }}"/>
+                            <input type="text" name="voltage[]" value="{{ $data->legends->voltage ?? '' }}"/>
                         </div>
                         <div class="lightining-input">
                             <label for=""> Dimming*</label>
-                            <input type="text" name="dimming[]" value="{{ $legendsData->dimming ?? '' }}"/>
+                            <input type="text" name="dimming[]" value="{{ $data->legends->dimming ?? '' }}"/>
                         </div>
                     </div>
                     <div class="lighting-img-wrapper">
@@ -68,7 +68,7 @@
                     </div>
                 </div>
 
-                @endforeach
+                {{-- @endforeach --}}
 
                 @endforeach
 
