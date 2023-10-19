@@ -11,6 +11,6 @@ class Fixtures extends Model
 
     public function legends()
     {
-        return $this->hasMany(LighteningLegendInfo::class, 'legend_id');
+        return $this->hasMany(LighteningLegendInfo::class, 'fixture_id');
     }
 }

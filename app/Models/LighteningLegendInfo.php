@@ -10,12 +10,13 @@ class LighteningLegendInfo extends Model
     use HasFactory;
 
     protected $fillable = [
-        'legend_id',
+        'pakage_info_id',
         'manufacturer',
         'description',
         'part_number',
         'lamp',
         'voltage',
-        'dimming'
+        'dimming',
+        'fixture_id'
     ];
 }

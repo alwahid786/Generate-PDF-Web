@@ -15,88 +15,75 @@
             </div>
         </div>
         <form action="{{ route('legends.post') }}" method="POST" enctype="multipart/form-data">
+
+            @csrf
+
             <div class="lightining-input-wrapper">
+
+                @foreach ($fixtureTypes as $data)
+
+                @foreach ($data->legends as $legendsData)
+
+
                 <div class="lighting-legend-create my-3">
                     <div class="input-field-wrapper">
                         <div class="lightining-input">
                             <label for="">Type*</label>
-                            <input type="text" />
+                            <input type="text" name="type[]" value="{{ $data->type }}"/>
+                            <input type="hidden" name="fixture_id[]" value="{{ $data->id }}"/>
+                            <input type="hidden" name="pakage_info_id" value="{{ $packageInfoId }}"/>
                         </div>
                         <div class="lightining-input">
                             <label for=""> Manufacturer*</label>
-                            <input type="text" />
+                            <input type="text" name="manufacturer[]" value="{{ $legendsData->manufacturer ?? '' }}"/>
                         </div>
                         <div class="lightining-input">
                             <label for=""> Description*</label>
-                            <input type="text" />
+                            <input type="text" name="description[]" value="{{ $legendsData->description ?? '' }}"/>
                         </div>
                         <div class="lightining-input">
                             <label for=""> Part Number*</label>
-                            <input type="text" />
+                            <input type="text" name="part_number[]" value="{{ $legendsData->part_number ?? '' }}"/>
                         </div>
                         <div class="lightining-input">
                             <label for=""> Lamp*</label>
-                            <input type="text" />
+                            <input type="text" name="lamp[]" value="{{ $legendsData->lamp ?? '' }}"/>
                         </div>
                         <div class="lightining-input">
                             <label for=""> Voltage*</label>
-                            <input type="text" />
+                            <input type="text" name="voltage[]" value="{{ $legendsData->voltage ?? '' }}"/>
                         </div>
                         <div class="lightining-input">
                             <label for=""> Dimming*</label>
-                            <input type="text" />
+                            <input type="text" name="dimming[]" value="{{ $legendsData->dimming ?? '' }}"/>
                         </div>
                     </div>
                     <div class="lighting-img-wrapper">
                         <h1 class="">Image*</h1>
-                        <img src="./dummy.jpg" alt="image" />
+                        @if ($data->image_path != NULL)
+                        <img src="{{ $data->image_path }}" alt="image" />
+                        @else
+                        <img src="{{ asset('public/assets/images/empty_image.jpg') }}" alt="">
+                        @endif
                     </div>
                 </div>
-                <div class="lighting-legend-create my-3">
-                    <div class="input-field-wrapper">
-                        <div class="lightining-input">
-                            <label for="">Type*</label>
-                            <input type="text" />
-                        </div>
-                        <div class="lightining-input">
-                            <label for=""> Manufacturer*</label>
-                            <input type="text" />
-                        </div>
-                        <div class="lightining-input">
-                            <label for=""> Description*</label>
-                            <input type="text" />
-                        </div>
-                        <div class="lightining-input">
-                            <label for=""> Part Number*</label>
-                            <input type="text" />
-                        </div>
-                        <div class="lightining-input">
-                            <label for=""> Lamp*</label>
-                            <input type="text" />
-                        </div>
-                        <div class="lightining-input">
-                            <label for=""> Voltage*</label>
-                            <input type="text" />
-                        </div>
-                        <div class="lightining-input">
-                            <label for=""> Dimming*</label>
-                            <input type="text" />
-                        </div>
-                    </div>
-                    <div class="lighting-img-wrapper">
-                        <h1 class="">Image*</h1>
-                        <img src="./dummy.jpg" alt="image" />
-                    </div>
-                </div>
+
+                @endforeach
+
+                @endforeach
+
                 <div class="legend-creator-btns">
                     <div class="legend-create-pdf">
-                        <a href="#">Save or Update</a>
+                        {{-- <a href="#">Save or Update</a> --}}
+                        <button type="submit" style="width: 150px;height: 48px;border-radius: 8px;background: #003f77;color:white">Save or Update</button>
                     </div>
                     <div class="lightining-input-btn">
                         <a href="{{url('/lightining-cover')}}"> Create PDF</a>
                     </div>
                 </div>
+
             </div>
+
         </form>
 </main>
 @endsection

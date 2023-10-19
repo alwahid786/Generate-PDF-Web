@@ -268,43 +268,35 @@ class PdfController extends Controller
 
         $packageInfoId = $request->query('packageInfoId');
 
-        $fixtureTypes = Fixtures::where('package_info_id', $packageInfoId)->get();
+        $fixtureTypes = Fixtures::with('legends')->where('package_info_id', $packageInfoId)->get();
 
-        return view('pages.lightening-legend', ['fixtureTypes' => $fixtureTypes]);
+        // dd($fixtureTypes);
+
+        return view('pages.lightening-legend', ['fixtureTypes' => $fixtureTypes, 'packageInfoId' => $packageInfoId]);
     }
 
     public function lighteningLegendPost(Request $request)
     {
 
-
-
-        foreach ($request->manufacturer as $key => $manufacturer) {
-
-            $packageInfoId = $request->package_id;
-
-            $fixtureIdData = [
-                'package_info_id' => 1,
-            ];
-
-            $lighteningLegend = LighteningLegend::updateOrCreate($fixtureIdData, $fixtureIdData);
+        foreach ($request->type as $key => $data) {
 
             $lighteningLegendInfoData = [
-                'legend_id' => $lighteningLegend->id,
-                'manufacturer' => $manufacturer,
+                'fixture_id' => $request->fixture_id[$key],
+                'pakage_info_id' => $request->pakage_info_id,
+                'manufacturer' => $request->manufacturer[$key],
                 'description' => $request->description[$key],
                 'part_number' => $request->part_number[$key],
                 'lamp' => $request->lamp[$key],
                 'voltage' => $request->voltage[$key],
                 'dimming' => $request->dimming[$key],
-                'fixture_id' => $request->fixture_id[$key]
             ];
 
-            LighteningLegendInfo::updateOrCreate(['legend_id' => $lighteningLegend->id], $lighteningLegendInfoData);
+            LighteningLegendInfo::updateOrCreate(['fixture_id' => $request->fixture_id[$key]], $lighteningLegendInfoData);
+            // LighteningLegendInfo::create($lighteningLegendInfoData);
+
         }
 
-
-
-
         return redirect()->back();
+
     }
 }
