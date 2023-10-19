@@ -47,9 +47,9 @@ Route::get('/test', function () {
     return view('emails.contact_us');
 });
 
-Route::get('/lightining-cover', function () {
-    return view('pages.legend-cover');
-});
+// Route::get('/lightining-cover', function () {
+//     return view('pages.legend-cover');
+// });
 
 
 // API's Function and Routes
@@ -82,6 +82,7 @@ Route::middleware('auth')->group(function () {
     Route::any('/record-drawing', [PdfController::class, 'createPdfPage'])->name('createPdfPage');
     Route::any('/ligtening-legend', [PdfController::class, 'lighteningLegend']);
     Route::post('/ligtening-legend-post', [PdfController::class, 'lighteningLegendPost'])->name('legends.post');
+    Route::any('/legends-pdf', [PdfController::class, 'generateLighteningPdf']);
     // });
 
     // admin route

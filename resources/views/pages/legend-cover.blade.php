@@ -141,6 +141,7 @@
                         </div>
                         <div class="table-inner-wrapper">
                             <table style="width: 100%">
+
                                 <tr>
                                     <th style="width: 10%">Type</th>
                                     <th style="width: 10%">Image</th>
@@ -151,42 +152,25 @@
                                     <th style="width: 10%">Voltage</th>
                                     <th style="width: 10%">Diming</th>
                                 </tr>
+                                @foreach ($fixtureTypes as $data)
                                 <tr>
-                                    <td>Lorem, ipsum</td>
+                                    <td>{{ $data->type ?? ''}}</td>
                                     <td>
-                                        <img style="width: 100%; max-height: 70px" src="{{asset('public/assets/images/dummy.jpg')}}" alt="" />
+                                        @if ($data->image_path != NULL)
+                                            <img style="width: 100%; max-height: 70px" src="{{ asset('public/files/'.$data->image_path) }}" alt="image" />
+                                        @else
+                                            <img style="width: 100%; max-height: 70px" src="{{ asset('public/assets/images/empty_image.jpg') }}" alt="">
+                                        @endif
+                                        {{-- <img style="width: 100%; max-height: 70px" src="{{asset('public/assets/images/dummy.jpg')}}" alt="" /> --}}
                                     </td>
-                                    <td>Lorem, ipsum.</td>
-                                    <td>Lorem ipsum dolor sit amet consectetur.</td>
-                                    <td>000-00-000-0</td>
-                                    <td>Lorem</td>
-                                    <td>220V</td>
-                                    <td>43</td>
+                                    <td>{{ $data->legends->manufacturer ?? '' }}</td>
+                                    <td>{{ $data->legends->description ?? '' }}</td>
+                                    <td>{{ $data->legends->part_number ?? '' }}</td>
+                                    <td>{{ $data->legends->lamp ?? '' }}</td>
+                                    <td>{{ $data->legends->voltage ?? '' }}</td>
+                                    <td>{{ $data->legends->dimming ?? '' }}</td>
                                 </tr>
-                                <tr>
-                                    <td>Lorem, ipsum</td>
-                                    <td>
-                                        <img style="width: 100%; max-height: 70px" src="{{asset('public/assets/images/dummy.jpg')}}" alt="" />
-                                    </td>
-                                    <td>Lorem, ipsum.</td>
-                                    <td>Lorem ipsum dolor sit amet consectetur.</td>
-                                    <td>000-00-000-0</td>
-                                    <td>Lorem</td>
-                                    <td>220V</td>
-                                    <td>43</td>
-                                </tr>
-                                <tr>
-                                    <td>Lorem, ipsum</td>
-                                    <td>
-                                        <img style="width: 100%; max-height: 70px" src="{{asset('public/assets/images/dummy.jpg')}}" alt="" />
-                                    </td>
-                                    <td>Lorem, ipsum.</td>
-                                    <td>Lorem ipsum dolor sit amet consectetur.</td>
-                                    <td>000-00-000-0</td>
-                                    <td>Lorem</td>
-                                    <td>220V</td>
-                                    <td>43</td>
-                                </tr>
+                                @endforeach
                             </table>
                         </div>
 

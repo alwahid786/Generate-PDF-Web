@@ -78,7 +78,7 @@
                         <button type="submit" style="width: 150px;height: 48px;border-radius: 8px;background: #003f77;color:white">Save or Update</button>
                     </div>
                     <div class="lightining-input-btn">
-                        <a href="{{url('/lightining-cover')}}"> Create PDF</a>
+                        <a href="{{(url('legends-pdf'))}}?packageInfoId=<?= $packageInfoId ?>"> Create PDF</a>
                     </div>
                 </div>
 
