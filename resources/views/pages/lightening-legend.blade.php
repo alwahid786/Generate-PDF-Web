@@ -29,33 +29,33 @@
                     <div class="input-field-wrapper">
                         <div class="lightining-input">
                             <label for="">Type*</label>
-                            <input type="text" name="type[]" value="{{ $data->type }}"/>
-                            <input type="hidden" name="fixture_id[]" value="{{ $data->id }}"/>
-                            <input type="hidden" name="pakage_info_id" value="{{ $packageInfoId }}"/>
+                            <input type="text" name="type[]" value="{{ $data->type }}" readonly />
+                            <input type="hidden" name="fixture_id[]" value="{{ $data->id }}" />
+                            <input type="hidden" name="pakage_info_id" value="{{ $packageInfoId }}" />
                         </div>
                         <div class="lightining-input">
                             <label for=""> Manufacturer*</label>
-                            <input type="text" name="manufacturer[]" value="{{ $data->legends->manufacturer ?? '' }}"/>
+                            <input type="text" name="manufacturer[]" value="{{ $data->legends->manufacturer ?? '' }}" />
                         </div>
                         <div class="lightining-input">
                             <label for=""> Description*</label>
-                            <input type="text" name="description[]" value="{{ $data->legends->description ?? '' }}"/>
+                            <input type="text" name="description[]" value="{{ $data->legends->description ?? '' }}" />
                         </div>
                         <div class="lightining-input">
                             <label for=""> Part Number*</label>
-                            <input type="text" name="part_number[]" value="{{ $data->legends->part_number ?? '' }}"/>
+                            <input type="text" name="part_number[]" value="{{ $data->part_number ?? '' }}" readonly />
                         </div>
                         <div class="lightining-input">
                             <label for=""> Lamp*</label>
-                            <input type="text" name="lamp[]" value="{{ $data->legends->lamp ?? '' }}"/>
+                            <input type="text" name="lamp[]" value="{{ $data->legends->lamp ?? '' }}" />
                         </div>
                         <div class="lightining-input">
                             <label for=""> Voltage*</label>
-                            <input type="text" name="voltage[]" value="{{ $data->legends->voltage ?? '' }}"/>
+                            <input type="text" name="voltage[]" value="{{ $data->legends->voltage ?? '' }}" />
                         </div>
                         <div class="lightining-input">
                             <label for=""> Dimming*</label>
-                            <input type="text" name="dimming[]" value="{{ $data->legends->dimming ?? '' }}"/>
+                            <input type="text" name="dimming[]" value="{{ $data->legends->dimming ?? '' }}" />
                         </div>
                     </div>
                     <div class="lighting-img-wrapper">
