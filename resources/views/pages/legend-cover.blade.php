@@ -117,7 +117,7 @@
     <div class="container-fluid py-3">
         <div class="header-wrapper">
             <div class="heading-top">
-                <h1>PDF Package Creator <span>{{ date("F j, Y") }}</span></h1>
+                <h1>Lightening Legend Creator <span>{{ date("F j, Y") }}</span></h1>
             </div>
         </div>
         <div id="content" style="
@@ -167,7 +167,7 @@
                                     </td>
                                     <td>{{ $data->legends->manufacturer ?? '' }}</td>
                                     <td>{{ $data->legends->description ?? '' }}</td>
-                                    <td>{{ $data->legends->part_number ?? '' }}</td>
+                                    <td>{{ $data->part_number ?? '' }}</td>
                                     <td>{{ $data->legends->lamp ?? '' }}</td>
                                     <td>{{ $data->legends->voltage ?? '' }}</td>
                                     <td>{{ $data->legends->dimming ?? '' }}</td>
