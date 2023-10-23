@@ -153,10 +153,10 @@ class PdfController extends Controller
             ];
 
             // path for ubuntu
-            $outputPath = '/var/www/html/pdf-generator/public/files/';
+            // $outputPath = '/var/www/html/pdf-generator/public/files/';
 
             // path for window
-            // $outputPath = 'C:\xampp\htdocs\pdf-generator\public\files';
+            $outputPath = 'C:\xampp\htdocs\pdf-generator\public\files';
 
 
             if (file_exists($pdfPath)) {
@@ -185,10 +185,10 @@ class PdfController extends Controller
                             $outputFilename = "/$time.$randomString.$randomNumber.png";
 
                             // command for window
-                            // $command = "gswin64c.exe -sDEVICE=pngalpha -r300 -o \"$outputPath$outputFilename\" -dFirstPage=$pageNumber -dLastPage=$pageNumber \"$pdfPath\"";
+                            $command = "gswin64c.exe -sDEVICE=pngalpha -r300 -o \"$outputPath$outputFilename\" -dFirstPage=$pageNumber -dLastPage=$pageNumber \"$pdfPath\"";
 
                             // command for ubuntu
-                            $command = "gs -sDEVICE=pngalpha -r600 -o \"$outputPath$outputFilename\" -dFirstPage=$pageNumber -dLastPage=$pageNumber \"$pdfPath\"";
+                            // $command = "gs -sDEVICE=pngalpha -r600 -o \"$outputPath$outputFilename\" -dFirstPage=$pageNumber -dLastPage=$pageNumber \"$pdfPath\"";
 
 
                             exec($command, $output, $returnCode);
@@ -297,7 +297,6 @@ class PdfController extends Controller
         }
 
         return redirect()->back();
-
     }
 
     public function generateLighteningPdf(Request $request)

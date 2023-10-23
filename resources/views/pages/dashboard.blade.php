@@ -16,7 +16,7 @@
     <div class="container-fluid py-3">
         <div class="header-wrapper">
             <div class="heading-top">
-                <h1>Dashboard <span>{{date('d M Y')}}</span></h1>
+                <h1>Dashboard<span>{{date('d M Y')}}</span></h1>
             </div>
             <a href="{{(url('create-pdf'))}}" class="btn create-btn"><img class="mr-2" src="{{asset('public/assets/images/plus.png')}}" alt="">Create New Package</a>
         </div>
@@ -61,13 +61,17 @@
                             <a href="{{(url('pdf-cover'))}}?packageTypeId=<?= $package['id']; ?>&is_view=true"><img class="my-1" src="{{asset('public/assets/images/view.png')}}" alt=""></a>
                             <a href="{{(url('create-pdf'))}}?packageInfoId=<?= $package['id']; ?>"><img class="my-1" src="{{asset('public/assets/images/edit.png')}}" alt=""></a>
                             <a href="{{(url('ligtening-legend'))}}?packageInfoId=<?= $package['id']; ?>"><img style="width: 30px;" class="my-1" src="{{asset('public/assets/images/add.png')}}" alt=""></a>
-
                         </td>
                     </tr>
                     @endforeach
                     @endif
                 </tbody>
             </table>
+        </div>
+        <div class="table-legend-wrapper">
+            <a><img class="my-1" src="{{asset('public/assets/images/view.png')}}" alt="">View PDF</a>
+            <a><img class="my-1" src="{{asset('public/assets/images/edit.png')}}" alt="">Edit PDF</a>
+            <a><img style="width: 30px;" class="my-1" src="{{asset('public/assets/images/add.png')}}" alt="">Add Lightining Legends</a>
         </div>
     </div>
 </main>

@@ -24,11 +24,13 @@
         text-align: center;
         background-color: rgb(207, 207, 207);
         padding: 0.3rem;
+        font-size: 0.9rem;
     }
 
     td {
         padding: 0.3rem;
         word-break: break-all;
+        font-size: 0.8rem;
     }
 
     .table-wrapper {
@@ -36,7 +38,7 @@
     }
 
     .table-inner-wrapper {
-        height: 890px;
+        height: 650px;
     }
 
     table {
@@ -127,10 +129,10 @@
         Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue',
         sans-serif;
     ">
-            <div id="inner-content" style="position: relative; width: 816px">
+            <div id="inner-content" style="position: relative; width: 1056px">
                 <div style="
-          height: 1056px;
-          width: 816px;
+          height: 816px;
+          width: 1056px;
           padding: 2rem;
           background-color: rgb(255, 255, 255);
         " class="body-page-wrapper">
@@ -157,9 +159,9 @@
                                     <td>{{ $data->type ?? ''}}</td>
                                     <td>
                                         @if ($data->image_path != NULL)
-                                            <img style="width: 100%; max-height: 70px" src="{{ asset('public/files/'.$data->image_path) }}" alt="image" />
+                                        <img style="width: 100%; max-height: 70px" src="{{ asset('public/files/'.$data->image_path) }}" alt="image" />
                                         @else
-                                            <img style="width: 100%; max-height: 70px" src="{{ asset('public/assets/images/empty_image.jpg') }}" alt="">
+                                        <img style="width: 100%; max-height: 70px" src="{{ asset('public/assets/images/empty_image.jpg') }}" alt="">
                                         @endif
                                         {{-- <img style="width: 100%; max-height: 70px" src="{{asset('public/assets/images/dummy.jpg')}}" alt="" /> --}}
                                     </td>
@@ -248,7 +250,7 @@
         jsPDF: {
             unit: "mm",
             format: "letter",
-            orientation: "portrait",
+            orientation: "landscape",
         },
     };
     convertBtn.addEventListener("click", () => {
