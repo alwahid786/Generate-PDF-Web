@@ -111,7 +111,7 @@
                 <div class="table-wrapper" style="height: 100%; width: 100%">
                     <div class="table-header">
                         <h1>Project: <span>Lorem, ipsum.</span></h1>
-                        <h1>Lightining Legend</h1>
+                        <h1>Lighting Legend</h1>
                     </div>
                     <div class="table-inner-wrapper">
                         <table style="width: 100%">

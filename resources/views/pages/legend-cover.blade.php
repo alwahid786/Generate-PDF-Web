@@ -117,7 +117,7 @@
     <div class="container-fluid py-3">
         <div class="header-wrapper">
             <div class="heading-top">
-                <h1>Lightening Legend Creator <span>{{ date("F j, Y") }}</span></h1>
+                <h1>Lighting Legend Creator <span>{{ date("F j, Y") }}</span></h1>
             </div>
         </div>
         <div id="content" style="
@@ -138,8 +138,8 @@
         " class="body-page-wrapper">
                     <div class="table-wrapper" style="height: 100%; width: 100%">
                         <div class="table-header">
-                            {{-- <h1>Project: <span>Lorem, ipsum.</span></h1> --}}
-                            <h1>Lightining Legend</h1>
+                            <h1>Project: <span class="projectTitle">{{ $projectName->package_name }}</span></h1>
+                            <h1>Lighting Legend</h1>
                         </div>
                         <div class="table-inner-wrapper">
                             <table style="width: 100%">
@@ -243,7 +243,7 @@
             type: "jpeg",
             quality: 1,
         },
-        filename: "test-file",
+        filename: `${fileName} - Lighting Legend.pdf`,
         html2canvas: {
             scale: 3,
         },

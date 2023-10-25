@@ -11,7 +11,7 @@
     <div class="container-fluid py-3">
         <div class="header-wrapper">
             <div class="heading-top">
-                <h1>Lightening Legend Creator <span>{{ date('d M Y') }}</span></h1>
+                <h1>Lighting Legend Creator <span>{{ date('d M Y') }}</span></h1>
             </div>
         </div>
         <form action="{{ route('legends.post') }}" method="POST" enctype="multipart/form-data">

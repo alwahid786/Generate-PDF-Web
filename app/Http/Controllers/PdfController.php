@@ -305,8 +305,10 @@ class PdfController extends Controller
 
         $fixtureTypes = Fixtures::where('package_info_id', $packageInfoId)->with('legends')->get();
 
+        $projectName = PackageInfo::where('id', $packageInfoId)->first();
+
         // dd($fixtureTypes);
 
-        return view('pages.legend-cover', ['fixtureTypes' => $fixtureTypes, 'packageInfoId' => $packageInfoId]);
+        return view('pages.legend-cover', ['fixtureTypes' => $fixtureTypes, 'packageInfoId' => $packageInfoId, 'projectName' => $projectName]);
     }
 }

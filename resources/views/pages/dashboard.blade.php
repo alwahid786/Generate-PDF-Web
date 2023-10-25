@@ -72,7 +72,7 @@
             <div class="table-legend-wrapper">
                 <a><img class="my-1" src="{{asset('public/assets/images/view.png')}}" alt="">View PDF</a>
                 <a><img class="my-1" src="{{asset('public/assets/images/edit.png')}}" alt="">Edit PDF</a>
-                <a><img style="width: 30px;" class="my-1" src="{{asset('public/assets/images/add.png')}}" alt="">Add Lightining Legends</a>
+                <a><img style="width: 30px;" class="my-1" src="{{asset('public/assets/images/add.png')}}" alt="">Add Lighting Legends</a>
             </div>
         </div>
 
