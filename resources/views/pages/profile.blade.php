@@ -21,11 +21,11 @@
             </div>
         </div>
         @if (\Session::has('success'))
-            <div class="alert alert-success">
-                <ul>
-                    <li>{{ \Session::get('success') }}</li>
-                </ul>
-            </div>
+        <div class="alert alert-success">
+            <ul>
+                <li>{{ \Session::get('success') }}</li>
+            </ul>
+        </div>
         @endif
         <form action="{{ route('updateProfile') }}" method="post" enctype="multipart/form-data">
             @csrf
@@ -41,6 +41,7 @@
                                 <input type="file" id="image-input" name="profile_img" class="validate" />
                             </label>
                         </div>
+                        <p class="error-message d-none" style="color: red;">File size should be less than or equal to 2 MB</p>
                     </div>
                     <div class="profile-detail-wrapper">
                         <div class="pdf-info-input-wrapper">
@@ -104,8 +105,16 @@
             if (input.files && input.files[0]) {
                 const imageElement = document.getElementById('profile-image');
                 const file = input.files[0];
-                console.log(imageElement)
-                imageElement.src = URL.createObjectURL(file);
+                // Check if the file size is less than or equal to 2 MB (2 * 1024 * 1024 bytes)
+                if (file.size <= 1 * 1024 * 1024) {
+                    imageElement.src = URL.createObjectURL(file);
+                } else {
+                    // Display an error message or take appropriate action if the file size exceeds 2 MB.
+                    document.getElementsByClassName('error-message').style.display = 'block';
+                    // Reset the input field to clear the selected file.
+                    input.value = '';
+                }
+                // imageElement.src = URL.createObjectURL(file);
             }
         });
     });
