@@ -179,9 +179,9 @@
             @if ($pdf_path[0]['fixture']['summary'] == 1)
             <div style="height: 1056px;width:816px;background-color: rgb(255, 255, 255);padding: 2rem;" class="main-page-wrapper">
                 <div style="display:flex; justify-content:space-between; align-items:center">
-                    <img style="width:140px; height:100%" src="{{ asset('public/assets/images/logo-icon.png') }}" <h1 style="font-size:1.2rem;margin:0px">Project</h1>
-                    <h1 style="font-size:1.2rem ;margin:0px"> Visionz #</h1>
-                    <h1 style="font-size:1.5rem ;margin:0px">Package</br> Summary</h1>
+                    <img style="width:140px; height:100%" src="{{ asset('public/assets/images/logo-icon.png') }}">
+                    <h4>{{ $pdf_path[0]['fixture']['project'] }}</h4>
+                    <h1 style=" font-size:1.5rem ;margin:0px">Package</br> Summary</h1>
                 </div>
                 <div style="height: 890px; padding-top: 15px">
                     <table style="width: 100%">
@@ -246,7 +246,7 @@
                 <div class="table-wrapper" style="border: 1px solid; ">
                     <div class="table-header" style="height: 70px; display: flex; border-bottom: 1px solid black">
                         <div style="width: 20%;border-right: 1px solid black;text-align: center;padding: 10px 0px;">
-                            <img style="width: 120px; margin: 0 auto" src="{{ asset('public/assets/images/side-logo.png') }}" alt="" />
+                            <img style="width: 120px; margin: 0 auto" src="{{ asset('public/assets/images/logo-icon.png') }}" alt="" />
                         </div>
                         <div style="width: 25%; border-right: 1px solid black; padding: 2px 0px">
                             <h1 style="margin: 0; font-size: 1.2rem; text-align: center">
