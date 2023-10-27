@@ -99,7 +99,7 @@
                         <span class="drop-zone__prompt"></span>
                         <span>Add Image</span>
                         <span>Drag+Drop</span>
-                        <input type="file" name="image_path" id="pdfImage" class="drop-zone__input" accept="image/jpeg, image/png, image/gif">
+                        <input type="file" name="image_path" id="imageFile" class="drop-zone__input" accept="image/jpeg, image/png, image/gif">
                     </div>
                     <div class="drop-zone">
                         <span class="drop-zone__prompt">Add File</span>
@@ -354,6 +354,7 @@
         $.each(previous_data, function(index, value) {
             new_obj = {
                 pdfFile: value.pdf_path,
+                imageFile: value.image_path,
                 reference_no: "dsds",
                 part_no: value.part_number,
                 fixtureType: value.type,
@@ -400,9 +401,9 @@
         var selectedFiles = pdfFileInput.files;
         var pdfFile = selectedFiles[0];
         // Get Image File
-        var ImageFileInput = document.getElementById('pdfImage');
-        var selectedImageFiles = ImageFileInput.files;
-        var ImageFile = selectedImageFiles[0];
+        var imageFileInput = document.getElementById('imageFile');
+        var selectedimageFiles = imageFileInput.files;
+        var imageFile = selectedimageFiles[0];
         // Get Image Preview Div
         // var imagePreview = $(".drop-zone__thumb:first").prop('outerHTML');
         // var pdfPreview = $(".drop-zone__thumb:eq(1)").prop('outerHTML');
@@ -420,6 +421,7 @@
                 if (obj.id === parseInt(editedId)) {
                     // console.log(obj.pdfFile);
                     oldfile = obj.pdfFile;
+                    oldimageFile = obj.imageFile;
                     editObj = {
                         ...obj,
                         reference_no: ref,
@@ -430,6 +432,11 @@
                         editObj['pdfFile'] = pdfFile
                     } else {
                         editObj['pdfFile'] = oldfile
+                    }
+                    if ($("#imageFile").val() != '') {
+                        editObj['imageFile'] = imageFile
+                    } else {
+                        editObj['imageFile'] = oldimageFile
                     }
                     // Create a new object with the updated age
                     return editObj;
@@ -454,7 +461,7 @@
 
         pdfObject = {
             "pdfFile": pdfFile,
-            'imageFile': ImageFile,
+            'imageFile': imageFile,
             "reference_no": ref,
             "part_no": partNo,
             "fixtureType": fixtureType,
@@ -533,7 +540,7 @@
         $("#fixtureType").val(type);
         $("#partNo").val(part);
         $("#editId").val(id);
-        // $("#pdfImage").after(imagePre);
+        // $("#imageFile").after(imagePre);
         // $("#pdfFile").after(pdfPre);
         // let indexToRemove = fixtures.findIndex(entry => entry.id === id);
         // if (indexToRemove !== -1) {
@@ -566,6 +573,7 @@
     }
     // Preview PDF Function
     $("#previewPdf").click(function() {
+        console.log(fixtures);
         if (fixtures.length < 1) {
             Swal.fire({
                 title: 'No Data!',

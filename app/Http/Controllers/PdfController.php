@@ -71,7 +71,6 @@ class PdfController extends Controller
 
 
         $fixtures = $request->fixtures;
-
         Fixtures::where('package_info_id', $packageType->id)->delete();
 
         $counts = 0;
@@ -88,26 +87,28 @@ class PdfController extends Controller
                 $filePath = $path . '/' . $name;
             }
 
-            $imageFilePath = null;
+            $imageFilePath =$fixture['imageFile'];
 
-            if ($fixture['imageFile'] != 'undefined') {
-                $image = $fixture['imageFile'];
+            if (!empty($imageFilePath) && gettype($imageFilePath) != 'string') {
+            $image = $fixture['imageFile'];
 
                 $imageName = $counts++ . time() . '.' . $image->getClientOriginalExtension();
 
                 $imagePath = public_path('/files');
                 $image->move($imagePath, $imageName);
                 // $imagefilePath = $imagePath . '/' . $imageName;
-                $imagefilePath = $imageName;
+                $fixture['imageFile'] = $imageName;
+                // dd($imagefilePath);
             }
 
+            // dd($imageFilePath);
 
             $fixtureData = new Fixtures();
             $fixtureData->package_info_id = $packageType->id;
             $fixtureData->pdf_path = $filePath;
             $fixtureData->type = $fixture['fixtureType'];
             $fixtureData->part_number = $fixture['part_no'];
-            $fixtureData->image_path = $imagefilePath ?? null;
+            $fixtureData->image_path = $fixture['imageFile'];
             $fixtureData->save();
         }
 
