@@ -117,7 +117,7 @@
     <div class="container-fluid py-3">
         <div class="header-wrapper">
             <div class="heading-top">
-                <h1>Lighting Legend Creator <span>{{ date("F j, Y") }}</span></h1>
+                <h1>Lighting Legend <span>{{ date("F j, Y") }}</span></h1>
             </div>
         </div>
         <div id="content" style="
@@ -212,7 +212,9 @@
         height: 60px;
         border-style: none;
         border-radius: 5px;
-      ">
+      "
+      onclick="backFunction()"
+      >
             Go back to Edit
         </button></a>
 </div>
@@ -259,6 +261,11 @@
 </script>
 
 <script>
+    function backFunction()
+    {
+        window.history.back();
+    }
+
     $('.sidenav  li:nth-of-type(2)').addClass('active');
 </script>
 
