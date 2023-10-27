@@ -60,7 +60,7 @@
                     </div>
                     <div class="lighting-img-wrapper">
                         <h1 class="">Image</h1>
-                        @if ($data->image_path != NULL)
+                        @if ($data->image_path != 'undefined')
                         <img src="{{ asset('public/files/'.$data->image_path) }}" alt="image" />
                         @else
                         <img src="{{ asset('public/assets/images/empty_image.jpg') }}" alt="">

@@ -30,7 +30,7 @@
     td {
         padding: 0.3rem;
         word-break: break-all;
-        font-size: 0.8rem;
+        font-size: 11px;
     }
 
     .table-wrapper {
