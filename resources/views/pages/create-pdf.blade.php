@@ -342,6 +342,25 @@
             }
         });
 
+        $("#pdfFile").on('change', function() {
+            if (!validatePDFFile(this)) {
+                Swal.fire({
+                    title: 'File Error',
+                    text: 'File must be a PDF',
+                    icon: 'error',
+                    confirmButtonColor: "#1D3F77"
+                });
+                // Clear the file input (optional)
+                $(this).val('');
+            }
+        });
+
+        function validatePDFFile(fileInput) {
+            const allowedExtensions = /(\.pdf)$/i;
+            const fileName = fileInput.value;
+            return allowedExtensions.test(fileName);
+        }
+
     });
 
 
