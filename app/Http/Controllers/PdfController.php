@@ -90,7 +90,7 @@ class PdfController extends Controller
             $imageFilePath =$fixture['imageFile'];
 
             if (!empty($imageFilePath) && gettype($imageFilePath) != 'string') {
-            $image = $fixture['imageFile'];
+                $image = $fixture['imageFile'];
 
                 $imageName = $counts++ . time() . '.' . $image->getClientOriginalExtension();
 
@@ -99,6 +99,8 @@ class PdfController extends Controller
                 // $imagefilePath = $imagePath . '/' . $imageName;
                 $fixture['imageFile'] = $imageName;
                 // dd($imagefilePath);
+            } else {
+                $fixture['imageFile'] = 'undefined'; // Set it to null if no image is provided
             }
 
             // dd($imageFilePath);
