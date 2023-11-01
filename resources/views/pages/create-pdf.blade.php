@@ -355,6 +355,25 @@
             }
         });
 
+        $('#imageFile').on('change', function () {
+            var input = this;
+            if (input.files.length > 0) {
+                var fileSize = input.files[0].size; // Get the file size in bytes
+                var maxSize = 5 * 1024 * 1024; // 5MB in bytes
+
+                if (fileSize > maxSize)
+                {
+                    Swal.fire({
+                        title: 'Image Error',
+                        text: 'Image must be less then 5mb',
+                        icon: 'error',
+                        confirmButtonColor: "#1D3F77"
+                    });
+                    $(this).val('');
+                }
+            }
+        });
+
         function validatePDFFile(fileInput) {
             const allowedExtensions = /(\.pdf)$/i;
             const fileName = fileInput.value;
