@@ -99,8 +99,6 @@ class PdfController extends Controller
                 // $imagefilePath = $imagePath . '/' . $imageName;
                 $fixture['imageFile'] = $imageName;
                 // dd($imagefilePath);
-            } else {
-                $fixture['imageFile'] = 'undefined'; // Set it to null if no image is provided
             }
 
             // dd($imageFilePath);
