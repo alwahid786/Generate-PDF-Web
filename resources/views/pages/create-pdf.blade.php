@@ -591,6 +591,7 @@
         let part = $("#partNo").val('');
         let fixtureType = $("#fixtureType").val('');
         let pdfFile = $("#pdfFile").val('');
+        let imageFile = $("#imageFile").val('');
         let dropImage = $(".drop-zone__thumb").remove();
     }
 
@@ -611,7 +612,7 @@
     }
     // Preview PDF Function
     $("#previewPdf").click(function() {
-        console.log(fixtures);
+        // console.log(fixtures);
         if (fixtures.length < 1) {
             Swal.fire({
                 title: 'No Data!',
