@@ -149,14 +149,22 @@
                 </div>
                 <div style="height: 50%;display: flex;flex-direction: column;justify-content: space-between;padding: 0 2rem;">
                     <?php
-                    $date = new DateTime($pdf_path[0]['fixture']['created_at']);
-                    $formattedDate = $date->format('d F Y');
+
+                        if (isset($pdf_path[0]) && !empty($pdf_path[0])) {
+                            $date = new DateTime($pdf_path[0]['fixture']['created_at']);
+                            $formattedDate = $date->format('d F Y');
+                        }
+
                     ?>
+
+                    @if (isset($pdf_path[0]) && !empty($pdf_path[0]))
                     <div>
                         <h1 style="font-size: 2.8rem; margin: 0" class="projectTitle">{{ $pdf_path[0]['fixture']['project'] }}</h1>
                         <h3 style="font-size: 17px;margin-top: 6px;margin-bottom: 4px;font-weight: bold;" class="projectTypeName">{{ $packageTypeName[0] }}</h3>
                         <p style="font-size: 14px;padding-top: 12px;">{{ $formattedDate }}</p>
                     </div>
+                    @endif
+
                     <div style="
               display: flex;
               align-items: center;
@@ -176,7 +184,7 @@
                 </div>
             </div>
             <!-- start summary page -->
-            @if ($pdf_path[0]['fixture']['summary'] == 1)
+            @if (isset($pdf_path[0]) && !empty($pdf_path[0]) && $pdf_path[0]['fixture']['summary'] == 1)
             <div style="height: 1056px;width:816px;background-color: rgb(255, 255, 255);padding: 2rem;" class="main-page-wrapper">
                 <div style="display:flex; justify-content:space-between; align-items:center">
                     <img style="width:140px; height:100%" src="{{ asset('public/assets/images/logo-icon.png') }}">
