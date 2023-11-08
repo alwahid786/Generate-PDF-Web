@@ -118,7 +118,7 @@ class PdfController extends Controller
             // $fix = Fixtures::find($fixture['id']);
             PackageInfo::where('id', $packageType->id)->delete();
             Fixtures::where('package_info_id', $packageType->id)->delete();
-            return response()->json(['status' => false, 'message' => 'Error']);
+            return response()->json(['status' => false, 'message' => 'Something went wrong. Please check your data and try again.']);
         }
 
         // dd($addedCountFixture, $saveFixtureCount, $packageType->id);
@@ -230,12 +230,12 @@ class PdfController extends Controller
 
                         }else{
 
-                            $fix = Fixtures::find($fixture['id']);
+                            // $fix = Fixtures::find($fixture['id']);
                             $getPdfName = Fixtures::where('id', $fixture['id'])->first();
-                            PackageInfo::where('id', $fix->package_info_id)->delete();
-                            Fixtures::where('package_info_id', $fix->package_info_id)->delete();
+                            PackageInfo::where('id', $getPdfName->package_info_id)->delete();
+                            Fixtures::where('package_info_id', $getPdfName->package_info_id)->delete();
 
-                            return redirect()->back()->with('error', 'your pdf ' . $getPdfName->type . ' type is currepted!');
+                            return redirect()->back()->with('error', 'Your pdf ' . $getPdfName->type . ' type is currepted!');
                         }
                     } else {
 
