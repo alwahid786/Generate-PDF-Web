@@ -71,12 +71,14 @@ class PdfController extends Controller
 
 
         $fixtures = $request->fixtures;
+
+        $addedCountFixture = count($fixtures);
+
         Fixtures::where('package_info_id', $packageType->id)->delete();
 
         $counts = 0;
 
         foreach ($fixtures as $fixture) {
-
             $filePath = $fixture['pdfFile'];
             if (gettype($filePath) != 'string') {
                 $uploadedFile = $fixture['pdfFile'];
@@ -98,10 +100,8 @@ class PdfController extends Controller
                 $image->move($imagePath, $imageName);
                 // $imagefilePath = $imagePath . '/' . $imageName;
                 $fixture['imageFile'] = $imageName;
-                // dd($imagefilePath);
-            }
 
-            // dd($imageFilePath);
+            }
 
             $fixtureData = new Fixtures();
             $fixtureData->package_info_id = $packageType->id;
@@ -111,6 +111,17 @@ class PdfController extends Controller
             $fixtureData->image_path = $fixture['imageFile'];
             $fixtureData->save();
         }
+
+        $saveFixtureCount = Fixtures::where('package_info_id', $packageType->id)->count();
+
+        if ($addedCountFixture !== $saveFixtureCount) {
+            // $fix = Fixtures::find($fixture['id']);
+            PackageInfo::where('id', $packageType->id)->delete();
+            Fixtures::where('package_info_id', $packageType->id)->delete();
+            return response()->json(['status' => false, 'message' => 'Error']);
+        }
+
+        // dd($addedCountFixture, $saveFixtureCount, $packageType->id);
 
         return response()->json(['status' => true, 'message' => 'Success', 'data' => $packageType->id]);
     }
@@ -211,9 +222,21 @@ class PdfController extends Controller
                             }
                         }
 
-                        Fixtures::where('id', $fixture['id'])->update([
-                            'pdf_images' => $pdfImages
-                        ]);
+                        if(!empty($pdfImages)){
+
+                            Fixtures::where('id', $fixture['id'])->update([
+                                'pdf_images' => $pdfImages
+                            ]);
+
+                        }else{
+
+                            $fix = Fixtures::find($fixture['id']);
+                            $getPdfName = Fixtures::where('id', $fixture['id'])->first();
+                            PackageInfo::where('id', $fix->package_info_id)->delete();
+                            Fixtures::where('package_info_id', $fix->package_info_id)->delete();
+
+                            return redirect()->back()->with('error', 'your pdf ' . $getPdfName->type . ' type is currepted!');
+                        }
                     } else {
 
                         $jsonData = $fixture['pdf_images'];

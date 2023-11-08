@@ -9,6 +9,11 @@
 @include('includes.navbar')
 <main class="content-wrapper">
     <div class="container-fluid py-3">
+        @if(session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
+            </div>
+        @endif
         <div class="header-wrapper">
             <div class="heading-top">
                 <h1>PDF Package Creator <span>{{ date('d M Y') }}</span></h1>
@@ -119,6 +124,7 @@
                     <ul class="mt-4" data-id="${id}">
                         <li style="font-weight: bold;">Fixture Type</li>
                         <li style="font-weight: bold;">Part Number</li>
+                        <li style="font-weight: bold;">Image</li>
                         <li style="font-weight: bold;">Spec Sheet</li>
                         {{-- <li style="font-weight: bold;">Edit</li> --}}
                         <li style="font-weight: bold;">Action</li>
@@ -128,6 +134,11 @@
                     <ul class="mt-4 row{{ $fixture['id'] }}" data-id="{{ $fixture['id'] }}">
                         <li class="fixType_append">{{ $fixture['type'] }}</li>
                         <li class="fixPartNo_append" style="max-width:200px;">{{ $fixture['part_number'] }}</li>
+                        <li style="width: 45px;">
+                        @if (!empty($fixture->image_path) && $fixture->image_path != 'undefined')
+                             <img style="width: 45px;"  src="{{ asset('public/assets/images/png_icon.png') }}" alt="image">
+                        @endif
+                    </li>
                         <li> <img src=" {{ asset('public/assets/images/pdf-icon.png') }}" alt="image"></li>
                         <li class="d-flex align-items-center justify-content-end">
                             <img style="cursor:pointer; width:28px;height:28px;" class="editPdfBtn" src="{{ asset('public/assets/images/edit-icon.svg') }}" alt="image">
@@ -512,6 +523,12 @@
         let pdfDiv = `<ul class="mt-4 row${id}" data-id="${id}">
                         <li class="fixType_append">${fixtureType}</li>
                         <li class="fixPartNo_append" style="max-width:200px; word-break: break-all">${partNo}</li>
+                        <li style="width: 45px;">`
+                        if (imageFile) {
+                            pdfDiv += ` <img style="width: 45px;" src="{{ asset('public/assets/images/png_icon.png') }}" alt="image"> `;
+                        }
+                        pdfDiv += `
+                        </li>
                         <li> <img src="{{ asset('public/assets/images/pdf-icon.png') }}" alt="image"></li>
                         <li class="d-flex align-items-center justify-content-end">
                             <img style="cursor:pointer; width:28px;height:28px;" class="editPdfBtn" src="{{ asset('public/assets/images/edit-icon.svg') }}" alt="image">
