@@ -165,10 +165,10 @@ class PdfController extends Controller
             ];
 
             // path for ubuntu
-            $outputPath = '/var/www/html/public/files/';
+            // $outputPath = '/var/www/html/public/files/';
 
             // path for window
-            // $outputPath = 'C:\xampp\htdocs\pdf-generator\public\files';
+            $outputPath = 'C:\xampp\htdocs\pdf-generator\public\files';
 
 
             if (file_exists($pdfPath)) {
@@ -197,10 +197,10 @@ class PdfController extends Controller
                             $outputFilename = "/$time.$randomString.$randomNumber.png";
 
                             // command for window
-                            // $command = "gswin64c.exe -sDEVICE=pngalpha -r300 -o \"$outputPath$outputFilename\" -dFirstPage=$pageNumber -dLastPage=$pageNumber \"$pdfPath\"";
+                            $command = "gswin64c.exe -sDEVICE=pngalpha -r300 -o \"$outputPath$outputFilename\" -dFirstPage=$pageNumber -dLastPage=$pageNumber \"$pdfPath\"";
 
                             // command for ubuntu
-                            $command = "gs -sDEVICE=pngalpha -r600 -o \"$outputPath$outputFilename\" -dFirstPage=$pageNumber -dLastPage=$pageNumber \"$pdfPath\"";
+                            // $command = "gs -sDEVICE=pngalpha -r600 -o \"$outputPath$outputFilename\" -dFirstPage=$pageNumber -dLastPage=$pageNumber \"$pdfPath\"";
 
 
                             exec($command, $output, $returnCode);
@@ -222,21 +222,31 @@ class PdfController extends Controller
                             }
                         }
 
-                        if(!empty($pdfImages)){
 
-                            Fixtures::where('id', $fixture['id'])->update([
-                                'pdf_images' => $pdfImages
-                            ]);
 
-                        }else{
+                        Fixtures::where('id', $fixture['id'])->update([
+                            'pdf_images' => $pdfImages
+                        ]);
 
-                            // $fix = Fixtures::find($fixture['id']);
-                            $getPdfName = Fixtures::where('id', $fixture['id'])->first();
-                            PackageInfo::where('id', $getPdfName->package_info_id)->delete();
-                            Fixtures::where('package_info_id', $getPdfName->package_info_id)->delete();
 
-                            return redirect()->back()->with('error', 'Your pdf ' . $getPdfName->type . ' type is currepted!');
-                        }
+                        // $fixtureId = $fixture['id'];
+
+                        // $getPdfName = Fixtures::where([
+                        //     'id' => $fixtureId,
+                        //     'pdf_images' => []
+                        // ])->first();
+
+                        // if ($getPdfName) {
+                        //     $pdfType = $getPdfName->type;
+
+                        //     Fixtures::where([
+                        //         'id' => $fixtureId,
+                        //         'pdf_images' => []
+                        //     ])->delete();
+
+                        //     return redirect()->back()->with('error', 'Your pdfs ' . $pdfType . ' type is currepted!');
+                        // }
+
                     } else {
 
                         $jsonData = $fixture['pdf_images'];
