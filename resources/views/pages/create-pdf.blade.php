@@ -9,10 +9,17 @@
 @include('includes.navbar')
 <main class="content-wrapper">
     <div class="container-fluid py-3">
+
+        @if(session('error_corrupted_file'))
+        <div class="alert alert-danger">
+            Your pdfs {{ session('error_corrupted_file') }} type is corrupted!
+        </div>
+        @endif
+
         @if(session('error'))
-            <div class="alert alert-danger">
-                {{ session('error') }}
-            </div>
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
         @endif
         <div class="header-wrapper">
             <div class="heading-top">
@@ -135,10 +142,10 @@
                         <li class="fixType_append">{{ $fixture['type'] }}</li>
                         <li class="fixPartNo_append" style="max-width:200px;">{{ $fixture['part_number'] }}</li>
                         <li style="width: 45px;">
-                        @if (!empty($fixture->image_path) && $fixture->image_path != 'undefined')
-                             <img style="width: 45px;"  src="{{ asset('public/assets/images/png_icon.png') }}" alt="image">
-                        @endif
-                    </li>
+                            @if (!empty($fixture->image_path) && $fixture->image_path != 'undefined')
+                            <img style="width: 45px;" src="{{ asset('public/assets/images/png_icon.png') }}" alt="image">
+                            @endif
+                        </li>
                         <li> <img src=" {{ asset('public/assets/images/pdf-icon.png') }}" alt="image"></li>
                         <li class="d-flex align-items-center justify-content-end">
                             <img style="cursor:pointer; width:28px;height:28px;" class="editPdfBtn" src="{{ asset('public/assets/images/edit-icon.svg') }}" alt="image">
@@ -366,14 +373,13 @@
             }
         });
 
-        $('#imageFile').on('change', function () {
+        $('#imageFile').on('change', function() {
             var input = this;
             if (input.files.length > 0) {
                 var fileSize = input.files[0].size; // Get the file size in bytes
                 var maxSize = 5 * 1024 * 1024; // 5MB in bytes
 
-                if (fileSize > maxSize)
-                {
+                if (fileSize > maxSize) {
                     Swal.fire({
                         title: 'Image Error',
                         text: 'Image must be less then 5mb',

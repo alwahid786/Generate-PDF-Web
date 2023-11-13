@@ -72,7 +72,7 @@ class PdfController extends Controller
 
         $fixtures = $request->fixtures;
 
-        $addedCountFixture = count($fixtures);
+        // $addedCountFixture = count($fixtures);
 
         Fixtures::where('package_info_id', $packageType->id)->delete();
 
@@ -89,7 +89,7 @@ class PdfController extends Controller
                 $filePath = $path . '/' . $name;
             }
 
-            $imageFilePath =$fixture['imageFile'];
+            $imageFilePath = $fixture['imageFile'];
 
             if (!empty($imageFilePath) && gettype($imageFilePath) != 'string') {
                 $image = $fixture['imageFile'];
@@ -100,7 +100,6 @@ class PdfController extends Controller
                 $image->move($imagePath, $imageName);
                 // $imagefilePath = $imagePath . '/' . $imageName;
                 $fixture['imageFile'] = $imageName;
-
             }
 
             $fixtureData = new Fixtures();
@@ -112,14 +111,14 @@ class PdfController extends Controller
             $fixtureData->save();
         }
 
-        $saveFixtureCount = Fixtures::where('package_info_id', $packageType->id)->count();
+        // $saveFixtureCount = Fixtures::where('package_info_id', $packageType->id)->count();
 
-        if ($addedCountFixture !== $saveFixtureCount) {
-            // $fix = Fixtures::find($fixture['id']);
-            PackageInfo::where('id', $packageType->id)->delete();
-            Fixtures::where('package_info_id', $packageType->id)->delete();
-            return response()->json(['status' => false, 'message' => 'Something went wrong. Please check your data and try again.']);
-        }
+        // if ($addedCountFixture !== $saveFixtureCount) {
+        //     // $fix = Fixtures::find($fixture['id']);
+        //     PackageInfo::where('id', $packageType->id)->delete();
+        //     Fixtures::where('package_info_id', $packageType->id)->delete();
+        //     return response()->json(['status' => false, 'message' => 'Something went wrong. Please check your data and try again.']);
+        // }
 
         // dd($addedCountFixture, $saveFixtureCount, $packageType->id);
 
@@ -147,6 +146,7 @@ class PdfController extends Controller
 
         $completePdfPath = [];
         $currentPage = [];
+        $errorMessages = [];
 
         foreach ($package->fixtures as $fixture) {
 
@@ -223,30 +223,35 @@ class PdfController extends Controller
                         }
 
 
+                        $fixtureId = $fixture['id'];
+                        $pdfImages = $pdfImages;
 
-                        Fixtures::where('id', $fixture['id'])->update([
+
+                        Fixtures::where('id', $fixtureId)->update([
                             'pdf_images' => $pdfImages
                         ]);
 
+                        // if ($updateFix) {
 
-                        // $fixtureId = $fixture['id'];
+                        //     $getPdfName = Fixtures::where('id', $fixtureId)
+                        //         ->where('pdf_images', [])
+                        //         ->get();
 
-                        // $getPdfName = Fixtures::where([
-                        //     'id' => $fixtureId,
-                        //     'pdf_images' => []
-                        // ])->first();
+                        //     if (count($getPdfName) > 0) {
 
-                        // if ($getPdfName) {
-                        //     $pdfType = $getPdfName->type;
+                        //         // Fixtures::where('id', $fixtureId)
+                        //         //     ->where('pdf_images', [])
+                        //         //     ->delete();
 
-                        //     Fixtures::where([
-                        //         'id' => $fixtureId,
-                        //         'pdf_images' => []
-                        //     ])->delete();
+                        //         if ($getPdfName->isNotEmpty()) {
+                        //             $errorMessages = $getPdfName->map(function ($pdfData) {
+                        //                 return 'Your pdfs ' . $pdfData->type . ' type is corrupted!';
+                        //             })->toArray();
 
-                        //     return redirect()->back()->with('error', 'Your pdfs ' . $pdfType . ' type is currepted!');
+                        //             // return redirect()->back()->with('error_currupted_file', $errorMessages);
+                        //         }
+                        //     }
                         // }
-
                     } else {
 
                         $jsonData = $fixture['pdf_images'];
@@ -288,6 +293,27 @@ class PdfController extends Controller
         $template =  view('pages.pdf-template', ['pdf_path' => $completePdfPath, 'getFixture' => $getFixture, 'packageTypeName' => $packageTypeName, 'typeId' => $typeId, 'is_view' => $is_view])->render();
 
         View::share('pdfTemplate', $template);
+
+        $corruptedData = Fixtures::where('package_info_id', $typeId)
+            ->whereJsonLength('pdf_images', '=', 0)
+            ->get();
+
+        if (count($corruptedData) > 0) {
+            // dd('hi');
+            // Fixtures::where([
+            //     'package_info_id' => $typeId,
+            //     whereJsonLength('pdf_images', '=', 0)
+            // ])->delete();
+            $errorType = $corruptedData->first()->type;
+
+            $corruptedData = Fixtures::where('package_info_id', $typeId)
+                ->whereJsonLength('pdf_images', '=', 0)
+                ->delete();
+
+
+
+            return redirect()->back()->with('error_corrupted_file', $errorType);
+        }
 
         return view('pages.pdf-cover')->with('pdfTemplate', $template);
     }
