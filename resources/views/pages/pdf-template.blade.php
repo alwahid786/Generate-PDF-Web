@@ -1,18 +1,6 @@
 <body style="background-color: #f6f6f6;">
-    <div id="content" style="
-        display:flex;
-        flex-direction:column;
-        align-items:center;
-    margin: 0 auto;
-        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
-          Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue',
-          sans-serif;
-      ">
-
-        <div class="controls" id="control-wrapper" style="display:block;
-        position: fixed;
-        right:0;top: 52%;
-    transform: translateY(-50%);">
+    <div id="content" style="display:flex; flex-direction:column; align-items:center; margin: 0 auto; font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',  Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue',  sans-serif;">
+        <div class="controls" id="control-wrapper" style="display:block;position: fixed;right:0;top: 52%;transform: translateY(-50%);">
             <div class="edit-options-wrapper" style="
                 background-color: rgb(255, 255, 255);
                 box-shadow: rgba(17, 17, 26, 0.05) 0px 1px 0px,
@@ -185,47 +173,19 @@
             </div>
             <!-- start summary page -->
             @if (isset($pdf_path[0]) && !empty($pdf_path[0]) && $pdf_path[0]['fixture']['summary'] == 1)
-            <div style="height: 1056px;width:816px;background-color: rgb(255, 255, 255);padding: 2rem;" class="main-page-wrapper">
+            <div style="height: 1056px;width:816px;background-color: rgb(255, 255, 255);padding: 2rem;" class="summary-page-wrapper">
                 <div style="display:flex; justify-content:space-between; align-items:center">
                     <img style="width:140px; height:100%" src="{{ asset('public/assets/images/logo-icon.png') }}">
                     <h4>{{ $pdf_path[0]['fixture']['project'] }}</h4>
-                    <h1 style=" font-size:1.5rem ;margin:0px">Package</br> Summary</h1>
+                    <h1 style=" font-size:1.5rem;margin:0px">Package</br> Summary</h1>
                 </div>
-                <div style="height: 890px; padding-top: 15px">
-                    <table style="width: 100%">
+                <div style="height: 890px; padding-top: 15px" class="summary-table">
+                    <table style="width: 100%" id="table-1">
                         <tr>
                             <th style="padding: 0.8rem 0; width: 15%; text-align:center">Type</th>
                             <th style="padding: 0.8rem 0; width: 30%;text-align:center">Image</th>
                             <th style="padding: 0.8rem 0; width: 40%;text-align:center">Part Number</th>
                         </tr>
-                        @foreach ($getFixture as $data)
-                        <tr>
-                            <td style="
-                        border-bottom: 1px solid rgb(226, 226, 226);
-                        border-collapse: collapse;
-                        text-align: center;
-                      ">
-                                {{ $data['type'] }}
-                            </td>
-
-                            <td style="
-                        border-bottom: 1px solid rgb(226, 226, 226);
-                        border-collapse: collapse;
-                        text-align: center;
-                      ">
-
-                                <img style="height: 90px" src="{{asset('public/files/'.$data['image_path'])}}" alt="">
-
-                            </td>
-                            <td style="
-                        border-bottom: 1px solid rgb(226, 226, 226);
-                        border-collapse: collapse;
-                        text-align: center;
-                      ">
-                                {{ $data['part_number'] }}
-                            </td>
-                        </tr>
-                        @endforeach
                     </table>
                 </div>
                 <div style="display: flex;align-items: center;justify-content: space-between;">
@@ -243,9 +203,6 @@
                 </div>
             </div>
             @endif
-
-            <!-- end summary page -->
-
             @foreach ($pdf_path as $index => $path)
             @php
             $currentPage = $index + 1;
@@ -323,9 +280,40 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
 <script>
-    const convertBtn = document.getElementById("convertBtn");
-    const contentDiv = document.getElementById("content");
+    $(document).ready(function() {
+        var fixtureData = @json($getFixture);
+        var myDiv = document.querySelector(".summary-table table");
+        var newTable = document.querySelector(".summary-page-wrapper")
+        var mainWrapper = document.getElementById("inner-content")
+        var maxHeight = 778;
+        var initId = 1
+        for (const data of fixtureData) {
+            const tableId = $(`#table-${initId}`)
+            var imageSrc = data.image_path !== "undefined" ? `{{asset('public/files/${data.image_path}')}}` : '';
+            var imgElement = `<img style='height: 90px' src="${imageSrc}" alt=''>`;
+            var row = "<tr>" +
+                "<td style='border-bottom: 1px solid rgb(226, 226, 226); border-collapse: collapse; text-align: center;'>" + (data.type !== undefined ? data.type : '') + "</td>" +
+                `<td style='border-bottom: 1px solid rgb(226, 226, 226); border-collapse: collapse; text-align: center;'>${imgElement}</td>` +
+                "<td style='border-bottom: 1px solid rgb(226, 226, 226); border-collapse: collapse; text-align: center;'>" + (data.part_number !== undefined ? data.part_number : '') + "</td>" +
+                "</tr>";
+            var divHeight = tableId.height();
+            if (divHeight > maxHeight) {
+                initId++;
+                const copiedElement = newTable.cloneNode(true);
+                $(copiedElement).find("table").attr("id", `table-${initId}`);
+                $(copiedElement).find("tr:has(td)").remove();
+                $(copiedElement).find("table").append(row);
+                $(copiedElement).insertAfter(newTable);
+            }
+            else{
+                tableId.append(row);
+            }
 
+        };
+    })
+</script>
+<script>
+    const convertBtn = document.getElementById("convertBtn");
     var projectTitles = document.getElementsByClassName("projectTitle");
     var projectName = document.getElementsByClassName("projectTypeName");
     if (projectTitles.length > 0) {
@@ -340,11 +328,11 @@
         image: {
             type: "jpeg",
             quality: 1,
-        }, // Use PNG and set maximum quality
-        filename: `${fileName} - ${fileTypeName}.pdf`, // The default filename for the downloaded PDF
+        },
+        filename: `${fileName} - ${fileTypeName}.pdf`,
         html2canvas: {
-            scale: 3
-        }, // Increase the scale for better image quality (adjust as needed)
+            scale: 2
+        },
         jsPDF: {
             unit: "mm",
             format: "letter",
@@ -352,33 +340,17 @@
         },
     };
     convertBtn.addEventListener("click", () => {
+        const contentDiv = document.getElementById("content");
+        console.log(contentDiv, "content")
         // $("#loader").removeClass('d-none');
         html2pdf().set(pdfOptions).from(contentDiv).save();
+
         // $("#loader").addClass('d-none');
         // html2pdf().set(pdfOptions).from(contentDiv).outputPdf().then(pdf => {
         //     $("#loader").removeClass('d-none');
         //     saveAs(pdf, `${fileName}.pdf`); // Save the PDF
         // });
     });
-
-    // function convertToPDF() {
-    //     html2pdf().set(pdfOptions).from(contentDiv).save();
-    // }
-
-    // window.addEventListener("load", convertToPDF);
-    // const imgElements = document.getElementsByClassName("body-images");
-
-    // Assuming there are multiple elements with the class "body-images"
-    // You can loop through them to get the width and height of each element
-    // for (let i = 0; i < imgElements.length; i++) {
-    //     var imgWidth = imgElements[i].clientWidth; // Get the width of the element
-    //     var imgHeight = imgElements[i].clientHeight; // Get the height of the element
-    //     console.log(`Image ${i + 1} - Height: ${imgHeight}, Width: ${imgWidth}`);
-    //     const imgRatio = imgWidth / imgHeight;
-    //     const pageWidth = imgRatio * 1056;
-    //     console.log(imgRatio,"ratio");
-    //     console.log(pageWidth,"width")
-    // }
 </script>
 <script>
     var canvas,

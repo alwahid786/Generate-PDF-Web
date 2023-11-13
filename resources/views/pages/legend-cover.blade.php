@@ -142,8 +142,7 @@
                             <h1>Lighting Legend</h1>
                         </div>
                         <div class="table-inner-wrapper">
-                            <table style="width: 100%">
-
+                            <table style="width: 100%" id="table-1">
                                 <tr>
                                     <th style="width: 10%">Type</th>
                                     <th style="width: 10%">Image</th>
@@ -154,28 +153,8 @@
                                     <th style="width: 10%">Voltage</th>
                                     <th style="width: 10%">Diming</th>
                                 </tr>
-                                @foreach ($fixtureTypes as $data)
-                                <tr>
-                                    <td>{{ $data->type ?? ''}}</td>
-                                    <td>
-                                        @if ($data->image_path != NULL)
-                                        <img style="width: 100%; max-height: 70px" src="{{ asset('public/files/'.$data->image_path) }}" alt="image" />
-                                        @else
-                                        <img style="width: 100%; max-height: 70px" src="{{ asset('public/assets/images/empty_image.jpg') }}" alt="">
-                                        @endif
-                                        {{-- <img style="width: 100%; max-height: 70px" src="{{asset('public/assets/images/dummy.jpg')}}" alt="" /> --}}
-                                    </td>
-                                    <td>{{ $data->legends->manufacturer ?? '' }}</td>
-                                    <td>{{ $data->legends->description ?? '' }}</td>
-                                    <td>{{ $data->part_number ?? '' }}</td>
-                                    <td>{{ $data->legends->lamp ?? '' }}</td>
-                                    <td>{{ $data->legends->voltage ?? '' }}</td>
-                                    <td>{{ $data->legends->dimming ?? '' }}</td>
-                                </tr>
-                                @endforeach
                             </table>
                         </div>
-
                         <div class="table-footer">
                             <div class="page-number">
                                 {{-- <h1>Page 2 of 10:</h1> --}}
@@ -212,9 +191,7 @@
         height: 60px;
         border-style: none;
         border-radius: 5px;
-      "
-      onclick="backFunction()"
-      >
+      " onclick="backFunction()">
             Go back to Edit
         </button></a>
 </div>
@@ -227,9 +204,44 @@
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
 <script>
+    $(document).ready(function() {
+        var fixtureTypes = @json($fixtureTypes);
+        var myDiv = document.querySelector(".body-page-wrapper table");
+        var newTable = document.querySelector(".body-page-wrapper")
+        var mainWrapper = document.getElementById("inner-content")
+        var maxHeight = 590;
+        var initId = 1
+        for (const data of fixtureTypes) {
+            const tableId = $(`#table-${initId}`)
+            const imageSrc = data.image_path !== "undefined" ? `{{asset('public/files/${data.image_path}')}}` : '';
+            const imgElement = `<img style='width: 100%; height: 50px'; object-fit:cover; src="${imageSrc}" alt=''>`;
+            var row = "<tr>" +
+                "<td>" + (data.type !== undefined ? data.type : '') + "</td>" +
+                `<td>${imgElement}</td>` +
+                "<td>" + (data.manufacturer !== undefined ? data.manufacturer : '') + "</td>" +
+                "<td>" + (data.description !== undefined ? data.description : '') + "</td>" +
+                "<td>" + (data.part_number !== undefined ? data.part_number : '') + "</td>" +
+                "<td>" + (data.lamp !== undefined ? data.lamp : '') + "</td>" +
+                "<td>" + (data.voltage !== undefined ? data.voltage : '') + "</td>" +
+                "<td>" + (data.dimming !== undefined ? data.dimming : '') + "</td>" +
+                "</tr>";
+            const divHeight = tableId.height();
+            if (divHeight > maxHeight) {
+                initId++;
+                const copiedElement = newTable.cloneNode(true);
+                $(copiedElement).find("table").attr("id", `table-${initId}`);
+                $(copiedElement).find("tr:has(td)").remove();
+                $(copiedElement).find("table").append(row);
+                mainWrapper.appendChild(copiedElement);
+            } else {
+                tableId.append(row);
+            }
+        };
+    })
+</script>
+<script>
     const convertBtn = document.getElementById("convertBtn");
     const contentDiv = document.getElementById("content");
-
     var projectTitles = document.getElementsByClassName("projectTitle");
     var projectName = document.getElementsByClassName("projectTypeName");
     if (projectTitles.length > 0) {
@@ -239,7 +251,6 @@
     if (projectName.length > 0) {
         var fileTypeName = projectName[0].innerHTML;
     }
-
     const pdfOptions = {
         image: {
             type: "jpeg",
@@ -259,15 +270,14 @@
         html2pdf().set(pdfOptions).from(contentDiv).save();
     });
 </script>
-
 <script>
-    function backFunction()
-    {
+    function backFunction() {
         window.history.back();
     }
-
     $('.sidenav  li:nth-of-type(2)').addClass('active');
 </script>
 
+</body>
 
+</html>
 @endsection

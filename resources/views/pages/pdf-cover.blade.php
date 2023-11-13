@@ -43,7 +43,7 @@
 <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap4.min.js"></script>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script>
+<!-- <script>
     $(document).ready(function() {
         $('#detail-table').DataTable({
             "ordering": false,
@@ -59,7 +59,7 @@
             }
         });
     });
-</script>
+</script> -->
 <script>
     $('.sidenav  li:nth-of-type(1)').addClass('active');
 </script>
