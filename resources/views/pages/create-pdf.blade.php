@@ -529,6 +529,7 @@
         let pdfDiv = `<ul class="mt-4 row${id}" data-id="${id}">
                         <li class="fixType_append">${fixtureType}</li>
                         <li class="fixPartNo_append" style="max-width:200px; word-break: break-all">${partNo}</li>
+                        <li>${(imageFile ? `<img style="width: 45px" src="{{ asset('public/assets/images/png_icon.png') }}" alt="image">` : '')}</li>
                         <li> <img src="{{ asset('public/assets/images/pdf-icon.png') }}" alt="image"></li>
                         <li class="d-flex align-items-center justify-content-end">
                             <img style="cursor:pointer; width:28px;height:28px;" class="editPdfBtn" src="{{ asset('public/assets/images/edit-icon.svg') }}" alt="image">
