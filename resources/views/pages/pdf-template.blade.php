@@ -290,7 +290,7 @@
         for (const data of fixtureData) {
             const tableId = $(`#table-${initId}`)
             var imageSrc = data.image_path !== "undefined" ? `{{asset('public/files/${data.image_path}')}}` : '';
-            var imgElement = `<img style='height: 90px' src="${imageSrc}" alt=''>`;
+            var imgElement = `<img style='height: 90px;width: 185px' src="${imageSrc}" alt=''>`;
             var row = "<tr>" +
                 "<td style='border-bottom: 1px solid rgb(226, 226, 226); border-collapse: collapse; text-align: center;'>" + (data.type !== undefined ? data.type : '') + "</td>" +
                 `<td style='border-bottom: 1px solid rgb(226, 226, 226); border-collapse: collapse; text-align: center;'>${imgElement}</td>` +
