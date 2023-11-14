@@ -1,3 +1,4 @@
+@extends('layouts.layout-default')
 <body style="background-color: #f6f6f6;">
     <div id="content" style="display:flex; flex-direction:column; align-items:center; margin: 0 auto; font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',  Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue',  sans-serif;">
         <div class="controls" id="control-wrapper" style="display:block;position: fixed;right:0;top: 52%;transform: translateY(-50%);">
@@ -126,7 +127,7 @@
                 </button>
             </div>
 
-            <div style="height: 1056px;width:816px;background-color: rgb(255, 255, 255);padding: 2rem;" class="main-page-wrapper">
+            <div style="height: 1056px;width:816px;background-color: rgb(255, 255, 255);padding: 2rem;" class="main-page-wrapper pdf-page">
                 <div style="height: 50%; position: relative">
                     <img src="{{ asset('public/assets/images/logo-icon.png') }}" style="
               position: absolute;
@@ -173,7 +174,7 @@
             </div>
             <!-- start summary page -->
             @if (isset($pdf_path[0]) && !empty($pdf_path[0]) && $pdf_path[0]['fixture']['summary'] == 1)
-            <div style="height: 1056px;width:816px;background-color: rgb(255, 255, 255);padding: 2rem;" class="summary-page-wrapper">
+            <div style="height: 1056px;width:816px;background-color: rgb(255, 255, 255);padding: 2rem;" class="summary-page-wrapper pdf-page">
                 <div style="display:flex; justify-content:space-between; align-items:center">
                     <img style="width:140px; height:100%" src="{{ asset('public/assets/images/logo-icon.png') }}">
                     <h4>{{ $pdf_path[0]['fixture']['project'] }}</h4>
@@ -207,7 +208,7 @@
             @php
             $currentPage = $index + 1;
             @endphp
-            <div style="height: 1056px; width:816px; padding: 2rem; background-color: rgb(255, 255, 255);" class="body-page-wrapper">
+            <div style="height: 1056px; width:816px; padding: 2rem; background-color: rgb(255, 255, 255);" class="body-page-wrapper pdf-page">
                 <div class="table-wrapper" style="border: 1px solid; ">
                     <div class="table-header" style="height: 70px; display: flex; border-bottom: 1px solid black">
                         <div style="width: 20%;border-right: 1px solid black;text-align: center;padding: 10px 0px;">
@@ -317,6 +318,7 @@
     })
 </script>
 <script>
+    const contentDiv = document.getElementById("content");
     const convertBtn = document.getElementById("convertBtn");
     var projectTitles = document.getElementsByClassName("projectTitle");
     var projectName = document.getElementsByClassName("projectTypeName");
@@ -343,17 +345,55 @@
             orientation: "portrait"
         },
     };
-    convertBtn.addEventListener("click", () => {
-        const contentDiv = document.getElementById("content");
-        console.log(contentDiv, "content")
-        // $("#loader").removeClass('d-none');
-        html2pdf().set(pdfOptions).from(contentDiv).save();
 
-        // $("#loader").addClass('d-none');
-        // html2pdf().set(pdfOptions).from(contentDiv).outputPdf().then(pdf => {
-        //     $("#loader").removeClass('d-none');
-        //     saveAs(pdf, `${fileName}.pdf`); // Save the PDF
-        // });
+
+    function showLoading() {
+        $("#loader").removeClass('d-none');
+    }
+
+    function loderValue(loadValue) {
+        $('#loader .loader-circle-9').contents().filter(function() {
+            return this.nodeType === 3;
+        }).first().replaceWith(loadValue + "%");
+    }
+
+    function hideLoading() {
+        $("#loader").addClass('d-none');
+
+    }
+    convertBtn.addEventListener("click", () => {
+        var pdfPages = 1;
+        var pdfPercentage = 0;
+        showLoading()
+        loderValue(pdfPercentage)
+        const pages = Array.from(contentDiv.querySelectorAll('.pdf-page'))
+        const arryLength = pages.length;
+        console.log(pages, "pages")
+        let worker = html2pdf()
+            .set(pdfOptions)
+            .from(pages[0])
+        worker = worker.toPdf()
+        if (pages.length > 1) {
+            pages.slice(1).forEach((page, index) => {
+                worker = worker
+                    .get('pdf')
+                    .then(pdf => {
+                        pdf.addPage()
+                        pdfPages++;
+                        pdfPercentage = Math.round((pdfPages / arryLength) * 100);
+                        loderValue(pdfPercentage)
+                        console.log(pdfPercentage)
+                        if (pdfPercentage > 99) {
+                            hideLoading()
+                        }
+                    })
+                    .from(page)
+                    .toContainer()
+                    .toCanvas()
+                    .toPdf()
+            })
+        }
+        worker.save();
     });
 </script>
 <script>
