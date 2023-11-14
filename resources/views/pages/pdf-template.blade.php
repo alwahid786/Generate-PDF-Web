@@ -290,7 +290,11 @@
         for (const data of fixtureData) {
             const tableId = $(`#table-${initId}`)
             var imageSrc = data.image_path !== "undefined" ? `{{asset('public/files/${data.image_path}')}}` : '';
-            var imgElement = `<img style='height: 90px;width: 185px' src="${imageSrc}" alt=''>`;
+            if (imageSrc) {
+                var imgElement = `<img style='height: 90px;width: 185px' src="${imageSrc}" alt=''>`;
+            } else {
+                var imgElement = `<img style='height: 90px;width: 185px' src='http://18.217.238.90/public/assets/images/empty_image.jpg'>`;
+            }
             var row = "<tr>" +
                 "<td style='border-bottom: 1px solid rgb(226, 226, 226); border-collapse: collapse; text-align: center;'>" + (data.type !== undefined ? data.type : '') + "</td>" +
                 `<td style='border-bottom: 1px solid rgb(226, 226, 226); border-collapse: collapse; text-align: center;'>${imgElement}</td>` +
