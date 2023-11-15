@@ -294,26 +294,26 @@ class PdfController extends Controller
 
         View::share('pdfTemplate', $template);
 
-        $corruptedData = Fixtures::where('package_info_id', $typeId)
-            ->whereJsonLength('pdf_images', '=', 0)
-            ->get();
+        // $corruptedData = Fixtures::where('package_info_id', $typeId)
+        //     ->whereJsonLength('pdf_images', '=', 0)
+        //     ->get();
 
-        if (count($corruptedData) > 0) {
-            // dd('hi');
-            // Fixtures::where([
-            //     'package_info_id' => $typeId,
-            //     whereJsonLength('pdf_images', '=', 0)
-            // ])->delete();
-            $errorType = $corruptedData->first()->type;
+        // if (count($corruptedData) > 0) {
+        //     // dd('hi');
+        //     // Fixtures::where([
+        //     //     'package_info_id' => $typeId,
+        //     //     whereJsonLength('pdf_images', '=', 0)
+        //     // ])->delete();
+        //     $errorType = $corruptedData->first()->type;
 
-            $corruptedData = Fixtures::where('package_info_id', $typeId)
-                ->whereJsonLength('pdf_images', '=', 0)
-                ->delete();
+        //     $corruptedData = Fixtures::where('package_info_id', $typeId)
+        //         ->whereJsonLength('pdf_images', '=', 0)
+        //         ->delete();
 
 
 
-            return redirect()->back()->with('error_corrupted_file', $errorType);
-        }
+        //     return redirect()->back()->with('error_corrupted_file', $errorType);
+        // }
 
         return view('pages.pdf-cover')->with('pdfTemplate', $template);
     }
