@@ -206,6 +206,7 @@
 <script>
     $(document).ready(function() {
         var fixtureTypes = @json($fixtureTypes);
+        console.log('fixtur', fixtureTypes)
         var myDiv = document.querySelector(".body-page-wrapper table");
         var newTable = document.querySelector(".body-page-wrapper")
         var mainWrapper = document.getElementById("inner-content")
@@ -218,12 +219,12 @@
             var row = "<tr>" +
                 "<td>" + (data.type !== undefined ? data.type : '') + "</td>" +
                 `<td>${imgElement}</td>` +
-                "<td>" + (data.manufacturer !== undefined ? data.manufacturer : '') + "</td>" +
-                "<td>" + (data.description !== undefined ? data.description : '') + "</td>" +
-                "<td>" + (data.part_number !== undefined ? data.part_number : '') + "</td>" +
-                "<td>" + (data.lamp !== undefined ? data.lamp : '') + "</td>" +
-                "<td>" + (data.voltage !== undefined ? data.voltage : '') + "</td>" +
-                "<td>" + (data.dimming !== undefined ? data.dimming : '') + "</td>" +
+                "<td>" + (data.legends.manufacturer !== undefined ? data.legends.manufacturer : '') + "</td>" +
+                "<td>" + (data.legends.description !== undefined ? data.legends.description : '') + "</td>" +
+                "<td>" + (data.legends.part_number !== undefined ? data.legends.part_number : '') + "</td>" +
+                "<td>" + (data.legends.lamp !== undefined ? data.legends.lamp : '') + "</td>" +
+                "<td>" + (data.legends.voltage !== undefined ? data.legends.voltage : '') + "</td>" +
+                "<td>" + (data.legends.dimming !== undefined ? data.legends.dimming : '') + "</td>" +
                 "</tr>";
             const divHeight = tableId.height();
             if (divHeight > maxHeight) {
