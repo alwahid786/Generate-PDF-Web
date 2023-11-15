@@ -718,14 +718,10 @@
     });
 
     function showLoading() {
-        $('body').css('opacity', 0.5);
-        $('button').prop('disabled', true);
         $("#loader").removeClass('d-none');
     }
 
     function hideLoading() {
-        $('body').css('opacity', 1);
-        $('button').prop('disabled', false);
         $("#loader").addClass('d-none');
     }
 </script>

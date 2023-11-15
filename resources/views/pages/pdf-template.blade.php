@@ -1,151 +1,58 @@
 @extends('layouts.layout-default')
+
 <body style="background-color: #f6f6f6;">
     <div id="content" style="display:flex; flex-direction:column; align-items:center; margin: 0 auto; font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',  Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue',  sans-serif;">
         <div class="controls" id="control-wrapper" style="display:block;position: fixed;right:0;top: 52%;transform: translateY(-50%);">
-            <div class="edit-options-wrapper" style="
-                background-color: rgb(255, 255, 255);
-                box-shadow: rgba(17, 17, 26, 0.05) 0px 1px 0px,
-                  rgba(17, 17, 26, 0.1) 0px 0px 8px;
-                border-radius: 10px;
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                position: relative;
-                width: 80px;
-              ">
-
-                <label class="edit-option" style="
-                  display: flex;
-                  flex-direction: column;
-                  justify-content: center;
-                  align-items: center;
-                  row-gap: 0.5rem;
-                  cursor: pointer;
-                  width: 100%;
-                  border-bottom:1px solid #00000014;
-                  margin:0px;
-                  padding-top:1.5rem;
-                  border-top-left-radius:10px;
-                  border-top-right-radius:10px;
-                ">
+            <div class="edit-options-wrapper" style="background-color: rgb(255, 255, 255);box-shadow: rgba(17, 17, 26, 0.05) 0px 1px 0px,rgba(17, 17, 26, 0.1) 0px 0px 8px;border-radius: 10px;display: flex;flex-direction: column;justify-content: center;align-items: center;position: relative;width: 80px;">
+                <label class="edit-option" style="display: flex;flex-direction: column;justify-content: center;align-items: center;row-gap: 0.5rem;cursor: pointer;width: 100%;border-bottom:1px solid #00000014;margin:0px;padding-top:1.5rem;border-top-left-radius:10px;border-top-right-radius:10px;">
                     <input type="radio" name="shape" value="line" style="display: none" />
                     <img style="width: 35px" src="{{ asset('public/assets/images/marker.png') }}" />
                     <p style="margin: 0">Highlight</p>
                 </label>
-                <label class="edit-option" style="
-                 display: flex;
-                  flex-direction: column;
-                  justify-content: center;
-                  align-items: center;
-                  row-gap: 0.5rem;
-                  padding-top:1.5rem;
-                  cursor: pointer;
-                  width: 100%;
-                  border-bottom:1px solid #00000014;
-                  margin:0px;
-                ">
+                <label class="edit-option" style="display: flex;flex-direction: column;justify-content: center;align-items: center;row-gap: 0.5rem;padding-top:1.5rem;cursor: pointer;width: 100%;border-bottom:1px solid #00000014;margin:0px;">
                     <input type="radio" name="shape" value="comm" id="comment-option" style="display: none" />
                     <img style="width: 35px" src="{{ asset('public/assets/images/add-text.png') }}" />
                     <p style="margin: 0">Add Test</p>
                 </label>
-                <label class="edit-option" style="
-                    display: flex;
-                  flex-direction: column;
-                  justify-content: center;
-                  align-items: center;
-                  row-gap: 0.5rem;
-                  padding-top:1.5rem;
-                  cursor: pointer;
-                  width: 100%;
-                  border-bottom:1px solid #00000014;
-                  margin:0px;
-                ">
+                <label class="edit-option" style="display: flex;flex-direction: column;justify-content: center;align-items: center;row-gap: 0.5rem;padding-top:1.5rem;cursor: pointer;width: 100%;border-bottom:1px solid #00000014;margin:0px;">
                     <input type="radio" name="shape" value="rect" style="display: none" />
                     <img style="width: 35px" src="{{ asset('public/assets/images/rectangle.png') }}" />
                     <p style="margin: 0">Add Box</p>
                 </label>
-                <label class="edit-option" style="
-                    display: flex;
-                  flex-direction: column;
-                  justify-content: center;
-                  align-items: center;
-                  row-gap: 0.5rem;
-                  padding-top:1.5rem;
-                  cursor: pointer;
-                  width: 100%;
-                  border-bottom:1px solid #00000014;
-                  margin:0px;
-                ">
+                <label class="edit-option" style="display: flex;flex-direction: column;justify-content: center;align-items: center;row-gap: 0.5rem;padding-top:1.5rem;cursor: pointer;width: 100%;border-bottom:1px solid #00000014;margin:0px;">
                     <input type="radio" name="shape" value="arrow" style="display: none" />
                     <img style="width: 35px" src="{{ asset('public/assets/images/right-arrow.png') }}" />
                     <p style="margin: 0">Arrow</p>
                 </label>
-                <div id="clearCanvas" class="edit-option" style="
-                    display: flex;
-                  flex-direction: column;
-                  justify-content: center;
-                  align-items: center;
-                  row-gap: 0.5rem;
-                  cursor: pointer;
-                  width: 100%;
-                  padding-top:1.5rem;
-                  padding-bottom:0.5rem;
-                  border-bottom-left-radius:10px;
-                  border-bottom-right-radius:10px;
-
-                ">
+                <div id="clearCanvas" class="edit-option" style="display: flex; flex-direction: column; justify-content: center; align-items: center; row-gap: 0.5rem; cursor: pointer; width: 100%; padding-top:1.5rem; padding-bottom:0.5rem; border-bottom-left-radius:10px; border-bottom-right-radius:10px;">
                     <img style="width: 35px" src="{{ asset('public/assets/images/eraser.png') }}" />
                     <p style="margin: 0">Clear All</p>
                 </div>
             </div>
         </div>
         <div id="inner-content" style="position: relative; width: 816px">
-            <canvas id="canvas" style="position: absolute; top: 0; left: 0; z-index: 1"></canvas>
             <div class="text-modal" id="comment-modal" style="display: none">
                 <div>
                     <img src="{{ asset('public/assets/images/delete-button.png') }}" style="width: 15px; cursor: pointer" id="comment-modal-close" />
                 </div>
-                <textarea placeholder="Enter comment" id="comment-content" type="text" rows="3" style="
-                  border-radius: 10px;
-                  border: 1px solid #dbdbdb;
-                  padding: 0.375rem 0.75rem;
-                  outline: none;
-                  resize: none;
-                  width: 100%;
+                <textarea placeholder="Enter comment" id="comment-content" type="text" rows="3" style=" border-radius: 10px; border: 1px solid #dbdbdb; padding: 0.375rem 0.75rem; outline: none; resize: none; width: 100%;
                 "></textarea>
-                <button id="comment-btn" style="
-                  background-color: #003f77;
-                  color: white;
-                  border-radius: 10px;
-                  border: none;
-                  height: 30px;
-                  width: 50px;
-                  cursor: pointer;
-                ">
+                <button id="comment-btn" style=" background-color: #003f77; color: white; border-radius: 10px; border: none; height: 30px; width: 50px; cursor: pointer;">
                     Add
                 </button>
             </div>
-
-            <div style="height: 1056px;width:816px;background-color: rgb(255, 255, 255);padding: 2rem;" class="main-page-wrapper pdf-page">
+            <div style="height: 1056px;width:816px;background-color: rgb(255, 255, 255);padding: 2rem; position: relative;" class="main-page-wrapper pdf-page">
+                <canvas id="canvas" style="position: absolute; top: 0; left: 0; z-index: 1; height: 1056px;width:816px"></canvas>
                 <div style="height: 50%; position: relative">
-                    <img src="{{ asset('public/assets/images/logo-icon.png') }}" style="
-              position: absolute;
-              right: -150px;
-              top: 50%;
-              transform: translateY(-50%) rotate(-90deg);
-              width: 500px;" />
+                    <img src="{{ asset('public/assets/images/logo-icon.png') }}" style=" position: absolute; right: -150px; top: 50%; transform: translateY(-50%) rotate(-90deg); width: 500px;" />
                 </div>
                 <div style="height: 50%;display: flex;flex-direction: column;justify-content: space-between;padding: 0 2rem;">
                     <?php
-
-                        if (isset($pdf_path[0]) && !empty($pdf_path[0])) {
-                            $date = new DateTime($pdf_path[0]['fixture']['created_at']);
-                            $formattedDate = $date->format('d F Y');
-                        }
-
+                    if (isset($pdf_path[0]) && !empty($pdf_path[0])) {
+                        $date = new DateTime($pdf_path[0]['fixture']['created_at']);
+                        $formattedDate = $date->format('d F Y');
+                    }
                     ?>
-
                     @if (isset($pdf_path[0]) && !empty($pdf_path[0]))
                     <div>
                         <h1 style="font-size: 2.8rem; margin: 0" class="projectTitle">{{ $pdf_path[0]['fixture']['project'] }}</h1>
@@ -153,11 +60,7 @@
                         <p style="font-size: 14px;padding-top: 12px;">{{ $formattedDate }}</p>
                     </div>
                     @endif
-
-                    <div style="
-              display: flex;
-              align-items: center;
-              justify-content: space-between;">
+                    <div style=" display: flex; align-items: center; justify-content: space-between;">
                         <div><img src="{{ asset('public/assets/images/logo-icon.png') }}" style="width: 170px" />
                         </div>
                         <div>
@@ -174,7 +77,8 @@
             </div>
             <!-- start summary page -->
             @if (isset($pdf_path[0]) && !empty($pdf_path[0]) && $pdf_path[0]['fixture']['summary'] == 1)
-            <div style="height: 1056px;width:816px;background-color: rgb(255, 255, 255);padding: 2rem;" class="summary-page-wrapper pdf-page">
+            <div style="height: 1056px;width:816px;background-color: rgb(255, 255, 255);padding: 2rem; position: relative;" class="summary-page-wrapper pdf-page">
+                <canvas id="canvas" style="position: absolute; top: 0; left: 0; z-index: 1; height: 1056px;width:816px"></canvas>
                 <div style="display:flex; justify-content:space-between; align-items:center">
                     <img style="width:140px; height:100%" src="{{ asset('public/assets/images/logo-icon.png') }}">
                     <h4>{{ $pdf_path[0]['fixture']['project'] }}</h4>
@@ -208,7 +112,8 @@
             @php
             $currentPage = $index + 1;
             @endphp
-            <div style="height: 1056px; width:816px; padding: 2rem; background-color: rgb(255, 255, 255);" class="body-page-wrapper pdf-page">
+            <div style="height: 1056px; width:816px; padding: 2rem; background-color: rgb(255, 255, 255); position: relative;" class="body-page-wrapper pdf-page">
+                <canvas id="canvas" style="position: absolute; top: 0; left: 0; z-index: 1; height: 1056px;width:816px"></canvas>
                 <div class="table-wrapper" style="border: 1px solid; ">
                     <div class="table-header" style="height: 70px; display: flex; border-bottom: 1px solid black">
                         <div style="width: 20%;border-right: 1px solid black;text-align: center;padding: 10px 0px;">
@@ -242,12 +147,10 @@
                             </h1>
                         </div>
                     </div>
-
                     <div class="pdf-content" style="height: 890px; width:100%; display:flex; justify-content:center; align-items:center">
                         <img class="body-images" style="width:100%; height:100%" src="{{ $path['path'] }}" alt="">
                         {{-- <img src="{{asset('public/assets/images/Capture.png')}}" alt="" style="width: 100%" /> --}}
                     </div>
-
                     <div class="table-footer" style="height: 37px; display: flex; border-top: 1px solid black; padding: 8px 0px">
                         <div style="width: 25%; text-align: center">
                             <p style="margin: 0; font-size: 0.9rem">
@@ -267,9 +170,7 @@
             @endforeach
         </div>
     </div>
-
 </body>
-
 <div class="d-flex flex-column justify-content-center align-items-center " style="position:fixed; bottom:10px; right:5px">
     <button style="background: #5757c8;color: white;width: 180px;height: 60px;border-style: none;border-radius: 5px; margin-bottom:5px" id="convertBtn">Download to PDF</button>
     @if (!$is_view)
@@ -292,9 +193,9 @@
             const tableId = $(`#table-${initId}`)
             var imageSrc = data.image_path !== "undefined" ? `{{asset('public/files/${data.image_path}')}}` : '';
             if (imageSrc) {
-                var imgElement = `<img style='height: 90px;width: 185px' src="${imageSrc}" alt=''>`;
+                var imgElement = `<img style='height: 90px' src="${imageSrc}" alt=''>`;
             } else {
-                var imgElement = `<img style='height: 90px;width: 185px' src='http://18.217.238.90/public/assets/images/empty_image.jpg'>`;
+                var imgElement = `<img style='height: 90px' src='http://18.217.238.90/public/assets/images/empty_image.jpg'>`;
             }
             var row = "<tr>" +
                 "<td style='border-bottom: 1px solid rgb(226, 226, 226); border-collapse: collapse; text-align: center;'>" + (data.type !== undefined ? data.type : '') + "</td>" +
@@ -309,8 +210,7 @@
                 $(copiedElement).find("tr:has(td)").remove();
                 $(copiedElement).find("table").append(row);
                 $(copiedElement).insertAfter(newTable);
-            }
-            else{
+            } else {
                 tableId.append(row);
             }
 
@@ -325,11 +225,9 @@
     if (projectTitles.length > 0) {
         var fileName = projectTitles[0].innerHTML;
     }
-
     if (projectName.length > 0) {
         var fileTypeName = projectName[0].innerHTML;
     }
-
     const pdfOptions = {
         image: {
             type: "jpeg",
@@ -346,7 +244,6 @@
         },
     };
 
-
     function showLoading() {
         $("#loader").removeClass('d-none');
     }
@@ -359,7 +256,6 @@
 
     function hideLoading() {
         $("#loader").addClass('d-none');
-
     }
     convertBtn.addEventListener("click", () => {
         var pdfPages = 1;
@@ -368,7 +264,6 @@
         loderValue(pdfPercentage)
         const pages = Array.from(contentDiv.querySelectorAll('.pdf-page'))
         const arryLength = pages.length;
-        console.log(pages, "pages")
         let worker = html2pdf()
             .set(pdfOptions)
             .from(pages[0])
@@ -382,7 +277,6 @@
                         pdfPages++;
                         pdfPercentage = Math.round((pdfPages / arryLength) * 100);
                         loderValue(pdfPercentage)
-                        console.log(pdfPercentage)
                         if (pdfPercentage > 99) {
                             hideLoading()
                         }
@@ -398,7 +292,7 @@
 </script>
 <script>
     var canvas,
-        context,
+        context = [],
         dragging = false,
         dragStartLocation,
         snapshot;
@@ -413,134 +307,136 @@
     const controlWrapper = document.getElementById("control-wrapper");
     const editOption = document.getElementById("edit-option");
 
+
     $(".edit-option").click(function() {
         $(".edit-option").css("background-color", "transparent");
         $(this).css("background-color", "#dce8f3");
     });
 
-    function getCanvasCoordinates(event) {
-        var x = event.clientX - canvas.getBoundingClientRect().left;
-        var y = event.clientY - canvas.getBoundingClientRect().top;
-
+    function getCanvasCoordinates(event, canvasIndex) {
+        var x = event.clientX - canvas[canvasIndex].getBoundingClientRect().left;
+        var y = event.clientY - canvas[canvasIndex].getBoundingClientRect().top;
         return {
             x: x,
             y: y,
         };
     }
 
-    function takeSnapShot() {
-        snapshot = context.getImageData(0, 0, canvas.width, canvas.height);
+    function takeSnapShot(canvasIndex) {
+        snapshot = context[canvasIndex].getImageData(0, 0, canvas[canvasIndex].width, canvas[canvasIndex].height);
     }
 
-    function restoreSnapShot() {
-        context.putImageData(snapshot, 0, 0);
+    function restoreSnapShot(canvasIndex) {
+        context[canvasIndex].putImageData(snapshot, 0, 0);
     }
 
-    function drawLine(position) {
-        context.lineWidth = 20;
-        context.strokeStyle = "#ffff007d";
-        context.beginPath();
-        context.moveTo(dragStartLocation.x, dragStartLocation.y);
-        context.lineTo(position.x, position.y);
-        context.stroke();
+    function drawLine(position, canvasIndex) {
+        context[canvasIndex].lineWidth = 20;
+        context[canvasIndex].strokeStyle = "#ffff007d";
+        context[canvasIndex].beginPath();
+        context[canvasIndex].moveTo(dragStartLocation.x, dragStartLocation.y);
+        context[canvasIndex].lineTo(position.x, position.y);
+        context[canvasIndex].stroke();
     }
 
-    function drawRect(position) {
-        context.lineWidth = 3;
-        context.strokeStyle = "#FF0000";
+    function drawRect(position, canvasIndex) {
+        context[canvasIndex].lineWidth = 3;
+        context[canvasIndex].strokeStyle = "#FF0000";
         var w = position.x - dragStartLocation.x;
         var h = position.y - dragStartLocation.y;
-        context.beginPath();
-        context.rect(dragStartLocation.x, dragStartLocation.y, w, h);
+        context[canvasIndex].beginPath();
+        context[canvasIndex].rect(dragStartLocation.x, dragStartLocation.y, w, h);
     }
 
-    function drawArrow(position) {
-        context.lineWidth = 3;
-        context.strokeStyle = "#0000FF";
-
+    function drawArrow(position, canvasIndex) {
+        context[canvasIndex].lineWidth = 3;
+        context[canvasIndex].strokeStyle = "#0000FF";
         var fromX = dragStartLocation.x;
         var fromY = dragStartLocation.y;
         var toX = position.x;
         var toY = position.y;
         var arrowheadSize = 10;
         var angle = Math.atan2(toY - fromY, toX - fromX);
-        context.beginPath();
-        context.moveTo(fromX, fromY);
-        context.lineTo(toX, toY);
-        context.stroke();
-        context.beginPath();
-        context.moveTo(toX, toY);
-        context.lineTo(
+        context[canvasIndex].beginPath();
+        context[canvasIndex].moveTo(fromX, fromY);
+        context[canvasIndex].lineTo(toX, toY);
+        context[canvasIndex].stroke();
+        context[canvasIndex].beginPath();
+        context[canvasIndex].moveTo(toX, toY);
+        context[canvasIndex].lineTo(
             toX - arrowheadSize * Math.cos(angle - Math.PI / 6),
             toY - arrowheadSize * Math.sin(angle - Math.PI / 6)
         );
-        context.lineTo(
+        context[canvasIndex].lineTo(
             toX - arrowheadSize * Math.cos(angle + Math.PI / 6),
             toY - arrowheadSize * Math.sin(angle + Math.PI / 6)
         );
-        context.closePath();
-        context.fillStyle = "#0000FF";
-        context.fill();
+        context[canvasIndex].closePath();
+        context[canvasIndex].fillStyle = "#0000FF";
+        context[canvasIndex].fill();
     }
 
-    function draw(position) {
+    function draw(position, canvasIndex) {
         var shape = document.querySelector(
             'input[type="radio"][name="shape"]:checked'
         ).value;
-        context.lineCap = "round";
+        context[canvasIndex].lineCap = "round";
         if (shape === "line") {
-            drawLine(position);
+            drawLine(position, canvasIndex);
         }
         if (shape === "rect") {
-            context.stroke();
-            drawRect(position);
+            context[canvasIndex].stroke();
+            drawRect(position, canvasIndex);
         }
         if (shape === "arrow") {
-            context.stroke();
-            drawArrow(position);
+            context[canvasIndex].stroke();
+            drawArrow(position, canvasIndex);
         }
     }
 
-    function dragStart(event) {
+    function dragStart(event, canvasIndex) {
         dragging = true;
-        dragStartLocation = getCanvasCoordinates(event);
-        takeSnapShot();
+        dragStartLocation = getCanvasCoordinates(event, canvasIndex);
+        takeSnapShot(canvasIndex);
     }
 
-    function drag(event) {
+    function drag(event, canvasIndex) {
         var position;
         if (dragging === true) {
-            restoreSnapShot();
-            position = getCanvasCoordinates(event);
-            draw(position);
+            restoreSnapShot(canvasIndex);
+            position = getCanvasCoordinates(event, canvasIndex);
+            draw(position, canvasIndex);
         }
     }
 
     //Drag Stop
-    function dragStop(event) {
+    function dragStop(event, canvasIndex) {
         dragging = false;
-        restoreSnapShot();
-        var position = getCanvasCoordinates(event);
-        draw(position);
+        restoreSnapShot(canvasIndex);
+        var position = getCanvasCoordinates(event, canvasIndex);
+        draw(position, canvasIndex);
     }
 
-    function eraseCanvas() {
-        context.clearRect(0, 0, canvas.width, canvas.height);
+    function eraseCanvas(canvasIndex) {
+        for (let i = 0; i < canvas.length; i++) {
+            context[i].clearRect(0, 0, canvas[i].width, canvas[i].height);
+        }
+
         const commentWrapper = document.getElementsByClassName("comment");
         var radioElements = document.querySelectorAll('input[name="shape"]');
         for (var i = 0; i < radioElements.length; i++) {
             radioElements[i].checked = false;
         }
         for (const commentItem of commentWrapper) {
-            console.log(commentItem);
             commentItem.style.display = "none";
         }
     }
-
     //function invoked when document is fully loaded
     function init() {
-        canvas = document.getElementById("canvas");
-        context = canvas.getContext("2d");
+        canvas = document.getElementsByTagName("canvas");
+        for (let ca = 0; ca < canvas.length; ca++) {
+            context[ca] = canvas[ca].getContext("2d");
+        }
         var clearCanvas = document.getElementById("clearCanvas"),
             contentWrapper = document.getElementById("content");
         clearCanvas.addEventListener("click", eraseCanvas, false);
@@ -554,9 +450,12 @@
                 selectedOption === "rect" ||
                 selectedOption === "arrow"
             ) {
-                canvas.addEventListener("mousedown", dragStart, false);
-                canvas.addEventListener("mousemove", drag, false);
-                canvas.addEventListener("mouseup", dragStop, false);
+                for (let ca = 0; ca < canvas.length; ca++) {
+                    canvas[ca].addEventListener("mousedown", (e) => dragStart(e, ca), false);
+                    canvas[ca].addEventListener("mousemove", (e) => drag(e, ca), false);
+                    canvas[ca].addEventListener("mouseup", (e) => dragStop(e, ca), false);
+                }
+
                 innerContent.removeEventListener("click", openCommentModal);
             }
             if (selectedOption === "comm") {
@@ -575,10 +474,13 @@
     window.addEventListener("load", init, false);
 
     function setCanvasDimensions() {
-        const canvas = document.getElementById("canvas");
-        const contentWrapper = document.getElementById("inner-content");
-        canvas.width = contentWrapper.clientWidth;
-        canvas.height = contentWrapper.clientHeight;
+        const canvas = document.getElementsByTagName("canvas");
+        const contentWrapper = document.getElementsByClassName("pdf-page");
+        for (let i = 0; i < canvas.length; i++) {
+            canvas[i].width = contentWrapper[i].clientWidth;
+            canvas[i].height = contentWrapper[i].clientHeight;
+        }
+
     }
 
     // Call the function to set canvas dimensions initially and when the window is resized
@@ -591,8 +493,6 @@
         commentContent.value = "";
         x1 = event.clientX - innerContent.getBoundingClientRect().left;
         y1 = event.clientY - innerContent.getBoundingClientRect().top;
-        console.log(x1, "x");
-        console.log(y1, "y");
 
         commentModal.style.cssText = `
                           position: absolute;
@@ -612,6 +512,8 @@
     }
 
     function modalComment() {
+        const pdfPage = document.getElementsByClassName("pdf-page")
+        const pageIndex = (Math.ceil(y1 / 1056)) - 1
         event.stopPropagation();
         const comment = document.createElement("div");
         const commentDelete = document.createElement("img");
@@ -620,7 +522,7 @@
         comment.classList.add("comment");
         comment.style.cssText = `
                               left: ${x1}px;
-                              top: ${y1}px;
+                              top: ${y1 % 1056}px;
                               display: none;
                               color: red;
                               background: transparent;
@@ -655,7 +557,7 @@
                 comment.remove();
             });
             comment.appendChild(commentDelete);
-            innerContent.appendChild(comment);
+            pdfPage[pageIndex].appendChild(comment);
             commentModal.style.display = "none";
             comment.style.display = "block";
         }

@@ -206,7 +206,6 @@
 <script>
     $(document).ready(function() {
         var fixtureTypes = @json($fixtureTypes);
-        console.log('fixtur', fixtureTypes)
         var myDiv = document.querySelector(".body-page-wrapper table");
         var newTable = document.querySelector(".body-page-wrapper")
         var mainWrapper = document.getElementById("inner-content")
@@ -219,12 +218,15 @@
             var row = "<tr>" +
                 "<td>" + (data.type !== undefined ? data.type : '') + "</td>" +
                 `<td>${imgElement}</td>` +
-                "<td>" + (data.legends.manufacturer !== undefined ? data.legends.manufacturer : '') + "</td>" +
-                "<td>" + (data.legends.description !== undefined ? data.legends.description : '') + "</td>" +
-                "<td>" + (data.legends.part_number !== undefined ? data.legends.part_number : '') + "</td>" +
-                "<td>" + (data.legends.lamp !== undefined ? data.legends.lamp : '') + "</td>" +
-                "<td>" + (data.legends.voltage !== undefined ? data.legends.voltage : '') + "</td>" +
-                "<td>" + (data.legends.dimming !== undefined ? data.legends.dimming : '') + "</td>" +
+                "<td>" + (data.legends !== null && data.legends !== undefined &&
+                    data.legends.manufacturer !== null && data.legends.manufacturer !== undefined ?
+                    data.legends.manufacturer :
+                    '') + "</td>" +
+                "<td>" + (data.legends !== null && data.legends !== undefined && data.legends.description !== null && data.legends.description !== undefined ? data.legends.description : '') + "</td>" +
+                "<td>" + (data.part_number !== undefined ? data.part_number : '') + "</td>" +
+                "<td>" + (data.legends !== null && data.legends !== undefined && data.legends.lamp !== null && data.legends.lamp !== undefined ? data.legends.lamp : '') + "</td>" +
+                "<td>" + (data.legends !== null && data.legends !== undefined && data.legends.voltage !== null && data.legends.voltage !== undefined ? data.legends.voltage : '') + "</td>" +
+                "<td>" + (data.legends !== null && data.legends !== undefined && data.legends.dimming !== null && data.legends.dimming !== undefined ? data.legends.dimming : '') + "</td>" +
                 "</tr>";
             const divHeight = tableId.height();
             if (divHeight > maxHeight) {
