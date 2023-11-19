@@ -55,7 +55,7 @@ class PdfController extends Controller
 
         $package = json_decode($request->input('package'));
 
-
+        // dd($request->all());
         if (!empty($package->pdfId)) {
             $packageType = PackageInfo::find($package->pdfId);
         } else {
@@ -72,13 +72,13 @@ class PdfController extends Controller
 
         $fixtures = $request->fixtures;
 
-        // $addedCountFixture = count($fixtures);
-
-        Fixtures::where('package_info_id', $packageType->id)->delete();
+        // Fixtures::where('package_info_id', $packageType->id)->delete();
+        $getAllFixturesId = Fixtures::where('package_info_id', $packageType->id)->pluck('id')->toArray();
 
         $counts = 0;
 
         foreach ($fixtures as $fixture) {
+
             $filePath = $fixture['pdfFile'];
             if (gettype($filePath) != 'string') {
                 $uploadedFile = $fixture['pdfFile'];
@@ -102,28 +102,41 @@ class PdfController extends Controller
                 $fixture['imageFile'] = $imageName;
             }
 
-            $fixtureData = new Fixtures();
-            $fixtureData->package_info_id = $packageType->id;
-            $fixtureData->pdf_path = $filePath;
-            $fixtureData->type = $fixture['fixtureType'];
-            $fixtureData->part_number = $fixture['part_no'];
-            $fixtureData->image_path = $fixture['imageFile'];
-            $fixtureData->save();
+            $existingFixture = Fixtures::find($fixture['id']);
+
+            if ($existingFixture) {
+                $existingFixture->package_info_id = $packageType['id'];
+                $existingFixture->pdf_path = $filePath;
+                $existingFixture->type = $fixture['fixtureType'];
+                $existingFixture->part_number = $fixture['part_no'];
+                $existingFixture->image_path = $fixture['imageFile'];
+                $existingFixture->save();
+            } else {
+                $newFixture = new Fixtures();
+                $newFixture->package_info_id = $packageType['id'];
+                $newFixture->pdf_path = $filePath;
+                $newFixture->type = $fixture['fixtureType'];
+                $newFixture->part_number = $fixture['part_no'];
+                $newFixture->image_path = $fixture['imageFile'];
+                $newFixture->save();
+            }
+
+            // $fixtureData = new Fixtures();
+            // $fixtureData->package_info_id = $packageType->id;
+            // $fixtureData->pdf_path = $filePath;
+            // $fixtureData->type = $fixture['fixtureType'];
+            // $fixtureData->part_number = $fixture['part_no'];
+            // $fixtureData->image_path = $fixture['imageFile'];
+            // $fixtureData->save();
         }
 
-        // $saveFixtureCount = Fixtures::where('package_info_id', $packageType->id)->count();
+        $fixturesToRemove = array_diff($getAllFixturesId, array_column($fixtures, 'id'));
 
-        // if ($addedCountFixture !== $saveFixtureCount) {
-        //     // $fix = Fixtures::find($fixture['id']);
-        //     PackageInfo::where('id', $packageType->id)->delete();
-        //     Fixtures::where('package_info_id', $packageType->id)->delete();
-        //     return response()->json(['status' => false, 'message' => 'Something went wrong. Please check your data and try again.']);
-        // }
-
-        // dd($addedCountFixture, $saveFixtureCount, $packageType->id);
+        Fixtures::whereIn('id', $fixturesToRemove)->delete();
 
         return response()->json(['status' => true, 'message' => 'Success', 'data' => $packageType->id]);
     }
+
     private function countPages($path)
     {
         $pdftext = file_get_contents($path);

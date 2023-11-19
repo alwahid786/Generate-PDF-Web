@@ -9,6 +9,15 @@ class Fixtures extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'type',
+        'part_number',
+        'pdf_path',
+        'package_info_id',
+        'image_path',
+        'pdf_images'
+    ];
+
     public function legends()
     {
         return $this->hasOne(LighteningLegendInfo::class, 'fixture_id');
