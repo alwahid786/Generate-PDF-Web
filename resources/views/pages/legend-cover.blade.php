@@ -158,7 +158,7 @@
                         <div class="table-footer">
                             <div class="page-number">
                                 {{-- <h1>Page 2 of 10:</h1> --}}
-                                <h1>Date : 10/18/2023</h1>
+                                Date:<h1 id="legendsCreatedDate"></h1>
                             </div>
                             <a href="mailto:project@visionz.ca">project@visionz.ca</a>
                             <div class="vision-logo-wrapper">
@@ -214,7 +214,7 @@
         for (const data of fixtureTypes) {
             const tableId = $(`#table-${initId}`)
             const imageSrc = data.image_path !== "undefined" ? `{{asset('public/files/${data.image_path}')}}` : '';
-            const imgElement = `<img style='width: 100%; height: 50px'; object-fit:cover; src="${imageSrc}" alt=''>`;
+            const imgElement = `<img style='width: 100%; height: 50px;object-fit: contain' src="${imageSrc}" alt=''>`;
             var row = "<tr>" +
                 "<td>" + (data.type !== undefined ? data.type : '') + "</td>" +
                 `<td>${imgElement}</td>` +
@@ -228,6 +228,13 @@
                 "<td>" + (data.legends !== null && data.legends !== undefined && data.legends.voltage !== null && data.legends.voltage !== undefined ? data.legends.voltage : '') + "</td>" +
                 "<td>" + (data.legends !== null && data.legends !== undefined && data.legends.dimming !== null && data.legends.dimming !== undefined ? data.legends.dimming : '') + "</td>" +
                 "</tr>";
+
+                const dateString = data?.legends?.created_at;
+                const date = new Date(dateString);
+                const options = { year: 'numeric', month: 'long', day: 'numeric' };
+                const formattedDate = date.toLocaleDateString('en-US', options);
+
+                $('#legendsCreatedDate').html(formattedDate)
             const divHeight = tableId.height();
             if (divHeight > maxHeight) {
                 initId++;
