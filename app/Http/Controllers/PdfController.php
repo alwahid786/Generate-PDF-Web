@@ -384,4 +384,9 @@ class PdfController extends Controller
 
         return view('pages.legend-cover', ['fixtureTypes' => $fixtureTypes, 'packageInfoId' => $packageInfoId, 'projectName' => $projectName]);
     }
+
+    public function repairPdf(Request $request)
+    {
+        return view('pages.repair-pdf');
+    }
 }
