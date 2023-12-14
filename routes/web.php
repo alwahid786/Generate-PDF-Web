@@ -83,6 +83,7 @@ Route::middleware('auth')->group(function () {
     Route::any('/ligtening-legend', [PdfController::class, 'lighteningLegend']);
     Route::post('/ligtening-legend-post', [PdfController::class, 'lighteningLegendPost'])->name('legends.post');
     Route::any('/legends-pdf', [PdfController::class, 'generateLighteningPdf']);
+    Route::any('/repair-pdf', [PdfController::class, 'repairPdf']);
     // });
 
     // admin route
