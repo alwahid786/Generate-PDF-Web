@@ -119,12 +119,12 @@
                     <img src="{{asset('public/assets/images/pro-blue.png')}}" class="pr-2 icon-blue">
                     Profile</a>
             </li>
-            <li class="nav-item my-1{{ request()->is('support') ? 'active' : '' }}">
+            <li class="nav-item my-1 {{ request()->is('support') ? 'active' : '' }}">
                 <a class="nav-link sidenav-item" href="{{url('support')}}"><img src="{{asset('public/assets/images/sup-white.png')}}" class="pr-2 icon-white">
                     <img src="{{asset('public/assets/images/sup-blue.png')}}" class="pr-2 icon-blue">
                     Support</a>
             </li>
-            <li class="nav-item my-1{{ request()->is('repair-pdf') ? 'active' : '' }}">
+            <li class="nav-item my-1 {{ request()->is('repair-pdf') ? 'active' : '' }}">
                 <a class="nav-link sidenav-item" href="{{url('repair-pdf')}}"><img src="{{asset('public/assets/images/repair-white.png')}}" class="pr-2 icon-white">
                     <img src="{{asset('public/assets/images/repair-blue.png')}}" class="pr-2 icon-blue">
                     Repair Pdf</a>
