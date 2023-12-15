@@ -81,12 +81,35 @@ class PdfController extends Controller
 
             $filePath = $fixture['pdfFile'];
             if (gettype($filePath) != 'string') {
+                // $uploadedFile = $fixture['pdfFile'];
+
+                // $name = time() . '_' . $uploadedFile->getClientOriginalName();
+                // $path = public_path('/files');
+
+                // $uploadedFile->move($path, $name);
+                // $filePath = $path . '/' . $name;
+
+                // $command = "gswin64c.exe -o \"$filePath\" -sDEVICE=pdfwrite \"$filePath\"";
+                // exec($command, $output, $returnCode);
+
                 $uploadedFile = $fixture['pdfFile'];
                 $name = time() . '_' . $uploadedFile->getClientOriginalName();
                 $path = public_path('/files');
-
+                $inputPdfPath = $path . '/' . $name;
+                
                 $uploadedFile->move($path, $name);
-                $filePath = $path . '/' . $name;
+                
+                // New output path for the converted PDF file
+                $outputPdfPath = $path . '/converted_' . $name;
+
+                // Ghostscript command to convert PDF
+                $command = "gs -o \"$outputPdfPath\" -sDEVICE=pdfwrite \"$inputPdfPath\"";
+
+                // $command = "gswin64c.exe -o \"$outputPdfPath\" -sDEVICE=pdfwrite \"$inputPdfPath\"";
+                exec($command, $output, $returnCode);
+
+                // After conversion, update $filePath to the new PDF path
+                $filePath = $outputPdfPath;
             }
 
             $imageFilePath = $fixture['imageFile'];
@@ -388,5 +411,21 @@ class PdfController extends Controller
     public function repairPdf(Request $request)
     {
         return view('pages.repair-pdf');
+    }
+
+    public function testController(Request $request)
+    {
+        $inputPdfPath = 'C:\xampp\htdocs\pdf-generator\public\files\test\one.pdf';
+        $outputPdfPath = 'C:\xampp\htdocs\pdf-generator\public\files\test\final.pdf';
+
+        // Assuming Ghostscript is installed and added to the system PATH variable
+        $command = "gswin64c.exe -o \"$outputPdfPath\" -sDEVICE=pdfwrite \"$inputPdfPath\"";
+        exec($command, $output, $returnCode);
+
+        if ($returnCode !== 0) {
+            return "Conversion failed with error code: $returnCode";
+        }
+
+        return "PDF converted successfully!";
     }
 }
