@@ -15,11 +15,21 @@ class Fixtures extends Model
         'pdf_path',
         'package_info_id',
         'image_path',
-        'pdf_images'
+        'pdf_images',
+        'order_by'
     ];
 
     public function legends()
     {
         return $this->hasOne(LighteningLegendInfo::class, 'fixture_id');
+    }
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::addGlobalScope('orderByAsc', function ($query) {
+            $query->orderBy('order_by', 'asc');
+        });
     }
 }

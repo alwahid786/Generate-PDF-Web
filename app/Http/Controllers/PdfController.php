@@ -76,8 +76,9 @@ class PdfController extends Controller
         $getAllFixturesId = Fixtures::where('package_info_id', $packageType->id)->pluck('id')->toArray();
 
         $counts = 0;
-
-        foreach ($fixtures as $fixture) {
+        
+        $fixtureCount = 0;
+        foreach ($fixtures as $index => $fixture) {
 
             $filePath = $fixture['pdfFile'];
             if (gettype($filePath) != 'string') {
@@ -127,20 +128,25 @@ class PdfController extends Controller
 
             $existingFixture = Fixtures::find($fixture['id']);
 
+            // dd($existingFixture[]);
+
             if ($existingFixture) {
                 $existingFixture->package_info_id = $packageType['id'];
                 $existingFixture->pdf_path = $filePath;
                 $existingFixture->type = $fixture['fixtureType'];
                 $existingFixture->part_number = $fixture['part_no'];
                 $existingFixture->image_path = $fixture['imageFile'];
+                $existingFixture->order_by = $index + 1;
                 $existingFixture->save();
             } else {
+                $fixtureCount++;
                 $newFixture = new Fixtures();
                 $newFixture->package_info_id = $packageType['id'];
                 $newFixture->pdf_path = $filePath;
                 $newFixture->type = $fixture['fixtureType'];
                 $newFixture->part_number = $fixture['part_no'];
                 $newFixture->image_path = $fixture['imageFile'];
+                $newFixture->order_by = $fixtureCount;
                 $newFixture->save();
             }
 
