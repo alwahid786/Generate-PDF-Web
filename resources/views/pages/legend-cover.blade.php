@@ -107,6 +107,18 @@
     .vision-logo-wrapper img {
         width: 100px;
     }
+
+    .legend-img {
+        /* width: 100%; */
+        height: 50px;
+        object-fit: contain;
+    }
+
+    .legend-image-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 </style>
 @if(auth()->user()->is_admin==1)
 @include('includes.admin.navbar')
@@ -214,10 +226,10 @@
         for (const data of fixtureTypes) {
             const tableId = $(`#table-${initId}`)
             const imageSrc = data.image_path !== "undefined" ? `{{asset('public/files/${data.image_path}')}}` : '';
-            const imgElement = `<img style='width: 100%; height: 50px;object-fit: contain' src="${imageSrc}" alt=''>`;
+            const imgElement = `<img class="legend-img" src="${imageSrc}" alt=''/>`;
             var row = "<tr>" +
                 "<td>" + (data.type !== undefined ? data.type : '') + "</td>" +
-                `<td>${imgElement}</td>` +
+                `<td class="legend-image-wrapper">${imgElement}</td>` +
                 "<td>" + (data.legends !== null && data.legends !== undefined &&
                     data.legends.manufacturer !== null && data.legends.manufacturer !== undefined ?
                     data.legends.manufacturer :
@@ -229,12 +241,16 @@
                 "<td>" + (data.legends !== null && data.legends !== undefined && data.legends.dimming !== null && data.legends.dimming !== undefined ? data.legends.dimming : '') + "</td>" +
                 "</tr>";
 
-                const dateString = data?.legends?.created_at;
-                const date = new Date(dateString);
-                const options = { year: 'numeric', month: 'long', day: 'numeric' };
-                const formattedDate = date.toLocaleDateString('en-US', options);
+            const dateString = data?.legends?.created_at;
+            const date = new Date(dateString);
+            const options = {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            };
+            const formattedDate = date.toLocaleDateString('en-US', options);
 
-                $('#legendsCreatedDate').html(formattedDate)
+            $('#legendsCreatedDate').html(formattedDate)
             const divHeight = tableId.height();
             if (divHeight > maxHeight) {
                 initId++;
