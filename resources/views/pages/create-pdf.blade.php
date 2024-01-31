@@ -182,7 +182,7 @@
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content py-3 px-2">
             <div class="modal-header">
-                <h5 class="modal-title" id="fixtureModalLabel">Add Fixtures</h5>
+                <h5 class="modal-title" id="fixtureModalLabel">Library Fixtures</h5>
                 <button type="button" class="close m-0" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -195,7 +195,7 @@
                         <li style="font-weight: bold;">Part Number</li>
                         <li style="font-weight: bold;">Image</li>
                         <li style="font-weight: bold;">Spec Sheet</li>
-                        <li style="font-weight: bold;">Action</li>
+                        {{-- <li style="font-weight: bold;">Action</li> --}}
                     </ul>
                     <ul class="mt-4 row fixture-detail-list">
                         <li class="selected-fixture">
@@ -210,10 +210,10 @@
                             <img style="width:45px" src="{{ asset('public/assets/images/png_icon.png') }}" alt="image">
                         </li>
                         <li> <img src=" {{ asset('public/assets/images/pdf-icon.png') }}" alt="image"></li>
-                        <li class="d-flex align-items-center justify-content-center">
+                        {{-- <li class="d-flex align-items-center justify-content-center">
                             <img style="cursor:pointer; width:28px;height:28px;" class="editPdfBtn" src="{{ asset('public/assets/images/edit-icon.svg') }}" alt="image">
                             <img style="cursor:pointer;" class="removePdfBtn ml-2" src="{{ asset('public/assets/images/delete.png') }}" alt="image">
-                        </li>
+                        </li> --}}
                     </ul>
 
                 </div>
