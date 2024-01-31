@@ -1782,3 +1782,7 @@ input.rounded-checkbox {
         max-width: 760px !important;
     }
 }
+#fixtureModal .summary-wrapper label:before {
+    left: 50%;
+    transform: translateX(-50%);
+}
