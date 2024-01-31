@@ -1266,9 +1266,10 @@
     width: 100%;
     padding: 1rem;
     border-radius: 10px;
+    cursor: pointer;
 }
 
-.add-button a:hover {
+.add-button a:nth-child(1):hover {
     background-color: #34a853de !important;
 }
 
@@ -1276,7 +1277,14 @@
     font-size: 1rem;
     margin: 0;
 }
-
+.add-library-btn {
+    color: white;
+    margin-top: 10px;
+    background-color: #003f77 !important;
+}
+.add-library-btn:hover {
+    background-color: #001c35 !important;
+}
 .drop-zone {
     width: 25%;
     max-width: 200px;
@@ -1333,11 +1341,16 @@
     text-align: center;
 }
 
-.pdf-detail-bar {
+.pdf-detail-bar,
+.fixture-modal-body {
     width: 100%;
 }
-
-.pdf-detail-bar ul {
+.fixture-modal-body {
+    max-height: 70vh;
+    overflow-y: auto;
+}
+.pdf-detail-bar ul,
+.fixture-modal-body ul {
     list-style: none;
     padding: 1rem;
     margin: 0;
@@ -1490,6 +1503,10 @@ input.rounded-checkbox {
     }
 
     .pdf-detail-bar ul {
+        flex-direction: column;
+        row-gap: 1rem;
+    }
+    .fixture-modal-body ul {
         flex-direction: column;
         row-gap: 1rem;
     }
@@ -1707,4 +1724,45 @@ input.rounded-checkbox {
 }
 .legend-create-pdf a:hover {
     background-color: #004077b0;
+}
+#fixtureModal li {
+    font-size: 1rem;
+}
+#fixtureModalLabel {
+    color: #003f77;
+    font-size: 1.9rem;
+    font-weight: 700;
+}
+#fixtureModal .modal-header {
+    position: relative;
+}
+#fixtureModal .modal-header button {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.fixture-save-btn {
+    background-color: #003f77;
+    color: white;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    border: none;
+    outline: none;
+    border-radius: 10px;
+}
+.fixture-modal-close {
+    background-color: #888888;
+    color: white;
+    padding: 0.6rem 1.6rem;
+    font-size: 1rem;
+    border: none;
+    outline: none;
+    border-radius: 10px;
+}
+.fixture-modal-close:hover {
+    background-color: #3f3f3f;
+}
+.fixture-save-btn:hover {
+    background-color: #011b31;
 }

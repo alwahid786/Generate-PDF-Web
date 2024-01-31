@@ -46,6 +46,9 @@ Route::get('/coming-soon', function () {
 Route::get('/test', function () {
     return view('emails.contact_us');
 });
+Route::get('/library', function () {
+    return view('pages.library');
+});
 
 // Route::get('/lightining-cover', function () {
 //     return view('pages.legend-cover');

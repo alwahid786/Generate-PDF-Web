@@ -109,6 +109,11 @@
                     <img src="{{asset('public/assets/images/rec-blue.png')}}" class="pr-2 icon-blue">
                     Record Drawing</a>
             </li>
+            <li class="nav-item my-1 {{ request()->is('library') ? 'active' : '' }}">
+                <a class="nav-link sidenav-item" href="{{url('/library')}}"><img src="{{asset('public/assets/images/library-white.png')}}" class="pr-2 icon-white">
+                    <img src="{{asset('public/assets/images/library-blue.png')}}" class="pr-2 icon-blue">
+                    Library</a>
+            </li>
             <!-- <li class="nav-item my-1 ">
                 <a class="nav-link sidenav-item" href="{{url('coming-soon')}}"><img src="{{asset('public/assets/images/exis-white.png')}}" class="pr-2 icon-white">
                     <img src="{{asset('public/assets/images/exis-blue.png')}}" class="pr-2 icon-blue">
