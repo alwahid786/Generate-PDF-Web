@@ -189,7 +189,7 @@
             </div>
             <div class="modal-body">
                 <div class="fixture-modal-body">
-                    <ul class="mt-4">
+                    <ul class="mt-4 fixture-detail-list">
                         <li style="font-weight: bold;">Select</li>
                         <li style="font-weight: bold;">Fixture Type</li>
                         <li style="font-weight: bold;">Part Number</li>
@@ -197,42 +197,25 @@
                         <li style="font-weight: bold;">Spec Sheet</li>
                         <li style="font-weight: bold;">Action</li>
                     </ul>
-                    <ul class="mt-4 row">
+                    <ul class="mt-4 row fixture-detail-list">
                         <li class="selected-fixture">
-                            <div class="summary-wrapper">
+                            <div class="summary-wrapper d-flex align-items-center justify-content-center">
                                 <input type="checkbox" name="summary" id="checkbox2" class="rounded-checkbox">
                                 <label for="checkbox2"></label>
                             </div>
                         </li>
-                        <li class="fixType_append">fixed</li>
+                        <li class="fixType_append">fixedfixed fixed</li>
                         <li class="fixPartNo_append" style="max-width:200px;">766456</li>
-                        <li style="width: 45px;">
-                            <img style="width: 45px;" src="{{ asset('public/assets/images/png_icon.png') }}" alt="image">
+                        <li>
+                            <img style="width:45px" src="{{ asset('public/assets/images/png_icon.png') }}" alt="image">
                         </li>
                         <li> <img src=" {{ asset('public/assets/images/pdf-icon.png') }}" alt="image"></li>
-                        <li class="d-flex align-items-center justify-content-end">
+                        <li class="d-flex align-items-center justify-content-center">
                             <img style="cursor:pointer; width:28px;height:28px;" class="editPdfBtn" src="{{ asset('public/assets/images/edit-icon.svg') }}" alt="image">
                             <img style="cursor:pointer;" class="removePdfBtn ml-2" src="{{ asset('public/assets/images/delete.png') }}" alt="image">
                         </li>
                     </ul>
-                    <ul class="mt-4 row">
-                        <li class="selected-fixture">
-                            <div class="summary-wrapper">
-                                <input type="checkbox" name="summary" id="checkbox3" class="rounded-checkbox">
-                                <label for="checkbox3"></label>
-                            </div>
-                        </li>
-                        <li class="fixType_append">fixed</li>
-                        <li class="fixPartNo_append" style="max-width:200px;">766456</li>
-                        <li style="width: 45px;">
-                            <img style="width: 45px;" src="{{ asset('public/assets/images/png_icon.png') }}" alt="image">
-                        </li>
-                        <li> <img src=" {{ asset('public/assets/images/pdf-icon.png') }}" alt="image"></li>
-                        <li class="d-flex align-items-center justify-content-end">
-                            <img style="cursor:pointer; width:28px;height:28px;" class="editPdfBtn" src="{{ asset('public/assets/images/edit-icon.svg') }}" alt="image">
-                            <img style="cursor:pointer;" class="removePdfBtn ml-2" src="{{ asset('public/assets/images/delete.png') }}" alt="image">
-                        </li>
-                    </ul>
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="fixture-modal-close" data-dismiss="modal">Close</button>

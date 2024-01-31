@@ -1766,3 +1766,19 @@ input.rounded-checkbox {
 .fixture-save-btn:hover {
     background-color: #011b31;
 }
+#fixtureModal .fixture-detail-list li {
+    width: 16.6%;
+    display: flex;
+    justify-content: center;
+    word-break: break-all;
+}
+@media screen and (max-width: 768px) {
+    #fixtureModal .fixture-detail-list li {
+        width: 100%;
+    }
+}
+@media screen and (max-width: 992px) and (min-width: 768px) {
+    #fixtureModal .modal-dialog {
+        max-width: 760px !important;
+    }
+}
