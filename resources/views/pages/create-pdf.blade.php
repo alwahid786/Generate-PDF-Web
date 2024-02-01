@@ -85,7 +85,17 @@
             <div class="create-pdf-lower-body mt-5">
                 <div class="lower-body-heading">
                     <h1>Fixture</h1>
+                    <div class="add-button" style="width: 210px;">
+                        <a class="add-library-btn" data-toggle="modal" data-target="#fixtureModal">
+                            <img src="{{ asset('public/assets/images/plus-circle.png') }}">
+                            <h1 >Select From Library</h1>
+                        </a>
+
+                        <p style="padding-top: 30px; font-weight: bold;text-align:center">OR</p>
+
+                    </div>
                 </div>
+
                 <div class="lower-body-input-wrapper">
                     <div class="lower-body-input">
                         <div class="pdf-info-input-wrapper">
@@ -125,10 +135,7 @@
                             <img src="{{ asset('public/assets/images/plus-circle.png') }}">
                             <h1>Save</h1>
                         </a>
-                        <a class="add-library-btn" data-toggle="modal" data-target="#fixtureModal">
-                            <img src="{{ asset('public/assets/images/plus-circle.png') }}">
-                            <h1>Select From Library</h1>
-                        </a>
+                        
                     </div>
                 </div>
                 <div class="pdf-detail-bar">
@@ -218,8 +225,8 @@
                     <ul class="mt-4 row fixture-detail-list">
                         <li class="selected-fixture">
                             <div class="summary-wrapper d-flex align-items-center justify-content-center">
-                                <input type="checkbox" name="summary" id="checkbox2" class="rounded-checkbox">
-                                <label for="checkbox2"></label>
+                                <input type="checkbox" name="summary" id="checkbox3" class="rounded-checkbox">
+                                <label for="checkbox3"></label>
                             </div>
                         </li>
                         <li class="fixType_append">fixedfixed fixed</li>
@@ -236,8 +243,8 @@
                     <ul class="mt-4 row fixture-detail-list">
                         <li class="selected-fixture">
                             <div class="summary-wrapper d-flex align-items-center justify-content-center">
-                                <input type="checkbox" name="summary" id="checkbox2" class="rounded-checkbox">
-                                <label for="checkbox2"></label>
+                                <input type="checkbox" name="summary" id="checkbox5" class="rounded-checkbox">
+                                <label for="checkbox5"></label>
                             </div>
                         </li>
                         <li class="fixType_append">fixedfixed fixed</li>
@@ -254,8 +261,8 @@
                     <ul class="mt-4 row fixture-detail-list">
                         <li class="selected-fixture">
                             <div class="summary-wrapper d-flex align-items-center justify-content-center">
-                                <input type="checkbox" name="summary" id="checkbox2" class="rounded-checkbox">
-                                <label for="checkbox2"></label>
+                                <input type="checkbox" name="summary" id="checkbox6" class="rounded-checkbox">
+                                <label for="checkbox6"></label>
                             </div>
                         </li>
                         <li class="fixType_append">fixedfixed fixed</li>
@@ -269,42 +276,7 @@
                             <img style="cursor:pointer;" class="removePdfBtn ml-2" src="{{ asset('public/assets/images/delete.png') }}" alt="image">
                         </li> --}}
                     </ul>
-                    <ul class="mt-4 row fixture-detail-list">
-                        <li class="selected-fixture">
-                            <div class="summary-wrapper d-flex align-items-center justify-content-center">
-                                <input type="checkbox" name="summary" id="checkbox2" class="rounded-checkbox">
-                                <label for="checkbox2"></label>
-                            </div>
-                        </li>
-                        <li class="fixType_append">fixedfixed fixed</li>
-                        <li class="fixPartNo_append" style="max-width:200px;">766456</li>
-                        <li>
-                            <img style="width:45px" src="{{ asset('public/assets/images/png_icon.png') }}" alt="image">
-                        </li>
-                        <li> <img src=" {{ asset('public/assets/images/pdf-icon.png') }}" alt="image"></li>
-                        {{-- <li class="d-flex align-items-center justify-content-center">
-                            <img style="cursor:pointer; width:28px;height:28px;" class="editPdfBtn" src="{{ asset('public/assets/images/edit-icon.svg') }}" alt="image">
-                            <img style="cursor:pointer;" class="removePdfBtn ml-2" src="{{ asset('public/assets/images/delete.png') }}" alt="image">
-                        </li> --}}
-                    </ul>
-                    <ul class="mt-4 row fixture-detail-list">
-                        <li class="selected-fixture">
-                            <div class="summary-wrapper d-flex align-items-center justify-content-center">
-                                <input type="checkbox" name="summary" id="checkbox2" class="rounded-checkbox">
-                                <label for="checkbox2"></label>
-                            </div>
-                        </li>
-                        <li class="fixType_append">fixedfixed fixed</li>
-                        <li class="fixPartNo_append" style="max-width:200px;">766456</li>
-                        <li>
-                            <img style="width:45px" src="{{ asset('public/assets/images/png_icon.png') }}" alt="image">
-                        </li>
-                        <li> <img src=" {{ asset('public/assets/images/pdf-icon.png') }}" alt="image"></li>
-                        {{-- <li class="d-flex align-items-center justify-content-center">
-                            <img style="cursor:pointer; width:28px;height:28px;" class="editPdfBtn" src="{{ asset('public/assets/images/edit-icon.svg') }}" alt="image">
-                            <img style="cursor:pointer;" class="removePdfBtn ml-2" src="{{ asset('public/assets/images/delete.png') }}" alt="image">
-                        </li> --}}
-                    </ul>
+                  
 
 
                 </div>
