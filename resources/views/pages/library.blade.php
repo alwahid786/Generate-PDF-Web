@@ -72,18 +72,37 @@
                         <li style="font-weight: bold;">Action</li>
                     </ul>
 
-                    {{-- <ul class="mt-4 row">
-                        <li class="fixType_append">fixed</li>
-                        <li class="fixPartNo_append" style="max-width:200px;">766456</li>
+                    @if (isset($libraryFixtures))
+
+                    @foreach ($libraryFixtures as $fixture)
+
+                    <ul class="mt-4 row">
+                        <li class="fixType_append">{{ $fixture->type }}</li>
+                        <li class="fixPartNo_append" style="max-width: 200px;">{{ $fixture->part_number }}</li>
                         <li style="width: 45px;">
-                            <img style="width: 45px;" src="{{ asset('public/assets/images/png_icon.png') }}" alt="image">
+                            @if ($fixture->image_path != null)
+                                <a href="{{ $fixture->image_path }}" target="_blank">
+                                    <img style="width: 45px;" src="{{ asset('public/assets/images/png_icon.png') }}" alt="image">
+                                </a>
+                            @endif
                         </li>
-                        <li> <img src=" {{ asset('public/assets/images/pdf-icon.png') }}" alt="image"></li>
+                        <li> 
+                            @if ($fixture->pdf_path != null)
+                                <a href="{{ $fixture->pdf_path }}" target="_blank">
+                                    <img src="{{ asset('public/assets/images/pdf-icon.png') }}" alt="image">
+                                </a>
+                            @endif
+                        </li>
                         <li class="d-flex align-items-center justify-content-end">
                             <img style="cursor:pointer; width:28px;height:28px;" class="editPdfBtn" src="{{ asset('public/assets/images/edit-icon.svg') }}" alt="image">
                             <img style="cursor:pointer;" class="removePdfBtn ml-2" src="{{ asset('public/assets/images/delete.png') }}" alt="image">
                         </li>
-                    </ul> --}}
+                    </ul>
+                    
+                        
+                    @endforeach
+                    
+                    @endif
 
                 </div>
 

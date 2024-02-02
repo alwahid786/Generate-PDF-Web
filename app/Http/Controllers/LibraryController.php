@@ -11,7 +11,8 @@ class LibraryController extends Controller
 
     public function libraryFixture(Request $request)
     {
-        return view('pages.library');
+        $libraryFixtures = LibraryFixture::get();
+        return view('pages.library', compact('libraryFixtures'));
     }
 
 
