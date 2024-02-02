@@ -292,62 +292,12 @@
     <script>
         $('body').addClass('bg-clr')
     </script>
-    {{-- <script src="https://code.jquery.com/jquery-3.5.1.js"></script> --}}
     <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap4.min.js"></script>
-    {{-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script> --}}
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 
-
-    <script>
-        // $('#projectName').on('keydown keyup change', function() {
-        //     var char = $(this).val();
-        //     var charLength = $(this).val().length;
-        //     if (charLength > 35) {
-        //         // $(this).val($(this).val().substring(0, 40));
-        //         $('#warning-message').text('Lengthsssss is not valid, maximum ' + 35 + ' allowed.');
-        //     } else {
-        //         $('#warning-message').text('');
-        //     }
-        // });
-
-        // $('#referenceNo').on('keydown keyup change', function() {
-        //     var char = $(this).val();
-        //     var charLength = $(this).val().length;
-        //     if (charLength > 15) {
-        //         // $(this).val($(this).val().substring(0, 15));
-        //         $('#warning-message-ref').text('Length is not valid, maximum ' + 15 + ' allowed.');
-        //     } else {
-        //         $('#warning-message-ref').text('');
-        //     }
-        // });
-
-        // $('#fixtureType').on('keydown keyup change', function() {
-        //     var char = $(this).val();
-        //     var charLength = $(this).val().length;
-        //     if (charLength > 10) {
-        //         // $(this).val($(this).val().substring(0, 14));
-        //         $('#warning-message-type').text('Length is not valid, maximum ' + 10 + ' allowed.');
-        //     } else {
-        //         $('#warning-message-type').text('');
-        //     }
-        // });
-
-        // $('#partNo').on('keydown keyup change', function() {
-        //     var char = $(this).val();
-        //     var charLength = $(this).val().length;
-        //     if (charLength > 60) {
-        //         // $(this).val($(this).val().substring(0, 60));
-        //         $('#warning-message-partno').text('Length is not valid, maximum ' + 60 + ' allowed.');
-        //     } else {
-        //         $('#warning-message-partno').text('');
-        //     }
-        // });
-        // $('.sidenav  li:nth-of-type(1)').addClass('active');
-    </script>
-    <!-- DropZone Scripts -- START -- -->
     <script>
         document.querySelectorAll(".drop-zone__input").forEach((inputElement) => {
             const dropZoneElement = inputElement.closest(".drop-zone");
