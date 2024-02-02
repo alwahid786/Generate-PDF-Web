@@ -15,6 +15,7 @@
             </div>
         </div>
         <form action="" method="POST" enctype="multipart/form-data">
+            @csrf
             <div class="create-pdf-lower-body mt-2">
                 <div class="lower-body-heading">
                     <h1>Fixture</h1>
@@ -26,7 +27,7 @@
                                 <h1>Type</h1>
                             </div>
                             <div class="pdf-info-input">
-                                <input type="text" name="fixture-type" id="fixtureType" class="typeValidation">
+                                <input type="text" name="fixture_type" id="fixtureType" class="typeValidation">
                                 <p style="color: red" id="warning-message-type"></p>
                             </div>
                         </div>
@@ -35,7 +36,7 @@
                                 <h1>Part Number</h1>
                             </div>
                             <div class="pdf-info-input">
-                                <input type="text" name="part-number" id="partNo" class="typeValidation">
+                                <input type="text" name="part_number" id="partNo" class="typeValidation">
                                 <p style="color: red" id="warning-message-partno"></p>
                             </div>
                         </div>
@@ -50,7 +51,7 @@
                         <span class="drop-zone__prompt">Add File</span>
                         <span>Spec Sheet</span>
                         <span>Drag + Drop</span>
-                        <input type="file" name="pdf-file" id="pdfFile" class="drop-zone__input typeValidation" accept=".pdf">
+                        <input type="file" name="pdf_file" id="pdfFile" class="drop-zone__input typeValidation" accept=".pdf">
                     </div>
                     <input type="hidden" id="editId">
                     <div class="add-button">
@@ -60,6 +61,8 @@
                         </a>
                     </div>
                 </div>
+
+            </form>
                 <div class="pdf-detail-bar">
                     <ul class="mt-4">
                         <li style="font-weight: bold;">Fixture Type</li>
@@ -69,7 +72,7 @@
                         <li style="font-weight: bold;">Action</li>
                     </ul>
 
-                    <ul class="mt-4 row">
+                    {{-- <ul class="mt-4 row">
                         <li class="fixType_append">fixed</li>
                         <li class="fixPartNo_append" style="max-width:200px;">766456</li>
                         <li style="width: 45px;">
@@ -80,36 +83,20 @@
                             <img style="cursor:pointer; width:28px;height:28px;" class="editPdfBtn" src="{{ asset('public/assets/images/edit-icon.svg') }}" alt="image">
                             <img style="cursor:pointer;" class="removePdfBtn ml-2" src="{{ asset('public/assets/images/delete.png') }}" alt="image">
                         </li>
-                    </ul>
-                    <ul class="mt-4 row">
-                        <li class="fixType_append">fixed</li>
-                        <li class="fixPartNo_append" style="max-width:200px;">766456</li>
-                        <li style="width: 45px;">
-                            <img style="width: 45px;" src="{{ asset('public/assets/images/png_icon.png') }}" alt="image">
-                        </li>
-                        <li> <img src=" {{ asset('public/assets/images/pdf-icon.png') }}" alt="image"></li>
-                        <li class="d-flex align-items-center justify-content-end">
-                            <img style="cursor:pointer; width:28px;height:28px;" class="editPdfBtn" src="{{ asset('public/assets/images/edit-icon.svg') }}" alt="image">
-                            <img style="cursor:pointer;" class="removePdfBtn ml-2" src="{{ asset('public/assets/images/delete.png') }}" alt="image">
-                        </li>
-                    </ul>
-                    <ul class="mt-4 row">
-                        <li class="fixType_append">fixed</li>
-                        <li class="fixPartNo_append" style="max-width:200px;">766456</li>
-                        <li style="width: 45px;">
-                            <img style="width: 45px;" src="{{ asset('public/assets/images/png_icon.png') }}" alt="image">
-                        </li>
-                        <li> <img src=" {{ asset('public/assets/images/pdf-icon.png') }}" alt="image"></li>
-                        <li class="d-flex align-items-center justify-content-end">
-                            <img style="cursor:pointer; width:28px;height:28px;" class="editPdfBtn" src="{{ asset('public/assets/images/edit-icon.svg') }}" alt="image">
-                            <img style="cursor:pointer;" class="removePdfBtn ml-2" src="{{ asset('public/assets/images/delete.png') }}" alt="image">
-                        </li>
-                    </ul>
+                    </ul> --}}
 
-                    <!-- Append PDF Row Here -->
                 </div>
+
+                {{-- <div class="pdf-action">
+                    <div class="action-type">
+                        <a id="previewPdf" href="javascript:void(0)">Preview & Save</a> --}}
+                        {{-- <button type="submit">Preview & Save</button> --}}
+                    {{-- </div>
+                   
+                </div> --}}
+                
             </div>
-        </form>
+        
 </main>
 @endsection
 @section('insertjavascript')
@@ -122,132 +109,10 @@
 {{-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script> --}}
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
-<!-- DropZone Scripts -- START -- -->
+<script src="{{ asset('public/assets/js/common.js') }}"></script>
 <script>
-    document.querySelectorAll(".drop-zone__input").forEach((inputElement) => {
-        const dropZoneElement = inputElement.closest(".drop-zone");
-
-        dropZoneElement.addEventListener("click", (e) => {
-            inputElement.click();
-        });
-
-        inputElement.addEventListener("change", (e) => {
-            if (inputElement.files.length) {
-
-                updateThumbnail(dropZoneElement, inputElement.files[0]);
-            }
-        });
-
-        dropZoneElement.addEventListener("dragover", (e) => {
-            e.preventDefault();
-            dropZoneElement.classList.add("drop-zone--over");
-        });
-
-        ["dragleave", "dragend"].forEach((type) => {
-            dropZoneElement.addEventListener(type, (e) => {
-                dropZoneElement.classList.remove("drop-zone--over");
-            });
-        });
-
-        dropZoneElement.addEventListener("drop", (e) => {
-            e.preventDefault();
-
-            if (e.dataTransfer.files.length) {
-                inputElement.files = e.dataTransfer.files;
-                updateThumbnail(dropZoneElement, e.dataTransfer.files[0]);
-            }
-
-            dropZoneElement.classList.remove("drop-zone--over");
-        });
-    });
-
-    function hideFirstAndThirdSpans(dropZoneElement) {
-        const spans = dropZoneElement.querySelectorAll("span");
-        spans[0].style.display = "none"; // Hide the first span
-        spans[2].style.display = "none"; // Hide the third span
-    }
-
-    function updateThumbnail(dropZoneElement, file) {
-        let thumbnailElement = dropZoneElement.querySelector(".drop-zone__thumb");
-
-        // First time - remove the prompt
-        if (dropZoneElement.querySelector(".drop-zone__prompt")) {
-            dropZoneElement.querySelector(".drop-zone__prompt").remove();
-        }
-
-        // First time - there is no thumbnail element, so lets create it
-        if (!thumbnailElement) {
-            thumbnailElement = document.createElement("div");
-            thumbnailElement.classList.add("drop-zone__thumb");
-            dropZoneElement.appendChild(thumbnailElement);
-        }
-
-        thumbnailElement.dataset.label = file.name;
-
-        // Show thumbnail for image files
-        if (file.type.startsWith("image/")) {
-            const reader = new FileReader();
-
-            reader.readAsDataURL(file);
-            reader.onload = () => {
-                thumbnailElement.style.backgroundImage = `url('${reader.result}')`;
-            };
-        } else {
-            thumbnailElement.style.backgroundImage = null;
-        }
-    }
+    var baseUrl = "{{ asset('public') }}"
+    var saveLibraryDataUrl = "{{ route('saveLibraryData') }}"
 </script>
 
-<script>
-    $(document).ready(function() {
-
-        // $(".pdf-detail-bar").sortable();
-
-        $('#projectName').on('keydown keyup change', function() {
-            var char = $(this).val();
-            var charLength = $(this).val().length;
-            if (charLength > 35) {
-                $(this).val($(this).val().substring(0, 35));
-                $('#warning-message').text('Length is not valid, maximum ' + 35 + ' allowed.');
-            } else {
-                $('#warning-message').text('');
-            }
-        });
-
-        $('#referenceNo').on('keydown keyup change', function() {
-            var char = $(this).val();
-            var charLength = $(this).val().length;
-            if (charLength > 15) {
-                $(this).val($(this).val().substring(0, 15));
-                $('#warning-message-ref').text('Length is not valid, maximum ' + 15 + ' allowed.');
-            } else {
-                $('#warning-message-ref').text('');
-            }
-        });
-
-        $('#fixtureType').on('keydown keyup change', function() {
-            var char = $(this).val();
-            var charLength = $(this).val().length;
-            if (charLength > 10) {
-                $(this).val($(this).val().substring(0, 10));
-                $('#warning-message-type').text('Length is not valid, maximum ' + 10 + ' allowed.');
-            } else {
-                $('#warning-message-type').text('');
-            }
-        });
-
-        $('#partNo').on('keydown keyup change', function() {
-            // alert('coming');
-            var char = $(this).val();
-            var charLength = $(this).val().length;
-            if (charLength > 60) {
-                $(this).val($(this).val().substring(0, 60));
-                $('#warning-message-partno').text('Length is not valid, maximum ' + 60 + ' allowed.');
-            } else {
-                $('#warning-message-partno').text('');
-            }
-        });
-    });
-</script>
 @endsection

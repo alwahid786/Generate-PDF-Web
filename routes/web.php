@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PdfController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\LibraryController;
 use App\Http\Controllers\Admin\AdminController;
 
 /*
@@ -46,9 +47,9 @@ Route::get('/coming-soon', function () {
 Route::get('/test', function () {
     return view('emails.contact_us');
 });
-Route::get('/library', function () {
-    return view('pages.library');
-});
+// Route::get('/library', function () {
+//     return view('pages.library');
+// });
 
 // Route::get('/lightining-cover', function () {
 //     return view('pages.legend-cover');
@@ -87,7 +88,10 @@ Route::middleware('auth')->group(function () {
     Route::post('/ligtening-legend-post', [PdfController::class, 'lighteningLegendPost'])->name('legends.post');
     Route::any('/legends-pdf', [PdfController::class, 'generateLighteningPdf']);
     Route::any('/repair-pdf', [PdfController::class, 'repairPdf']);
-    // });
+
+    // library fixtures
+    Route::any('/library', [LibraryController::class, 'libraryFixture']);
+    Route::any('/save-library-data', [LibraryController::class, 'saveLibraryData'])->name('saveLibraryData');
 
     // admin route
 
