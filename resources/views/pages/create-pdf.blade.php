@@ -208,18 +208,24 @@
                     @if (isset($libraryFixtures))
 
                     @foreach ($libraryFixtures as $fixture)
+
                     <ul class="mt-4 row fixture-detail-list">
+
                         <li class="selected-fixture">
                             <div class="summary-wrapper d-flex align-items-center justify-content-center">
-                                <input type="checkbox" name="summary" id="checkbox2" class="rounded-checkbox">
-                                <label for="checkbox2"></label>
+                                <input type="checkbox" name="summary" id="checkbox{{$fixture->id}}" class="rounded-checkbox">
+                                <label for="checkbox{{$fixture->id}}"></label>
                             </div>
                         </li>
+
                         <li class="fixType_append">{{ $fixture->type }}</li>
+
                         <li class="fixPartNo_append" style="max-width:200px;">{{ $fixture->part_number }}</li>
-                            
+
                         <li>
-                            <img style="width:45px" src="{{ asset('public/assets/images/png_icon.png') }}" alt="image">
+                            @if ($fixture->image_path != null)
+                                <img style="width:45px" src="{{ asset('public/assets/images/png_icon.png') }}" alt="image">
+                            @endif
                         </li>
 
                         <li> <img src=" {{ asset('public/assets/images/pdf-icon.png') }}" alt="image"></li>
