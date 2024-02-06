@@ -19,6 +19,7 @@ use Mpdf\Mpdf;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Str;
 use PDF;
+use App\Models\LibraryFixture;
 
 class PdfController extends Controller
 {
@@ -26,6 +27,7 @@ class PdfController extends Controller
     public function createPdfPage(Request $request)
     {
         $packageTypes = PackageType::get();
+        $libraryFixtures = LibraryFixture::get();
         $packageInfoId = $request->query('packageInfoId');
 
         $urlParam = $request->segment(count($request->segments()));
@@ -46,7 +48,7 @@ class PdfController extends Controller
             $packageInfo = PackageInfo::where('id', $packageInfoId)->with('fixtures')->first();
             return view('pages.create-pdf', compact('packageTypes', 'packageInfo', 'packageName'));
         }
-        return view('pages.create-pdf', compact('packageTypes', 'packageName', 'packagetypeId'));
+        return view('pages.create-pdf', compact('packageTypes', 'packageName', 'packagetypeId', 'packageInfoId', 'libraryFixtures'));
     }
 
     // Preview PDF Function
