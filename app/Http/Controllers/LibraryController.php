@@ -53,5 +53,35 @@ class LibraryController extends Controller
         return response()->json(['status' => true, 'message' => 'Success', 'data' => []]);
 
     }
+
+    public function deleteLibraryData(Request $request)
+    {
+        $id = $request->input('id');
+
+        $libraryFixture = LibraryFixture::find($id);
+
+        if ($libraryFixture) {
+            $imagePath = $libraryFixture->image_path;
+
+            if (!empty($imagePath)) {
+                $absolutePath = $imagePath;
+
+                if (file_exists($absolutePath)) {
+                    unlink($absolutePath);
+                }
+            }
+
+            $deleted = $libraryFixture->delete();
+
+            if ($deleted) {
+                return response()->json(['status' => 'success', 'message' => 'Fixture Deleted Successfully', 'data' => []]);
+            } else {
+                return response()->json(['status' => 'error', 'message' => 'Error deleting fixture', 'data' => []], 500);
+            }
+        } else {
+            return response()->json(['status' => 'error', 'message' => 'Fixture not found', 'data' => []], 404);
+        }
+    }
+
     
 }

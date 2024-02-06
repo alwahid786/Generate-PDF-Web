@@ -83,90 +83,6 @@ function resetFixtures() {
 
 // validations
 var fixtures = [];
-// $(document).on('click', '#addTypeBtn', function() {
-
-
-//     alert('all done')
-
-//     // Get PDF FIle
-//     var pdfFileInput = document.getElementById('pdfFile');
-//     var selectedFiles = pdfFileInput.files;
-//     var pdfFile = selectedFiles[0];
-//     // Get Image File
-//     var imageFileInput = document.getElementById('imageFile');
-//     var selectedimageFiles = imageFileInput.files;
-//     var imageFile = selectedimageFiles[0];
-
-//     let partNo = $("#partNo").val();
-//     let fixtureType = $("#fixtureType").val();
-//     let id = Math.floor(Math.random() * 90000) + 10000;
-
-
-//     // Check if it is edit case
-//     let editedId = $("#editId").val();
-//     if (editedId != '') {
-//         // Update Array
-//         fixtures = fixtures.map(obj => {
-//             if (obj.id === parseInt(editedId)) {
-//                 // console.log(obj.pdfFile);
-//                 oldfile = obj.pdfFile;
-//                 oldimageFile = obj.imageFile;
-//                 editObj = {
-//                     ...obj,
-//                     reference_no: ref,
-//                     part_no: partNo,
-//                     fixtureType: fixtureType,
-//                 };
-//                 if ($("#pdfFile").val() != '') {
-//                     editObj['pdfFile'] = pdfFile
-//                 } else {
-//                     editObj['pdfFile'] = oldfile
-//                 }
-//                 if ($("#imageFile").val() != '') {
-//                     editObj['imageFile'] = imageFile
-//                 } else {
-//                     editObj['imageFile'] = oldimageFile
-//                 }
-//                 // Create a new object with the updated age
-//                 return editObj;
-//             }
-//             return obj; // Return unchanged object
-//         });
-//         // Update Content Row which was appended
-//         $(".row" + editedId).find('.fixType_append').text(fixtureType);
-//         $(".row" + editedId).find('.fixPartNo_append').text(partNo);
-//         // resetFixtures();
-
-
-//         $("#editId").val('');
-//         return;
-//     }
-
-//     pdfObject = {
-//         "pdfFile": pdfFile,
-//         'imageFile': imageFile,
-//         "part_no": partNo,
-//         "fixtureType": fixtureType,
-//         "id": id,
-//     };
-//     // 
-//     fixtures.push(pdfObject);
-//     let pdfDiv = `<ul class="mt-4 row${id}" data-id="${id}">
-//                 <li class="fixType_append">${fixtureType}</li>
-//                 <li class="fixPartNo_append" style="max-width:200px; word-break: break-all">${partNo}</li>
-//                 <li>${(imageFile ? `<img style="width: 45px" src="${baseUrl}/assets/images/png_icon.png" alt="image">` : '')}</li>
-//                 <li> <img src="${baseUrl}/assets/images/pdf-icon.png" alt="image"></li>
-//                 <li class="d-flex align-items-center justify-content-end"> 
-//                     <img style="cursor:pointer; width:28px;height:28px;" class="editPdfBtn" src="${baseUrl}/assets/images/edit-icon.svg" alt="image">
-//                     <img style="cursor:pointer;" class="removePdfBtn ml-2" src="${baseUrl}/assets/images/delete.png" alt="image">
-//                 </li>
-//             </ul>`;
-//     $(".pdf-detail-bar").append(pdfDiv);
-
-//     resetFixtures();
-
-
-// });
 
 // save fixture library
 
@@ -250,3 +166,57 @@ $('#addTypeBtn').on('click', function () {
     });
 
 });
+
+
+// delete Library fixtures
+
+function deleteLibraryFixtures(id)
+{
+
+    Swal.fire({
+        title: 'Are you sure?',
+        text: 'You won\'t be able to revert this!',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+
+        var delete_library_url = deleteLibraryDataUrl;
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        $.ajax({
+
+            url: delete_library_url,
+            type: "POST",
+            data: {id : id},
+            dataType: 'json',
+
+            success: function(data) {
+
+                    Swal.fire({
+                        title: 'Delete fixture',
+                        text: data?.message,
+                        icon: data?.status,
+                        confirmButtonColor: "#1D3F77"
+                    }).then(function() {
+                        location.reload();
+                    });
+
+            },
+
+            error: function(data) {
+
+            }
+
+        });
+
+    });
+    
+}

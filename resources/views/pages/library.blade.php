@@ -95,7 +95,7 @@
                         </li>
                         <li class="d-flex align-items-center justify-content-end">
                             <img style="cursor:pointer; width:28px;height:28px;" class="editPdfBtn" src="{{ asset('public/assets/images/edit-icon.svg') }}" alt="image">
-                            <img style="cursor:pointer;" class="removePdfBtn ml-2" src="{{ asset('public/assets/images/delete.png') }}" alt="image">
+                            <img onclick="deleteLibraryFixtures({{$fixture->id}})" style="cursor:pointer;" class="removePdfBtn ml-2" src="{{ asset('public/assets/images/delete.png') }}" alt="image">
                         </li>
                     </ul>
                     
@@ -132,6 +132,7 @@
 <script>
     var baseUrl = "{{ asset('public') }}"
     var saveLibraryDataUrl = "{{ route('saveLibraryData') }}"
+    var deleteLibraryDataUrl = "{{ route('deleteLibraryData') }}"
 </script>
 
 @endsection
