@@ -63,7 +63,7 @@ $('#addTypeBtn').on('click', function () {
     data.append('fixtures[fixtureType]', fixtureType);
 
     var csrfToken = $('meta[name="csrf-token"]').attr('content');
-
+    $("#loader").removeClass('d-none');
     fetch(url, {
         method: 'POST',
         body: data,
@@ -73,6 +73,7 @@ $('#addTypeBtn').on('click', function () {
     })
     .then(response => response.json())
     .then(data => {
+        $("#loader").addClass('d-none');
         // console.log(data?.message);
         if(data?.message == "Success") {
             Swal.fire({
