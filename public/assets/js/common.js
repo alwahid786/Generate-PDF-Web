@@ -291,7 +291,7 @@ function appendLibraryData() {
             {
                 
                 $.each(libraryData, function(index, fixture) {
-                    
+
                     let id = Math.floor(Math.random() * 90000) + 10000;
 
                     pdfObject = {
@@ -303,10 +303,13 @@ function appendLibraryData() {
                     };
 
                     fixtures.push(pdfObject);
+                    // console.log(fixtures)
+                    // return
 
-                            let pdfDiv = `<ul class="mt-4 row${id}" data-id="${id}">
-                        <li class="fixType_append">${fixtureType}</li>
-                        <li class="fixPartNo_append" style="max-width:200px; word-break: break-all">${partNo}</li>
+
+                            let pdfDiv = `<ul class="mt-4 row${pdfObject?.id}" data-id="${pdfObject?.id}">
+                        <li class="fixType_append">${pdfObject?.fixtureType}</li>
+                        <li class="fixPartNo_append" style="max-width:200px; word-break: break-all">${pdfObject?.part_no}</li>
                         <li><img style="width: 45px" src="${baseUrl}/assets/images/png_icon.png" alt="image"></li>
                         <li> <img src="${baseUrl}/assets/images/pdf-icon.png" alt="image"></li>
                         <li class="d-flex align-items-center justify-content-end">
