@@ -291,14 +291,15 @@ function appendLibraryData() {
             {
                 
                 $.each(libraryData, function(index, fixture) {
-
+                    
+                    let id = Math.floor(Math.random() * 90000) + 10000;
 
                     pdfObject = {
                         "pdfFile": fixture.pdf_path,
                         'imageFile': fixture.image_path,
                         "part_no": fixture.part_number,
                         "fixtureType": fixture.type,
-                        "id": fixture.id,
+                        "id": id,
                     };
 
                     fixtures.push(pdfObject);
