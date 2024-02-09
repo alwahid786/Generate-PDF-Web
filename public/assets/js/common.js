@@ -224,7 +224,7 @@ function deleteLibraryFixtures(id)
 function appendLibraryData() {
 
     let fixtureIds = [];
-
+    // alert('comming')
     $('input[type="checkbox"]:checked').each(function() {
         let fixtureRow = $(this).closest('ul.row');
         let fixtureId = fixtureRow.find('.fixId_append').val();

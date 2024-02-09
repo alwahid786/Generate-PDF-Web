@@ -5,6 +5,7 @@
     body {
         background: #f6f6f6;
     }
+
 </style>
 @include('includes.navbar')
 <main class="content-wrapper">
@@ -168,8 +169,8 @@
                     <!-- Append PDF Row Here -->
                 </div>
                 <div class="summary-wrapper">
-                    <input type="checkbox" name="summary" id="checkbox1" class="rounded-checkbox">
-                    <label for="checkbox1">Summary</label>
+                    <input type="checkbox" name="summary" id="checkbox_summary" class="rounded-checkbox">
+                    <label for="checkbox_summary">Summary</label>
                 </div>
                 <div class="pdf-action">
                     <div class="action-type">
@@ -213,7 +214,7 @@
 
                         <li class="selected-fixture">
                             <div class="summary-wrapper d-flex align-items-center justify-content-center">
-                                <input type="checkbox" name="summary" id="checkbox{{$fixture->id}}" class="rounded-checkbox">
+                                <input type="checkbox" name="fixture_idsss{{$fixture->id}}" id="checkbox{{$fixture->id}}" class="rounded-checkbox">
                                 <label for="checkbox{{$fixture->id}}"></label>
                                 <input type="hidden" class="fixId_append" value="{{ $fixture->id }}">
                             </div>
@@ -668,7 +669,7 @@
             let packageType = $("#packageType").val();
             let projectName = $("#projectName").val();
             let referenceNo = $("#referenceNo").val();
-            let summaryCheckbox = document.getElementById("checkbox1");
+            let summaryCheckbox = document.getElementById("checkbox_summary");
             if (summaryCheckbox.checked) {
                 summary = 1;
             } else {

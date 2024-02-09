@@ -29,7 +29,8 @@ class LibraryController extends Controller
             $image_name = time() . '_' . $uploadedImgFile->getClientOriginalName();
             $image_name = str_replace(' ', '_', $image_name);
             $image_path = public_path('/files');
-            $inputImgPath = $image_path . '/' . $image_name;
+            // $inputImgPath = $image_path . '/' . $image_name;
+            $inputImgPath = $image_name;
             $uploadedImgFile->move($image_path, $image_name);
         }
 
@@ -95,7 +96,7 @@ class LibraryController extends Controller
             $libraryData = libraryFixture::where('id', $value)->get();
             
             $getLibrarySelectedData = array_merge($getLibrarySelectedData, $libraryData->toArray());
-            
+
         }
 
         return response()->json(['status' => 'success', 'message' => 'Fixture data', 'data' => $getLibrarySelectedData]);
