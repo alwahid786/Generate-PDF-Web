@@ -83,5 +83,10 @@ class LibraryController extends Controller
         }
     }
 
+    public function getLibraryData(Request $request)
+    {
+        dd($request->all());
+    }
+
     
 }

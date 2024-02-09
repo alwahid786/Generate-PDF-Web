@@ -93,6 +93,7 @@ Route::middleware('auth')->group(function () {
     Route::any('/library', [LibraryController::class, 'libraryFixture']);
     Route::any('/save-library-data', [LibraryController::class, 'saveLibraryData'])->name('saveLibraryData');
     Route::any('/delete-library-data', [LibraryController::class, 'deleteLibraryData'])->name('deleteLibraryData');
+    Route::any('/get-library-data', [LibraryController::class, 'getLibraryData'])->name('getLibraryData');
 
     // admin route
 

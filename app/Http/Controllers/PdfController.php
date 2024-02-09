@@ -80,6 +80,7 @@ class PdfController extends Controller
         $counts = 0;
         
         $fixtureCount = 0;
+
         foreach ($fixtures as $index => $fixture) {
 
             $filePath = $fixture['pdfFile'];
@@ -106,9 +107,9 @@ class PdfController extends Controller
                 $outputPdfPath = $path . '/converted_' . $name;
 
                 // Ghostscript command to convert PDF
-                $command = "gs -o \"$outputPdfPath\" -sDEVICE=pdfwrite \"$inputPdfPath\"";
+                // $command = "gs -o \"$outputPdfPath\" -sDEVICE=pdfwrite \"$inputPdfPath\"";
 
-                // $command = "gswin64c.exe -o \"$outputPdfPath\" -sDEVICE=pdfwrite \"$inputPdfPath\"";
+                $command = "gswin64c.exe -o \"$outputPdfPath\" -sDEVICE=pdfwrite \"$inputPdfPath\"";
                 exec($command, $output, $returnCode);
 
                 // After conversion, update $filePath to the new PDF path
@@ -209,10 +210,10 @@ class PdfController extends Controller
             ];
 
             // path for ubuntu
-            $outputPath = '/var/www/html/public/files/';
+            // $outputPath = '/var/www/html/public/files/';
 
             // path for window
-            // $outputPath = 'C:\xampp\htdocs\pdf-generator\public\files';
+            $outputPath = 'C:\xampp\htdocs\pdf-generator\public\files';
 
 
             if (file_exists($pdfPath)) {
@@ -241,10 +242,10 @@ class PdfController extends Controller
                             $outputFilename = "/$time.$randomString.$randomNumber.png";
 
                             // command for window
-                            // $command = "gswin64c.exe -sDEVICE=pngalpha -r300 -o \"$outputPath$outputFilename\" -dFirstPage=$pageNumber -dLastPage=$pageNumber \"$pdfPath\"";
+                            $command = "gswin64c.exe -sDEVICE=pngalpha -r300 -o \"$outputPath$outputFilename\" -dFirstPage=$pageNumber -dLastPage=$pageNumber \"$pdfPath\"";
 
                             // command for ubuntu
-                            $command = "gs -sDEVICE=pngalpha -r600 -o \"$outputPath$outputFilename\" -dFirstPage=$pageNumber -dLastPage=$pageNumber \"$pdfPath\"";
+                            // $command = "gs -sDEVICE=pngalpha -r600 -o \"$outputPath$outputFilename\" -dFirstPage=$pageNumber -dLastPage=$pageNumber \"$pdfPath\"";
 
 
                             exec($command, $output, $returnCode);

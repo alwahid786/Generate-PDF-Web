@@ -215,6 +215,7 @@
                             <div class="summary-wrapper d-flex align-items-center justify-content-center">
                                 <input type="checkbox" name="summary" id="checkbox{{$fixture->id}}" class="rounded-checkbox">
                                 <label for="checkbox{{$fixture->id}}"></label>
+                                <input type="hidden" class="fixId_append" value="{{ $fixture->id }}">
                             </div>
                         </li>
 
@@ -224,11 +225,11 @@
 
                         <li>
                             @if ($fixture->image_path != null)
-                                <img style="width:45px" src="{{ asset('public/assets/images/png_icon.png') }}" alt="image">
+                                <img data-src-img="{{ $fixture->image_path }}" style="width:45px" src="{{ asset('public/assets/images/png_icon.png') }}" alt="image">
                             @endif
                         </li>
 
-                        <li> <img src=" {{ asset('public/assets/images/pdf-icon.png') }}" alt="image"></li>
+                        <li> <img  data-src-pdf="{{ $fixture->pdf_path }}" src="{{ asset('public/assets/images/pdf-icon.png') }}" alt="image"></li>
                         
                     </ul>
                     @endforeach
@@ -238,7 +239,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="fixture-modal-close" data-dismiss="modal">Close</button>
-                    <button type="button" class="fixture-save-btn">Save changes</button>
+                    <button onclick="appendLibraryData()" type="button" class="fixture-save-btn">Save changes</button>
                 </div>
             </div>
         </div>
@@ -247,11 +248,14 @@
     @section('insertjavascript')
     <script>
         $('body').addClass('bg-clr')
+        var baseUrl = "{{ asset('public') }}"
+        var getLibraryDataUrl = "{{ route('getLibraryData') }}"
     </script>
     <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap4.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="{{ asset('public/assets/js/common.js') }}"></script>
 
 
     <script>

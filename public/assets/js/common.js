@@ -220,3 +220,79 @@ function deleteLibraryFixtures(id)
     });
     
 }
+
+// function appendLibraryData() {
+//     $('input[type="checkbox"]:checked').each(function() {
+//         let id = Math.floor(Math.random() * 90000) + 10000;
+        
+//         let fixtureRow = $(this).closest('ul.row');
+
+//         let partNo = fixtureRow.find('.fixPartNo_append').text();
+//         let fixtureType = fixtureRow.find('.fixType_append').text();
+
+//         let imageFile = fixtureRow.find('li img').attr('data-src-img');
+//         let pdfFile = fixtureRow.find('li img').attr('data-src-pdf');
+
+//         pdfObject = {
+//             "pdfFile": pdfFile,
+//             'imageFile': imageFile,
+//             "part_no": partNo,
+//             "fixtureType": fixtureType,
+//             "id": id,
+//         };
+
+        
+//         fixtures.push(pdfObject);
+//         console.log(fixtures, 'documentation')
+
+//         let pdfDiv = `<ul class="mt-4 row${id}" data-id="${id}">
+//                         <li class="fixType_append">${fixtureType}</li>
+//                         <li class="fixPartNo_append" style="max-width:200px; word-break: break-all">${partNo}</li>
+//                         <li><img style="width: 45px" src="${baseUrl}/assets/images/png_icon.png" alt="image"></li>
+//                         <li> <img src="${baseUrl}/assets/images/pdf-icon.png" alt="image"></li>
+//                         <li class="d-flex align-items-center justify-content-end">
+//                             <img style="cursor:pointer; width:28px;height:28px;" class="editPdfBtn" src="${baseUrl}/assets/images/edit-icon.svg" alt="image">
+//                             <img style="cursor:pointer;" class="removePdfBtn ml-2" src="${baseUrl}/assets/images/delete.png" alt="image">
+//                         </li>
+//                     </ul>`;
+
+//         $(".pdf-detail-bar").append(pdfDiv);
+
+//     });
+// }
+
+function appendLibraryData() {
+
+    $('input[type="checkbox"]:checked').each(function() {
+
+        let fixtureRow = $(this).closest('ul.row');
+        let fixtureId = fixtureRow.find('.fixId_append').val();
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        $.ajax({
+
+            url: getLibraryDataUrl,
+            type: "POST",
+            data: {id : fixtureId},
+            dataType: 'json',
+
+            success: function(data) {
+                
+            },
+
+            error: function(data) {
+
+            }
+
+        });
+
+    });
+    
+
+}
+
