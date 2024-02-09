@@ -57,7 +57,6 @@ class PdfController extends Controller
 
         $package = json_decode($request->input('package'));
 
-        // dd($request->all());
         if (!empty($package->pdfId)) {
             $packageType = PackageInfo::find($package->pdfId);
         } else {
@@ -74,7 +73,6 @@ class PdfController extends Controller
 
         $fixtures = $request->fixtures;
 
-        // Fixtures::where('package_info_id', $packageType->id)->delete();
         $getAllFixturesId = Fixtures::where('package_info_id', $packageType->id)->pluck('id')->toArray();
 
         $counts = 0;
@@ -85,16 +83,6 @@ class PdfController extends Controller
 
             $filePath = $fixture['pdfFile'];
             if (gettype($filePath) != 'string') {
-                // $uploadedFile = $fixture['pdfFile'];
-
-                // $name = time() . '_' . $uploadedFile->getClientOriginalName();
-                // $path = public_path('/files');
-
-                // $uploadedFile->move($path, $name);
-                // $filePath = $path . '/' . $name;
-
-                // $command = "gswin64c.exe -o \"$filePath\" -sDEVICE=pdfwrite \"$filePath\"";
-                // exec($command, $output, $returnCode);
 
                 $uploadedFile = $fixture['pdfFile'];
                 $name = time() . '_' . $uploadedFile->getClientOriginalName();
@@ -125,13 +113,10 @@ class PdfController extends Controller
 
                 $imagePath = public_path('/files');
                 $image->move($imagePath, $imageName);
-                // $imagefilePath = $imagePath . '/' . $imageName;
                 $fixture['imageFile'] = $imageName;
             }
 
             $existingFixture = Fixtures::find($fixture['id']);
-
-            // dd($existingFixture[]);
 
             if ($existingFixture) {
                 $existingFixture->package_info_id = $packageType['id'];
@@ -152,14 +137,6 @@ class PdfController extends Controller
                 $newFixture->order_by = $fixtureCount;
                 $newFixture->save();
             }
-
-            // $fixtureData = new Fixtures();
-            // $fixtureData->package_info_id = $packageType->id;
-            // $fixtureData->pdf_path = $filePath;
-            // $fixtureData->type = $fixture['fixtureType'];
-            // $fixtureData->part_number = $fixture['part_no'];
-            // $fixtureData->image_path = $fixture['imageFile'];
-            // $fixtureData->save();
         }
 
         $fixturesToRemove = array_diff($getAllFixturesId, array_column($fixtures, 'id'));
@@ -218,9 +195,6 @@ class PdfController extends Controller
 
             if (file_exists($pdfPath)) {
 
-                // $extension = pathinfo($pdfPath, PATHINFO_EXTENSION);
-
-                // if ($extension === 'pdf') {
                 try {
 
 
@@ -228,9 +202,6 @@ class PdfController extends Controller
 
 
                     $totalPages = $this->countPages($pdfPath);
-
-                    // echo "Total Pages: $totoalPages<br>";
-                    // die;
 
                     if ($is_view == false) {
                         for ($pageNumber = 1; $pageNumber <= $totalPages; $pageNumber++) {
@@ -276,27 +247,6 @@ class PdfController extends Controller
                             'pdf_images' => $pdfImages
                         ]);
 
-                        // if ($updateFix) {
-
-                        //     $getPdfName = Fixtures::where('id', $fixtureId)
-                        //         ->where('pdf_images', [])
-                        //         ->get();
-
-                        //     if (count($getPdfName) > 0) {
-
-                        //         // Fixtures::where('id', $fixtureId)
-                        //         //     ->where('pdf_images', [])
-                        //         //     ->delete();
-
-                        //         if ($getPdfName->isNotEmpty()) {
-                        //             $errorMessages = $getPdfName->map(function ($pdfData) {
-                        //                 return 'Your pdfs ' . $pdfData->type . ' type is corrupted!';
-                        //             })->toArray();
-
-                        //             // return redirect()->back()->with('error_currupted_file', $errorMessages);
-                        //         }
-                        //     }
-                        // }
                     } else {
 
                         $jsonData = $fixture['pdf_images'];
@@ -322,11 +272,6 @@ class PdfController extends Controller
 
                     dd($exception->getMessage());
                 }
-                // } else {
-                //     $completePdfPath[] = $pdfPath;
-                //     $pageNumber = 1;
-                // }
-
 
             } else {
 
@@ -344,11 +289,7 @@ class PdfController extends Controller
             ->get();
 
         if (count($corruptedData) > 0) {
-            // dd('hi');
-            // Fixtures::where([
-            //     'package_info_id' => $typeId,
-            //     whereJsonLength('pdf_images', '=', 0)
-            // ])->delete();
+           
             $errorType = $corruptedData->first()->type;
 
             $corruptedData = Fixtures::where('package_info_id', $typeId)
@@ -397,7 +338,6 @@ class PdfController extends Controller
             ];
 
             LighteningLegendInfo::updateOrCreate(['fixture_id' => $request->fixture_id[$key]], $lighteningLegendInfoData);
-            // LighteningLegendInfo::create($lighteningLegendInfoData);
 
         }
 
@@ -412,8 +352,6 @@ class PdfController extends Controller
 
         $projectName = PackageInfo::where('id', $packageInfoId)->first();
 
-        // dd($fixtureTypes);
-
         return view('pages.legend-cover', ['fixtureTypes' => $fixtureTypes, 'packageInfoId' => $packageInfoId, 'projectName' => $projectName]);
     }
 
@@ -427,7 +365,6 @@ class PdfController extends Controller
         $inputPdfPath = 'C:\xampp\htdocs\pdf-generator\public\files\test\one.pdf';
         $outputPdfPath = 'C:\xampp\htdocs\pdf-generator\public\files\test\final.pdf';
 
-        // Assuming Ghostscript is installed and added to the system PATH variable
         $command = "gswin64c.exe -o \"$outputPdfPath\" -sDEVICE=pdfwrite \"$inputPdfPath\"";
         exec($command, $output, $returnCode);
 
