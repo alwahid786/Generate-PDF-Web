@@ -224,7 +224,7 @@ function deleteLibraryFixtures(id)
 function appendLibraryData() {
 
     let fixtureIds = [];
-    // alert('comming')
+
     $('input[type="checkbox"]:checked').each(function() {
         let fixtureRow = $(this).closest('ul.row');
         let fixtureId = fixtureRow.find('.fixId_append').val();
@@ -246,9 +246,11 @@ function appendLibraryData() {
         dataType: 'json',
 
         success: function(data) {
+
             var libraryData = data?.data
             if(libraryData)
             {
+                
                 
                 $.each(libraryData, function(index, fixture) {
 
@@ -276,6 +278,18 @@ function appendLibraryData() {
                     </ul>`;
 
                     $(".pdf-detail-bar").append(pdfDiv);
+
+                    $('#fixtureModal').modal('hide');
+                    $('input[type="checkbox"]').prop('checked', false);
+
+
+                    Swal.fire({
+                        title: 'Library fixture',
+                        text: 'Library fixture added!',
+                        icon: 'success',
+                        confirmButtonColor: "#1D3F77"
+                    })
+
 
                 });
             }
