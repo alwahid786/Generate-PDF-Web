@@ -85,7 +85,21 @@ class LibraryController extends Controller
 
     public function getLibraryData(Request $request)
     {
-        dd($request->all());
+
+        $ids = $request->all();
+
+        $getLibrarySelectedData = [];
+
+        foreach ($ids as $key => $value) {
+            
+            $libraryData = libraryFixture::where('id', $value)->get();
+            
+            $getLibrarySelectedData = array_merge($getLibrarySelectedData, $libraryData->toArray());
+            
+        }
+
+        return response()->json(['status' => 'success', 'message' => 'Fixture data', 'data' => $getLibrarySelectedData]);
+
     }
 
     
