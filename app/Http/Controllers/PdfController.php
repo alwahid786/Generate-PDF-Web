@@ -46,7 +46,7 @@ class PdfController extends Controller
 
         if ($packageInfoId) {
             $packageInfo = PackageInfo::where('id', $packageInfoId)->with('fixtures')->first();
-            return view('pages.create-pdf', compact('packageTypes', 'packageInfo', 'packageName'));
+            return view('pages.create-pdf', compact('packageTypes', 'packageInfo', 'packageName', 'libraryFixtures'));
         }
         return view('pages.create-pdf', compact('packageTypes', 'packageName', 'packagetypeId', 'packageInfoId', 'libraryFixtures'));
     }
