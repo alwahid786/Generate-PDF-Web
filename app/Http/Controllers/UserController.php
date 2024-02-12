@@ -20,6 +20,49 @@ class UserController extends Controller
     {
         $package = PackageInfo::findOrFail($request->id);
 
+        $fixtures = $package->fixtures;
+
+        foreach ($fixtures as $fixture) {
+
+            if (!empty($fixture->pdf_images)) {
+
+                $images = json_decode($fixture->pdf_images);
+
+                
+                foreach ($images as $image) {
+                    $filename = basename($image->path);
+                    $absolutePath = public_path('files/' . $filename);
+        
+                    if (file_exists($absolutePath)) {
+                        unlink($absolutePath);
+                    }
+                }
+
+            }
+
+            if (!empty($fixture->image_path)) {
+
+                $absoluteImagePath = public_path('files/'.$fixture->image_path);
+
+                if (file_exists($absoluteImagePath)) {
+                    unlink($absoluteImagePath);
+                }
+
+            }
+
+            if (!empty($fixture->pdf_path)) {
+
+                $absolutePdfPath = $fixture->pdf_path;
+        
+                if (file_exists($absolutePdfPath)) {
+                    unlink($absolutePdfPath);
+                }
+
+            }
+
+        }
+        
+
         $package->fixtures()->delete();
 
         $package->delete();
