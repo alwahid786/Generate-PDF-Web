@@ -1242,7 +1242,27 @@
     column-gap: 1rem;
     width: 100%;
 }
-
+.lower-body-input-container{
+    flex-direction: column;
+}
+.lower-body-input-wrapper-inner-file{
+    display: flex;
+    flex-direction: column;
+    row-gap: 1rem;
+}
+.lower-body-input-wrapper-inner-fields{
+    display: flex;
+    column-gap: 1rem;
+}
+.lower-body-input-wrapper-inner-file-header{
+    display: flex;
+    column-gap: 1rem;
+    justify-content: center;
+}
+.lower-body-input-wrapper-inner-file-footer .add-button a{
+    max-width: 300px;
+    margin: 0 auto;
+}
 .lower-body-input {
     width: 60%;
 }

@@ -20,46 +20,97 @@
                 <div class="lower-body-heading">
                     <h1>Fixture</h1>
                 </div>
-                <div class="lower-body-input-wrapper">
-                    <div class="lower-body-input">
-                        <div class="pdf-info-input-wrapper">
-                            <div class="section-heading">
-                                <h1>Type</h1>
+                <div class="lower-body-input-wrapper lower-body-input-container">
+                    <div class="lower-body-input-wrapper-inner-fields">
+                        <div class="lower-body-input">
+                            <div class="pdf-info-input-wrapper">
+                                <div class="section-heading">
+                                    <h1>Manufacturer</h1>
+                                </div>
+                                <div class="pdf-info-input">
+                                    <input type="text" name="fixture_type" id="fixtureType" class="typeValidation">
+                                    <p style="color: red" id="warning-message-type"></p>
+                                </div>
                             </div>
-                            <div class="pdf-info-input">
-                                <input type="text" name="fixture_type" id="fixtureType" class="typeValidation">
-                                <p style="color: red" id="warning-message-type"></p>
+                            <div class="pdf-info-input-wrapper">
+                                <div class="section-heading">
+                                    <h1>Description </h1>
+                                </div>
+                                <div class="pdf-info-input">
+                                    <input type="text" name="part_number" id="partNo" class="typeValidation">
+                                    <p style="color: red" id="warning-message-partno"></p>
+                                </div>
                             </div>
                         </div>
-                        <div class="pdf-info-input-wrapper">
-                            <div class="section-heading">
-                                <h1>Part Number</h1>
+                        <div class="lower-body-input">
+                            <div class="pdf-info-input-wrapper">
+                                <div class="section-heading">
+                                    <h1>Part Number</h1>
+                                </div>
+                                <div class="pdf-info-input">
+                                    <input type="text" name="fixture_type" id="fixtureType" class="typeValidation">
+                                    <p style="color: red" id="warning-message-type"></p>
+                                </div>
                             </div>
-                            <div class="pdf-info-input">
-                                <input type="text" name="part_number" id="partNo" class="typeValidation">
-                                <p style="color: red" id="warning-message-partno"></p>
+                            <div class="pdf-info-input-wrapper">
+                                <div class="section-heading">
+                                    <h1>Lamp</h1>
+                                </div>
+                                <div class="pdf-info-input">
+                                    <input type="text" name="part_number" id="partNo" class="typeValidation">
+                                    <p style="color: red" id="warning-message-partno"></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="lower-body-input">
+                            <div class="pdf-info-input-wrapper">
+                                <div class="section-heading">
+                                    <h1>Voltage </h1>
+                                </div>
+                                <div class="pdf-info-input">
+                                    <input type="text" name="fixture_type" id="fixtureType" class="typeValidation">
+                                    <p style="color: red" id="warning-message-type"></p>
+                                </div>
+                            </div>
+                            <div class="pdf-info-input-wrapper">
+                                <div class="section-heading">
+                                    <h1>Dimming </h1>
+                                </div>
+                                <div class="pdf-info-input">
+                                    <input type="text" name="part_number" id="partNo" class="typeValidation">
+                                    <p style="color: red" id="warning-message-partno"></p>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="drop-zone">
-                        <span class="drop-zone__prompt"></span>
-                        <span>Add Image</span>
-                        <span>Drag+Drop</span>
-                        <input type="file" name="image_path" id="imageFile" class="drop-zone__input" accept="image/jpeg, image/png, image/gif">
+                  <div class="lower-body-input-wrapper-inner-file">
+                    <div class="lower-body-input-wrapper-inner-file-header">
+                        <div class="drop-zone">
+                            <span class="drop-zone__prompt"></span>
+                            <span>Add Image</span>
+                            <span>Drag+Drop</span>
+                            <input type="file" name="image_path" id="imageFile" class="drop-zone__input" accept="image/jpeg, image/png, image/gif">
+                        </div>
+                        <div class="drop-zone">
+                            <span class="drop-zone__prompt">Add File</span>
+                            <span>Spec Sheet</span>
+                            <span>Drag + Drop</span>
+                            <input type="file" name="pdf_file" id="pdfFile" class="drop-zone__input typeValidation" accept=".pdf">
+                        </div>
                     </div>
-                    <div class="drop-zone">
-                        <span class="drop-zone__prompt">Add File</span>
-                        <span>Spec Sheet</span>
-                        <span>Drag + Drop</span>
-                        <input type="file" name="pdf_file" id="pdfFile" class="drop-zone__input typeValidation" accept=".pdf">
+                    <div class="lower-body-input-wrapper-inner-file-footer">
+                        <input type="hidden" id="editId">
+                        <div class="add-button">
+                            <a href="javascript:void(0)" id="addTypeBtn">
+                                <img src="{{ asset('public/assets/images/plus-circle.png') }}">
+                                <h1>Save</h1>
+                            </a>
+                        </div>
                     </div>
-                    <input type="hidden" id="editId">
-                    <div class="add-button">
-                        <a href="javascript:void(0)" id="addTypeBtn">
-                            <img src="{{ asset('public/assets/images/plus-circle.png') }}">
-                            <h1>Save</h1>
-                        </a>
-                    </div>
+                   
+                  
+                  </div>
+                   
                 </div>
 
             </form>
