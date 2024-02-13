@@ -86,15 +86,6 @@
             <div class="create-pdf-lower-body mt-5">
                 <div class="lower-body-heading">
                     <h1>Fixture</h1>
-                    <div class="add-button" style="width: 210px;">
-                        <a class="add-library-btn" data-toggle="modal" data-target="#fixtureModal">
-                            <img src="{{ asset('public/assets/images/plus-circle.png') }}">
-                            <h1 >Select From Library</h1>
-                        </a>
-
-                        <p style="padding-top: 30px; font-weight: bold;text-align:center">OR</p>
-
-                    </div>
                 </div>
 
                 <div class="lower-body-input-wrapper">
@@ -132,10 +123,18 @@
                     </div>
                     <input type="hidden" id="editId">
                     <div class="add-button">
-                        <a href="javascript:void(0)" id="addTypeBtn">
+
+                        <a href="javascript:void(0)" id="addTypeBtn" style="width: 210px;">
                             <img src="{{ asset('public/assets/images/plus-circle.png') }}">
                             <h1>Save</h1>
                         </a>
+
+                        <div class="add-button" style="width: 210px;">
+                            <a class="add-library-btn" data-toggle="modal" data-target="#fixtureModal">
+                                <img src="{{ asset('public/assets/images/plus-circle.png') }}">
+                                <h1 >Select From Library</h1>
+                            </a>
+                        </div>
                         
                     </div>
                 </div>
@@ -199,7 +198,6 @@
                 <div class="fixture-modal-body">
                     <ul class="mt-4 fixture-detail-list">
                         <li style="font-weight: bold;">Select</li>
-                        <li style="font-weight: bold;">Fixture Type</li>
                         <li style="font-weight: bold;">Part Number</li>
                         <li style="font-weight: bold;">Image</li>
                         <li style="font-weight: bold;">Spec Sheet</li>
@@ -220,7 +218,6 @@
                             </div>
                         </li>
 
-                        <li class="fixType_append">{{ $fixture->type }}</li>
 
                         <li class="fixPartNo_append" style="max-width:200px;">{{ $fixture->part_number }}</li>
 
