@@ -101,7 +101,7 @@
                     <div class="lower-body-input-wrapper-inner-file-footer">
                         <input type="hidden" id="editId">
                         <div class="add-button">
-                            <a href="javascript:void(0)" id="addTypeBtn">
+                            <a href="javascript:void(0)" id="addLibraryTypeBtn">
                                 <img src="{{ asset('public/assets/images/plus-circle.png') }}">
                                 <h1>Save</h1>
                             </a>

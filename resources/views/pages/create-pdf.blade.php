@@ -109,13 +109,13 @@
                             </div>
                         </div>
                     </div>
-                    <div class="drop-zone">
+                    <div class="drop-zone image">
                         <span class="drop-zone__prompt"></span>
                         <span>Add Image</span>
                         <span>Drag+Drop</span>
                         <input type="file" name="image_path" id="imageFile" class="drop-zone__input" accept="image/jpeg, image/png, image/gif">
                     </div>
-                    <div class="drop-zone">
+                    <div class="drop-zone pdf">
                         <span class="drop-zone__prompt">Add File</span>
                         <span>Spec Sheet</span>
                         <span>Drag + Drop</span>
@@ -445,7 +445,6 @@
         ?>
         // console.log(fixtures)
         $(document).on('click', '#addTypeBtn', function() {
-
             let error = 0;
             let validate = $(".typeValidation").each(function() {
                 if ($(this).val() == '') {
@@ -463,6 +462,7 @@
                     }
                 }
             });
+            alert(error);
             if (error > 0) {
                 Swal.fire({
                     title: 'Empty Fields',
@@ -536,7 +536,15 @@
                     updateFixturesArray();
                 }
             });
-
+            
+           pdfLibObj = $(".drop-zone.pdf").find('.drop-zone__thumb');
+            if(pdfLibObj.attr('data-lib') =='true' && pdfFile==undefined){
+                pdfFile = pdfLibObj.attr('data-label')
+            }
+           imgLibObj = $(".drop-zone.image").find('.drop-zone__thumb');
+            if(pdfLibObj.attr('data-lib') =='true' && imageFile==undefined){
+                imageFile = imgLibObj.attr('data-label')
+            }
             pdfObject = {
                 "pdfFile": pdfFile,
                 'imageFile': imageFile,
@@ -549,6 +557,7 @@
                 // "pdfPreview": pdfPreview
             };
             fixtures.push(pdfObject);
+            // console.log(fixtures);
             let pdfDiv = `<ul class="mt-4 row${id}" data-id="${id}">
                         <li class="fixType_append">${fixtureType}</li>
                         <li class="fixPartNo_append" style="max-width:200px; word-break: break-all">${partNo}</li>
