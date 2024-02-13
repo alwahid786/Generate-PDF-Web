@@ -44,10 +44,14 @@ class LibraryController extends Controller
         }
         
         LibraryFixture::create([
-            'type' => $fixtures['fixtures']['fixtureType'],
             'part_number' => $fixtures['fixtures']['part_no'],
             'pdf_path' => $inputPdfPath ?? null,
             'image_path' => $inputImgPath ?? null,
+            'manufacturer' => $fixtures['fixtures']['manufacturer'],
+            'lamp' => $fixtures['fixtures']['lamp'],
+            'voltage' => $fixtures['fixtures']['voltage'],
+            'dimming' => $fixtures['fixtures']['dimming'],
+            'description' => $fixtures['fixtures']['description']
         ]);
 
 

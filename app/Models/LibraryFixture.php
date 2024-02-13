@@ -14,5 +14,10 @@ class LibraryFixture extends Model
         'part_number',
         'pdf_path',
         'image_path',
+        'manufacturer',
+        'description',
+        'lamp',
+        'voltage',
+        'dimming'
     ];
 }

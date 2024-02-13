@@ -28,7 +28,7 @@
                                     <h1>Manufacturer</h1>
                                 </div>
                                 <div class="pdf-info-input">
-                                    <input type="text" name="fixture_type" id="fixtureType" class="typeValidation">
+                                    <input type="text" name="manufacturer" id="manufacturer" class="typeValidation">
                                     <p style="color: red" id="warning-message-type"></p>
                                 </div>
                             </div>
@@ -37,7 +37,7 @@
                                     <h1>Description </h1>
                                 </div>
                                 <div class="pdf-info-input">
-                                    <input type="text" name="part_number" id="partNo" class="typeValidation">
+                                    <input type="text" name="description" id="description" class="typeValidation">
                                     <p style="color: red" id="warning-message-partno"></p>
                                 </div>
                             </div>
@@ -48,7 +48,7 @@
                                     <h1>Part Number</h1>
                                 </div>
                                 <div class="pdf-info-input">
-                                    <input type="text" name="fixture_type" id="fixtureType" class="typeValidation">
+                                    <input type="text" name="part_number" id="part_number" class="typeValidation">
                                     <p style="color: red" id="warning-message-type"></p>
                                 </div>
                             </div>
@@ -57,7 +57,7 @@
                                     <h1>Lamp</h1>
                                 </div>
                                 <div class="pdf-info-input">
-                                    <input type="text" name="part_number" id="partNo" class="typeValidation">
+                                    <input type="text" name="lamp" id="lamp" class="typeValidation">
                                     <p style="color: red" id="warning-message-partno"></p>
                                 </div>
                             </div>
@@ -68,7 +68,7 @@
                                     <h1>Voltage </h1>
                                 </div>
                                 <div class="pdf-info-input">
-                                    <input type="text" name="fixture_type" id="fixtureType" class="typeValidation">
+                                    <input type="text" name="voltage" id="voltage" class="typeValidation">
                                     <p style="color: red" id="warning-message-type"></p>
                                 </div>
                             </div>
@@ -77,7 +77,7 @@
                                     <h1>Dimming </h1>
                                 </div>
                                 <div class="pdf-info-input">
-                                    <input type="text" name="part_number" id="partNo" class="typeValidation">
+                                    <input type="text" name="dimming" id="dimming" class="typeValidation">
                                     <p style="color: red" id="warning-message-partno"></p>
                                 </div>
                             </div>
@@ -116,7 +116,6 @@
             </form>
                 <div class="pdf-detail-bar">
                     <ul class="mt-4">
-                        <li style="font-weight: bold;">Fixture Type</li>
                         <li style="font-weight: bold;">Part Number</li>
                         <li style="font-weight: bold;">Image</li>
                         <li style="font-weight: bold;">Spec Sheet</li>
@@ -128,18 +127,20 @@
                     @foreach ($libraryFixtures as $fixture)
 
                     <ul class="mt-4 row">
-                        <li class="fixType_append">{{ $fixture->type }}</li>
                         <li class="fixPartNo_append" style="max-width: 200px;">{{ $fixture->part_number }}</li>
                         <li style="width: 45px;">
                             @if ($fixture->image_path != null)
-                                <a href="{{ $fixture->image_path }}" target="_blank">
+                                <a href="{{ asset('/public/files/' . $fixture->image_path) }}" target="_blank">
                                     <img style="width: 45px;" src="{{ asset('public/assets/images/png_icon.png') }}" alt="image">
                                 </a>
                             @endif
                         </li>
                         <li> 
                             @if ($fixture->pdf_path != null)
-                                <a href="{{ $fixture->pdf_path }}" target="_blank">
+                                <?php
+                                    $baseName = basename($fixture->pdf_path);
+                                ?>
+                                <a href="{{ asset('/public/files/' . $baseName) }}" target="_blank">
                                     <img src="{{ asset('public/assets/images/pdf-icon.png') }}" alt="image">
                                 </a>
                             @endif

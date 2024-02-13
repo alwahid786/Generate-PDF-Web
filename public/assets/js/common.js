@@ -54,13 +54,21 @@ $('#addTypeBtn').on('click', function () {
     var selectedimageFiles = imageFileInput.files;
     var imageFile = selectedimageFiles[0];
 
-    let partNo = $("#partNo").val();
-    let fixtureType = $("#fixtureType").val();
+    let manufacturer = $("#manufacturer").val();
+    let description = $("#description").val();
+    let part_number = $("#part_number").val();
+    let lamp = $("#lamp").val();
+    let voltage = $("#voltage").val();
+    let dimming = $("#dimming").val();
 
     data.append('fixtures[pdfFile]', pdfFile);
     data.append('fixtures[imageFile]', imageFile);
-    data.append('fixtures[part_no]', partNo);
-    data.append('fixtures[fixtureType]', fixtureType);
+    data.append('fixtures[part_no]', part_number);
+    data.append('fixtures[manufacturer]', manufacturer);
+    data.append('fixtures[lamp]', lamp);
+    data.append('fixtures[voltage]', voltage);
+    data.append('fixtures[dimming]', dimming);
+    data.append('fixtures[description]', description);
 
     var csrfToken = $('meta[name="csrf-token"]').attr('content');
     $("#loader").removeClass('d-none');
