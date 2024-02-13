@@ -159,7 +159,7 @@ function appendLibraryData() {
 
     let fixtureIds = [];
 
-    $('input[type="checkbox"]:checked').each(function() {
+    $('input[type="radio"]:checked').each(function() {
         let fixtureRow = $(this).closest('ul.row');
         let fixtureId = fixtureRow.find('.fixId_append').val();
         fixtureIds.push(fixtureId);
@@ -184,7 +184,7 @@ function appendLibraryData() {
             var libraryData = data?.data
             if(libraryData)
             {
-
+                resetFixtures();
                 $(".drop-zone__prompt").remove();
                 $("#pdfFile").removeClass('typeValidation');
 
@@ -201,7 +201,6 @@ function appendLibraryData() {
                 const pdfCompletePath = pdfObject?.pdfFile;
 
                 const basename = pdfCompletePath.split('\\').pop();
-                alert(basename)
 
                 $('#partNo').val(pdfObject?.part_no)  
 
@@ -209,78 +208,17 @@ function appendLibraryData() {
                 $('.drop-zone.image').prepend(`<div class="drop-zone__thumb" data-lib="true" data-label="${pdfObject?.imageFile}"> <img style="width: 100%; height: 100%; object-fit: cover;" src="${baseUrl}/files/${pdfObject?.imageFile}"> </div>`);
                 $('.drop-zone.pdf').prepend(`<div class="drop-zone__thumb"  data-lib="true" data-label="${pdfObject?.pdfFile}"><img style="width: 100%; height: 100%; object-fit: cover;" src="${baseUrl}/assets/images/pdf-icon.png" alt="image"></div>`);
 
-
-                // $('#imageFile').src = pdfObject?.imageFile
-                // drop-zone__thumb:first
-
-                // $(".drop-zone__thumb").remove();
-                    
-                // $(".drop-zone").append(
-                //     `<div class="drop-zone__thumb" data-label="${pdfObject?.pdfFile}"></div>`);
-
-                // Append image thumbnail
-                // $(".drop-zone:nth-child(1)").append(
-                //     `<div class="drop-zone__thumb" data-label="${pdfObject.imageFile}">
-                //         <img src="${pdfObject.imageFile}" alt="Image">
-                //     </div>`
-                // );
-
-                // Append PDF thumbnail
-                // $(".drop-zone:nth-child(1)").append(
-                //     `<div class="drop-zone__thumb" data-label="${pdfObject.pdfFile}">
-                //         <img src="${pdfObject.pdfFile}" alt="PDF">
-                //     </div>`
-                // );
-                
-                console.log('selected data of libray', pdfObject?.part_no)
-                
-                // $.each(libraryData, function(index, fixture) {
-
-                //     let id = Math.floor(Math.random() * 90000) + 10000;
-
-                //     pdfObject = {
-                //         "pdfFile": fixture.pdf_path,
-                //         'imageFile': fixture.image_path,
-                //         "part_no": fixture.part_number,
-                //         "fixtureType": fixture.type,
-                //         "id": id,
-                //     };
-
-                //     fixtures.push(pdfObject);
-
-                //     // append library data
-
-                    
+                $('#fixtureModal').modal('hide');
+                $('input[type="radio"]').prop('checked', false);
 
 
-                //     // old data append
+                Swal.fire({
+                    title: 'Library fixture',
+                    text: 'Library fixture added!',
+                    icon: 'success',
+                    confirmButtonColor: "#1D3F77"
+                });
 
-                //     // let pdfDiv = `<ul class="mt-4 row${pdfObject?.id}" data-id="${pdfObject?.id}">
-                //     //     <li class="fixType_append">${pdfObject?.fixtureType}</li>
-                //     //     <li class="fixPartNo_append" style="max-width:200px; word-break: break-all">${pdfObject?.part_no}</li>
-                //     //     <li><img style="width: 45px" src="${baseUrl}/assets/images/png_icon.png" alt="image"></li>
-                //     //     <li> <img src="${baseUrl}/assets/images/pdf-icon.png" alt="image"></li>
-                //     //     <li class="d-flex align-items-center justify-content-end">
-                //     //         <img style="cursor:pointer; width:28px;height:28px;" class="editPdfBtn" src="${baseUrl}/assets/images/edit-icon.svg" alt="image">
-                //     //         <img style="cursor:pointer;" class="removePdfBtn ml-2" src="${baseUrl}/assets/images/delete.png" alt="image">
-                //     //     </li>
-                //     // </ul>`;
-
-                //     // $(".pdf-detail-bar").append(pdfDiv);
-
-                //     // $('#fixtureModal').modal('hide');
-                //     // $('input[type="checkbox"]').prop('checked', false);
-
-
-                //     // Swal.fire({
-                //     //     title: 'Library fixture',
-                //     //     text: 'Library fixture added!',
-                //     //     icon: 'success',
-                //     //     confirmButtonColor: "#1D3F77"
-                //     // })
-
-
-                // });
             }
         },
 

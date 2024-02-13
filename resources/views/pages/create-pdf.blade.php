@@ -212,8 +212,8 @@
 
                         <li class="selected-fixture">
                             <div class="summary-wrapper d-flex align-items-center justify-content-center">
-                                <input type="checkbox" name="fixture_idsss{{$fixture->id}}" id="checkbox{{$fixture->id}}" class="rounded-checkbox">
-                                <label for="checkbox{{$fixture->id}}"></label>
+                                <input type="radio" name="selected_fixture" id="radio{{$fixture->id}}" class="rounded-radio" value="{{ $fixture->id }}">
+                                <label for="radio{{$fixture->id}}"></label>
                                 <input type="hidden" class="fixId_append" value="{{ $fixture->id }}">
                             </div>
                         </li>
@@ -372,7 +372,6 @@
             });
 
             $('#partNo').on('keydown keyup change', function() {
-                // alert('coming');
                 var char = $(this).val();
                 var charLength = $(this).val().length;
                 if (charLength > 60) {
@@ -462,7 +461,6 @@
                     }
                 }
             });
-            alert(error);
             if (error > 0) {
                 Swal.fire({
                     title: 'Empty Fields',
@@ -681,7 +679,6 @@
             } else {
                 summary = 0;
             }
-            // alert(summary)
             var packageObject = {
                 packageType: packageType,
                 projectName: projectName,
