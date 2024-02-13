@@ -158,14 +158,6 @@
 
                 </div>
 
-                {{-- <div class="pdf-action">
-                    <div class="action-type">
-                        <a id="previewPdf" href="javascript:void(0)">Preview & Save</a> --}}
-                        {{-- <button type="submit">Preview & Save</button> --}}
-                    {{-- </div>
-                   
-                </div> --}}
-                
             </div>
         
 </main>
