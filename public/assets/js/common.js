@@ -189,12 +189,14 @@ function appendLibraryData() {
                 $("#pdfFile").removeClass('typeValidation');
 
                 let id = Math.floor(Math.random() * 90000) + 10000;
-                
-                
+                const libraryFixtureId = fixtureIds[0];
+                // console.log();
+                // return
                 pdfObject = {
                     "pdfFile": libraryData[0]['pdf_path'],
                     'imageFile': libraryData[0]['image_path'],
                     "part_no": libraryData[0]['part_number'],
+                    "libraryFixtureId": libraryFixtureId,
                     "id": id,
                 };
 
@@ -203,6 +205,7 @@ function appendLibraryData() {
                 const basename = pdfCompletePath.split('\\').pop();
 
                 $('#partNo').val(pdfObject?.part_no)  
+                $('#libraryFixtureId').val(pdfObject?.libraryFixtureId) 
 
 
                 $('.drop-zone.image').prepend(`<div class="drop-zone__thumb" data-lib="true" data-label="${pdfObject?.imageFile}"> <img style="width: 100%; height: 100%; object-fit: cover;" src="${baseUrl}/files/${pdfObject?.imageFile}"> </div>`);

@@ -119,6 +119,47 @@ class PdfController extends Controller
             $existingFixture = Fixtures::find($fixture['id']);
 
             if ($existingFixture) {
+
+                foreach ($existingFixture as $unlink_media) {
+
+                    if (!empty($unlink_media->pdf_images)) {
+        
+                        $images = json_decode($unlink_media->pdf_images);
+        
+                        
+                        foreach ($images as $image) {
+                            $filename = basename($image->path);
+                            $absolutePath = public_path('files/' . $filename);
+                
+                            if (file_exists($absolutePath)) {
+                                unlink($absolutePath);
+                            }
+                        }
+        
+                    }
+        
+                    if (!empty($unlink_media->image_path)) {
+        
+                        $absoluteImagePath = public_path('files/'.$unlink_media->image_path);
+        
+                        if (file_exists($absoluteImagePath)) {
+                            unlink($absoluteImagePath);
+                        }
+        
+                    }
+        
+                    if (!empty($unlink_media->pdf_path)) {
+        
+                        $absolutePdfPath = $unlink_media->pdf_path;
+                
+                        if (file_exists($absolutePdfPath)) {
+                            unlink($absolutePdfPath);
+                        }
+        
+                    }
+        
+                }
+
                 $existingFixture->package_info_id = $packageType['id'];
                 $existingFixture->pdf_path = $filePath;
                 $existingFixture->type = $fixture['fixtureType'];
@@ -136,6 +177,23 @@ class PdfController extends Controller
                 $newFixture->image_path = $fixture['imageFile'];
                 $newFixture->order_by = $fixtureCount;
                 $newFixture->save();
+
+                if (isset($fixture['libraryFixtureId']) && $fixture['libraryFixtureId'] != null) {
+                    $libraryFixtureId = $fixture['libraryFixtureId'];
+
+                    $liteningData = LibraryFixture::where('id', $libraryFixtureId)->first();
+
+                    LighteningLegendInfo::create([
+                        'manufacturer' => $liteningData->manufacturer,
+                        'description' => $liteningData->description,
+                        'part_number' => $liteningData->part_number,
+                        'lamp' => $liteningData->lamp,
+                        'voltage' => $liteningData->voltage,
+                        'dimming' => $liteningData->dimming,
+                        'fixture_id' => $newFixture->id,
+                        'pakage_info_id' => $packageType->id,
+                    ]);
+                }
             }
         }
 

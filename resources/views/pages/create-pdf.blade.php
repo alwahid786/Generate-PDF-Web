@@ -220,6 +220,7 @@
 
 
                         <li class="fixPartNo_append" style="max-width:200px;">{{ $fixture->part_number }}</li>
+                        <input type="hidden" name="library_fixture_id" id="libraryFixtureId">
 
                         <li>
                             @if ($fixture->image_path != null)
@@ -487,6 +488,7 @@
             let ref = $("#referenceNo").val();
             let partNo = $("#partNo").val();
             let fixtureType = $("#fixtureType").val();
+            let libraryFixtureId = $("#libraryFixtureId").val();
             let id = Math.floor(Math.random() * 90000) + 10000;
 
             // Check if it is edit case
@@ -550,6 +552,7 @@
                 "part_no": partNo,
                 "fixtureType": fixtureType,
                 "id": id,
+                'libraryFixtureId': libraryFixtureId
                 // "new_edit": true
                 // "imagePreview": imagePreview,
                 // "pdfPreview": pdfPreview
@@ -673,6 +676,7 @@
             let packageType = $("#packageType").val();
             let projectName = $("#projectName").val();
             let referenceNo = $("#referenceNo").val();
+            let libraryFixtureId = $("#libraryFixtureId").val();
             let summaryCheckbox = document.getElementById("checkbox_summary");
             if (summaryCheckbox.checked) {
                 summary = 1;
@@ -684,7 +688,8 @@
                 projectName: projectName,
                 referenceNo: referenceNo,
                 summary: summary,
-                pdfId: '{{ $packageInfo->id ?? "" }}'
+                pdfId: '{{ $packageInfo->id ?? "" }}',
+                libraryFixtureId: libraryFixtureId
             }
 
             updateFixturesArray();
@@ -700,6 +705,7 @@
                 data.append(`fixtures[${i}][part_no]`, fixture.part_no);
                 data.append(`fixtures[${i}][id]`, fixture.id);
                 data.append(`fixtures[${i}][fixtureType]`, fixture.fixtureType);
+                data.append(`fixtures[${i}][libraryFixtureId]`, fixture.libraryFixtureId);
             }
             data.append('package', JSON.stringify(packageObject));
             var csrfToken = $('meta[name="csrf-token"]').attr('content');
