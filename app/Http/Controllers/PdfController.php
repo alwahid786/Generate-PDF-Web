@@ -178,21 +178,29 @@ class PdfController extends Controller
                 $newFixture->order_by = $fixtureCount;
                 $newFixture->save();
 
+                // dd($fixture['libraryFixtureId']);
+
                 if (isset($fixture['libraryFixtureId']) && $fixture['libraryFixtureId'] != null) {
                     $libraryFixtureId = $fixture['libraryFixtureId'];
 
                     $liteningData = LibraryFixture::where('id', $libraryFixtureId)->first();
 
-                    LighteningLegendInfo::create([
-                        'manufacturer' => $liteningData->manufacturer,
-                        'description' => $liteningData->description,
-                        'part_number' => $liteningData->part_number,
-                        'lamp' => $liteningData->lamp,
-                        'voltage' => $liteningData->voltage,
-                        'dimming' => $liteningData->dimming,
-                        'fixture_id' => $newFixture->id,
-                        'pakage_info_id' => $packageType->id,
-                    ]);
+                    if (null != $liteningData || count($liteningData) > 0) {
+
+                        LighteningLegendInfo::create([
+                            'manufacturer' => $liteningData->manufacturer,
+                            'description' => $liteningData->description,
+                            'part_number' => $liteningData->part_number,
+                            'lamp' => $liteningData->lamp,
+                            'voltage' => $liteningData->voltage,
+                            'dimming' => $liteningData->dimming,
+                            'fixture_id' => $newFixture->id,
+                            'pakage_info_id' => $packageType->id,
+                        ]);
+
+                    }
+
+                    
                 }
             }
         }
