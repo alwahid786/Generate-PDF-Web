@@ -220,7 +220,6 @@
 
 
                         <li class="fixPartNo_append" style="max-width:200px;">{{ $fixture->part_number }}</li>
-                        <input type="hidden" name="library_fixture_id" id="libraryFixtureId">
 
                         <li>
                             @if ($fixture->image_path != null)
@@ -232,8 +231,9 @@
                         
                     </ul>
                     @endforeach
-                    
                     @endif
+                    
+                    <input type="hidden" name="library_fixture_id" id="libraryFixtureId">
 
                 </div>
                 <div class="modal-footer">
@@ -580,7 +580,7 @@
             // console.log(fixtures);
             // console.log('old')
             // console.log('old')
-
+            $('#libraryFixtureId').val('')
         });
         // Remove PDF BTN Click function
         $(document).on('click', '.removePdfBtn', function() {
