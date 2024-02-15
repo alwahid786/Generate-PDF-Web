@@ -107,5 +107,12 @@ class LibraryController extends Controller
 
     }
 
+    public function getSpecificLibraryData(Request $request) 
+    {
+        $data = libraryFixture::where('id',  $request->id)->first();
+
+        return response()->json(['status' => 'success', 'message' => 'Library data', 'data' => $data]);
+    }
+
     
 }

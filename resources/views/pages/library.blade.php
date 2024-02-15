@@ -5,6 +5,8 @@
     body {
         background: #f6f6f6;
     }
+
+    
 </style>
 @include('includes.navbar')
 <main class="content-wrapper">
@@ -148,6 +150,7 @@
                         <li class="d-flex align-items-center justify-content-end">
                             {{-- <img style="cursor:pointer; width:28px;height:28px;" class="editPdfBtn" src="{{ asset('public/assets/images/edit-icon.svg') }}" alt="image"> --}}
                             <img onclick="deleteLibraryFixtures({{$fixture->id}})" style="cursor:pointer;" class="removePdfBtn ml-2" src="{{ asset('public/assets/images/delete.png') }}" alt="image">
+                            <img onclick="showLibrarydata({{$fixture->id}})" style="cursor:pointer;" class="removePdfBtn ml-2" src="{{asset('public/assets/images/view.png')}}" alt="image">
                         </li>
                     </ul>
                     
@@ -161,6 +164,93 @@
             </div>
         
 </main>
+
+{{-- modal --}}
+
+<div class="modal fade" id="libraryModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+      </div>
+      <div class="modal-body">
+        <form id="cities-form" action="#" method="post">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="pdf-info-input-wrapper form-field">
+                        <div class="section-heading">
+                            <h1>Manufacturer </h1>
+                        </div>
+                        <div class="pdf-info-input">
+                            <input style="font-size: 14px;" type="text" name="lib_manufacturer" id="lib_manufacturer" readonly>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="pdf-info-input-wrapper form-field">
+                        <div class="section-heading">
+                            <h1>Part Number</h1>
+                        </div>
+                        <div class="pdf-info-input">
+                            <input style="font-size: 14px;" type="text" name="lib_partno" id="lib_partno" readonly>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="pdf-info-input-wrapper form-field">
+                        <div class="section-heading">
+                            <h1>Voltage </h1>
+                        </div>
+                        <div class="pdf-info-input">
+                            <input style="font-size: 14px;" type="text" name="lib_voltage" id="lib_voltage" class="" readonly>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="pdf-info-input-wrapper form-field">
+                        <div class="section-heading">
+                            <h1>Description </h1>
+                        </div>
+                        <div class="pdf-info-input">
+                            <input style="font-size: 14px;" type="text" name="lib_description" id="lib_description" class="" readonly>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="pdf-info-input-wrapper form-field">
+                        <div class="section-heading">
+                            <h1>Lamp </h1>
+                        </div>
+                        <div class="pdf-info-input">
+                            <input style="font-size: 14px;" type="text" name="lib_lamp" id="lib_lamp" class="" readonly>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="pdf-info-input-wrapper form-field">
+                        <div class="section-heading">
+                            <h1>Dimming </h1>
+                        </div>
+                        <div class="pdf-info-input">
+                            <input style="font-size: 14px;" type="text" name="lib_dimming" id="lib_dimming" class="" readonly>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+
+          
+       </form>
+      </div>
+      <div class="modal-footer">
+         <span class="error"></span>
+          <button id="submit" type="button" class="btn btn-primary">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
 @endsection
 @section('insertjavascript')
 <script>
@@ -170,13 +260,14 @@
 <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap4.min.js"></script>
 {{-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script> --}}
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+{{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> --}}
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="{{ asset('public/assets/js/common.js') }}"></script>
 <script>
     var baseUrl = "{{ asset('public') }}"
     var saveLibraryDataUrl = "{{ route('saveLibraryData') }}"
     var deleteLibraryDataUrl = "{{ route('deleteLibraryData') }}"
+    var getSpecificLibraryDataUrl = "{{ route('getSpecificLibraryData') }}"
 
 
     document.querySelectorAll(".drop-zone__input").forEach((inputElement) => {

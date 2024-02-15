@@ -1806,3 +1806,15 @@ input.rounded-checkbox {
     left: 50%;
     transform: translateX(-50%);
 }
+.form-field{
+    width: 100%;
+}
+.form-field .section-heading{
+    text-align: left;
+}
+.form-field .section-heading h1{
+    color: black;
+}
+.form-field .pdf-info-input input{
+    height: 50px;
+}

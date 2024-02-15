@@ -117,6 +117,10 @@ function deleteLibraryFixtures(id)
         confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
 
+        if (result?.dismiss == 'backdrop' || result?.dismiss == 'cancel') {
+            return
+        }
+
         var delete_library_url = deleteLibraryDataUrl;
 
         $.ajaxSetup({
@@ -241,5 +245,46 @@ function appendLibraryData() {
 
     
 
+}
+
+function showLibrarydata(libraryId) {
+
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+    $.ajax({
+
+        url: getSpecificLibraryDataUrl,
+        type: "POST",
+        data: {
+            id: libraryId
+        },
+
+        success: function(data) {
+
+            if (data?.status == 'success') {
+                // console.log(data?.data)
+
+                $('#lib_manufacturer').val(data?.data?.manufacturer)
+                $('#lib_partno').val(data?.data?.part_number)
+                $('#lib_voltage').val(data?.data?.voltage)
+                $('#lib_description').val(data?.data?.description)
+                $('#lib_lamp').val(data?.data?.lamp)
+                $('#lib_dimming').val(data?.data?.dimming)
+
+                $('#libraryModal').modal('show')
+
+
+            }
+            
+        },
+
+        error: function(data) {
+            
+        }
+    });
 }
 
