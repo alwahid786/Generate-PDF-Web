@@ -159,6 +159,20 @@ function appendLibraryData() {
 
     let fixtureIds = [];
 
+    const is_checkbox = $('input[type="radio"]:checked').length;
+
+    if (is_checkbox == 0) {
+
+        Swal.fire({
+            title: 'Library fixture',
+            text: 'Select the library',
+            icon: 'error',
+            confirmButtonColor: "#1D3F77"
+        });
+
+        return
+    }
+
     $('input[type="radio"]:checked').each(function() {
         let fixtureRow = $(this).closest('ul.row');
         let fixtureId = fixtureRow.find('.fixId_append').val();
@@ -215,12 +229,7 @@ function appendLibraryData() {
                 $('input[type="radio"]').prop('checked', false);
 
 
-                // Swal.fire({
-                //     title: 'Library fixture',
-                //     text: 'Library fixture added!',
-                //     icon: 'success',
-                //     confirmButtonColor: "#1D3F77"
-                // });
+                
 
             }
         },
