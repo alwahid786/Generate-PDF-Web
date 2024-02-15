@@ -241,9 +241,8 @@
           
        </form>
       </div>
-      <div class="modal-footer">
-         <span class="error"></span>
-          <button id="submit" type="button" class="btn btn-primary">Close</button>
+      <div class="">
+          <button style="margin: 20px;" id="submit" type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
