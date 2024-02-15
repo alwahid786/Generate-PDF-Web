@@ -212,7 +212,7 @@
 
                         <li class="selected-fixture">
                             <div class="summary-wrapper d-flex align-items-center justify-content-center">
-                                <input type="radio" name="selected_fixture" id="radio{{$fixture->id}}" class="rounded-radio" value="{{ $fixture->id }}">
+                                <input style="visibility: hidden;" type="radio" name="selected_fixture" id="radio{{$fixture->id}}" class="rounded-radio" value="{{ $fixture->id }}">
                                 <label for="radio{{$fixture->id}}"></label>
                                 <input type="hidden" class="fixId_append" value="{{ $fixture->id }}">
                             </div>
@@ -238,7 +238,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="fixture-modal-close" data-dismiss="modal">Close</button>
-                    <button onclick="appendLibraryData()" type="button" class="fixture-save-btn">Save changes</button>
+                    <button onclick="appendLibraryData()" type="button" class="fixture-save-btn">Add Library</button>
                 </div>
             </div>
         </div>

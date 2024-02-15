@@ -215,12 +215,12 @@ function appendLibraryData() {
                 $('input[type="radio"]').prop('checked', false);
 
 
-                Swal.fire({
-                    title: 'Library fixture',
-                    text: 'Library fixture added!',
-                    icon: 'success',
-                    confirmButtonColor: "#1D3F77"
-                });
+                // Swal.fire({
+                //     title: 'Library fixture',
+                //     text: 'Library fixture added!',
+                //     icon: 'success',
+                //     confirmButtonColor: "#1D3F77"
+                // });
 
             }
         },
