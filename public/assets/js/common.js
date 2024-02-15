@@ -226,7 +226,7 @@ function appendLibraryData() {
                 $('#libraryFixtureId').val(pdfObject?.libraryFixtureId) 
 
 
-                $('.drop-zone.image').prepend(`<div class="drop-zone__thumb" data-lib="true" data-label="${pdfObject?.imageFile}"> <img style="width: 100%; height: 100%; object-fit: cover;" src="${baseUrl}/files/${pdfObject?.imageFile}"> </div>`);
+                $('.drop-zone.image').prepend(`<div class="drop-zone__thumb" data-lib="true" data-label="${pdfObject?.imageFile ?? 'no image'}"> <img style="width: 100%; height: 100%; object-fit: cover;" src="${baseUrl}/files/${pdfObject?.imageFile}"> </div>`);
                 $('.drop-zone.pdf').prepend(`<div class="drop-zone__thumb"  data-lib="true" data-label="${pdfObject?.pdfFile}"><img style="width: 100%; height: 100%; object-fit: cover;" src="${baseUrl}/assets/images/pdf-icon.png" alt="image"></div>`);
 
                 $('#fixtureModal').modal('hide');
