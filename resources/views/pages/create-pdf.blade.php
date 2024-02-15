@@ -225,11 +225,22 @@
 
                         <li>
                             @if ($fixture->image_path != null)
+                            <a href="{{ asset('/public/files/' . $fixture->image_path) }}" target="_blank">
                                 <img data-src-img="{{ $fixture->image_path }}" style="width:45px" src="{{ asset('public/assets/images/png_icon.png') }}" alt="image">
+                            </a>
                             @endif
                         </li>
 
-                        <li> <img  data-src-pdf="{{ $fixture->pdf_path }}" src="{{ asset('public/assets/images/pdf-icon.png') }}" alt="image"></li>
+                        <li> 
+                            @if ($fixture->pdf_path != null)
+                                <?php
+                                    $baseName = basename($fixture->pdf_path);
+                                ?>
+                                <a href="{{ asset('/public/files/' . $baseName) }}" target="_blank">
+                                    <img  data-src-pdf="{{ $fixture->pdf_path }}" src="{{ asset('public/assets/images/pdf-icon.png') }}" alt="image">
+                                </a>
+                            @endif
+                        </li>
                         
                     </ul>
                     @endforeach
