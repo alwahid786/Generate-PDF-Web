@@ -228,6 +228,8 @@
                             <a href="{{ asset('/public/files/' . $fixture->image_path) }}" target="_blank">
                                 <img data-src-img="{{ $fixture->image_path }}" style="width:45px" src="{{ asset('public/assets/images/png_icon.png') }}" alt="image">
                             </a>
+                            @else
+                            <h2>---</h2>
                             @endif
                         </li>
 
