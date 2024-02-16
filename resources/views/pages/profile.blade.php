@@ -33,7 +33,14 @@
                 <div class="profile-body-inner">
                     <div class="profile-img-wrapper">
                         <!-- <img src="{{asset('public/assets/images/test-image.jpg')}}"> -->
+
+                        @if (auth()->user()->profile_img)
                         <img src="{{auth()->user()->profile_img ?? ''}}" id="profile-image">
+                        @else
+                        <span style="    font-weight: bold;
+                        padding-bottom: 20px;
+                    ">No Profile Image</span>
+                        @endif
 
                         <div class="upload-file">
                             <label class="mb-0">
@@ -74,7 +81,7 @@
                 </div>
 
                 <div class="profile-update-btn">
-                    <button type="submit" class="login-btn">Update</button>
+                    <button type="submit" style="margin-top: 20px" class="login-btn">Update</button>
                     <!-- <button class="login-btn" data-toggle="modal" data-target="#exampleModal">Update</button> -->
                 </div>
             </div>
