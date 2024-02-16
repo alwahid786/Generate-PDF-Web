@@ -60,8 +60,13 @@
                     </div>
                     <div class="lighting-img-wrapper">
                         <h1 class="">Image</h1>
-                        @if ($data->image_path != 'undefined')
-                        <img src="{{ asset('public/files/'.$data->image_path) }}" alt="image" />
+                        @if (($data->image_path != 'undefined') && ($data->image_path != 'no image'))
+
+                        <a href="{{ asset('public/files/'.$data->image_path) }}" target="__blank">
+                            <img src="{{ asset('public/files/'.$data->image_path) }}" alt="image" />
+                        </a>
+
+                        
                         @else
                         <img src="{{ asset('public/assets/images/empty_image.jpg') }}" alt="">
                         @endif
