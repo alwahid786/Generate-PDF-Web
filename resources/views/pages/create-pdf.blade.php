@@ -124,14 +124,14 @@
                     <input type="hidden" id="editId">
                     <div class="add-button">
 
-                        <div class="add-button" style="width: 210px;">
+                        <div class="add-button" style="width: 180px;">
                             <a class="add-library-btn" data-toggle="modal" data-target="#fixtureModal">
                                 <img src="{{ asset('public/assets/images/plus-circle.png') }}">
                                 <h1 >Select From Library</h1>
                             </a>
                         </div>
 
-                        <a class="mt-3" href="javascript:void(0)" id="addTypeBtn" style="width: 210px;">
+                        <a class="mt-3" href="javascript:void(0)" id="addTypeBtn" style="width: 180px;">
                             <img src="{{ asset('public/assets/images/plus-circle.png') }}">
                             <h1>Save</h1>
                         </a>
