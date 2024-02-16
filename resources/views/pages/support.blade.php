@@ -41,7 +41,7 @@
                             <h1>Email:</h1>
                         </div>
                         <div class="pdf-info-input">
-                            <input type="email" name="email">
+                            <input type="email" name="email" required>
                         </div>
                     </div>
                 </div>
@@ -51,7 +51,7 @@
                             <h1>Phone No:</h1>
                         </div>
                         <div class="pdf-info-input">
-                            <input type="text" name="phone_number">
+                            <input type="text" name="phone_number" required>
                         </div>
                     </div>
                 </div>
@@ -61,7 +61,7 @@
                             <h1>Message:</h1>
                         </div>
                         <div class="pdf-info-input">
-                            <textarea name="description" id=""></textarea>
+                            <textarea name="description" id="" required></textarea>
                         </div>
                     </div>
                 </div>
