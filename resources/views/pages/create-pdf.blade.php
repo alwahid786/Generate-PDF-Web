@@ -200,10 +200,9 @@
                 <div class="fixture-modal-body">
                     <ul class="mt-4 fixture-detail-list">
                         <li style="font-weight: bold;">Select</li>
+                        <li style="font-weight: bold;">Manufacturer </li>
                         <li style="font-weight: bold;">Part Number</li>
                         <li style="font-weight: bold;">Image</li>
-                        <li style="font-weight: bold;">Spec Sheet</li>
-                        {{-- <li style="font-weight: bold;">Action</li> --}}
                     </ul>
 
                     @if (isset($libraryFixtures))
@@ -221,6 +220,7 @@
                         </li>
 
 
+                        <li class="fixPartNo_append" style="max-width:200px;">{{ $fixture->manufacturer }}</li>
                         <li class="fixPartNo_append" style="max-width:200px;">{{ $fixture->part_number }}</li>
 
                         <li>
@@ -233,16 +233,16 @@
                             @endif
                         </li>
 
-                        <li> 
+                        {{-- <li> 
                             @if ($fixture->pdf_path != null)
                                 <?php
-                                    $baseName = basename($fixture->pdf_path);
+                                    // $baseName = basename($fixture->pdf_path);
                                 ?>
                                 <a href="{{ asset('/public/files/' . $baseName) }}" target="_blank">
                                     <img  data-src-pdf="{{ $fixture->pdf_path }}" src="{{ asset('public/assets/images/pdf-icon.png') }}" alt="image">
                                 </a>
                             @endif
-                        </li>
+                        </li> --}}
                         
                     </ul>
                     @endforeach
@@ -253,7 +253,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="fixture-modal-close" data-dismiss="modal">Close</button>
-                    <button onclick="appendLibraryData()" type="button" class="fixture-save-btn">Add Library</button>
+                    <button onclick="appendLibraryData()" type="button" class="fixture-save-btn">Add</button>
                 </div>
             </div>
         </div>
