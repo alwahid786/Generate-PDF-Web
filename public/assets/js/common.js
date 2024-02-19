@@ -284,7 +284,7 @@ function showLibrarydata(libraryId) {
                 var imageLinkURL = basePathImage ? assetUrl + '/' + basePathImage : '';
                 $('.imageLink').attr('href', imageLinkURL);
 
-                alert(basePathImage)
+                // alert(basePathImage)
 
                 if (basePathImage !== null && basePathImage !== '') {
                     $('.imageLink img').show();

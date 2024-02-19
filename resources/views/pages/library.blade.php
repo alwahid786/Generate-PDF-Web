@@ -59,7 +59,7 @@
                                     <h1>Lamp</h1>
                                 </div>
                                 <div class="pdf-info-input">
-                                    <input type="text" name="lamp" id="lamp" class="typeValidation">
+                                    <input type="text" name="lamp" id="lamp" class="">
                                     <p style="color: red" id="warning-message-partno"></p>
                                 </div>
                             </div>
@@ -70,7 +70,7 @@
                                     <h1>Voltage </h1>
                                 </div>
                                 <div class="pdf-info-input">
-                                    <input type="text" name="voltage" id="voltage" class="typeValidation">
+                                    <input type="text" name="voltage" id="voltage" class="">
                                     <p style="color: red" id="warning-message-type"></p>
                                 </div>
                             </div>
@@ -79,7 +79,7 @@
                                     <h1>Dimming </h1>
                                 </div>
                                 <div class="pdf-info-input">
-                                    <input type="text" name="dimming" id="dimming" class="typeValidation">
+                                    <input type="text" name="dimming" id="dimming" class="">
                                     <p style="color: red" id="warning-message-partno"></p>
                                 </div>
                             </div>

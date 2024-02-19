@@ -34,7 +34,9 @@ class LibraryController extends Controller
             $uploadedImgFile->move($image_path, $image_name);
         }
 
-        if ($fixtures['fixtures']['pdfFile']) {
+        // dd($fixtures['fixtures']['pdfFile']);
+
+        if ($fixtures['fixtures']['pdfFile'] != "null") {
             $uploadedFile = $fixtures['fixtures']['pdfFile'];
             $name = time() . '_' . $uploadedFile->getClientOriginalName();
             $name = str_replace(' ', '_', $name);
