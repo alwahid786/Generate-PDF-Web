@@ -34,6 +34,7 @@
                                     <p style="color: red" id="warning-message-type"></p>
                                 </div>
                             </div>
+                            <input type="hidden" id="libraryIdUpdate">
                             <div class="pdf-info-input-wrapper">
                                 <div class="section-heading">
                                     <h1>Description </h1>
@@ -87,13 +88,13 @@
                     </div>
                   <div class="lower-body-input-wrapper-inner-file">
                     <div class="lower-body-input-wrapper-inner-file-header">
-                        <div class="drop-zone">
+                        <div class="drop-zone drop-zone-image">
                             <span class="drop-zone__prompt"></span>
                             <span>Add Image</span>
                             <span>Drag+Drop</span>
                             <input type="file" name="image_path" id="imageFile" class="drop-zone__input" accept="image/jpeg, image/png, image/gif">
                         </div>
-                        <div class="drop-zone">
+                        <div class="drop-zone drop-zone-pdf">
                             <span class="drop-zone__prompt">Add File</span>
                             <span>Spec Sheet</span>
                             <span>Drag + Drop</span>
@@ -150,7 +151,7 @@
                             @endif
                         </li> --}}
                         <li class="d-flex align-items-center justify-content-end">
-                            {{-- <img style="cursor:pointer; width:28px;height:28px;" class="editPdfBtn" src="{{ asset('public/assets/images/edit-icon.svg') }}" alt="image"> --}}
+                            <img style="cursor:pointer; width:28px;height:28px;" onclick="showLibrarydataForEdit({{$fixture->id}})" src="{{ asset('public/assets/images/edit-icon.svg') }}" alt="image">
                             {{-- <img onclick="deleteLibraryFixtures({{$fixture->id}})" style="cursor:pointer;" class="removePdfBtn ml-2" src="{{ asset('public/assets/images/delete.png') }}" alt="image"> --}}
                             <img onclick="showLibrarydata({{$fixture->id}})" style="cursor:pointer;" class="removePdfBtn ml-2" src="{{asset('public/assets/images/view.png')}}" alt="image">
                         </li>

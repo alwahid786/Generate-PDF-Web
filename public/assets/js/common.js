@@ -61,6 +61,8 @@ $('#addLibraryTypeBtn').on('click', function () {
     let voltage = $("#voltage").val();
     let dimming = $("#dimming").val();
 
+    let libraryIdForUpdate = $("#libraryIdUpdate").val();
+
     data.append('fixtures[pdfFile]', pdfFile);
     data.append('fixtures[imageFile]', imageFile);
     data.append('fixtures[part_no]', part_number);
@@ -69,6 +71,7 @@ $('#addLibraryTypeBtn').on('click', function () {
     data.append('fixtures[voltage]', voltage);
     data.append('fixtures[dimming]', dimming);
     data.append('fixtures[description]', description);
+    data.append('fixtures[libraryId]', libraryIdForUpdate);
 
     var csrfToken = $('meta[name="csrf-token"]').attr('content');
     $("#loader").removeClass('d-none');
@@ -305,4 +308,55 @@ function showLibrarydata(libraryId) {
         }
     });
 }
+
+function showLibrarydataForEdit(libraryId) {
+
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+    $.ajax({
+
+        url: getSpecificLibraryDataUrl,
+        type: "POST",
+        data: {
+            id: libraryId
+        },
+
+        success: function(data) {
+            console.log('Myajbas', data)
+
+            if (data?.status == 'success') {
+
+
+                var pdfBaseName = data?.data?.pdf_path ? data.data.pdf_path.split('/').pop() : '';
+                var fullURL = assetUrl+'/'+pdfBaseName;
+
+                $('#manufacturer').val(data?.data?.manufacturer)
+                $('#part_number').val(data?.data?.part_number)
+                $('#voltage').val(data?.data?.voltage)
+                $('#description').val(data?.data?.description)
+                $('#lamp').val(data?.data?.lamp)
+                $('#dimming').val(data?.data?.dimming)
+                $('#libraryIdUpdate').val(data?.data?.id)
+                
+                var basePathImage = data?.data?.image_path;
+                var imageLinkURL = basePathImage ? assetUrl + '/' + basePathImage : '';
+
+                $(".drop-zone-pdf").append(
+                    `<div class="drop-zone__thumb" data-label="${fullURL}"></div>`);
+
+                $(".drop-zone-image").append(
+                    `<div class="drop-zone__thumb" data-label="${imageLinkURL}"></div>`);
+
+            }
+        },
+
+        error: function(data) {
+            
+        }
+    });
+};
 

@@ -609,10 +609,6 @@
         });
         // EDIT PDF BTN Click function
         $(document).on('click', '.editPdfBtn', function() {
-            console.log('EditFixtures', fixtures)
-
-            // console.log('EditFixtures', fixtures[0].pdfFile)
-
 
             $(".drop-zone__prompt").remove();
             $("#pdfFile").removeClass('typeValidation');
