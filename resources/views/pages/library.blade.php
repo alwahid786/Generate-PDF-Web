@@ -118,9 +118,9 @@
             </form>
                 <div class="pdf-detail-bar">
                     <ul class="mt-4">
+                        <li style="font-weight: bold;">Manufacturer</li>
                         <li style="font-weight: bold;">Part Number</li>
-                        <li style="font-weight: bold;">Image</li>
-                        <li style="font-weight: bold;">Spec Sheet</li>
+                        <li style="font-weight: bold;">Description </li>
                         <li style="font-weight: bold;">Action</li>
                     </ul>
 
@@ -129,24 +129,26 @@
                     @foreach ($libraryFixtures as $fixture)
 
                     <ul class="mt-4 row">
-                        <li class="fixPartNo_append" style="max-width: 200px;">{{ $fixture->part_number }}</li>
-                        <li style="width: 45px;">
-                            @if ($fixture->image_path != null)
-                                <a href="{{ asset('/public/files/' . $fixture->image_path) }}" target="_blank">
+                        <li class="fixPartNo_append" style="width: 200px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; ">{{ $fixture->manufacturer }}</li>
+                        <li class="fixPartNo_append" style="width: 200px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; ">{{ $fixture->part_number }}</li>
+                        <li class="fixPartNo_append" style="width: 200px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; ">{{ $fixture->description }}</li>
+                        {{-- <li style="width: 45px;"> --}}
+                            {{-- @if ($fixture->image_path != null) --}}
+                                {{-- <a href="{{ asset('/public/files/' . $fixture->image_path) }}" target="_blank">
                                     <img style="width: 45px;" src="{{ asset('public/assets/images/png_icon.png') }}" alt="image">
-                                </a>
-                            @endif
-                        </li>
-                        <li> 
+                                </a> --}}
+                            {{-- @endif --}}
+                        {{-- </li> --}}
+                        {{-- <li> 
                             @if ($fixture->pdf_path != null)
                                 <?php
-                                    $baseName = basename($fixture->pdf_path);
+                                    // $baseName = basename($fixture->pdf_path);
                                 ?>
                                 <a href="{{ asset('/public/files/' . $baseName) }}" target="_blank">
                                     <img src="{{ asset('public/assets/images/pdf-icon.png') }}" alt="image">
                                 </a>
                             @endif
-                        </li>
+                        </li> --}}
                         <li class="d-flex align-items-center justify-content-end">
                             {{-- <img style="cursor:pointer; width:28px;height:28px;" class="editPdfBtn" src="{{ asset('public/assets/images/edit-icon.svg') }}" alt="image"> --}}
                             <img onclick="deleteLibraryFixtures({{$fixture->id}})" style="cursor:pointer;" class="removePdfBtn ml-2" src="{{ asset('public/assets/images/delete.png') }}" alt="image">
@@ -235,6 +237,25 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-md-6">
+                    <div class="pdf-info-input-wrapper form-field">
+
+                        <div class="d-flex mt-5">
+
+                            <a class="pdfLink" href="" target="_blank">
+                                <img style="width: 60px; border-radius: 10px;" src="{{ asset('public/assets/images/pdf-icon.png') }}" alt="image">
+                            </a>
+    
+                            <a class="imageLink" href="" target="_blank">
+                                <img style="width: 75px; border-radius: 10px;" src="{{ asset('public/assets/images/png_icon.png') }}" alt="image">
+                            </a>
+
+                        </div>
+                        
+                        
+                        
+                    </div>
+                </div>
             </div>
         
 
@@ -267,6 +288,7 @@
     var saveLibraryDataUrl = "{{ route('saveLibraryData') }}"
     var deleteLibraryDataUrl = "{{ route('deleteLibraryData') }}"
     var getSpecificLibraryDataUrl = "{{ route('getSpecificLibraryData') }}"
+    var assetUrl = "{{asset('public/files/')}}"
 
 
     document.querySelectorAll(".drop-zone__input").forEach((inputElement) => {

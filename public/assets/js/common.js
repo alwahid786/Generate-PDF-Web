@@ -266,7 +266,11 @@ function showLibrarydata(libraryId) {
         success: function(data) {
 
             if (data?.status == 'success') {
-                // console.log(data?.data)
+                console.log(data?.data?.pdf_path)
+                console.log(data?.data?.image_path)
+
+                var pdfBaseName = data?.data?.pdf_path ? data.data.pdf_path.split('/').pop() : '';
+                var fullURL = assetUrl+'/'+pdfBaseName;
 
                 $('#lib_manufacturer').val(data?.data?.manufacturer)
                 $('#lib_partno').val(data?.data?.part_number)
@@ -274,7 +278,21 @@ function showLibrarydata(libraryId) {
                 $('#lib_description').val(data?.data?.description)
                 $('#lib_lamp').val(data?.data?.lamp)
                 $('#lib_dimming').val(data?.data?.dimming)
+                $('.pdfLink').attr('href', fullURL);
+                
+                var basePathImage = data?.data?.image_path;
+                var imageLinkURL = basePathImage ? assetUrl + '/' + basePathImage : '';
+                $('.imageLink').attr('href', imageLinkURL);
 
+                alert(basePathImage)
+
+                if (basePathImage !== null && basePathImage !== '') {
+                    $('.imageLink img').show();
+                    $('.imageLink img').attr('src', baseUrl + '/assets/images/png_icon.png');
+                } else {
+                    $('.imageLink img').hide();
+                }
+                
                 $('#libraryModal').modal('show')
 
 
